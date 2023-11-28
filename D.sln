@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaptopStore", "LaptopStore\LaptopStore.csproj", "{0C97180B-322F-417C-B125-96943F5BEB54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaptopStoreApi", "LaptopStoreApi\LaptopStoreApi.csproj", "{F4901A6F-B8C5-4B09-B93C-21527579FA32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C97180B-322F-417C-B125-96943F5BEB54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C97180B-322F-417C-B125-96943F5BEB54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C97180B-322F-417C-B125-96943F5BEB54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C97180B-322F-417C-B125-96943F5BEB54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4901A6F-B8C5-4B09-B93C-21527579FA32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4901A6F-B8C5-4B09-B93C-21527579FA32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4901A6F-B8C5-4B09-B93C-21527579FA32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4901A6F-B8C5-4B09-B93C-21527579FA32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
