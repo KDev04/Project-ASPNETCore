@@ -8,5 +8,6 @@ namespace LaptopStoreApi.Models
         {
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<Laptop> Laptops => Set<Laptop>();
     }
 }
