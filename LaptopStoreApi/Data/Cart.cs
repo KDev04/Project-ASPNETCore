@@ -1,4 +1,4 @@
-﻿namespace LaptopStoreApi.Models
+﻿namespace LaptopStoreApi.Data
 {
     public class Cart
     {
@@ -6,7 +6,7 @@
         public virtual void AddItem(Laptop laptop, int quantity)
         {
             CartLine? line = Lines
-                .Where(p => p.Laptop.Id == laptop.Id)
+                .Where(p => p.Laptop.MaLaptop == laptop.MaLaptop)
                 .FirstOrDefault();
             if (line == null)
             {
@@ -17,8 +17,8 @@
                 line.Quantity += quantity;
             }
         }
-        public virtual void RemoveLine(Laptop L) => Lines.RemoveAll(l => l.Laptop.Id == L.Id);
-        public decimal ComputeTotalValue() => Lines.Sum(e => e.Laptop.Price * e.Quantity);
+        public virtual void RemoveLine(Laptop L) => Lines.RemoveAll(l => l.Laptop.MaLaptop == L.MaLaptop);
+        public decimal ComputeTotalValue() => Lines.Sum(e => e.Laptop.Gia* e.Quantity);
         public virtual void Clear() => Lines.Clear();
 
 

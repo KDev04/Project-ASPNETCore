@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-namespace LaptopStoreApi.Models
+namespace LaptopStoreApi.Data
 {
     public class SeedData
     {
@@ -18,27 +18,11 @@ namespace LaptopStoreApi.Models
                     (
                     new Laptop
                     {
-                        Name = "Gigabyte G5",
-                        Price = 18000000,
-                        Type = 15.6,
-                        Color = "Black",
-                        Year = 2016,
-                        Description = "A vipro Laptop",
-                        Status = "ok",
-                        Category = "Gigabyte"
-
+                        TenLaptop = "Abc"
                     },
                     new Laptop
                     {
-                        Name = "Gigabyte MD7",
-                        Price = 18000000,
-                        Type = 17,
-                        Color = "Black",
-                        Year = 2019,
-                        Description = "A vipro Laptop",
-                        Status = "hot",
-                        Category = "Gigabyte"
-
+                        TenLaptop = "BCd"
                     }
 
 
