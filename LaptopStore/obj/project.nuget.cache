@@ -1,8 +1,20 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "iBPXwvee2D7mV9HCcZ/GfV3S6rtEElWlmfIrLsc3CSon4t9ZABByaTmhDPz3MPuq6NKmKqdmI6IXzwLK6PKYhQ==",
   "success": true,
   "projectFilePath": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj",
   "expectedPackageFiles": [],
+=======
+  "dgSpecHash": "4XstZNStb5tLa6THnKyKWeU892FOq3HFoLA6cIB/IsUoeejaiCSS8pucDPmMc4K4RPtYUkhL0wBOhnGYuEfh5A==",
+  "success": true,
+  "projectFilePath": "D:\\D\\LaptopStore\\LaptopStore.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
+>>>>>>> 60a8457a5c6d1963b65426c328c44ca50fbdbd01
   "logs": []
 }
