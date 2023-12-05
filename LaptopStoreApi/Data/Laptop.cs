@@ -8,29 +8,26 @@ namespace LaptopStoreApi.Data
     public class Laptop
     {
         [Key]
-        [Required]
         public Guid MaLaptop { get; set; }
-        [Required]
         [MaxLength(100)]
         public string TenLaptop { get; set; } = string.Empty;
-        [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
+        [Range(100000, double.MaxValue, ErrorMessage = "Please enter a positive price")]
         [Column(TypeName = "decimal(8, 2)")]
         public decimal Gia { get; set; }
         public byte GiamGia { get; set; }
-        [Required]
+
         public double LoaiManHinh { get; set; }
-        [Required]
+        
         public string Mau { get; set; } = string.Empty;
-        [Required]
+
         public int NamSanXuat { get; set; }
-        [Required]
+
         public string Mota { get; set; } = string.Empty;
-        [Required]
+        public string ImgPath { get; set; } = string.Empty;
+
         public DateTime CreateDate { get; set; }
-        [Required]
+
         public DateTime LastModifiedDate { get; set; }
-        [Required]
         public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }

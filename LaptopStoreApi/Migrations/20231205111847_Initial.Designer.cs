@@ -4,6 +4,7 @@ using LaptopStoreApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApplicationLaptopDbContext))]
-    partial class ApplicationLaptopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231205111847_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,10 +115,6 @@ namespace LaptopStoreApi.Migrations
 
                     b.Property<byte>("GiamGia")
                         .HasColumnType("tinyint");
-
-                    b.Property<string>("ImgPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");

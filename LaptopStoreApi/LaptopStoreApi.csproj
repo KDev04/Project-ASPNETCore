@@ -19,6 +19,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.23" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Image\" />
   </ItemGroup>
 
 </Project>

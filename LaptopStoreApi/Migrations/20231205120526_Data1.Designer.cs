@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApplicationLaptopDbContext))]
-    [Migration("20231203043013_Initial")]
-    partial class Initial
+    [Migration("20231205120526_Data1")]
+    partial class Data1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,7 +105,6 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("CategoryId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -116,6 +115,10 @@ namespace LaptopStoreApi.Migrations
 
                     b.Property<byte>("GiamGia")
                         .HasColumnType("tinyint");
+
+                    b.Property<string>("ImgPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
@@ -171,9 +174,7 @@ namespace LaptopStoreApi.Migrations
                 {
                     b.HasOne("LaptopStoreApi.Data.Category", "Category")
                         .WithMany("Laptops")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });
