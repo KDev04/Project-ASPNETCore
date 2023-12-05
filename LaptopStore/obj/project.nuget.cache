@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Lb0MM/16OZosU6JVfI2smsKmjaCumHnXKl/FYWr19LNm03CHNcpXhDfbhyeODFf+LxnJnU4JyqWHo6qz61mAUQ==",
+  "dgSpecHash": "4XstZNStb5tLa6THnKyKWeU892FOq3HFoLA6cIB/IsUoeejaiCSS8pucDPmMc4K4RPtYUkhL0wBOhnGYuEfh5A==",
   "success": true,
   "projectFilePath": "D:\\D\\LaptopStore\\LaptopStore.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

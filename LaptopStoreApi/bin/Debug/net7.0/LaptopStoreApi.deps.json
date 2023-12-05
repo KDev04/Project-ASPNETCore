@@ -9,19 +9,14 @@
       "LaptopStoreApi/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "7.0.4",
-<<<<<<< HEAD
-=======
           "Microsoft.EntityFrameworkCore.Design": "7.0.13",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.13",
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
           "LaptopStoreApi.dll": {}
         }
       },
-<<<<<<< HEAD
-=======
       "Azure.Core/1.25.0": {
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
@@ -64,7 +59,6 @@
           }
         }
       },
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
       "Microsoft.AspNetCore.OpenApi/7.0.4": {
         "dependencies": {
           "Microsoft.OpenApi": "1.4.3"
@@ -76,9 +70,6 @@
           }
         }
       },
-<<<<<<< HEAD
-      "Microsoft.Extensions.ApiDescription.Server/6.0.5": {},
-=======
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -359,7 +350,6 @@
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
       "Microsoft.OpenApi/1.4.3": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
@@ -368,8 +358,6 @@
           }
         }
       },
-<<<<<<< HEAD
-=======
       "Microsoft.SqlServer.Server/1.0.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.SqlServer.Server.dll": {
@@ -405,7 +393,6 @@
           }
         }
       },
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
       "Swashbuckle.AspNetCore/6.4.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -443,8 +430,6 @@
             "fileVersion": "6.4.0.0"
           }
         }
-<<<<<<< HEAD
-=======
       },
       "System.CodeDom/4.4.0": {
         "runtime": {
@@ -621,7 +606,6 @@
             "fileVersion": "6.0.21.52210"
           }
         }
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
       }
     }
   },
@@ -631,8 +615,6 @@
       "serviceable": false,
       "sha512": ""
     },
-<<<<<<< HEAD
-=======
     "Azure.Core/1.25.0": {
       "type": "package",
       "serviceable": true,
@@ -654,7 +636,6 @@
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
     },
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
     "Microsoft.AspNetCore.OpenApi/7.0.4": {
       "type": "package",
       "serviceable": true,
@@ -662,8 +643,6 @@
       "path": "microsoft.aspnetcore.openapi/7.0.4",
       "hashPath": "microsoft.aspnetcore.openapi.7.0.4.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",
       "serviceable": true,
@@ -734,7 +713,6 @@
       "path": "microsoft.entityframeworkcore.sqlserver/7.0.13",
       "hashPath": "microsoft.entityframeworkcore.sqlserver.7.0.13.nupkg.sha512"
     },
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",
       "serviceable": true,
@@ -742,8 +720,6 @@
       "path": "microsoft.extensions.apidescription.server/6.0.5",
       "hashPath": "microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "Microsoft.Extensions.Caching.Abstractions/7.0.0": {
       "type": "package",
       "serviceable": true,
@@ -884,7 +860,6 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
     },
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
     "Microsoft.OpenApi/1.4.3": {
       "type": "package",
       "serviceable": true,
@@ -892,8 +867,6 @@
       "path": "microsoft.openapi/1.4.3",
       "hashPath": "microsoft.openapi.1.4.3.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "Microsoft.SqlServer.Server/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -915,7 +888,6 @@
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
     },
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
     "Swashbuckle.AspNetCore/6.4.0": {
       "type": "package",
       "serviceable": true,
@@ -943,8 +915,6 @@
       "sha512": "sha512-1Hh3atb3pi8c+v7n4/3N80Jj8RvLOXgWxzix6w3OZhB7zBGRwsy7FWr4e3hwgPweSBpwfElqj4V4nkjYabH9nQ==",
       "path": "swashbuckle.aspnetcore.swaggerui/6.4.0",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
-<<<<<<< HEAD
-=======
     },
     "System.CodeDom/4.4.0": {
       "type": "package",
@@ -1106,7 +1076,6 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
->>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
     }
   }
 }
