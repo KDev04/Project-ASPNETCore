@@ -1,0 +1,22 @@
+﻿@model List<Laptop>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table>
+    <tr>
+        <th>Ma Laptop</th>
+        <th>Ten Laptop</th>
+        <th>Gia</th>
+        <!-- Các cột khác -->
+    </tr>
+    @foreach (var laptop in Model)
+    {
+        <tr>
+            <td>@laptop.tenLaptop</td>
+            <td>@laptop.gia</td>
+            <!-- Các cột khác -->
+        </tr>
+    }
+</table>

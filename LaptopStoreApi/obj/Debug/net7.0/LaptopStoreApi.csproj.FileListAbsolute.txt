@@ -110,9 +110,7 @@ D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\LaptopStoreApi.genruntimeconfig.cache
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\ref\LaptopStoreApi.dll
 >>>>>>> 869b05b5a3bad1c1b583f919d04711d278a55c99
-<<<<<<< HEAD
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
-=======
 D:\D\LaptopStoreApi\bin\Debug\net7.0\Azure.Core.dll
 D:\D\LaptopStoreApi\bin\Debug\net7.0\Azure.Identity.dll
 D:\D\LaptopStoreApi\bin\Debug\net7.0\Humanizer.dll

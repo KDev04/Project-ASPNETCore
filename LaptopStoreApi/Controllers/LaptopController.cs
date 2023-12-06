@@ -19,7 +19,7 @@ namespace LaptopStoreApi.Controllers
         [HttpGet(Name = "GetLaptops")]
         public IEnumerable<Laptop> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new Laptop
+            return Enumerable.Range(1,2).Select(index => new Laptop
             {
                 TenLaptop = "EFG"
 
@@ -53,7 +53,7 @@ namespace LaptopStoreApi.Controllers
                 {
                     using (var stream = new FileStream(imgFilePath, FileMode.Create))
                     {
-                        await model.Image?.CopyToAsync(stream);
+                        await model?.Image?.CopyToAsync(stream);
                     }
                 }
                 
