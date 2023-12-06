@@ -37,7 +37,7 @@ namespace LaptopStoreApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Data.DonHang", b =>
@@ -113,10 +113,6 @@ namespace LaptopStoreApi.Migrations
                     b.Property<byte>("GiamGia")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("ImgPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -143,7 +139,7 @@ namespace LaptopStoreApi.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Laptops");
+                    b.ToTable("Laptops", (string)null);
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Data.DonHangChiTiet", b =>
