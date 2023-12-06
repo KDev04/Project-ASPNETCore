@@ -29,6 +29,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseStaticFiles();
 //SeedData.CreateData(app);
 LocationEndpointsConfig.AddEndpoints(app);
 app.Run();

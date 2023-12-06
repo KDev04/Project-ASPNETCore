@@ -6,9 +6,10 @@
 
 <table>
     <tr>
-        <th>Ma Laptop</th>
         <th>Ten Laptop</th>
         <th>Gia</th>
+        <th>Img</th>
+        <th>mm  </th>
         <!-- Các cột khác -->
     </tr>
     @foreach (var laptop in Model)
@@ -16,6 +17,10 @@
         <tr>
             <td>@laptop.tenLaptop</td>
             <td>@laptop.gia</td>
+            <td>@laptop.imgPath</td>
+            <td>
+                <img src=http://localhost:4000/@laptop.imgPath />
+            </td>
             <!-- Các cột khác -->
         </tr>
     }

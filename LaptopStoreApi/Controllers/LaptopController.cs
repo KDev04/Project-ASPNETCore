@@ -16,15 +16,11 @@ namespace LaptopStoreApi.Controllers
         {
             _logger = logger;
         }
-        [HttpGet(Name = "GetLaptops")]
-        public IEnumerable<Laptop> Get()
+        [HttpGet(Name ="GetAll")]
+        public IActionResult GetAll()
         {
-            return Enumerable.Range(1,2).Select(index => new Laptop
-            {
-                TenLaptop = "EFG"
-
-            })
-        .ToArray();
+            var latops = _logger.Laptops.ToList();
+            return Ok(latops);
         }
         [HttpGet("{Name}")]
         public IActionResult GetByName(string Name)
@@ -37,41 +33,55 @@ namespace LaptopStoreApi.Controllers
             else { return NotFound(); }
         }
         [HttpPost(Name = "CreateNewLaptop")]
-        public async Task<IActionResult> CreateNewLaptop([FromForm]  LaptopModel model)
+        public async Task<IActionResult> CreateNewLaptop([FromForm] LaptopModel model)
         {
-            
             try
             {
-                string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Image?.FileName);
-                string imgFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Image");
-                string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
-                if (!Directory.Exists(imgFolderPath))
-                {
-                    Directory.CreateDirectory(imgFolderPath);
-                }
                 if (model.Image != null && model.Image.Length > 0)
                 {
+                    string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Image.FileName);
+                    string imgFolderPath = Path.Combine("wwwroot", "Image"); // Thư mục "wwwroot/Image"
+                    string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+
+                    if (!Directory.Exists(imgFolderPath))
+                    {
+                        Directory.CreateDirectory(imgFolderPath);
+                    }
+
                     using (var stream = new FileStream(imgFilePath, FileMode.Create))
                     {
-                        await model?.Image?.CopyToAsync(stream);
+                        await model.Image.CopyToAsync(stream);
                     }
-                }
-                
-                var laptop = new Laptop
-                {
-                    TenLaptop = model.TenLaptop,
-                    ImgPath = imgFilePath,
 
-                };
-                _logger.Add(laptop);
-                _logger.SaveChanges();
-                return Ok(laptop);
+                    var laptop = new Laptop
+                    {
+                        TenLaptop = model.TenLaptop,
+                        Gia = model.Gia,
+                        GiamGia = model.GiamGia,
+                        Mau = model.Mau,
+                        LoaiManHinh = model.LoaiManHinh,
+                        NamSanXuat = model.NamSanXuat,
+                        Mota = model.Mota,
+                        CategoryId = model.CategoryId,
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                        ImgPath = "Image/" + imgFileName // Đường dẫn tương đối
+                    };
+
+                    _logger.Add(laptop);
+                    _logger.SaveChanges();
+
+                    return Ok(laptop);
+                }
+                else
+                {
+                    return BadRequest("No image file found");
+                }
             }
             catch
             {
                 return BadRequest();
             }
         }
-
     }
 }

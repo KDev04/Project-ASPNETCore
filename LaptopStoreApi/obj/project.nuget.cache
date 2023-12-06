@@ -78,6 +78,12 @@
   ],
   "logs": [
     {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\D\\LaptopStoreApi\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'expectedPackageFiles', line 79, position 0."
+    },
+    {
       "code": "NU1904",
       "level": "Warning",
       "warningLevel": 1,
