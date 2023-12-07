@@ -1,0 +1,36 @@
+﻿@model Laptop
+
+<div class="col-lg-4 col-md-6">
+    <div class="card mb-4 d-flex flex-column border-0">
+        <div class="image-container"
+             style="overflow: hidden; margin-top: 10px;">
+            <img class="card-img-top img-card" src=http://localhost:4000/@Model.imgPath />
+        </div>
+    </div>
+    <div class="card-body flex-grow-1 d-flex flex-column">
+        <div class="row text-center mb-3">
+            <h4>@Model.tenLaptop</h4>
+
+        </div>
+        <div class="row ms-3 ms-md-5 pt-3 text-black">
+            <pre class="fs-7" style="font-family:Roboto Mono">
+                @Model.mota
+            </pre>
+        </div>
+        <div class="row ms-3 ms-md-5 pt-3 text-black-50" >
+            <h3>
+                @Model.gia <i class="fa-solid fa-lira-sign"> </i>
+            </h3>
+        </div>
+        <div class="mt-auto" >
+            <div class="container d-flex justify-content-center justify-content-md-around" >
+                <btn class="btn btn-outline-warning text-black" >
+                    Thêm vào giỏ hàng <i class="fa-solid fa-cart-plus"></i>
+                </btn>
+                <btn class="btn btn-outline-success text-black">
+                    Bình luận <i class="fa-regular fa-credit-card"></i>
+                </btn>
+            </div>
+        </div>
+    </div>
+</div>
