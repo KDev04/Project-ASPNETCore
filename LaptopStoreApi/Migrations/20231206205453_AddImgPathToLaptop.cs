@@ -5,7 +5,7 @@
 namespace LaptopStoreApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Data1 : Migration
+    public partial class AddImgPathToLaptop : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

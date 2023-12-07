@@ -78,6 +78,8 @@ D:\D\LaptopStoreApi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Cach
 D:\D\LaptopStoreApi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\D\LaptopStoreApi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 >>>>>>> 60a8457a5c6d1963b65426c328c44ca50fbdbd01
+D:\D\LaptopStoreApi\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+D:\D\LaptopStoreApi\obj\Debug\net7.0\LaptopStoreApi.sourcelink.json
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\appsettings.Development.json
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\appsettings.json
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\LaptopStoreApi.exe
@@ -156,3 +158,5 @@ D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\LaptopStoreApi.genruntimeconfig.cache
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\ref\LaptopStoreApi.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\LaptopStoreApi.staticwebassets.runtime.json
+>>>>>>> a5f68532f1c84fbfef51ec6c89e98f3622231189
+D:\D\LaptopStoreApi\bin\Debug\net7.0\LaptopStoreApi.staticwebassets.runtime.json

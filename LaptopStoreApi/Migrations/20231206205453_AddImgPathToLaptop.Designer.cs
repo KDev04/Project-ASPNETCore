@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApplicationLaptopDbContext))]
-    [Migration("20231205120526_Data1")]
-    partial class Data1
+    [Migration("20231206205453_AddImgPathToLaptop")]
+    partial class AddImgPathToLaptop
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
