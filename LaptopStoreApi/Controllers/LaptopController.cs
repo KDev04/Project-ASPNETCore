@@ -7,7 +7,7 @@ using System.Linq.Dynamic.Core;
 
 namespace LaptopStoreApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class LaptopController : ControllerBase
     {
@@ -16,11 +16,17 @@ namespace LaptopStoreApi.Controllers
         {
             _logger = logger;
         }
-        [HttpGet(Name ="GetAll")]
+        [HttpGet("All", Name = "GetAll")]
         public IActionResult GetAll()
         {
-            var latops = _logger.Laptops.ToList();
-            return Ok(latops);
+            var laptops = _logger.Laptops.ToList();
+            return Ok(laptops);
+        }
+
+        [HttpGet("Hello", Name = "GetString")]
+        public IActionResult GetString()
+        {
+            return Ok("Hello");
         }
         [HttpGet("{Name}")]
         public IActionResult GetByName(string Name)
@@ -32,7 +38,7 @@ namespace LaptopStoreApi.Controllers
             }
             else { return NotFound(); }
         }
-        [HttpPost(Name = "CreateNewLaptop")]
+        [HttpPost("New", Name = "CreateNewLaptop")]
         public async Task<IActionResult> CreateNewLaptop([FromForm] LaptopModel model)
         {
             try
@@ -83,5 +89,20 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest();
             }
         }
+        [HttpDelete("Delete/{id}")]
+        public IActionResult DeleteById (Guid id)
+        {
+            var laptop = _logger.Laptops.FirstOrDefault(l => l.MaLaptop == id);
+            if (laptop is not null)
+            {
+                _logger.Laptops.Remove(laptop);
+                _logger.SaveChanges();
+                return Ok("Đã xóa");
+            }
+            else
+            {
+                return NotFound();
+            }
+        } 
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "U7Rc+mbZxsWTEpv+YW2+v/TLVLE/r+xbx/9egPMNRis=",
+  "Hash": "o5sLsfL4GWzqLOjQ1h82j+N1f3wLARF/PcRd2oDrI5A=",
   "Source": "LaptopStoreApi",
   "BasePath": "_content/LaptopStoreApi",
   "Mode": "Default",
@@ -168,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\b424a335-8612-4c95-96ef-b66c66331035.png"
+    },
+    {
+      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\c8c2ef75-4e5a-4c88-b3ff-cc71f1c297bd.jpg",
+      "SourceId": "LaptopStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "BasePath": "_content/LaptopStoreApi",
+      "RelativePath": "Image/c8c2ef75-4e5a-4c88-b3ff-cc71f1c297bd.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\c8c2ef75-4e5a-4c88-b3ff-cc71f1c297bd.jpg"
     },
     {
       "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\e1b012f4-897b-4a67-b303-065acb22f2dc.png",
