@@ -1,7 +1,7 @@
 using LaptopStoreApi.EndPoints;
 using Microsoft.EntityFrameworkCore;
 using LaptopStoreApi.Data;
-
+using LaptopStoreApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +15,8 @@ builder.Services.AddDbContext<ApplicationLaptopDbContext>(option =>
     option.UseSqlServer(
         builder.Configuration.GetConnectionString("LaptopDB"));
 });
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ILaptopRepository, LaptopRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

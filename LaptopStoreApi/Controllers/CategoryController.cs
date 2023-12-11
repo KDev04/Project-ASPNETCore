@@ -1,65 +1,95 @@
 ﻿using LaptopStoreApi.Data;
 using LaptopStoreApi.Models;
+using LaptopStoreApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaptopStoreApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ApplicationLaptopDbContext _context;
-        public CategoryController(ApplicationLaptopDbContext context)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(ICategoryRepository category)
         {
-            _context = context;
+            _categoryRepository = category;
         }
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
-        {
-            var categories = _context.Categories.ToList();
-            return Ok(categories);
-        }
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var category = _context.Categories.SingleOrDefault(c => c.Id == id);
-            if (category != null)
-            {
-                return Ok(category);
-            }
-            else { return NotFound(); }
-        }
-        [HttpPost] 
-        public IActionResult CreateNew(CategoryModel model)
         {
             try
             {
-                var category = new Category
+                return Ok(_categoryRepository.GetAll());
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("Get/{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var data = _categoryRepository.GetById(id);
+                if (data == null)
                 {
-                    Name = model.Name
-                };
-                _context.Add(category);
-                _context.SaveChanges();
-                return Ok(category);
+                    return NotFound();
+                } else
+                {
+                    return Ok(data);
+
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpPost("Add")] 
+        public IActionResult Add(CategoryModel model)
+        {
+            try
+            {
+                return Ok(_categoryRepository.Add(model));
             }
             catch
             {
                 return BadRequest();
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult UpdateById(int id, CategoryModel model)
+        [HttpPut("Update/{id}")]
+        public IActionResult Update(int id, CategoryModel model)
         {
 
-            var category = _context.Categories.SingleOrDefault(c => c.Id == id);
-            if (category != null)
+            if (id != model.Id)
             {
-                category.Name = model.Name;
-                _context.SaveChanges();
+                return BadRequest();
+            }
+            try
+            {
+                _categoryRepository.Update(model); ;
                 return NoContent();
             }
-            else { return NotFound(); }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id) 
+        {
+            try
+            {
+                _categoryRepository.Delete(id);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

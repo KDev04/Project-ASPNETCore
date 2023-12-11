@@ -8,11 +8,9 @@ namespace LaptopStoreApi.Data
     public class Laptop
     {
         [Key]
-        public Guid MaLaptop { get; set; }
+        public int MaLaptop { get; set; }
         [MaxLength(100)]
         public string TenLaptop { get; set; } = string.Empty;
-        [Range(100000, double.MaxValue, ErrorMessage = "Please enter a positive price")]
-        [Column(TypeName = "decimal(8, 2)")]
         public decimal Gia { get; set; }
         public byte GiamGia { get; set; }
 

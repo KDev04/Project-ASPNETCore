@@ -5,11 +5,9 @@ namespace LaptopStoreApi.Models
 {
     public class LaptopModel
     {
-        [Required]
-        [MaxLength(100)]
+        public int MaLaptop { get; set; }
         public string TenLaptop { get; set; } = string.Empty;
-        [Range(100000, double.MaxValue, ErrorMessage = "Please enter a positive price")]
-        [Column(TypeName = "decimal(8, 2)")]
+
         public decimal Gia { get; set; }
         public byte GiamGia { get; set; }
 
@@ -21,6 +19,7 @@ namespace LaptopStoreApi.Models
 
         public string Mota { get; set; } = string.Empty;
         public int? CategoryId { get; set; }
+        public string ImgPath { get; set; } = string.Empty;
 
         public IFormFile? Image { get; set; }
     }

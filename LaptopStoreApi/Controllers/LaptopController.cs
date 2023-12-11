@@ -4,6 +4,7 @@ using LaptopStoreApi.Data;
 using LaptopStoreApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
+using LaptopStoreApi.Services;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -11,24 +12,120 @@ namespace LaptopStoreApi.Controllers
     [ApiController]
     public class LaptopController : ControllerBase
     {
-        private readonly ApplicationLaptopDbContext _logger;
-        public LaptopController(ApplicationLaptopDbContext logger)
+        /*private readonly ApplicationLaptopDbContext _logger;*/
+        private readonly ILaptopRepository _repository;
+        public LaptopController(ILaptopRepository repository)
+        {
+            _repository = repository;
+        }
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                return Ok(_repository.GetAll());
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("Get/{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var data = _repository.GetById(id);
+                if (data == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(data);
+
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpPost("Add")]
+        public IActionResult Add([FromForm] LaptopModel model)
+        {
+            try
+            {
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    return Ok(_repository.Add(model));
+                }
+                else
+                {
+                    return BadRequest("No image file found");
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _repository.Delete(id);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpPut("Update/{id}")]
+        public IActionResult Update(int id, [FromForm] LaptopModel model)
+        {
+            if (id != model.MaLaptop)
+            {
+                return BadRequest();
+            }
+            try
+            {   
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    return Ok(_repository.Add(model));
+                }
+                else
+                {
+                    return BadRequest("No image file found");
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
+
+        /*public LaptopController(ApplicationLaptopDbContext logger)
         {
             _logger = logger;
-        }
-        [HttpGet("All", Name = "GetAll")]
+        }*/
+        /*[HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             var laptops = _logger.Laptops.ToList();
             return Ok(laptops);
         }
-
-        [HttpGet("Hello", Name = "GetString")]
+*/
+        /*[HttpGet("Hello", Name = "GetString")]
         public IActionResult GetString()
         {
             return Ok("Hello");
-        }
-        [HttpGet("{Name}")]
+        }*/
+        /*[HttpGet("Get/{Name}")]
         public IActionResult GetByName(string Name)
         {
             var laptop = _logger.Laptops.ToList().FirstOrDefault(l => l.TenLaptop == Name);
@@ -38,7 +135,7 @@ namespace LaptopStoreApi.Controllers
             }
             else { return NotFound(); }
         }
-        [HttpPost("New", Name = "CreateNewLaptop")]
+        [HttpPost("New")]
         public async Task<IActionResult> CreateNewLaptop([FromForm] LaptopModel model)
         {
             try
@@ -103,6 +200,6 @@ namespace LaptopStoreApi.Controllers
             {
                 return NotFound();
             }
-        } 
+        } */
     }
 }

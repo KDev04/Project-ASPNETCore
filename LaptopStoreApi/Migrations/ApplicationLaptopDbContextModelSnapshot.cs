@@ -42,9 +42,11 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Data.DonHang", b =>
                 {
-                    b.Property<Guid>("MaDh")
+                    b.Property<int>("MaDh")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDh"));
 
                     b.Property<string>("DiaChiGiao")
                         .HasColumnType("nvarchar(max)");
@@ -73,11 +75,11 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Data.DonHangChiTiet", b =>
                 {
-                    b.Property<Guid>("MaDh")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("MaDh")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("MaLaptop")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("MaLaptop")
+                        .HasColumnType("int");
 
                     b.Property<double>("DonGia")
                         .HasColumnType("float");
@@ -97,9 +99,11 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Data.Laptop", b =>
                 {
-                    b.Property<Guid>("MaLaptop")
+                    b.Property<int>("MaLaptop")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaLaptop"));
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -108,7 +112,7 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Gia")
-                        .HasColumnType("decimal(8, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<byte>("GiamGia")
                         .HasColumnType("tinyint");

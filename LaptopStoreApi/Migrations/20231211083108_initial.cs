@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LaptopStoreApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,7 +28,8 @@ namespace LaptopStoreApi.Migrations
                 name: "DonHangs",
                 columns: table => new
                 {
-                    MaDh = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaDh = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     NgayDat = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
                     NgayGiao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TinhTrangDonHang = table.Column<int>(type: "int", nullable: false),
@@ -45,14 +46,16 @@ namespace LaptopStoreApi.Migrations
                 name: "Laptops",
                 columns: table => new
                 {
-                    MaLaptop = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaLaptop = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenLaptop = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Gia = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Gia = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     GiamGia = table.Column<byte>(type: "tinyint", nullable: false),
                     LoaiManHinh = table.Column<double>(type: "float", nullable: false),
                     Mau = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NamSanXuat = table.Column<int>(type: "int", nullable: false),
                     Mota = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: true)
@@ -71,8 +74,8 @@ namespace LaptopStoreApi.Migrations
                 name: "ChiTietDonHangs",
                 columns: table => new
                 {
-                    MaLaptop = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MaDh = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaLaptop = table.Column<int>(type: "int", nullable: false),
+                    MaDh = table.Column<int>(type: "int", nullable: false),
                     SoLuong = table.Column<int>(type: "int", nullable: false),
                     DonGia = table.Column<double>(type: "float", nullable: false),
                     GiamGia = table.Column<byte>(type: "tinyint", nullable: false)

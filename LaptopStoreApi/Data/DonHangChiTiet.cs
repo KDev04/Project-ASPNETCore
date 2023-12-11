@@ -2,8 +2,8 @@
 {
     public class DonHangChiTiet
     {
-        public Guid MaLaptop { get; set; }
-        public Guid MaDh { get; set; }
+        public int MaLaptop { get; set; }
+        public int MaDh { get; set; }
         public int SoLuong { get; set; }
         public double DonGia { get; set; }
         public byte GiamGia { get; set; }
