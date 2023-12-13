@@ -13,7 +13,7 @@ namespace LaptopStore.Controllers
             {
                 try
                 {
-                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/All");
+                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetAll");
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -32,5 +32,6 @@ namespace LaptopStore.Controllers
             }
         }
         public IActionResult Detail() => View();
+
     }
 }

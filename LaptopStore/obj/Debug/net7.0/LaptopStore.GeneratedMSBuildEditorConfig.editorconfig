@@ -16,6 +16,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Pages/Admin/AdminLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Pages/Admin/Routed.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm91dGVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Pages/Admin/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cX0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Pages/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

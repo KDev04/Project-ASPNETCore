@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\026c442e-6711-4ba6-8d4a-36b49477de9f.jpg",
+      "PackagePath": "staticwebassets\\Image\\026c442e-6711-4ba6-8d4a-36b49477de9f.jpg"
+    },
+    {
       "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\1940e531-287d-4c39-b369-6711171c8b91.png",
       "PackagePath": "staticwebassets\\Image\\1940e531-287d-4c39-b369-6711171c8b91.png"
     },
@@ -47,6 +51,10 @@
     {
       "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\e7de541b-4ee1-4ab6-adcb-ad5c694357f4.png",
       "PackagePath": "staticwebassets\\Image\\e7de541b-4ee1-4ab6-adcb-ad5c694357f4.png"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\e91e6f61-fb84-4cf8-86d0-e57c971f5b71.jpg",
+      "PackagePath": "staticwebassets\\Image\\e91e6f61-fb84-4cf8-86d0-e57c971f5b71.jpg"
     },
     {
       "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\f21ef7e0-68d4-437f-aca2-31145671181d.png",
