@@ -51,6 +51,18 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("Search/{keyword}")]
+        public IActionResult Search(string keyword) 
+        {
+            try
+            {
+                return Ok(_repository.Search(keyword));
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         [HttpPost("Add")]
         public IActionResult Add([FromForm] LaptopModel model)
         {

@@ -9,5 +9,6 @@ namespace LaptopStoreApi.Services
         Laptop Add(LaptopModel model);
         void Update(LaptopModel model);
         void Delete(int id);
+        List<Laptop> Search (string keyword);
     }
 }

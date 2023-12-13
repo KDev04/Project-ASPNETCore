@@ -105,5 +105,14 @@ namespace LaptopStoreApi.Services
                 _context.SaveChanges();
             }
         }
+        public List<Laptop> Search (string keyword)
+        {
+            var searchResult = _context.Laptops.Where(l => l.TenLaptop.Contains(keyword)).ToList();
+            if (searchResult.Count > 0)
+            {
+                return searchResult;
+            }
+            return null;
+        }
     }
 }
