@@ -112,7 +112,7 @@ namespace LaptopStoreApi.Services
             {
                 return searchResult;
             }
-            return null;
+            else return null;
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿@model Laptop
+<form asp-action="SaveProduct" asp-controller="Laptop" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="TenLaptop">Tên Laptop:</label>
+        <input asp-for="TenLaptop" required>
+    </div>
+    <div>
+        <label asp-for="Gia">Giá:</label>
+        <input asp-for="Gia" type="number" required>
+    </div>
+    <div>
+        <label asp-for="GiamGia">Giảm Giá:</label>
+        <input asp-for="GiamGia" type="number">
+    </div>
+    <div>
+        <label asp-for="LoaiManHinh">Loại Màn Hình:</label>
+        <input asp-for="LoaiManHinh" type="number">
+    </div>
+    <div>
+        <label asp-for="Mau">Màu:</label>
+        <input asp-for="Mau" type="text">
+    </div>
+    <div>
+        <label asp-for="NamSanXuat">Năm Sản Xuất:</label>
+        <input asp-for="NamSanXuat" type="number">
+    </div>
+    <div>
+        <label asp-for="Mota">Mô Tả:</label>
+        <textarea asp-for="Mota"></textarea>
+    </div>
+    <div>
+        <label asp-for="CategoryId">Category ID:</label>
+        <input asp-for="CategoryId" type="number">
+    </div>
+    <div>
+        <label asp-for="Image">Ảnh:</label>
+        <input asp-for="Image" type="file" required>
+    </div>
+    <button type="submit">Tạo mới Laptop</button>
+</form>

@@ -68,3 +68,11 @@ D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 D:\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\libman.json
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Humanizer.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\System.CodeDom.dll

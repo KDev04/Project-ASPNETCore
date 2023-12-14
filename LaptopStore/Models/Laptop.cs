@@ -2,20 +2,22 @@
 {
     public class Laptop
     {
-        public string? maLaptop { get; set; }
-        public string? tenLaptop { get; set; }
-        public decimal? gia { get; set; }
-        public int? giamGia { get; set; }
-        public int? loaiManHinh { get; set; }
-        public string? mau { get; set; }
-        public int? namSanXuat { get; set; }
-        public string? mota { get; set; }
-        public string? imgPath { get; set; }
-        public DateTime? createDate { get; set; }
-        public DateTime? lastModifiedDate { get; set; }
-        public int? categoryId { get; set; }
-        public Category? category { get; set; }
-        public List<DonHangChiTiet>? donHangChiTiets { get; set; }
+        public string? MaLaptop { get; set; }
+        public string? TenLaptop { get; set; }
+        public decimal? Gia { get; set; }
+        public int? GiamGia { get; set; }
+        public int? LoaiManHinh { get; set; }
+        public string? Mau { get; set; }
+        public int? NamSanXuat { get; set; }
+        public string? Mota { get; set; }
+        public string? ImgPath { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public List<DonHangChiTiet>? DonHangChiTiets { get; set; }
+        public IFormFile? Image { get; set; }
+
     }
 
     public class Category
@@ -27,24 +29,24 @@
 
     public class DonHangChiTiet
     {
-        public string? maLaptop { get; set; }
-        public string? maDh { get; set; }
-        public int? soLuong { get; set; }
-        public decimal? donGia { get; set; }
-        public int? giamGia { get; set; }
-        public string? laptop { get; set; }
-        public DonHang? donHang { get; set; }
+        public string? MaLaptop { get; set; }
+        public string? MaDh { get; set; }
+        public int? SoLuong { get; set; }
+        public decimal? DonGia { get; set; }
+        public int? GiamGia { get; set; }
+        public string? Laptop { get; set; }
+        public DonHang? DonHang { get; set; }
     }
 
     public class DonHang
     {
-        public string?  maDh { get; set; }
-        public DateTime ngayDat { get; set; }
-        public DateTime ngayGiao { get; set; }
-        public int tinhTrangDonHang { get; set; }
-        public string? nguoiNhan { get; set; }
-        public string? diaChiGiao { get; set; }
-        public string? sodienThoai { get; set; }
-        public List<string>? donHangChiTiets { get; set; }
+        public string?  MaDh { get; set; }
+        public DateTime NgayDat { get; set; }
+        public DateTime NgayGiao { get; set; }
+        public int TinhTrangDonHang { get; set; }
+        public string? NguoiNhan { get; set; }
+        public string? DiaChiGiao { get; set; }
+        public string? SodienThoai { get; set; }
+        public List<string>? DonHangChiTiets { get; set; }
     }
 }
