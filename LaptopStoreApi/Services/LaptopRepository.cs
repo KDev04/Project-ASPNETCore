@@ -14,6 +14,12 @@ namespace LaptopStoreApi.Services
 
         public Laptop Add([FromForm] LaptopModel model)
         {
+            if (model.Image == null || model.Image.Length == 0)
+            {
+                // Xử lý khi không có tệp hình ảnh được gửi lên
+                // Ví dụ: trả về lỗi hoặc thông báo không có tệp hình ảnh
+            }
+
             string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Image.FileName);
             string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
             string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
@@ -25,7 +31,7 @@ namespace LaptopStoreApi.Services
 
             using (var stream = new FileStream(imgFilePath, FileMode.Create))
             {
-                model.Image.CopyToAsync(stream);
+                model.Image.CopyTo(stream);
             }
 
             var laptop = new Laptop
@@ -46,7 +52,6 @@ namespace LaptopStoreApi.Services
             _context.Laptops.Add(laptop);
             _context.SaveChanges();
             return laptop;
-            
         }
 
         public void Delete(int id)

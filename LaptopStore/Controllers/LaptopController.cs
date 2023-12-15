@@ -41,28 +41,41 @@ namespace LaptopStore.Controllers
                 {
                     try
                     {
-                        if (model.Image != null && model.Image.Length > 0)
+                        using (var formData = new MultipartFormDataContent())
                         {
-                            using (var formData = new MultipartFormDataContent())
+                            formData.Add(new StringContent(model.TenLaptop), "TenLaptop");
+                            formData.Add(new StringContent(model.Gia.ToString()), "Gia");
+                            formData.Add(new StringContent(model.GiamGia.ToString()), "GiamGia");
+                            formData.Add(new StringContent(model.LoaiManHinh.ToString()), "LoaiManHinh");
+                            formData.Add(new StringContent(model.Mau), "Mau");
+                            formData.Add(new StringContent(model.NamSanXuat.ToString()), "NamSanXuat");
+                            formData.Add(new StringContent(model.Mota), "Mota");
+                            formData.Add(new StringContent(model.CategoryId.ToString()), "CategoryId");
+
+                            if (model.Image != null && model.Image.Length > 0)
                             {
-                                formData.Add(new StringContent(model.TenLaptop), "TenLaptop");
-                                formData.Add(new StringContent(model.Gia.ToString()), "Gia");
-                                formData.Add(new StringContent(model.GiamGia.ToString()), "GiamGia");
-                                formData.Add(new StringContent(model.LoaiManHinh.ToString()), "LoaiManHinh");
-                                formData.Add(new StringContent(model.Mau), "Mau");
-                                formData.Add(new StringContent(model.NamSanXuat.ToString()), "NamSanXuat");
-                                formData.Add(new StringContent(model.Mota), "Mota");
-                                formData.Add(new StringContent(model.CategoryId.ToString()), "CategoryId");
+                                using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                                {
+                                    formData.Add(streamContent, "Image", model.Image.FileName);
 
-                                formData.Add(new StreamContent(model.Image.OpenReadStream()), "Image", model.Image.FileName);
+                                    var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
 
-                                var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
-                                return Redirect("/Laptop/");
+                                    if (response.IsSuccessStatusCode)
+                                    {
+                                        // Xử lý khi tạo laptop thành công
+                                        return Redirect("/Laptop/Index");
+                                    }
+                                    else
+                                    {
+                                        // Xử lý khi có lỗi từ API
+                                        ModelState.AddModelError("", "An error occurred while creating the laptop.");
+                                    }
+                                }
                             }
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "No image file found");
+                            else
+                            {
+                                ModelState.AddModelError("", "No image file found");
+                            }
                         }
                     }
                     catch
@@ -72,7 +85,7 @@ namespace LaptopStore.Controllers
                 }
             }
 
-            return View("Index");
+            return Redirect("/Laptop/Index");
         }
         public IActionResult Create()
         {
