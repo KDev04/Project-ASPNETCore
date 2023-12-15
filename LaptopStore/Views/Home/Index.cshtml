@@ -1,9 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<partial name="section3" />
 
-<div class="bg-black text-center text-warning">
-    <h1>Welcome to the Home Page!</h1>
-    <p>Hello world</p>
-</div>
-<a asp-controller="Home" asp-action="Privacy">Privacy</a>
+<partial name="section1"/>
+<partial name="section2" />
+
+@* <a asp-controller="Home" asp-action="Privacy">Privacy</a> *@

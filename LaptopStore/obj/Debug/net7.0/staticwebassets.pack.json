@@ -13,6 +13,110 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\aboutus-1.webp",
+      "PackagePath": "staticwebassets\\img\\aboutus-1.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\aboutus-2.webp",
+      "PackagePath": "staticwebassets\\img\\aboutus-2.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\bg-1.jpg",
+      "PackagePath": "staticwebassets\\img\\bg-1.jpg"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\bg-1.webp",
+      "PackagePath": "staticwebassets\\img\\bg-1.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\bg-2.png",
+      "PackagePath": "staticwebassets\\img\\bg-2.png"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\c.png",
+      "PackagePath": "staticwebassets\\img\\c.png"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-1.webp",
+      "PackagePath": "staticwebassets\\img\\caro-1.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-2.webp",
+      "PackagePath": "staticwebassets\\img\\caro-2.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-3.webp",
+      "PackagePath": "staticwebassets\\img\\caro-3.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-4.webp",
+      "PackagePath": "staticwebassets\\img\\caro-4.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-5.webp",
+      "PackagePath": "staticwebassets\\img\\caro-5.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-6.webp",
+      "PackagePath": "staticwebassets\\img\\caro-6.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-7.webp",
+      "PackagePath": "staticwebassets\\img\\caro-7.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-8.webp",
+      "PackagePath": "staticwebassets\\img\\caro-8.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\contact-1.webp",
+      "PackagePath": "staticwebassets\\img\\contact-1.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\homesec-1.webp",
+      "PackagePath": "staticwebassets\\img\\homesec-1.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\homesec-2.webp",
+      "PackagePath": "staticwebassets\\img\\homesec-2.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\nitrovideo.mp4",
+      "PackagePath": "staticwebassets\\img\\nitrovideo.mp4"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\predatorvideo.mp4",
+      "PackagePath": "staticwebassets\\img\\predatorvideo.mp4"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\rv-1.png",
+      "PackagePath": "staticwebassets\\img\\rv-1.png"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store10.webp",
+      "PackagePath": "staticwebassets\\img\\store10.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store11.webp",
+      "PackagePath": "staticwebassets\\img\\store11.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store12.webp",
+      "PackagePath": "staticwebassets\\img\\store12.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store13.webp",
+      "PackagePath": "staticwebassets\\img\\store13.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store14.webp",
+      "PackagePath": "staticwebassets\\img\\store14.webp"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store15.webp",
+      "PackagePath": "staticwebassets\\img\\store15.webp"
+    },
+    {
       "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

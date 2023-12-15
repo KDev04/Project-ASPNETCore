@@ -15,7 +15,7 @@ namespace LaptopStoreApi.Services
         public Laptop Add([FromForm] LaptopModel model)
         {
             string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Image.FileName);
-            string imgFolderPath = Path.Combine("wwwroot", "Image"); // Thư mục "wwwroot/Image"
+            string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
             string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
 
             if (!Directory.Exists(imgFolderPath))
