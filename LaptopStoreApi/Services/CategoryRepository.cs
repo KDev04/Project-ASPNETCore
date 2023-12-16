@@ -1,69 +1,105 @@
-﻿using LaptopStoreApi.Data;
+﻿using AutoMapper;
+using LaptopStoreApi.Data;
 using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaptopStoreApi.Services
 {
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationLaptopDbContext _context;
-        public CategoryRepository(ApplicationLaptopDbContext context) 
+        private readonly IMapper _mapper;
+        public CategoryRepository(ApplicationLaptopDbContext context, IMapper mapper) 
         { 
             _context = context;
+            _mapper = mapper;
         }
-        public CategoryModel Add(CategoryModel category)
+
+        public async Task<int> Add(CategoryModel category)
         {
-            var cate = new Category
-            {
-                Name = category.Name
-            };
+           var cate = _mapper.Map<Category>(category);
             _context.Categories.Add(cate);
-            _context.SaveChanges();
-            return new CategoryModel 
-            { 
-                Name = cate.Name,
-                Id = cate.Id
-            };
+            await _context.SaveChangesAsync();
+            return cate.Id;
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var cate = _context.Categories.FirstOrDefault(ct => ct.Id == id);
-            if (cate != null)
+            var del = _context.Categories!.SingleOrDefault(c => c.Id == id);
+            if (del != null)
             {
-                _context.Categories.Remove(cate);
-                _context.SaveChanges();
+                _context.Categories.Remove(del);
+                await _context.SaveChangesAsync();
             }
         }
 
-        public List<CategoryModel> GetAll()
+        public async Task<List<CategoryModel>> GetAll()
         {
-            var cates = _context.Categories.Select(ct => new CategoryModel { Id = ct.Id, Name = ct.Name });
-            return cates.ToList();
+            var cates = await _context.Categories!.ToListAsync();
+            return _mapper.Map<List<CategoryModel>>(cates);
         }
 
-        public CategoryModel GetById(int id)
+        public async Task<CategoryModel> GetById(int id)
         {
-            var cate = _context.Categories.FirstOrDefault(ct => ct.Id == id);
-            if (cate != null)
-            {
-                return new CategoryModel
-                {
-                    Id = cate.Id,
-                    Name = cate.Name
-                };
-            }
-            return new CategoryModel(); // Hoặc return new CategoryModel { Id = 0, Name = "" }; tùy thuộc vào logic của ứng dụng
+            var cate = await _context.Categories!.FirstOrDefaultAsync(c => c.Id == id);
+            return _mapper.Map<CategoryModel>(cate);
         }
 
-        public void Update(CategoryModel category)
+        public async Task Update(int id, CategoryModel category)
         {
-            var cate = _context.Categories.FirstOrDefault(ct => ct.Id == category.Id);
-            if (cate != null)
+            if (id == category.Id)
             {
-                cate.Name = category.Name;
-                _context.SaveChanges();
+                var update = _mapper.Map<Category>(category);
+                _context.Categories!.Update(update);
+                await _context.SaveChangesAsync();
             }
         }
+        /*public CategoryModel Add(CategoryModel category)
+{
+   var cate = new Category
+   {
+       Name = category.Name
+   };
+   _context.Categories.Add(cate);
+   _context.SaveChanges();
+   return new CategoryModel 
+   { 
+       Name = cate.Name,
+       Id = cate.Id
+   };
+}
+
+public void Delete(int id)
+{
+   var cate = _context.Categories.FirstOrDefault(ct => ct.Id == id);
+   if (cate != null)
+   {
+       _context.Categories.Remove(cate);
+       _context.SaveChanges();
+   }
+}
+
+public async Task<List<CategoryModel>> GetAll()
+{
+   var cates = await _context.Categories!.ToListAsync();
+   return _mapper.Map<List<CategoryModel>>(cates);
+
+}
+
+public CategoryModel GetById(int id)
+{
+   c// Hoặc return new CategoryModel { Id = 0, Name = "" }; tùy thuộc vào logic của ứng dụng
+}
+
+public void Update(CategoryModel category)
+{
+   var cate = _context.Categories.FirstOrDefault(ct => ct.Id == category.Id);
+   if (cate != null)
+   {
+       cate.Name = category.Name;
+       _context.SaveChanges();
+   }
+}*/
     }
 }

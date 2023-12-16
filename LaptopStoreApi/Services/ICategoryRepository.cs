@@ -1,13 +1,14 @@
 ﻿using LaptopStoreApi.Models;
 using System.Threading.Tasks;
+using AutoMapper;
 namespace LaptopStoreApi.Services
 {
     public interface ICategoryRepository
     {
-        List<CategoryModel> GetAll();
-        CategoryModel GetById(int id);
-        CategoryModel Add(CategoryModel category);
-        void Delete(int id);
-        void Update(CategoryModel category);
+        public Task<List<CategoryModel>>  GetAll();
+        public Task<CategoryModel> GetById(int id);
+        public Task<int> Add(CategoryModel category);
+        public Task Delete(int id);
+        public Task Update(int id, CategoryModel category);
     }
 }

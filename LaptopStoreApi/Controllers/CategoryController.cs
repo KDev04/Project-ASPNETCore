@@ -16,11 +16,11 @@ namespace LaptopStoreApi.Controllers
             _categoryRepository = category;
         }
         [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                return Ok(_categoryRepository.GetAll());
+                return Ok(await _categoryRepository.GetAll());
             }
             catch
             {
@@ -28,38 +28,33 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [HttpGet("Get/{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                var data = _categoryRepository.GetById(id);
-                if (data == null)
-                {
-                    return NotFound();
-                } else
-                {
-                    return Ok(data);
-
-                }
+                var data = await _categoryRepository.GetById(id);
+                return data == null ? NotFound() : Ok(data);
             }
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpPost("Add")] 
-        public IActionResult Add(CategoryModel model)
+        [HttpPost("Add")]
+        public async Task<IActionResult> Add(CategoryModel model)
         {
             try
             {
-                return Ok(_categoryRepository.Add(model));
+                var newCateId = await _categoryRepository.Add(model);
+                var data = await _categoryRepository.GetById(newCateId);
+                return data == null ? NotFound() : Ok(data);
             }
             catch
             {
                 return BadRequest();
             }
         }
-        [HttpPut("Update/{id}")]
+ /*       [HttpPut("Update/{id}")]
         public IActionResult Update(int id, CategoryModel model)
         {
 
@@ -76,10 +71,10 @@ namespace LaptopStoreApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-        }
+        }*/
 
-        [HttpDelete("Delete/{id}")]
-        public IActionResult Delete(int id) 
+        /*[HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id)
         {
             try
             {
@@ -90,6 +85,6 @@ namespace LaptopStoreApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-        }
+        }*/
     }
 }
