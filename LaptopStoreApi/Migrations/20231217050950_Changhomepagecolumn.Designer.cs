@@ -4,6 +4,7 @@ using LaptopStoreApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApplicationLaptopDbContext))]
-    partial class ApplicationLaptopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217050950_Changhomepagecolumn")]
+    partial class Changhomepagecolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,8 +121,6 @@ namespace LaptopStoreApi.Migrations
 
                     b.HasKey("HomePageId");
 
-                    b.HasIndex("MaLaptop");
-
                     b.ToTable("Homepage");
                 });
 
@@ -197,16 +198,6 @@ namespace LaptopStoreApi.Migrations
                         .HasConstraintName("FK_DonHangCT_Laptop");
 
                     b.Navigation("DonHang");
-
-                    b.Navigation("Laptop");
-                });
-
-            modelBuilder.Entity("LaptopStoreApi.Data.Homepage", b =>
-                {
-                    b.HasOne("LaptopStoreApi.Data.Laptop", "Laptop")
-                        .WithMany()
-                        .HasForeignKey("MaLaptop")
-                        .HasConstraintName("FK_Homepage_Laptops");
 
                     b.Navigation("Laptop");
                 });

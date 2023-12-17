@@ -8,26 +8,26 @@ namespace LaptopStoreApi.Data
             ApplicationLaptopDbContext context = app.ApplicationServices
                 .CreateScope().ServiceProvider
                 .GetRequiredService<ApplicationLaptopDbContext>();
+
             if (context.Database.GetPendingMigrations().Any())
             {
                 context.Database.Migrate();
             }
-            if (!context.Laptops.Any())
-            {
-                context.Laptops.AddRange
-                    (
-                    new Laptop
-                    {
-                        TenLaptop = "Abc"
-                    },
-                    new Laptop
-                    {
-                        TenLaptop = "BCd"
-                    }
+
+            // if (!context.Laptops.Any())
+            // {
+
+            // }
+            // if (!context.Homepages.Any())
+            // {
+            //     var homepageData = new List<Homepage>
+            //     {
 
 
-                    );
-            }
+
+            //     }
+
+            // }
         }
     }
 }
