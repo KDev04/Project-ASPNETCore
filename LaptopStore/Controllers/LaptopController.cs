@@ -31,62 +31,85 @@ namespace LaptopStore.Controllers
                 }
             }
         }
-        public IActionResult Detail() => View();
+        public async Task<IActionResult> Detail(int id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/Get/" + id);
+                    response.EnsureSuccessStatusCode();
+                    var content = await response.Content.ReadAsStringAsync();
 
-        // public async Task<IActionResult> SaveProduct(Laptop model)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         using (var httpClient = new HttpClient())
-        //         {
-        //             try
-        //             {
-        //                 using (var formData = new MultipartFormDataContent())
-        //                 {
-        //                     formData.Add(new StringContent(model.TenLaptop), "TenLaptop");
-        //                     formData.Add(new StringContent(model.Gia.ToString()), "Gia");
-        //                     formData.Add(new StringContent(model.GiamGia.ToString()), "GiamGia");
-        //                     formData.Add(new StringContent(model.LoaiManHinh.ToString()), "LoaiManHinh");
-        //                     formData.Add(new StringContent(model.Mau), "Mau");
-        //                     formData.Add(new StringContent(model.NamSanXuat.ToString()), "NamSanXuat");
-        //                     formData.Add(new StringContent(model.Mota), "Mota");
-        //                     formData.Add(new StringContent(model.CategoryId.ToString()), "CategoryId");
+                    // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
+                    // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
 
-        //                     if (model.Image != null && model.Image.Length > 0)
-        //                     {
-        //                         using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
-        //                         {
-        //                             formData.Add(streamContent, "Image", model.Image.FileName);
+                    var laptop = JsonConvert.DeserializeObject<Laptop>(content);
+                    return View(laptop);
+                }
+                catch (Exception)
+                {
+                    // Xử lý lỗi khi gặp vấn đề khi gọi API
+                    // Ví dụ:
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+        }
 
-        //                             var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
+        public async Task<IActionResult> SaveProduct(Laptop model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    try
+                    {
+                        using (var formData = new MultipartFormDataContent())
+                        {
+                            formData.Add(new StringContent(model.TenLaptop?.ToString() ?? ""), "TenLaptop");
+                            formData.Add(new StringContent(model.Gia?.ToString() ?? ""), "Gia");
+                            formData.Add(new StringContent(model.GiamGia?.ToString() ?? ""), "GiamGia");
+                            formData.Add(new StringContent(model.LoaiManHinh?.ToString() ?? ""), "LoaiManHinh");
+                            formData.Add(new StringContent(model.Mau ?? ""), "Mau");
+                            formData.Add(new StringContent(model.NamSanXuat?.ToString() ?? ""), "NamSanXuat");
+                            formData.Add(new StringContent(model.Mota ?? ""), "Mota");
+                            formData.Add(new StringContent(model.CategoryId?.ToString() ?? ""), "CategoryId");
 
-        //                             if (response.IsSuccessStatusCode)
-        //                             {
-        //                                 // Xử lý khi tạo laptop thành công
-        //                                 return Redirect("/Laptop/Index");
-        //                             }
-        //                             else
-        //                             {
-        //                                 // Xử lý khi có lỗi từ API
-        //                                 ModelState.AddModelError("", "An error occurred while creating the laptop.");
-        //                             }
-        //                         }
-        //                     }
-        //                     else
-        //                     {
-        //                         ModelState.AddModelError("", "No image file found");
-        //                     }
-        //                 }
-        //             }
-        //             catch
-        //             {
-        //                 ModelState.AddModelError("", "An error occurred");
-        //             }
-        //         }
-        //     }
+                            if (model.Image != null && model.Image.Length > 0)
+                            {
+                                using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                                {
+                                    formData.Add(streamContent, "Image", model.Image.FileName);
 
-        //     return Redirect("/Laptop/Index");
-        // }
+                                    var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
+
+                                    if (response.IsSuccessStatusCode)
+                                    {
+                                        // Xử lý khi tạo laptop thành công
+                                        return Redirect("/Laptop/Index");
+                                    }
+                                    else
+                                    {
+                                        // Xử lý khi có lỗi từ API
+                                        ModelState.AddModelError("", "An error occurred while creating the laptop.");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "No image file found");
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError("", "An error occurred");
+                    }
+                }
+            }
+
+            return Redirect("/Laptop/Index");
+        }
         public IActionResult Create()
         {
             return View();

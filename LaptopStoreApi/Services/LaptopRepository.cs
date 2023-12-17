@@ -20,7 +20,7 @@ namespace LaptopStoreApi.Services
                 // Ví dụ: trả về lỗi hoặc thông báo không có tệp hình ảnh
             }
 
-            string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Image.FileName);
+            string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model?.Image?.FileName);
             string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
             string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
 
@@ -31,12 +31,12 @@ namespace LaptopStoreApi.Services
 
             using (var stream = new FileStream(imgFilePath, FileMode.Create))
             {
-                model.Image.CopyTo(stream);
+                model?.Image?.CopyTo(stream);
             }
 
             var laptop = new Laptop
             {
-                TenLaptop = model.TenLaptop,
+                TenLaptop = model?.TenLaptop ?? "",
                 Gia = model.Gia,
                 GiamGia = model.GiamGia,
                 Mau = model.Mau,
