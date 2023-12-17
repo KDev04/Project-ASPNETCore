@@ -46,14 +46,14 @@ namespace LaptopStoreApi.Data
     {
         [Key]
         public int? HomePageId { get; set; }
-        [ForeignKey("Laptops")]
-        public int? MaLaptop { get; set; }
+
         [Required]
         public string? VideoUrl { get; set; }
         [Required]
         public string? SlideImageUrl { get; set; }
-        // Thêm quan hệ với bảng Laptops
-        public Laptop Laptop { get; set; }
+        public int? MaLaptop { get; set; }
+        [ForeignKey("MaLaptop")]
+        public Laptop? Laptop { get; set; }
     }
 
 
