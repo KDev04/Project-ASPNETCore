@@ -1,1 +1,61 @@
-﻿<h1>This is detail</h1>
+﻿@model Laptop
+<style>
+    .img-card {
+        max-height: 200px;
+        object-fit: contain;
+    }
+</style>
+<section class="container py-5 my-5" >
+    <div class="container bg-light rounded-5 p-5">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mb-4">
+                                <div class="image-container"
+                                     style="overflow: hidden; margin-top: 10px;">
+                                    <img src=http://localhost:4000/@Model.ImgPath
+                                         alt="img"
+                                         class="img-fluid rounded img-card" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col text-center">
+                                <h3 class="fw-bold">@Model.TenLaptop</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-12">
+                <div class="card text-black">
+                    <div class="card-body">
+                        <h6 class="mb-4 pb-2 border-bottom fw-bold">Thông tin</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h6>@Model.Mota</h6>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <h6 class="mb-2 pb-2 border-bottom fw-bold">Giá</h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h3 class="text-black-50">
+                                        @Model.Gia <i class="fa-solid fa-lira-sign"></i>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-success ms-2">
+                                Mua
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

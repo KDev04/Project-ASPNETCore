@@ -2,7 +2,7 @@
 {
     public class Laptop
     {
-        public string? MaLaptop { get; set; }
+        public int? MaLaptop { get; set; }
         public string? TenLaptop { get; set; }
         public decimal? Gia { get; set; }
         public int? GiamGia { get; set; }
