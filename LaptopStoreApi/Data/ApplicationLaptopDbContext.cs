@@ -31,5 +31,6 @@ namespace LaptopStoreApi.Data
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<DonHangChiTiet> DonHangChiTiets => Set<DonHangChiTiet>();
         public DbSet<DonHang> DonHangs => Set<DonHang>();
+        public DbSet<Homepage> Homepages => Set<Homepage>();
     }
 }

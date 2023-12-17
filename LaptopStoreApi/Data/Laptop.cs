@@ -15,7 +15,7 @@ namespace LaptopStoreApi.Data
         public byte GiamGia { get; set; }
 
         public double LoaiManHinh { get; set; }
-        
+
         public string Mau { get; set; } = string.Empty;
 
         public int NamSanXuat { get; set; }
@@ -35,7 +35,25 @@ namespace LaptopStoreApi.Data
             DonHangChiTiets = new HashSet<DonHangChiTiet>();
 
         }
+    
     }
+
+    [Table("Homepage")]
+    public class Homepage
+    {
+        [Key]
+        public int HomePageId { get; set; }
+        [ForeignKey("Laptops")]
+        public int MaLaptop { get; set; }
+        [Required]
+        public string VideoUrl { get; set; }
+        [Required]
+        public string SlideImageUrl { get; set; }
+        // Thêm quan hệ với bảng Laptops
+        public Laptop Laptop { get; set; }
+    }
+
+
     [Table("Categories")]
     public class Category
     {
