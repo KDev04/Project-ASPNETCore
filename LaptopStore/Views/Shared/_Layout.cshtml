@@ -232,20 +232,63 @@
         </nav>
     </header>
     @* <div class="container" style="padding-top: 78px;"> *@
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    @* </div> *@
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - LaptopStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <partial name="~/Views/Component/footer.cshtml" />
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+ <style>
+        .card-footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .text-title a {
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+
+        button.card-button {
+            border: #252525;
+            flex: 1;
+            padding: .3em;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: .3s ease-in-out;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* You may need to adjust this based on your design */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .card-button:hover {
+            background-color: #ffcaa6;
+        }
+    </style>
 
 </html>
