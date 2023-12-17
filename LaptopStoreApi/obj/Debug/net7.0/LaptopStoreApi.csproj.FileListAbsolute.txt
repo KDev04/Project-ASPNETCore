@@ -162,3 +162,4 @@ D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug
 D:\D\LaptopStoreApi\bin\Debug\net7.0\LaptopStoreApi.staticwebassets.runtime.json
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\AutoMapper.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\LaptopStoreApi.sourcelink.json
