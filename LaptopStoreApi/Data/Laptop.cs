@@ -11,10 +11,12 @@ namespace LaptopStoreApi.Data
         public int MaLaptop { get; set; }
         [MaxLength(100)]
         public string TenLaptop { get; set; } = string.Empty;
+
         public decimal Gia { get; set; }
         public byte GiamGia { get; set; }
 
         public double LoaiManHinh { get; set; }
+         public string Hangsx { get; set; } = string.Empty;
 
         public string Mau { get; set; } = string.Empty;
 
@@ -22,11 +24,12 @@ namespace LaptopStoreApi.Data
 
         public string Mota { get; set; } = string.Empty;
         public string ImgPath { get; set; } = string.Empty;
-
+        
         public DateTime CreateDate { get; set; }
 
         public DateTime LastModifiedDate { get; set; }
         public int? CategoryId { get; set; }
+
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
         public ICollection<DonHangChiTiet>? DonHangChiTiets { get; set; }
@@ -35,20 +38,20 @@ namespace LaptopStoreApi.Data
             DonHangChiTiets = new HashSet<DonHangChiTiet>();
 
         }
-    
+
     }
 
     [Table("Homepage")]
     public class Homepage
     {
         [Key]
-        public int HomePageId { get; set; }
+        public int? HomePageId { get; set; }
         [ForeignKey("Laptops")]
-        public int MaLaptop { get; set; }
+        public int? MaLaptop { get; set; }
         [Required]
-        public string VideoUrl { get; set; }
+        public string? VideoUrl { get; set; }
         [Required]
-        public string SlideImageUrl { get; set; }
+        public string? SlideImageUrl { get; set; }
         // Thêm quan hệ với bảng Laptops
         public Laptop Laptop { get; set; }
     }
