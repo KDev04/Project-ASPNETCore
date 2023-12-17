@@ -4,6 +4,7 @@ using LaptopStoreApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApplicationLaptopDbContext))]
-    partial class ApplicationLaptopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217013155_Homepage17_12")]
+    partial class Homepage17_12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,16 +102,16 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Data.Homepage", b =>
                 {
-                    b.Property<int?>("HomePageId")
+                    b.Property<int>("HomePageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("HomePageId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HomePageId"));
 
                     b.Property<int>("LaptopMaLaptop")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MaLaptop")
+                    b.Property<int>("MaLaptop")
                         .HasColumnType("int");
 
                     b.Property<string>("SlideImageUrl")
@@ -145,10 +148,6 @@ namespace LaptopStoreApi.Migrations
 
                     b.Property<byte>("GiamGia")
                         .HasColumnType("tinyint");
-
-                    b.Property<string>("Hangsx")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImgPath")
                         .IsRequired()

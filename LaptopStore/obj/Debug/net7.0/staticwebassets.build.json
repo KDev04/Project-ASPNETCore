@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XqtKvoXx+YCGAtd+s0VPOSooP/ooQb1ZQhPXV/zwsFQ=",
+  "Hash": "v/hp+MNuI5BMkqoK/PY/m0/skTamlb32AUKV8EYYhGs=",
   "Source": "LaptopStore",
   "BasePath": "_content/LaptopStore",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "LaptopStore\\wwwroot",
       "Source": "LaptopStore",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\LaptopStore.styles.css",
+      "Identity": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\LaptopStore.styles.css",
       "SourceId": "LaptopStore",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "LaptopStore.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\LaptopStore.styles.css"
+      "OriginalItemSpec": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\LaptopStore.styles.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css",
+      "Identity": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css",
       "SourceId": "LaptopStore",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "LaptopStore.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css"
+      "OriginalItemSpec": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\css\\site.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\css\\site.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\favicon.ico",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\favicon.ico",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\aboutus-1.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\aboutus-1.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/aboutus-1.webp",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\img\\aboutus-1.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\aboutus-2.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\aboutus-2.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/aboutus-2.webp",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\img\\aboutus-2.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\bg-1.jpg",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\bg-1.jpg",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/bg-1.jpg",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\img\\bg-1.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\bg-1.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\bg-1.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/bg-1.webp",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\img\\bg-1.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\bg-2.png",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\bg-2.png",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/bg-2.png",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\img\\bg-2.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\c.png",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\c.png",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/c.png",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\img\\c.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-1.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-1.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-1.webp",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-1.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-2.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-2.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-2.webp",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-2.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-3.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-3.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-3.webp",
       "AssetKind": "All",
@@ -264,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-3.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-4.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-4.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-4.webp",
       "AssetKind": "All",
@@ -283,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-4.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-5.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-5.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-5.webp",
       "AssetKind": "All",
@@ -302,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-5.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-6.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-6.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-6.webp",
       "AssetKind": "All",
@@ -321,10 +321,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-6.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-7.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-7.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-7.webp",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-7.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\caro-8.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\caro-8.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/caro-8.webp",
       "AssetKind": "All",
@@ -359,10 +359,10 @@
       "OriginalItemSpec": "wwwroot\\img\\caro-8.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\contact-1.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\contact-1.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/contact-1.webp",
       "AssetKind": "All",
@@ -378,10 +378,10 @@
       "OriginalItemSpec": "wwwroot\\img\\contact-1.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\homesec-1.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\homesec-1.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/homesec-1.webp",
       "AssetKind": "All",
@@ -397,10 +397,10 @@
       "OriginalItemSpec": "wwwroot\\img\\homesec-1.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\homesec-2.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\homesec-2.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/homesec-2.webp",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\img\\homesec-2.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\nitrovideo.mp4",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\nitrovideo.mp4",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/nitrovideo.mp4",
       "AssetKind": "All",
@@ -435,10 +435,10 @@
       "OriginalItemSpec": "wwwroot\\img\\nitrovideo.mp4"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\predatorvideo.mp4",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\predatorvideo.mp4",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/predatorvideo.mp4",
       "AssetKind": "All",
@@ -454,10 +454,10 @@
       "OriginalItemSpec": "wwwroot\\img\\predatorvideo.mp4"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\rv-1.png",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\rv-1.png",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/rv-1.png",
       "AssetKind": "All",
@@ -473,10 +473,10 @@
       "OriginalItemSpec": "wwwroot\\img\\rv-1.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store10.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\store10.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/store10.webp",
       "AssetKind": "All",
@@ -492,10 +492,10 @@
       "OriginalItemSpec": "wwwroot\\img\\store10.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store11.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\store11.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/store11.webp",
       "AssetKind": "All",
@@ -511,10 +511,10 @@
       "OriginalItemSpec": "wwwroot\\img\\store11.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store12.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\store12.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/store12.webp",
       "AssetKind": "All",
@@ -530,10 +530,10 @@
       "OriginalItemSpec": "wwwroot\\img\\store12.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store13.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\store13.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/store13.webp",
       "AssetKind": "All",
@@ -549,10 +549,10 @@
       "OriginalItemSpec": "wwwroot\\img\\store13.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store14.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\store14.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/store14.webp",
       "AssetKind": "All",
@@ -568,10 +568,10 @@
       "OriginalItemSpec": "wwwroot\\img\\store14.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\img\\store15.webp",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\img\\store15.webp",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "img/store15.webp",
       "AssetKind": "All",
@@ -587,10 +587,10 @@
       "OriginalItemSpec": "wwwroot\\img\\store15.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\js\\site.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\js\\site.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -606,10 +606,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -625,10 +625,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -644,10 +644,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -663,10 +663,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -682,10 +682,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -701,10 +701,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -720,10 +720,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -739,10 +739,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -758,10 +758,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -777,10 +777,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -796,10 +796,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -815,10 +815,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -834,10 +834,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -853,10 +853,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -872,10 +872,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -891,10 +891,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -910,10 +910,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -929,10 +929,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -948,10 +948,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -967,10 +967,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -986,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -1005,10 +1005,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -1024,10 +1024,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -1043,10 +1043,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -1062,10 +1062,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -1081,10 +1081,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -1100,10 +1100,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -1119,10 +1119,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -1138,10 +1138,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -1157,10 +1157,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -1176,10 +1176,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -1195,10 +1195,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -1214,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -1233,10 +1233,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -1252,10 +1252,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -1271,10 +1271,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -1290,10 +1290,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -1309,10 +1309,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -1328,10 +1328,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -1347,10 +1347,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -1366,10 +1366,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -1385,10 +1385,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -1404,10 +1404,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -1423,10 +1423,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -1442,10 +1442,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -1461,10 +1461,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\all.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\all.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/all.css",
       "AssetKind": "All",
@@ -1480,10 +1480,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\all.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\all.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\all.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/all.min.css",
       "AssetKind": "All",
@@ -1499,10 +1499,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\all.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\brands.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\brands.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/brands.css",
       "AssetKind": "All",
@@ -1518,10 +1518,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\brands.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\brands.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\brands.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/brands.min.css",
       "AssetKind": "All",
@@ -1537,10 +1537,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\brands.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\fontawesome.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\fontawesome.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/fontawesome.css",
       "AssetKind": "All",
@@ -1556,10 +1556,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\fontawesome.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\fontawesome.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\fontawesome.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/fontawesome.min.css",
       "AssetKind": "All",
@@ -1575,10 +1575,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\fontawesome.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\regular.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\regular.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/regular.css",
       "AssetKind": "All",
@@ -1594,10 +1594,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\regular.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\regular.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\regular.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/regular.min.css",
       "AssetKind": "All",
@@ -1613,10 +1613,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\regular.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\solid.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\solid.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/solid.css",
       "AssetKind": "All",
@@ -1632,10 +1632,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\solid.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\solid.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\solid.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/solid.min.css",
       "AssetKind": "All",
@@ -1651,10 +1651,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\solid.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\svg-with-js.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\svg-with-js.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/svg-with-js.css",
       "AssetKind": "All",
@@ -1670,10 +1670,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\svg-with-js.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\svg-with-js.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\svg-with-js.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/svg-with-js.min.css",
       "AssetKind": "All",
@@ -1689,10 +1689,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\svg-with-js.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-font-face.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-font-face.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/v4-font-face.css",
       "AssetKind": "All",
@@ -1708,10 +1708,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\v4-font-face.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-font-face.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-font-face.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/v4-font-face.min.css",
       "AssetKind": "All",
@@ -1727,10 +1727,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\v4-font-face.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-shims.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-shims.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/v4-shims.css",
       "AssetKind": "All",
@@ -1746,10 +1746,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\v4-shims.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-shims.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v4-shims.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/v4-shims.min.css",
       "AssetKind": "All",
@@ -1765,10 +1765,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\v4-shims.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v5-font-face.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v5-font-face.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/v5-font-face.css",
       "AssetKind": "All",
@@ -1784,10 +1784,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\v5-font-face.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v5-font-face.min.css",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\css\\v5-font-face.min.css",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/css/v5-font-face.min.css",
       "AssetKind": "All",
@@ -1803,10 +1803,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\css\\v5-font-face.min.css"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\all.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\all.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/all.js",
       "AssetKind": "All",
@@ -1822,10 +1822,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\all.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\all.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\all.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/all.min.js",
       "AssetKind": "All",
@@ -1841,10 +1841,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\all.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\brands.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\brands.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/brands.js",
       "AssetKind": "All",
@@ -1860,10 +1860,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\brands.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\brands.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\brands.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/brands.min.js",
       "AssetKind": "All",
@@ -1879,10 +1879,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\brands.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\conflict-detection.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\conflict-detection.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/conflict-detection.js",
       "AssetKind": "All",
@@ -1898,10 +1898,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\conflict-detection.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\conflict-detection.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\conflict-detection.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/conflict-detection.min.js",
       "AssetKind": "All",
@@ -1917,10 +1917,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\conflict-detection.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\fontawesome.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\fontawesome.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/fontawesome.js",
       "AssetKind": "All",
@@ -1936,10 +1936,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\fontawesome.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\fontawesome.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\fontawesome.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/fontawesome.min.js",
       "AssetKind": "All",
@@ -1955,10 +1955,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\fontawesome.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\regular.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\regular.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/regular.js",
       "AssetKind": "All",
@@ -1974,10 +1974,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\regular.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\regular.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\regular.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/regular.min.js",
       "AssetKind": "All",
@@ -1993,10 +1993,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\regular.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\solid.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\solid.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/solid.js",
       "AssetKind": "All",
@@ -2012,10 +2012,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\solid.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\solid.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\solid.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/solid.min.js",
       "AssetKind": "All",
@@ -2031,10 +2031,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\solid.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\v4-shims.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\v4-shims.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/v4-shims.js",
       "AssetKind": "All",
@@ -2050,10 +2050,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\v4-shims.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\v4-shims.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\js\\v4-shims.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/js/v4-shims.min.js",
       "AssetKind": "All",
@@ -2069,10 +2069,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\js\\v4-shims.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\sprites\\brands.svg",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\sprites\\brands.svg",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/sprites/brands.svg",
       "AssetKind": "All",
@@ -2088,10 +2088,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\sprites\\brands.svg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\sprites\\regular.svg",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\sprites\\regular.svg",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/sprites/regular.svg",
       "AssetKind": "All",
@@ -2107,10 +2107,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\sprites\\regular.svg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\sprites\\solid.svg",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\sprites\\solid.svg",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/sprites/solid.svg",
       "AssetKind": "All",
@@ -2126,10 +2126,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\sprites\\solid.svg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-brands-400.ttf",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-brands-400.ttf",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-brands-400.ttf",
       "AssetKind": "All",
@@ -2145,10 +2145,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-brands-400.ttf"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-brands-400.woff2",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-brands-400.woff2",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-brands-400.woff2",
       "AssetKind": "All",
@@ -2164,10 +2164,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-brands-400.woff2"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-regular-400.ttf",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-regular-400.ttf",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-regular-400.ttf",
       "AssetKind": "All",
@@ -2183,10 +2183,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-regular-400.ttf"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-regular-400.woff2",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-regular-400.woff2",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-regular-400.woff2",
       "AssetKind": "All",
@@ -2202,10 +2202,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-regular-400.woff2"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-solid-900.ttf",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-solid-900.ttf",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-solid-900.ttf",
       "AssetKind": "All",
@@ -2221,10 +2221,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-solid-900.ttf"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-solid-900.woff2",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-solid-900.woff2",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-solid-900.woff2",
       "AssetKind": "All",
@@ -2240,10 +2240,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-solid-900.woff2"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-v4compatibility.ttf",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-v4compatibility.ttf",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-v4compatibility.ttf",
       "AssetKind": "All",
@@ -2259,10 +2259,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-v4compatibility.ttf"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-v4compatibility.woff2",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\font-awesome\\webfonts\\fa-v4compatibility.woff2",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/font-awesome/webfonts/fa-v4compatibility.woff2",
       "AssetKind": "All",
@@ -2278,10 +2278,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\font-awesome\\webfonts\\fa-v4compatibility.woff2"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -2297,10 +2297,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -2316,10 +2316,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",
@@ -2335,10 +2335,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -2354,10 +2354,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -2373,10 +2373,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -2392,10 +2392,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -2411,10 +2411,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -2430,10 +2430,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -2449,10 +2449,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -2468,10 +2468,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -2487,10 +2487,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "D:\\D\\LaptopStore\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "LaptopStore",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStore\\wwwroot\\",
       "BasePath": "_content/LaptopStore",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",

@@ -34,6 +34,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Component/section1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50XHNlY3Rpb24xLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Component/section2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50XHNlY3Rpb24yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Component/section3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50XHNlY3Rpb24zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Component/section4.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50XHNlY3Rpb240LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,18 +76,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Shared/LaptopSummary.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExhcHRvcFN1bW1hcnkuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Shared/section1.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXHNlY3Rpb24xLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Shared/section2.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXHNlY3Rpb24yLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Shared/section3.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXHNlY3Rpb24zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/cdsg/HK5/BACKEND/ApiProjectFinaly/Project-ASPNETCore/LaptopStore/Views/Shared/_ValidationScriptsPartial.cshtml]
