@@ -26,6 +26,11 @@ namespace LaptopStoreApi.Data
                     .HasConstraintName("FK_DonHangCT_Laptop");
 
             });
+            modelBuilder.Entity<Homepage>()
+            .HasOne(h => h.Laptop)
+            .WithMany() // Mỗi laptop có thể xuất hiện trong nhiều homepage, bạn có thể điều chỉnh nếu cần thiết
+            .HasForeignKey(h => h.MaLaptop)
+            .HasConstraintName("FK_Homepage_Laptops");
         }
         public DbSet<Laptop> Laptops => Set<Laptop>();
         public DbSet<Category> Categories => Set<Category>();

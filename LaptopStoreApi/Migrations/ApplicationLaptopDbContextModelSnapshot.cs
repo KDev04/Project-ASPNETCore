@@ -205,7 +205,8 @@ namespace LaptopStoreApi.Migrations
                 {
                     b.HasOne("LaptopStoreApi.Data.Laptop", "Laptop")
                         .WithMany()
-                        .HasForeignKey("MaLaptop");
+                        .HasForeignKey("MaLaptop")
+                        .HasConstraintName("FK_Homepage_Laptops");
 
                     b.Navigation("Laptop");
                 });
