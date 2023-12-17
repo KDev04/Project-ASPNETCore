@@ -13,21 +13,12 @@ namespace LaptopStoreApi.Data
             {
                 context.Database.Migrate();
             }
+            if(!context.Laptops.Any())
+            {
 
-            // if (!context.Laptops.Any())
-            // {
-
-            // }
-            // if (!context.Homepages.Any())
-            // {
-            //     var homepageData = new List<Homepage>
-            //     {
-
-
-
-            //     }
-
-            // }
+            }
         }
+
+       
     }
 }
