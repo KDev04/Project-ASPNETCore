@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9a9EPRbzcBQIUte5W1Z6VmPT1QnXC08aIchvRnHYPV8=",
+  "Hash": "/CNCZ+MUUDbECzEPKJ1BkX8mWk0MPRKMjoRe/pjHgDM=",
   "Source": "LaptopStoreApi",
   "BasePath": "_content/LaptopStoreApi",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\993030b8-e115-4b6f-b885-8eb7620f8969.jpg"
+    },
+    {
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\cc87478d-ba13-4433-95f3-9802166343e8.png",
+      "SourceId": "LaptopStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
+      "BasePath": "_content/LaptopStoreApi",
+      "RelativePath": "Image/cc87478d-ba13-4433-95f3-9802166343e8.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\cc87478d-ba13-4433-95f3-9802166343e8.png"
     },
     {
       "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg",
