@@ -4,6 +4,7 @@ using LaptopStoreApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApplicationLaptopDbContext))]
-    partial class ApplicationLaptopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217035923_SuaHomepage17_12")]
+    partial class SuaHomepage17_12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,6 +108,9 @@ namespace LaptopStoreApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("HomePageId"));
 
+                    b.Property<int?>("LaptopMaLaptop")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MaLaptop")
                         .HasColumnType("int");
 
@@ -118,7 +124,7 @@ namespace LaptopStoreApi.Migrations
 
                     b.HasKey("HomePageId");
 
-                    b.HasIndex("MaLaptop");
+                    b.HasIndex("LaptopMaLaptop");
 
                     b.ToTable("Homepage");
                 });
@@ -205,7 +211,7 @@ namespace LaptopStoreApi.Migrations
                 {
                     b.HasOne("LaptopStoreApi.Data.Laptop", "Laptop")
                         .WithMany()
-                        .HasForeignKey("MaLaptop");
+                        .HasForeignKey("LaptopMaLaptop");
 
                     b.Navigation("Laptop");
                 });
