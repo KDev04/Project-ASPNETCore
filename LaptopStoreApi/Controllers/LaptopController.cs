@@ -12,123 +12,139 @@ namespace LaptopStoreApi.Controllers
     [ApiController]
     public class LaptopController : ControllerBase
     {
-            private readonly ILaptopRepository _repository;
+        private readonly ILaptopRepository _repository;
 
-            public LaptopController(ILaptopRepository repository)
+        public LaptopController(ILaptopRepository repository)
+        {
+            _repository = repository;
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
             {
-                _repository = repository;
+                var laptops = await _repository.GetAll();
+                return Ok(laptops);
             }
-
-            [HttpGet("GetAll")]
-            public async Task<IActionResult> GetAll()
+            catch
             {
-                try
-                {
-                    var laptops = await _repository.GetAll();
-                    return Ok(laptops);
-                }
-                catch
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
-            [HttpGet("Get/{id}")]
-            public async Task<IActionResult> GetById(int id)
+        }
+        [HttpGet("Filter")]
+        public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy) 
+        { 
+            try
             {
-                try
-                {
-                    var laptop = await _repository.GetById(id);
-                    if (laptop == null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        return Ok(laptop);
-                    }
-                }
-                catch
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
+                var laptops = _repository.Filter(name, from, to, sortBy);
+                return Ok(laptops);
             }
+            catch 
+            { 
+                return BadRequest("khong hoat dong");
+            }
+        }
 
-            [HttpGet("Search/{keyword}")]
-            public async Task<IActionResult> Search(string keyword)
+        [HttpGet("Get/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
             {
-                try
+                var laptop = await _repository.GetById(id);
+                if (laptop == null)
                 {
-                    var searchResult = await _repository.Search(keyword);
-                    return Ok(searchResult);
+                    return NotFound();
                 }
-                catch
+                else
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
+                    return Ok(laptop);
                 }
             }
-
-            [HttpPost("Add")]
-            public async Task<IActionResult> Add([FromForm] LaptopModel model)
+            catch
             {
-                try
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+
+
+
+        [HttpGet("Search/{keyword}")]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            try
+            {
+                var searchResult = await _repository.Search(keyword);
+                return Ok(searchResult);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost("Add")]
+        public async Task<IActionResult> Add([FromForm] LaptopModel model)
+        {
+            try
+            {
+                if (model.Image != null && model.Image.Length > 0)
                 {
-                    if (model.Image != null && model.Image.Length > 0)
-                    {
-                        var newLaptop = await _repository.Add(model);
-                        return Ok(newLaptop);
-                    }
-                    else
-                    {
-                        return BadRequest("No image file found");
-                    }
+                    var newLaptop = await _repository.Add(model);
+                    return Ok(newLaptop);
                 }
-                catch
+                else
                 {
-                    return BadRequest();
+                    return BadRequest("No image file found");
                 }
             }
-
-            [HttpDelete("Delete/{id}")]
-            public async Task<IActionResult> Delete(int id)
+            catch
             {
-                try
-                {
-                    await _repository.Delete(id);
-                    return Ok();
-                }
-                catch
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _repository.Delete(id);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut("Update/{id}")]
+        public async Task<IActionResult> Update(int id, [FromForm] LaptopModel model)
+        {
+            if (id != model.MaLaptop)
+            {
+                return BadRequest();
             }
 
-            [HttpPut("Update/{id}")]
-            public async Task<IActionResult> Update(int id, [FromForm] LaptopModel model)
+            try
             {
-                if (id != model.MaLaptop)
+                if (model.Image != null && model.Image.Length > 0)
                 {
-                    return BadRequest();
+                    await _repository.Update(model);
+                    return Ok(model);
                 }
-
-                try
+                else
                 {
-                    if (model.Image != null && model.Image.Length > 0)
-                    {
-                        await _repository.Update(model);
-                        return Ok(model);
-                    }
-                    else
-                    {
-                        return BadRequest("No image file found");
-                    }
-                }
-                catch
-                {
-                    return BadRequest();
+                    return BadRequest("No image file found");
                 }
             }
-        
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         /*private readonly ApplicationLaptopDbContext _logger;*/
         /*private readonly ILaptopRepository _repository;
         public LaptopController(ILaptopRepository repository)

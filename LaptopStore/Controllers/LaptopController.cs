@@ -112,5 +112,40 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> Filter (string name, decimal? from, decimal? to, string sortBy)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    // Gửi yêu cầu GET tới API Filter và truyền các tham số
+                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&from={from}&to={to}&sortBy={sortBy}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                        response.EnsureSuccessStatusCode();
+
+                        // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
+                        // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                        var laptop = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                        return View("Index", laptop); // Trả về view mà bạn muốn hiển thị dữ liệu
+                    }
+                    else
+                    {
+                        // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                        return StatusCode((int)response.StatusCode);
+                    }
+                }
+                catch
+                {
+                    return BadRequest("khong hoat dong");
+                }
+            }
+            
+        }
     }
 }
