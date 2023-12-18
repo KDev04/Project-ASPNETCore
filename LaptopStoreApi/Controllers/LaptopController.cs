@@ -33,11 +33,11 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [HttpGet("Filter")]
-        public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy) 
+        public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy, int page =1) 
         { 
             try
             {
-                var laptops = _repository.Filter(name, from, to, sortBy);
+                var laptops = _repository.Filter(name, from, to, sortBy, page);
                 return Ok(laptops);
             }
             catch 

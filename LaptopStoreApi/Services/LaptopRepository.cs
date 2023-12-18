@@ -9,6 +9,7 @@ namespace LaptopStoreApi.Services
     public class LaptopRepository : ILaptopRepository
     {
         private readonly ApplicationLaptopDbContext _context;
+        public static int Page_size { set; get; } = 5;
         public LaptopRepository(ApplicationLaptopDbContext context)
         {
             _context = context;
@@ -127,7 +128,7 @@ namespace LaptopStoreApi.Services
             return laptops;
         }
 
-        public List<Laptop> Filter(string name, decimal? from, decimal? to, string sortBy)
+        public List<Laptop> Filter(string name, decimal from, decimal to, string sortBy, int page = 1)
         {
             var allLaptops = _context.Laptops.AsQueryable();
             #region Filtering
@@ -158,8 +159,14 @@ namespace LaptopStoreApi.Services
                 }
             }
             #endregion
-            var result = allLaptops.Select(model => new Laptop
+            /*#region Paging
+            allLaptops = allLaptops.Skip((page - 1) * Page_size).Take(Page_size);
+            #endregion 
+            */
+            var db = Paging<Laptop>.Create(allLaptops, page, Page_size);
+            var result = db.Select(model => new Laptop
             {
+                MaLaptop = model.MaLaptop,
                 TenLaptop = model.TenLaptop,
                 Gia = model.Gia,
                 GiamGia = model.GiamGia,
