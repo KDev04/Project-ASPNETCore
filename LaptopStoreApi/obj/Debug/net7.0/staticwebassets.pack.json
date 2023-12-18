@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Image\\2aa3a81b-e587-4b5d-8b3f-8a4da7755aea.jpg"
     },
     {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\5ba563f2-d3cc-461b-82f3-41b33b6477cb.png",
+      "PackagePath": "staticwebassets\\Image\\5ba563f2-d3cc-461b-82f3-41b33b6477cb.png"
+    },
+    {
       "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\617b8bb5-f4b9-455a-b8b0-91ddb5b907d7.png",
       "PackagePath": "staticwebassets\\Image\\617b8bb5-f4b9-455a-b8b0-91ddb5b907d7.png"
     },
@@ -31,6 +35,14 @@
     {
       "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg",
       "PackagePath": "staticwebassets\\Image\\d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop1.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop1.jpg"
+    },
+    {
+      "Id": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop2.jpg",
+      "PackagePath": "staticwebassets\\images\\laptop2.jpg"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.LaptopStoreApi.Microsoft.AspNetCore.StaticWebAssets.props",

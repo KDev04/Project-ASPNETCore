@@ -6,7 +6,7 @@
         public string? TenLaptop { get; set; }
         public decimal? Gia { get; set; }
         public int? GiamGia { get; set; }
-        public int? LoaiManHinh { get; set; }
+        public decimal? LoaiManHinh { get; set; }
         public string? Mau { get; set; }
         public int? NamSanXuat { get; set; }
         public string? Mota { get; set; }

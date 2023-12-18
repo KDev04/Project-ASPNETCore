@@ -4,11 +4,11 @@ namespace LaptopStoreApi.Services
 {
     public interface ILaptopRepository
     {
-        List<Laptop> GetAll();
-        Laptop GetById(int id);
-        Laptop Add(LaptopModel model);
-        void Update(LaptopModel model);
-        void Delete(int id);
-        List<Laptop> Search (string keyword);
+        Task<List<Laptop>> GetAll();
+        Task<Laptop> GetById(int id);
+        Task<Laptop> Add(LaptopModel model);
+        Task Update(LaptopModel model);
+        Task Delete(int id);
+        Task<List<Laptop>> Search(string keyword);
     }
 }
