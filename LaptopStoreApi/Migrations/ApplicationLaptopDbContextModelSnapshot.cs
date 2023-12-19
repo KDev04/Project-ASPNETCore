@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LaptopStoreApi.Migrations
 {
+
     [DbContext(typeof(ApplicationLaptopDbContext))]
     partial class ApplicationLaptopDbContextModelSnapshot : ModelSnapshot
     {

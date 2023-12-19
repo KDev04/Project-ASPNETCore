@@ -128,7 +128,7 @@ namespace LaptopStoreApi.Services
             return laptops;
         }
 
-        public List<Laptop> Filter(string name, decimal from, decimal to, string sortBy, int page = 1)
+        public List<Laptop> Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1)
         {
             var allLaptops = _context.Laptops.AsQueryable();
             #region Filtering
