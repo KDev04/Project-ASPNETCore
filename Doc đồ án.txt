@@ -1,0 +1,25 @@
+Hiển Thị Danh Sách Sản Phẩm:
+Trình bày sản phẩm một cách rõ ràng, có hình ảnh và thông tin chi tiết.
+
+Chức Năng Giỏ Hàng và Thanh Toán Cơ Bản:
+Thêm sản phẩm vào giỏ hàng.
+Hiển thị giỏ hàng và tính tổng tiền.
+Gửi đơn đặt hàng cơ bản.
+
+Tích Hợp Chức Năng Quản Trị Người Dùng:
+Đăng ký tài khoản 
+Đăng nhập và quản lý thông tin cá nhân.
+Quên mật khẩu và khôi phục.
+
+Thêm, Sửa, Xóa Sản Phẩm từ Trang Quản Trị:
+Giao diện quản trị thân thiện.
+Form thêm, sửa, xóa sản phẩm.
+
+Quản Lý Tồn Kho và Thông Báo Khi Còn Ít Hàng:
+Hiển thị số lượng tồn kho.
+Thông báo khi số lượng tồn kho ít.
+Tính toán số lượng bán ra, doanh thu.
+
+Thống Kê và Xuất Báo Cáo:
+Tạo báo cáo xuất ra file Excel.
+Thống kê lượt xem sản phẩm.
