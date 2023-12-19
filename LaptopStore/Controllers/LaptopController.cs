@@ -11,23 +11,21 @@ namespace LaptopStore.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                try
+                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetAll");
+
+                if (response.IsSuccessStatusCode)
                 {
-                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetAll");
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
+                    var responseData = await response.Content.ReadAsStringAsync();
 
-                    // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
-                    // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
 
-                   var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
-                    return View(laptops);
+                    return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
                 }
-                catch (Exception)
+                else
                 {
-                    // Xử lý lỗi khi gặp vấn đề khi gọi API
-                    // Ví dụ:
-                    return RedirectToAction("Error", "Home");
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)response.StatusCode);
                 }
             }
         }
@@ -113,6 +111,41 @@ namespace LaptopStore.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        public async Task<IActionResult> Filter (string name, decimal? from, decimal? to, string sortBy)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    // Gửi yêu cầu GET tới API Filter và truyền các tham số
+                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&from={from}&to={to}&sortBy={sortBy}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                        response.EnsureSuccessStatusCode();
+
+                        // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
+                        // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                        var laptop = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                        return View("Index", laptop); // Trả về view mà bạn muốn hiển thị dữ liệu
+                    }
+                    else
+                    {
+                        // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                        return StatusCode((int)response.StatusCode);
+                    }
+                }
+                catch
+                {
+                    return BadRequest("khong hoat dong");
+                }
+            }
+            
         }
     }
 }

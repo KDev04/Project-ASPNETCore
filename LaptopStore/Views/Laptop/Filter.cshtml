@@ -1,0 +1,44 @@
+﻿@using (Html.BeginForm("Filter", "Laptop", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="name">Tên laptop:</label>
+                <input type="text" name="name" id="name" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="from">Giá từ:</label>
+                <input type="number" name="from" id="from" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="to">Giá đến:</label>
+                <input type="number" name="to" id="to" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="sortBy">Sắp xếp theo:</label>
+                <select name="sortBy" id="sortBy" class="form-control">
+                    <option value="TenLaptop_asc">Tên tăng dần</option>
+                    <option value="TenLaptop_desc">Tên giảm dần</option>
+                    <option value="Gia_asc">Giá tăng dần</option>
+                    <option value="Gia_desc">Giá giảm dần</option>
+                </select>
+            </div>
+        </div>
+        <div class ="col">
+            <div class="form-group">
+                <label for="sortBy" class="text-white">Sắp xếp theo:</label>
+                <button type="submit" class="btn btn-primary form-control">Lọc</button>
+            </div>
+        </div>
+    </div>
+
+}
