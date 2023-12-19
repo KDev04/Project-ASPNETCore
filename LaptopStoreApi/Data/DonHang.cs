@@ -8,6 +8,7 @@ namespace LaptopStoreApi.Data
     }
     public class DonHang
     {
+        [Key]
         public int MaDh { get; set; }
         public DateTime NgayDat { get; set; }
         public DateTime? NgayGiao { get; set; }

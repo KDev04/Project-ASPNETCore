@@ -174,7 +174,7 @@ namespace LaptopStoreApi.Services
                 LoaiManHinh = model.LoaiManHinh,
                 NamSanXuat = model.NamSanXuat,
                 Mota = model.Mota,
-                CategoryId = model.CategoryId,
+                Loai = model.Loai,
                 CreateDate = model.CreateDate,
                 LastModifiedDate = model.LastModifiedDate,
                 ImgPath = model.ImgPath,
@@ -223,7 +223,7 @@ namespace LaptopStoreApi.Services
                 LoaiManHinh = model.LoaiManHinh,
                 NamSanXuat = model.NamSanXuat,
                 Mota = model.Mota,
-                CategoryId = model.CategoryId,
+                Loai = model.Loai,
                 CreateDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 ImgPath = "Image/" + imgFileName // Đường dẫn tương đối
@@ -260,7 +260,7 @@ namespace LaptopStoreApi.Services
                 laptop.LoaiManHinh = model.LoaiManHinh;
                 laptop.NamSanXuat = model.NamSanXuat;
                 laptop.Mota = model.Mota;
-                laptop.CategoryId = model.CategoryId;
+                laptop.Loai = model.Loai;
                 laptop.ImgPath = "Image/" + imgFileName;
                 laptop.LastModifiedDate = DateTime.Now;
                 await _context.SaveChangesAsync();

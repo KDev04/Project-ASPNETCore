@@ -6,9 +6,9 @@ namespace LaptopStoreApi.Helpers
 {
     public class ApplicationMapper : Profile
     {
-        public ApplicationMapper() 
+/*        public ApplicationMapper() 
         { 
             CreateMap<Category, CategoryModel>().ReverseMap();
-        }
+        }*/
     }
 }

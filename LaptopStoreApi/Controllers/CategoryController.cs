@@ -10,7 +10,7 @@ namespace LaptopStoreApi.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository _categoryRepository;
+/*        private readonly ICategoryRepository _categoryRepository;
         public CategoryController(ICategoryRepository category)
         {
             _categoryRepository = category;
@@ -53,7 +53,7 @@ namespace LaptopStoreApi.Controllers
             {
                 return BadRequest();
             }
-        }
+        }*/
  /*       [HttpPut("Update/{id}")]
         public IActionResult Update(int id, CategoryModel model)
         {

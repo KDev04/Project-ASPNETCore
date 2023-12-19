@@ -97,6 +97,8 @@ D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Azure.Core.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Azure.Identity.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Humanizer.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
@@ -165,5 +167,3 @@ D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\LaptopStoreApi.pdb
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\LaptopStoreApi.genruntimeconfig.cache
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\obj\Debug\net7.0\ref\LaptopStoreApi.dll
-D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStoreApi\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

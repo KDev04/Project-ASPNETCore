@@ -18,7 +18,7 @@ namespace LaptopStoreApi.Models
         public int NamSanXuat { get; set; }
 
         public string Mota { get; set; } = string.Empty;
-        public int? CategoryId { get; set; }
+        public string Loai { get; set; } = string.Empty;
         public string ImgPath { get; set; } = string.Empty;
 
         public IFormFile? Image { get; set; }

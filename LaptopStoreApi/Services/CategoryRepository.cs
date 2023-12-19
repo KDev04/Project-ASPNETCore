@@ -8,7 +8,7 @@ namespace LaptopStoreApi.Services
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly ApplicationLaptopDbContext _context;
+/*        private readonly ApplicationLaptopDbContext _context;
         private readonly IMapper _mapper;
         public CategoryRepository(ApplicationLaptopDbContext context, IMapper mapper) 
         { 
@@ -54,7 +54,7 @@ namespace LaptopStoreApi.Services
                 _context.Categories!.Update(update);
                 await _context.SaveChangesAsync();
             }
-        }
+        }*/
         /*public CategoryModel Add(CategoryModel category)
 {
    var cate = new Category

@@ -28,10 +28,7 @@ namespace LaptopStoreApi.Data
         public DateTime CreateDate { get; set; }
 
         public DateTime LastModifiedDate { get; set; }
-        public int? CategoryId { get; set; }
-
-        [ForeignKey("CategoryId")]
-        public Category? Category { get; set; }
+        public string Loai {  get; set; }
         public ICollection<DonHangChiTiet>? DonHangChiTiets { get; set; }
         public Laptop()
         {
@@ -57,7 +54,7 @@ namespace LaptopStoreApi.Data
     }
 
 
-    [Table("Categories")]
+    /*[Table("Categories")]
     public class Category
     {
         [Key]
@@ -66,5 +63,5 @@ namespace LaptopStoreApi.Data
         [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
         public virtual ICollection<Laptop>? Laptops { get; set; }
-    }
+    }*/
 }

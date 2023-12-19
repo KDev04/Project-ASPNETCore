@@ -1,9 +1,16 @@
-﻿namespace LaptopStoreApi.Data
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LaptopStoreApi.Data
 {
     public class DonHangChiTiet
     {
-        public int MaLaptop { get; set; }
+        [Key]
+        public int DhctId { get; set; }
         public int MaDh { get; set; }
+        [ForeignKey("MaDh")]
+        public int MaLaptop { get; set; }
+
         public int SoLuong { get; set; }
         public double DonGia { get; set; }
         public byte GiamGia { get; set; }

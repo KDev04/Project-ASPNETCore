@@ -1,11 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 namespace LaptopStoreApi.Data
 {
-    public class ApplicationLaptopDbContext : DbContext
+    public class ApplicationLaptopDbContext : IdentityDbContext<ApiUser>
     {
         public ApplicationLaptopDbContext(DbContextOptions<ApplicationLaptopDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(l => new { l.LoginProvider, l.ProviderKey });
+            modelBuilder.Entity<Laptop>()
+                .HasKey(l => l.MaLaptop);
             modelBuilder.Entity<DonHang>(e =>
             {
                 e.ToTable("DonHangs");
@@ -15,7 +21,7 @@ namespace LaptopStoreApi.Data
             modelBuilder.Entity<DonHangChiTiet>(e =>
             {
                 e.ToTable("ChiTietDonHangs");
-                e.HasKey(e=> new { e.MaDh, e.MaLaptop });
+                e.HasKey(e=> new { e.MaDh });
                 e.HasOne(e => e.DonHang)
                     .WithMany(e => e.DonHangChiTiets)
                     .HasForeignKey(e => e.MaDh)
@@ -33,7 +39,7 @@ namespace LaptopStoreApi.Data
             .HasConstraintName("FK_Homepage_Laptops");
         }
         public DbSet<Laptop> Laptops => Set<Laptop>();
-        public DbSet<Category> Categories => Set<Category>();
+   /*     public DbSet<Category> Categories => Set<Category>();*/
         public DbSet<DonHangChiTiet> DonHangChiTiets => Set<DonHangChiTiet>();
         public DbSet<DonHang> DonHangs => Set<DonHang>();
         public DbSet<Homepage> Homepages => Set<Homepage>();

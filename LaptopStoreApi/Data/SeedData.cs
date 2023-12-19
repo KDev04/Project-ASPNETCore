@@ -13,14 +13,6 @@ namespace LaptopStoreApi.Data
             {
                 context.Database.Migrate();
             }
-            if (!context.Categories.Any())
-            {
-                context.Categories.AddRange(
-                    new Category { Name = "Gigabyte"},
-                    new Category { Name = "Dell"}
-                );
-                context.SaveChanges();
-            }
             if (!context.Laptops.Any())
             {
                 // Thêm dữ liệu mẫu cho bảng Laptops
@@ -73,7 +65,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop1.jpg",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 1 // Thay 1 bằng Id thực tế của Category
+                        Loai="Dell" // Thay 1 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -88,7 +80,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop2.jpg",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -103,7 +95,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop3.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "Leveno"
                     },
                     new Laptop
                     {
@@ -118,7 +110,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop4.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "Acer" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -133,7 +125,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop5.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP"// Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -148,7 +140,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop6.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -163,7 +155,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop7.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -178,7 +170,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop8.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -193,7 +185,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop9.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -208,7 +200,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop10.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -223,7 +215,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop11.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP"  // Thay 2 bằng Id thực tế của Category
                     },
                     new Laptop
                     {
@@ -238,7 +230,7 @@ namespace LaptopStoreApi.Data
                         ImgPath = "/images/laptop12.png",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        CategoryId = 2 // Thay 2 bằng Id thực tế của Category
+                        Loai = "HP" // Thay 2 bằng Id thực tế của Category
                     });
                 context.SaveChanges();
             }
