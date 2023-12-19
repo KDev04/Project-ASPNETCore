@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css",
-      "PackagePath": "staticwebassets\\LaptopStore.bundle.scp.css"
-    },
-    {
       "Id": "D:\\D\\LaptopStore\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

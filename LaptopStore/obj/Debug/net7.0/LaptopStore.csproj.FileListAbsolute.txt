@@ -36,9 +36,7 @@ D:\D\LaptopStore\obj\Debug\net7.0\staticwebassets\msbuild.build.LaptopStore.prop
 D:\D\LaptopStore\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.LaptopStore.props
 D:\D\LaptopStore\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.LaptopStore.props
 D:\D\LaptopStore\obj\Debug\net7.0\staticwebassets.pack.json
-D:\D\LaptopStore\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\D\LaptopStore\obj\Debug\net7.0\scopedcss\bundle\LaptopStore.styles.css
-D:\D\LaptopStore\obj\Debug\net7.0\scopedcss\projectbundle\LaptopStore.bundle.scp.css
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.csproj.CopyComplete
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.dll
 D:\D\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll

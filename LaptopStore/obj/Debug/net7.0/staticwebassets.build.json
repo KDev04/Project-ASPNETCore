@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "v/hp+MNuI5BMkqoK/PY/m0/skTamlb32AUKV8EYYhGs=",
+  "Hash": "qwZxG/DpECshQ2I43cM5aQjiPfufOJaejMGuxsSeSYU=",
   "Source": "LaptopStore",
   "BasePath": "_content/LaptopStore",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\LaptopStore.styles.css",
-      "SourceId": "LaptopStore",
-      "SourceType": "Computed",
-      "ContentRoot": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/LaptopStore",
-      "RelativePath": "LaptopStore.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\bundle\\LaptopStore.styles.css"
-    },
-    {
-      "Identity": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css",
-      "SourceId": "LaptopStore",
-      "SourceType": "Computed",
-      "ContentRoot": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/LaptopStore",
-      "RelativePath": "LaptopStore.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\D\\LaptopStore\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\LaptopStore.bundle.scp.css"
-    },
     {
       "Identity": "D:\\D\\LaptopStore\\wwwroot\\css\\site.css",
       "SourceId": "LaptopStore",
