@@ -24,6 +24,7 @@ namespace LaptopStoreApi.Migrations
                     table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
+
             migrationBuilder.CreateTable(
                 name: "DonHangs",
                 columns: table => new
