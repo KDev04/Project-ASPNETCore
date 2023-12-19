@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LaptopStoreApi.Migrations
 {
+
     [DbContext(typeof(ApplicationLaptopDbContext))]
     [Migration("20231218020401_Mirate0")]
     partial class Mirate0
