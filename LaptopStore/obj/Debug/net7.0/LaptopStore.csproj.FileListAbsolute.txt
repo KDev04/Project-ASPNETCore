@@ -81,9 +81,7 @@ D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\ne
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.LaptopStore.props
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.LaptopStore.props
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\staticwebassets.pack.json
-D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\scopedcss\bundle\LaptopStore.styles.css
-D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\scopedcss\projectbundle\LaptopStore.bundle.scp.css
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\LaptopStore.csproj.CopyComplete
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\LaptopStore.dll
 D:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll

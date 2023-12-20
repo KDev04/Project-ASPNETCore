@@ -2,36 +2,18 @@
 <section class="container py-5 my-5">
     <form asp-action="SaveProduct" asp-controller="Laptop" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label asp-for="TenLaptop">Tên Laptop:</label>
-            <input asp-for="TenLaptop" class="form-control" required>
+            <label asp-for="Name">Tên Laptop:</label>
+            <input asp-for="Name" class="form-control" required>
         </div>
         <div class="form-group">
-            <label asp-for="Gia">Giá:</label>
-            <input asp-for="Gia" type="number" class="form-control" required>
+            <label asp-for="Price">Giá:</label>
+            <input asp-for="Price" type="number" class="form-control" required>
         </div>
+
+
         <div class="form-group">
-            <label asp-for="GiamGia">Giảm Giá:</label>
-            <input asp-for="GiamGia" type="number" class="form-control">
-        </div>
-        <div class="form-group">
-            <label asp-for="LoaiManHinh">Loại Màn Hình:</label>
-            <input asp-for="LoaiManHinh" type="number" class="form-control">
-        </div>
-        <div class="form-group">
-            <label asp-for="Mau">Màu:</label>
-            <input asp-for="Mau" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <label asp-for="NamSanXuat">Năm Sản Xuất:</label>
-            <input asp-for="NamSanXuat" type="number" class="form-control">
-        </div>
-        <div class="form-group">
-            <label asp-for="Mota">Mô Tả:</label>
-            <textarea asp-for="Mota" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label asp-for="CategoryId">Category ID:</label>
-            <input asp-for="CategoryId" type="number" class="form-control">
+            <label asp-for="Quantity">Số lượng kho:</label>
+            <input asp-for="Quantity" type="number" class="form-control">
         </div>
         <div class="form-group">
             <label asp-for="Image">Ảnh:</label>

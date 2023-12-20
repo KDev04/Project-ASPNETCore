@@ -11,7 +11,7 @@ namespace LaptopStore.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetAll");
+                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop2/GetAll");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -35,7 +35,7 @@ namespace LaptopStore.Controllers
             {
                 try
                 {
-                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/Get/" + id);
+                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop2/Get/" + id);
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -64,14 +64,9 @@ namespace LaptopStore.Controllers
                     {
                         using (var formData = new MultipartFormDataContent())
                         {
-                            formData.Add(new StringContent(model.TenLaptop?.ToString() ?? ""), "TenLaptop");
-                            formData.Add(new StringContent(model.Gia?.ToString() ?? ""), "Gia");
-                            formData.Add(new StringContent(model.GiamGia?.ToString() ?? ""), "GiamGia");
-                            formData.Add(new StringContent(model.LoaiManHinh?.ToString() ?? ""), "LoaiManHinh");
-                            formData.Add(new StringContent(model.Mau ?? ""), "Mau");
-                            formData.Add(new StringContent(model.NamSanXuat?.ToString() ?? ""), "NamSanXuat");
-                            formData.Add(new StringContent(model.Mota ?? ""), "Mota");
-                            formData.Add(new StringContent(model.CategoryId?.ToString() ?? ""), "CategoryId");
+                            formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
+                            formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
+                            formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");;
 
                             if (model.Image != null && model.Image.Length > 0)
                             {
@@ -79,7 +74,7 @@ namespace LaptopStore.Controllers
                                 {
                                     formData.Add(streamContent, "Image", model.Image.FileName);
 
-                                    var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
+                                    var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop2/Add", formData);
 
                                     if (response.IsSuccessStatusCode)
                                     {

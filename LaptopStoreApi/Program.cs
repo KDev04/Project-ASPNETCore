@@ -58,6 +58,7 @@ builder.Services.AddIdentity<User, IdentityRole>(option =>
 }).AddEntityFrameworkStores<ApiDbContext>();
 /*builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ILaptopRepository, LaptopRepository>();*/
+builder.Services.AddScoped<ILapRepo2, LapRepo2>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -75,4 +76,5 @@ app.MapControllers();
 app.UseStaticFiles();
 /*SeedData.CreateData(app);
 LocationEndpointsConfig.AddEndpoints(app);*/
+SeedDatabase.CreateData(app);
 app.Run();

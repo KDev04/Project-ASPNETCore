@@ -7,7 +7,7 @@
 </style>
 <div class="col-lg-4 col-md-6">
     <div class="card mb-4 d-flex flex-column border-0">
-        <a asp-action="Detail" asp-controller="Laptop" asp-route-id ="@Model.MaLaptop">
+        <a asp-action="Detail" asp-controller="Laptop" asp-route-id ="@Model.LaptopId">
             <div class="image-container"
                  style="overflow: hidden; margin-top: 10px;">
                 <img class="card-img-top img-card" src=http://localhost:4000/@Model.ImgPath />
@@ -16,17 +16,17 @@
     </div>
     <div class="card-body flex-grow-1 d-flex flex-column">
         <div class="row text-center mb-3">
-            <h4>@Model.TenLaptop</h4>
+            <h4>@Model.Name</h4>
 
         </div>
         <div class="row ms-3 ms-md-5 pt-3 text-black">
             <pre class="fs-7" style="font-family:Roboto Mono">
-                @Model.Mota
+                @Model.Quantity
             </pre>
         </div>
         <div class="row ms-3 ms-md-5 pt-3 text-black-50" >
             <h3>
-                @Model.Gia <i class="fa-solid fa-lira-sign"> </i>
+                @Model.Price <i class="fa-solid fa-lira-sign"> </i>
             </h3>
         </div>
         <div class="mt-auto" >

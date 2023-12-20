@@ -2,32 +2,19 @@
 {
     public class Laptop
     {
-        public int? MaLaptop { get; set; }
-        public string? TenLaptop { get; set; }
-        public decimal? Gia { get; set; }
-        public int? GiamGia { get; set; }
-        public decimal? LoaiManHinh { get; set; }
-        public string? Mau { get; set; }
-        public int? NamSanXuat { get; set; }
-        public string? Mota { get; set; }
-        public string? ImgPath { get; set; }
-        public DateTime? CreateDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
-        public int? CategoryId { get; set; }
-        public Category? Category { get; set; }
-        public List<DonHangChiTiet>? DonHangChiTiets { get; set; }
+        public int LaptopId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public int Quantity { get; set; } // so luong ton kho
+        public string ImgPath { get; set; } = string.Empty;
+        public DateTime CreateDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
         public IFormFile? Image { get; set; }
 
     }
 
-    public class Category
-    {
-        public int? id { get; set; }
-        public string? name { get; set; }
-        public List<string>? laptops { get; set; }
-    }
 
-    public class DonHangChiTiet
+   /* public class DonHangChiTiet
     {
         public string? MaLaptop { get; set; }
         public string? MaDh { get; set; }
@@ -48,5 +35,5 @@
         public string? DiaChiGiao { get; set; }
         public string? SodienThoai { get; set; }
         public List<string>? DonHangChiTiets { get; set; }
-    }
+    }*/
 }
