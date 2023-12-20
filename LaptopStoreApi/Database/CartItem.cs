@@ -4,8 +4,11 @@ namespace LaptopStoreApi.Database
 {
     public class CartItem
     {
-        public int IdCartItem {  get; set; }
-        public Laptop Laptop { get; set; } = new();
+        public int Id { get; set; }
+        public int CartId { get; set; }
+        public Cart? Cart { get; set; }
+        public int LaptopId { get; set; }
+        public Laptop? Laptop { get; set; }
         public int Quantity { get; set; }
     }
 }
