@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LaptopStoreApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9501ce7cb26a69354479d79ce38e8ccff6a14fbd")]
 [assembly: System.Reflection.AssemblyProductAttribute("LaptopStoreApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LaptopStoreApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
