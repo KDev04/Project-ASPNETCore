@@ -6,27 +6,88 @@ using LaptopStoreApi.Database;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using LaptopStoreApi.Swagger;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(cfg =>
+    {
+        cfg.WithOrigins(builder.Configuration["AllowedOrigins"]);
+        cfg.AllowAnyHeader();
+        cfg.AllowAnyMethod();
+    });
+    options.AddPolicy(name: "AnyOrigin",
+        cfg =>
+        {
+            cfg.AllowAnyOrigin();
+            cfg.AllowAnyHeader();
+            cfg.AllowAnyMethod();
+        });
+});
+builder.Services.AddControllers(options =>
+{
+    options.ModelBindingMessageProvider.SetValueIsInvalidAccessor(
+        (x) => $"The value '{x}' is invalid.");
+    options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
+        (x) => $"The field {x} must be a number.");
+    options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor(
+        (x, y) => $"The value '{x}' is not valid for {y}.");
+    options.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
+        () => $"A value is required.");
 
-builder.Services.AddControllers();
-builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+    options.CacheProfiles.Add("NoCache",
+        new CacheProfile() { NoStore = true });
+    options.CacheProfiles.Add("Any-60",
+        new CacheProfile() { Location = ResponseCacheLocation.Any, Duration = 60 });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(Program));
-/*builder.Services.AddDbContext<ApplicationLaptopDbContext>(option =>
+builder.Services.AddSwaggerGen(options =>
 {
-    option.UseSqlServer(
-        builder.Configuration.GetConnectionString("LaptopDB"));
-});*/
+    options.ParameterFilter<SortColumnFilter>();
+    options.ParameterFilter<SortOrderFilter>();
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 builder.Services.AddDbContext<ApiDbContext>(option =>
 {
     option.UseSqlServer(
         builder.Configuration.GetConnectionString("LaptopDB2"));
 });
-// add authentication 
+
+builder.Services.AddIdentity<User, IdentityRole>(option =>
+{
+    option.Password.RequiredLength = 4;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<ApiDbContext>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme =
@@ -43,21 +104,12 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidateAudience = true,
         ValidAudience = builder.Configuration["JWT:Audience"],
+        RequireExpirationTime = true,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
             System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
     };
 });
-builder.Services.AddIdentity<User, IdentityRole>(option =>
-{
-    option.Password.RequiredLength = 4;
-    option.Password.RequireNonAlphanumeric = false;
-    option.Password.RequireDigit = false;
-    option.Password.RequireUppercase = false;
-    option.Password.RequireLowercase = false;
-}).AddEntityFrameworkStores<ApiDbContext>();
-/*builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ILaptopRepository, LaptopRepository>();*/
 builder.Services.AddScoped<ILapRepo2, LapRepo2>();
 var app = builder.Build();
 

@@ -1,10 +1,12 @@
 ﻿using LaptopStoreApi.Models;
 using LaptopStoreApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaptopStoreApi.Controllers
 {
+    
     [Route("api/[controller]/")]
     [ApiController]
     public class Laptop2Controller : ControllerBase
@@ -73,7 +75,9 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [Authorize]
         [HttpPost("Add")]
+        [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
         {
             try
