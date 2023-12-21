@@ -1,6 +1,6 @@
 using LaptopStoreApi.EndPoints;
 using Microsoft.EntityFrameworkCore;
-using LaptopStoreApi.Data;
+// using LaptopStoreApi.Data;
 using LaptopStoreApi.Services;
 using LaptopStoreApi.Database;
 using Microsoft.AspNetCore.Identity;
