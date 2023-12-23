@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreWebApi.Migrations
 {
     [DbContext(typeof(LaptopDbContext))]
-    [Migration("20231223024039_CreateData")]
-    partial class CreateData
+    [Migration("20231223074502_Dtb")]
+    partial class Dtb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,6 +122,14 @@ namespace LaptopStoreWebApi.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -304,7 +312,7 @@ namespace LaptopStoreWebApi.Migrations
 
             modelBuilder.Entity("LaptopStoreWebApi.Data.CartItem", b =>
                 {
-                    b.HasOne("LaptopStoreWebApi.Data.Cart", null)
+                    b.HasOne("LaptopStoreWebApi.Data.Cart", "Cart")
                         .WithMany("Items")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -315,6 +323,8 @@ namespace LaptopStoreWebApi.Migrations
                         .HasForeignKey("LaptopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cart");
 
                     b.Navigation("Laptop");
                 });

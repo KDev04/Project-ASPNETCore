@@ -35,7 +35,7 @@ namespace LaptopStore.Controllers
             {
                 try
                 {
-                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop2/Get/" + id);
+                    var response = await httpClient.GetAsync("http://localhost:8000/api/Laptops/Get/" + id);
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -74,7 +74,7 @@ namespace LaptopStore.Controllers
                                 {
                                     formData.Add(streamContent, "Image", model.Image.FileName);
 
-                                    var response = await httpClient.PostAsync("http://localhost:4000/api/Laptop2/Add", formData);
+                                    var response = await httpClient.PostAsync("http://localhost:8000/api/Laptops/Add", formData);
 
                                     if (response.IsSuccessStatusCode)
                                     {
@@ -107,14 +107,14 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Filter (string name, decimal? from, decimal? to, string sortBy)
+        public async Task<IActionResult> Filter (string name = "", string sortBy = "", int page = 1, int from = 0, int to = int.MaxValue)
         {
             using (var httpClient = new HttpClient())
             {
                 try
                 {
                     // Gửi yêu cầu GET tới API Filter và truyền các tham số
-                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&from={from}&to={to}&sortBy={sortBy}");
+                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:8000/api/Laptops/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}");
 
                     if (response.IsSuccessStatusCode)
                     {

@@ -9,10 +9,6 @@ namespace LaptopStoreApi.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
-        [HttpPost]
-        public void AddToCard(int LaptopId, int quantity)
-        {
-            CartItem item = new CartItem() { LaptopId = LaptopId,Quantity = quantity};
-        } 
+       
     }
 }
