@@ -87,7 +87,7 @@ builder.Services.AddIdentity<User, IdentityRole>(option =>
     option.Password.RequireDigit = false;
     option.Password.RequireUppercase = false;
     option.Password.RequireLowercase = false;
-}).AddEntityFrameworkStores<ApiDbContext>();
+}).AddEntityFrameworkStores<ApiDbContext>().AddDefaultTokenProviders();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme =
@@ -98,6 +98,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,

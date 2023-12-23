@@ -29,6 +29,19 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("Filter")]
+        public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1)
+        {
+            try
+            {
+                var laptops = _repository.Filter(name, from, to, sortBy, page);
+                return Ok(laptops);
+            }
+            catch
+            {
+                return BadRequest("khong hoat dong");
+            }
+        }
         [HttpGet("Search/{keyword}")]
         public async Task<IActionResult> Search(string keyword)
         {
@@ -97,5 +110,6 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest();
             }
         }
+
     }
 }

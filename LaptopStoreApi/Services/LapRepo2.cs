@@ -7,6 +7,7 @@ namespace LaptopStoreApi.Services
     public class LapRepo2 : ILapRepo2
     {
         private readonly ApiDbContext _context;
+        public static int Page_size { set; get; } = 5;
         public LapRepo2(ApiDbContext context)
         {
             _context = context;
@@ -82,6 +83,53 @@ namespace LaptopStoreApi.Services
         public Task Update(LapModel2 model)
         {
             throw new NotImplementedException();
+        }
+        public List<Laptop> Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1)
+        {
+            var allLaptops = _context.Laptops.AsQueryable();
+
+            #region Filtering
+            if (!string.IsNullOrEmpty(name))
+            {
+                allLaptops = allLaptops.Where(l => l.Name.Contains(name));
+            }
+            if (from.HasValue)
+            {
+                allLaptops = allLaptops.Where(l => l.Price >= from);
+            }
+            if (to.HasValue)
+            {
+                allLaptops = allLaptops.Where(l => l.Price <= to);
+            }
+            #endregion
+
+            #region Sorting
+            // mac dinh la name
+            allLaptops = allLaptops.OrderBy(l => l.Name);
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                switch (sortBy)
+                {
+                    case "TenLaptop_asc": allLaptops = allLaptops.OrderBy(l => l.Name); break;
+                    case "TenLaptop_desc": allLaptops = allLaptops.OrderByDescending(l => l.Name); break;
+                    case "Gia_asc": allLaptops = allLaptops.OrderBy(l => l.Price); break;
+                    case "Gia_desc": allLaptops = allLaptops.OrderByDescending(l => l.Price); break;
+                }
+            }
+            #endregion
+
+            var db = Paging<Laptop>.Create(allLaptops, page, Page_size);
+            var result = db.Select(model => new Laptop
+            {
+                Name = model.Name, 
+                Price = model.Price,
+                Quantity = model.Quantity,
+                CreateDate = model.CreateDate,
+                LastModifiedDate = model.LastModifiedDate,
+                ImgPath = model.ImgPath,
+            });
+
+            return result.ToList();
         }
     }
 }

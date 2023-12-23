@@ -10,5 +10,6 @@ namespace LaptopStoreApi.Services
         Task Update(LapModel2 model);
         Task Delete(int id);
         Task<List<Laptop>> Search(string keyword);
+        List<Laptop> Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1);
     }
 }
