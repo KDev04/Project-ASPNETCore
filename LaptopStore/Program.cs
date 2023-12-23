@@ -14,9 +14,11 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
 app.MapBlazorHub();
+
 app.MapFallbackToPage("/admin/{*catchall}", "/Admin/index");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -25,8 +27,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// app.MapControllerRoute(
-//     name: "default",
-//     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "login",
+    pattern: "{controller=Home}/{action=Auth}");
 LocationEndPointsConfig.AddEndpoints(app);
 app.Run();

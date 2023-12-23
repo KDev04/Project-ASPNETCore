@@ -15,5 +15,6 @@ namespace LaptopStoreApi.Database
         public string ImgPath { get; set; } = string.Empty;
         public DateTime CreateDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
+       
     }
 }
