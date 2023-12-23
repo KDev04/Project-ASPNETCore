@@ -1,3 +1,7 @@
+@{
+    ViewData["Title"] = "Register";
+}
+
 <section class="vh-100">
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -39,8 +43,8 @@
             </style>
 
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                @* <p class="text-center text-danger">{message}</p> *@
-                <form onSubmit="formSubmitHandler">
+                <p id="errorMessage" class="text-center text-danger"></p>
+                <form id="registerForm">
                     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                         <p class="lead fw-normal mb-0 me-3">Sign in with</p>
                         <ul class="list-unstyled small text-muted">
@@ -57,6 +61,7 @@
                             </li>
                         </ul>
                     </div>
+
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center fw-bold mx-3 mb-0">Or</p>
                     </div>
@@ -66,9 +71,10 @@
                         <input id="txtUserName" type="text" placeholder="Enter your username" autoCompl ete="off"
                             class="form-control form-control-lg" onchange="setUsername(this.value)" />
                     </div>
+
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input id="txtUserName" label="Email" type="email" placeholder="Enter your username"
+                        <input id="txtUserName" label="Email" type="email" placeholder="Enter your email"
                             autoComplete="off" class="form-control form-control-lg" onChange="setEmail(this.value)" />
                     </div>
                     <!-- Password input -->
@@ -86,8 +92,10 @@
                         <a href="#!" class="text-body">Forgot password?</a>
                     </div>
                     <div class="text-center text-lg-start mt-4 pt-2">
+                        
                         <button type="submit" class="btn btn-primary btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                             <a href="/auth/register" class="text-danger">Register</a>
                         </p>
@@ -97,12 +105,49 @@
         </div>
     </div>
 </section>
+
+@section scripts {
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('txtUserName').value;
+            const email = document.getElementById('txtEmail').value;
+            const password = document.getElementById('txtPassWord').value;
+
+            const data = new FormData();
+            data.append('UserName', username);
+            data.append('Email', email);
+            data.append('Password', password);
+
+            fetch('/api/Account/Register', {
+                method: 'POST',
+                body: data,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Thay đổi nội dung của thẻ <p> dựa trên phản hồi từ API
+                const messageElement = document.getElementById('errorMessage');
+                if (messageElement) {
+                    messageElement.innerHTML = data.message; // Giả sử API trả về một thuộc tính 'message'
+                }
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+        });
+    </script>
+}
+
+
+
 <style>
-    /* html,
-body,
-#root {
-  height: 100%;
-} */
+
     .divider:after,
     .divider:before {
         content: "";
