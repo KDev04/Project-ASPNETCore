@@ -11,7 +11,7 @@ namespace LaptopStore.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop2/GetAll");
+                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8000/api/Laptops/GetLaptops");
 
                 if (response.IsSuccessStatusCode)
                 {
