@@ -9,15 +9,15 @@ namespace LaptopStoreApi.Controllers
     
     [Route("api/[controller]/")]
     [ApiController]
-    public class Laptop2Controller : ControllerBase
+    public class LaptopController : ControllerBase
     {
         private readonly ILapRepo2 _repository;
-        public Laptop2Controller(ILapRepo2 repo2)
+        public LaptopController(ILapRepo2 repo2)
         {
             _repository = repo2;
         }
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetLaptops()
         {
             try
             {
@@ -69,7 +69,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [HttpGet("Get/{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetLaptop(int id)
         {
             try
             {

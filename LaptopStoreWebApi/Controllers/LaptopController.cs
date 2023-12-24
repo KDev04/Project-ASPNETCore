@@ -15,11 +15,11 @@ namespace LaptopStoreWebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class LaptopsController : ControllerBase
+    public class LaptopController : ControllerBase
     {
         private readonly LaptopDbContext _context;
         public static int Page_size { set; get; } = 5;
-        public LaptopsController(LaptopDbContext context)
+        public LaptopController(LaptopDbContext context)
         {
             _context = context;
         }
