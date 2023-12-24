@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Register";
 }
+@model RegisterModel
 
 <section class="vh-100">
     <div class="container-fluid h-custom">
@@ -44,7 +45,7 @@
 
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <p id="errorMessage" class="text-center text-danger"></p>
-                <form id="registerForm">
+                <form asp-action="SignUp" asp-controller="Auth" method="post" enctype="multipart/form-data">
                     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                         <p class="lead fw-normal mb-0 me-3">Sign in with</p>
                         <ul class="list-unstyled small text-muted">
@@ -65,11 +66,23 @@
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center fw-bold mx-3 mb-0">Or</p>
                     </div>
-                    <!-- Username input -->
+                    
+                    <div>
+                        <label asp-for="email">Email:</label>
+                        <input asp-for="email" class="form-control form-control-lg" required placeholder="Enter your email" />
+                        <span asp-validation-for="email" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="password">Password:</label>
+                        <input asp-for="password" class="form-control form-control-lg" required />
+                        <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
+
+                    @* <!-- Username input -->
                     <div class="form-outline mb-4">
                         <label for="txtUserName">Username:</label>
                         <input id="txtUserName" type="text" placeholder="Enter your username" autoCompl ete="off"
-                            class="form-control form-control-lg" onchange="setUsername(this.value)" />
+                            class="form-control form-control-lg" />
                     </div>
 
                     <!-- Email input -->
@@ -90,11 +103,11 @@
                             <label class="form-check-label" for="form2Example3">Remember me</label>
                         </div>
                         <a href="#!" class="text-body">Forgot password?</a>
-                    </div>
+                    </div> *@
                     <div class="text-center text-lg-start mt-4 pt-2">
                         
                         <button type="submit" class="btn btn-primary btn-lg"
-                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Tạo tài khoản</button>
 
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                             <a href="/auth/login" class="text-danger">Login</a>

@@ -35,7 +35,7 @@ namespace LaptopStore.Controllers
             {
                 try
                 {
-                    var response = await httpClient.GetAsync("http://localhost:8000/api/Laptops/Get/" + id);
+                    var response = await httpClient.GetAsync("http://localhost:8000/api/Laptops/GetLaptop/" + id);
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -142,5 +142,6 @@ namespace LaptopStore.Controllers
             }
             
         }
+        
     }
 }

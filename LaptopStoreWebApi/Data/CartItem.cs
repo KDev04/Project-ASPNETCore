@@ -16,9 +16,4 @@ namespace LaptopStoreWebApi.Data
         public int Total { get; set; }
         public Laptop? Laptop { get; set; }
     }
-    public class ItemModel
-    {
-        public int LaptopId { get; set; }
-        public int Quantity { get; set; }
-    }
 }

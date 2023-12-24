@@ -79,6 +79,8 @@ app.MapIdentityApi<User>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+// mo duong dan wwwroot
+app.UseStaticFiles();
 app.MapControllers();
 app.MapGet("/test", (ClaimsPrincipal user) => $"Hello {user.Identity!.Name}").RequireAuthorization();
 SeedData.CreateData(app);

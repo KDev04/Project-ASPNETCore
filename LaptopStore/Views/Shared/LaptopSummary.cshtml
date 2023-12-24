@@ -1,4 +1,4 @@
-﻿@model Laptop
+﻿@model Laptop 
 <style>
     .img-card {
         max-height: 200px;
@@ -10,7 +10,7 @@
         <a asp-action="Detail" asp-controller="Laptop" asp-route-id ="@Model.LaptopId">
             <div class="image-container"
                  style="overflow: hidden; margin-top: 10px;">
-                <img class="card-img-top img-card" src=http://localhost:4000/@Model.ImgPath />
+                <img class="card-img-top img-card" src=http://localhost:8000/@Model.ImgPath />
             </div>
         </a>
     </div>
@@ -30,14 +30,20 @@
             </h3>
         </div>
         <div class="mt-auto" >
-            <div class="container d-flex justify-content-center justify-content-md-around" >
-                <btn class="btn btn-outline-warning text-black" >
-                    Thêm vào giỏ hàng <i class="fa-solid fa-cart-plus"></i>
-                </btn>
-                <btn class="btn btn-outline-success text-black">
-                    Bình luận <i class="fa-regular fa-credit-card"></i>
-                </btn>
-            </div>
+            @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+            {
+                <input type="hidden" name="userId" value="1673eb75-8775-45c8-8aac-b8f053873b19" />
+                <input type="hidden" name="LaptopId" value="@Model.LaptopId" />
+                <input type="hidden" name="Quantity" value="1" />
+                <div class="container d-flex justify-content-center justify-content-md-around">
+                    <button class="btn btn-outline-warning text-black" type="submit">
+                        Thêm vào giỏ hàng <i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                    <button class="btn btn-outline-success text-black">
+                        Bình luận <i class="fa-regular fa-credit-card"></i>
+                    </button>
+                </div>
+            }
         </div>
     </div>
 </div>

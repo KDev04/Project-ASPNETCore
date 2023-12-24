@@ -39,7 +39,7 @@ namespace LaptopStoreWebApi.Controllers
             return Ok(JsonSerializer.Serialize(cart, options));
         }
         [HttpPost]
-        public IActionResult AddToCart(string userId, [FromForm] ItemModel item)
+        public IActionResult AddToCart(string userId, int LaptopId, int Quantity)
         {
             var cart = _context.Carts.FirstOrDefault(c => c.UserId == userId);
             if (cart == null)
@@ -49,7 +49,7 @@ namespace LaptopStoreWebApi.Controllers
                 _context.SaveChanges();
             }
 
-            var laptop = _context.Laptops.FirstOrDefault(l => l.LaptopId == item.LaptopId);
+            var laptop = _context.Laptops.FirstOrDefault(l => l.LaptopId == LaptopId);
             if (laptop == null)
             {
                 return BadRequest("Laptop không tồn tại");
@@ -58,7 +58,7 @@ namespace LaptopStoreWebApi.Controllers
             var existingCartItem = _context.CartItems.FirstOrDefault(ci => ci.CartId == cart.Id && ci.LaptopId == laptop.LaptopId);
             if (existingCartItem != null)
             {
-                existingCartItem.Quantity += item.Quantity;
+                existingCartItem.Quantity += Quantity;
                 existingCartItem.Total = laptop.Price * existingCartItem.Quantity;
             }
             else
@@ -68,8 +68,8 @@ namespace LaptopStoreWebApi.Controllers
                     LaptopId = laptop.LaptopId,
                     Laptop = laptop,
                     CartId = cart.Id,
-                    Quantity = item.Quantity,
-                    Total = laptop.Price * item.Quantity
+                    Quantity = Quantity,
+                    Total = laptop.Price * Quantity
                 };
                 _context.CartItems.Add(cartItem);
             }
