@@ -15,7 +15,7 @@ namespace LaptopStoreApi.Database
 
             modelBuilder.Entity<Laptop>().HasKey(l => l.LaptopId);
 
-            modelBuilder.Entity<Cart>().HasNoKey();
+            modelBuilder.Entity<Cart>().HasKey(c=>c.Id);
 
             modelBuilder.Entity<Cart>()
                        .HasOne(c => c.User)

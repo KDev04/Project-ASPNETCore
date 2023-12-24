@@ -1,0 +1,22 @@
+﻿@model List<Cart>
+@{
+    ViewData["Title"] = "Cart Page";
+}
+<section class="container py-5 my-5">
+    @foreach (var cart in Model)
+    {
+        <div class="row">
+            <div class="col-3">
+                <img class="card-img-top img-card" src=http://localhost:4000/@cart.ImgPath />
+
+            </div>
+            <div class="col">
+                @cart.Name
+            </div>
+            <div class="col">
+                @cart.Quantity
+            </div>
+        </div>
+    }
+</section>
+

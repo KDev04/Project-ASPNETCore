@@ -39,6 +39,12 @@ namespace LaptopStoreApi.Controllers
                     var newUser = new User();
                     newUser.UserName = input.UserName;
                     newUser.Email = input.Email;
+                    newUser.Address = "Chua co";
+                    newUser.FirstName = "Nguyen van";
+                    newUser.LastName = "A";
+                    newUser.BirthDay = DateTime.Now;
+                    newUser.AvatarUrl = "/Avata/1";
+                    newUser.Age = 18;
                     var result = await _userManager.CreateAsync(
                         newUser, input.Password);
                     if (result.Succeeded)

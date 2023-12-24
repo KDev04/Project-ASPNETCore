@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LaptopStoreApi.Controllers
 {
     
-    [Route("api/[controller]/")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LaptopController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace LaptopStoreApi.Controllers
         {
             _repository = repo2;
         }
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetLaptops()
         {
             try
@@ -29,7 +29,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("Filter")]
+        [HttpGet]
         public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1)
         {
             try
@@ -42,7 +42,7 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest("khong hoat dong");
             }
         }
-        [HttpGet("Search/{keyword}")]
+        [HttpGet]
         public async Task<IActionResult> Search(string keyword)
         {
             try
@@ -55,7 +55,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -68,7 +68,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("Get/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetLaptop(int id)
         {
             try
@@ -89,7 +89,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [Authorize]
-        [HttpPost("Add")]
+        [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
         {
