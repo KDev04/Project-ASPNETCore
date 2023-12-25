@@ -28,6 +28,7 @@ namespace LaptopStoreApi.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<ActionResult> Register([FromForm] RegisterModel input)
@@ -36,17 +37,12 @@ namespace LaptopStoreApi.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var newUser = new User();
+                    var newUser = new User();   
                     newUser.UserName = input.UserName;
                     newUser.Email = input.Email;
-                    newUser.Address = "Chua co";
-                    newUser.FirstName = "Nguyen van";
-                    newUser.LastName = "A";
-                    newUser.BirthDay = DateTime.Now;
-                    newUser.AvatarUrl = "/Avata/1";
-                    newUser.Age = 18;
                     var result = await _userManager.CreateAsync(
                         newUser, input.Password);
+
                     if (result.Succeeded)
                     {
                         _logger.LogInformation(
@@ -82,6 +78,8 @@ namespace LaptopStoreApi.Controllers
                     exceptionDetails);
             }
         }
+        
+
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<ActionResult> Login([FromForm] LoginModel input)

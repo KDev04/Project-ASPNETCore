@@ -1,8 +1,19 @@
-﻿namespace LaptopStore.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LaptopStore.Models
 {
     public class RegisterModel
     {
-        public string? email { get; set; }
-        public string? password { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string? UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [MaxLength(255)]
+        public string? Email { get; set; }
+
+        [Required]
+        public string? Password { get; set; }
     }
 }

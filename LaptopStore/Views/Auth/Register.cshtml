@@ -44,123 +44,97 @@
             </style>
 
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <p id="errorMessage" class="text-center text-danger"></p>
-                <form asp-action="SignUp" asp-controller="Auth" method="post" enctype="multipart/form-data">
-                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                        <p class="lead fw-normal mb-0 me-3">Sign in with</p>
-                        <ul class="list-unstyled small text-muted">
-                            <li>
-                                <div class="mt-4 text-white">
-                                    <i
-                                        class="fa-brands fa-square-facebook border border-black bg-black p-2 mt-1 fs-3"></i>
-                                    <i class="fa-brands fa-google-plus-g border border-black bg-black p-2 mt-1 fs-3"
-                                        style="color: #ffffff;"></i>
-                                    <i class="fa-brands fa-linkedin border border-black bg-black p-2 mt-1 fs-3"></i>
-                                    <i class="fa-brands fa-twitter border border-black bg-black p-2 mt-1 fs-3"></i>
-                                    <i class="fa-brands fa-vk border border-black bg-black p-2 mt-1 fs-3"></i>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
 
-                    <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0">Or</p>
-                    </div>
-                    
-                    <div>
-                        <label asp-for="email">Email:</label>
-                        <input asp-for="email" class="form-control form-control-lg" required placeholder="Enter your email" />
-                        <span asp-validation-for="email" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <label asp-for="password">Password:</label>
-                        <input asp-for="password" class="form-control form-control-lg" required />
-                        <span asp-validation-for="password" class="text-danger"></span>
-                    </div>
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                    <ul class="list-unstyled small text-muted">
+                        <li>
+                            <div class="mt-4 text-white">
+                                <i class="fa-brands fa-square-facebook border border-black bg-black p-2 mt-1 fs-3"></i>
+                                <i class="fa-brands fa-google border border-black bg-black p-2 mt-1 fs-3"></i>
+                                <i class="fa-brands fa-twitter border border-black bg-black p-2 mt-1 fs-3"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                    @* <!-- Username input -->
+                <p id="errorMessage" class="text-center text-success">@ViewBag.SuccessMessage</p>
+                <form asp-action="SignUp" asp-controller="Auth" method="post">
                     <div class="form-outline mb-4">
-                        <label for="txtUserName">Username:</label>
-                        <input id="txtUserName" type="text" placeholder="Enter your username" autoCompl ete="off"
+                        <input id="UserName" name="UserName" type="text" placeholder="Username"
                             class="form-control form-control-lg" />
                     </div>
-
-                    <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input id="txtUserName" label="Email" type="email" placeholder="Enter your email"
-                            autoComplete="off" class="form-control form-control-lg" onChange="setEmail(this.value)" />
+                        <input id="Email" name="Email" type="email" placeholder="Email"
+                            class="form-control form-control-lg" onChange="setEmail(this.value)" />
                     </div>
-                    <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input id="txtPassWord" label="Pass Word" type="password" placeholder="Enter password"
-                            autoComplete="off" class="form-control form-control-lg"
-                            onChange="setPassword(this.value)" />
+                        <input id="Password" name="Password" type="password" placeholder="Enter password"
+                            class="form-control form-control-lg" onChange="setPassword(this.value)" />
                     </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                            <label class="form-check-label" for="form2Example3">Remember me</label>
-                        </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
-                    </div> *@
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        
                         <button type="submit" class="btn btn-primary btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;">Tạo tài khoản</button>
-
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account?
                             <a href="/auth/login" class="text-danger">Login</a>
                         </p>
                     </div>
                 </form>
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
 </section>
 
-@section scripts {
-    <script>
-        document.getElementById("registerForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+@* @section scripts {
+<script>
+document.getElementById("registerForm").addEventListener("submit", function (event) {
+event.preventDefault();
 
-            const username = document.getElementById('txtUserName').value;
-            const email = document.getElementById('txtEmail').value;
-            const password = document.getElementById('txtPassWord').value;
+const username = document.getElementById('txtUserName').value;
+const email = document.getElementById('txtEmail').value;
+const password = document.getElementById('txtPassWord').value;
 
-            const data = new FormData();
-            data.append('UserName', username);
-            data.append('Email', email);
-            data.append('Password', password);
+const data = new FormData();
+data.append('UserName', username);
+data.append('Email', email);
+data.append('Password', password);
 
-            fetch('/api/Account/Register', {
-                method: 'POST',
-                body: data,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Thay đổi nội dung của thẻ <p> dựa trên phản hồi từ API
-                const messageElement = document.getElementById('errorMessage');
-                if (messageElement) {
-                    messageElement.innerHTML = data.message; // Giả sử API trả về một thuộc tính 'message'
-                }
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-        });
-    </script>
+fetch('/api/Account/Register', {
+method: 'POST',
+body: data,
+})
+.then(response => {
+if (!response.ok) {
+throw new Error('Network response was not ok');
 }
+return response.json();
+})
+.then(data => {
+// Thay đổi nội dung của thẻ <p> dựa trên phản hồi từ API
+const messageElement = document.getElementById('errorMessage');
+if (messageElement) {
+messageElement.innerHTML = data.message; // Giả sử API trả về một thuộc tính 'message'
+}
+})
+.catch(error => {
+console.error('There has been a problem with your fetch operation:', error);
+});
+});
+</script>
+} *@
 
 
 
 <style>
-
     .divider:after,
     .divider:before {
         content: "";
