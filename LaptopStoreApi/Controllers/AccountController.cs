@@ -1,5 +1,6 @@
 ﻿using LaptopStoreApi.Database;
 using LaptopStoreApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -102,8 +103,8 @@ namespace LaptopStoreApi.Controllers
                             SecurityAlgorithms.HmacSha256);
 
                         var claims = new List<Claim>();
-                        claims.Add(new Claim(
-                            ClaimTypes.Name, user.UserName));
+                        claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                         claims.AddRange(
                             (await _userManager.GetRolesAsync(user))
                                 .Select(r => new Claim(ClaimTypes.Role, r)));
@@ -144,6 +145,31 @@ namespace LaptopStoreApi.Controllers
                     StatusCodes.Status401Unauthorized,
                     exceptionDetails);
             }
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var userId = User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var UserInfo = new User()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                AvatarUrl = user.AvatarUrl,
+                FirstName = user.FirstName,
+                Address = user.Address,
+                Age = user.Age,
+                BirthDay = user.BirthDay,
+
+            };
+            return Ok(UserInfo);
+
         }
     }
 }

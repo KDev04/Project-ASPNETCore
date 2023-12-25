@@ -17,7 +17,7 @@ namespace LaptopStoreApi.Controllers
         {
             _repository = repo2;
         }
-        [Authorize]
+/*        [Authorize]*/
         [HttpGet]
         public async Task<IActionResult> GetLaptops()
         {
@@ -31,7 +31,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [Authorize]
+/*        [Authorize]*/
         [HttpGet]
         public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1)
         {
@@ -58,6 +58,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -91,8 +92,8 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        /*[Authorize]*/
-        [Authorize(Roles = RoleNames.Administrator)]
+        [Authorize]
+        /*        [Authorize(Roles = RoleNames.Administrator)]*/
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)

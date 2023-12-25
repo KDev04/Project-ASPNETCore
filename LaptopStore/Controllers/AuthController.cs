@@ -113,37 +113,120 @@ namespace LaptopStore.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-        public async Task<IActionResult> SignIn(RegisterModel model)
+        public async Task<IActionResult> SignIn([FromForm] LoginModel model)
         {
-            var json = JsonConvert.SerializeObject(model);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PostAsync("http://localhost:8000/login", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var token = await response.Content.ReadAsStringAsync();
+                if (ModelState.IsValid)
+                {
+                    // Sử dụng HTTPClient để gọi API
+                    using (var httpClient = new HttpClient())
+                    {
+                        // Địa chỉ API đăng ký tài khoản
+                        var apiUrl = "http://localhost:4000/api/Account/Login";
 
-                // Lưu token trong session hoặc cookie
-                HttpContext.Session.SetString("Token", token);
+                        // Chuyển đối tượng RegisterModel thành chuỗi JSON
+                        var jsonModel = JsonConvert.SerializeObject(model);
 
-                // Chuyển hướng về trang chính sau khi đăng nhập thành công
-                return RedirectToAction("Index", "Home");
+                        // Tạo nội dung yêu cầu từ chuỗi JSON
+                        var content = new FormUrlEncodedContent(new[]
+                            {
+                                new KeyValuePair<string, string>("UserName", model.UserName),
+                                new KeyValuePair<string, string>("Password", model.Password)
+                            });
+
+                        var response = await httpClient.PostAsync(apiUrl, content);
+
+
+                        // Kiểm tra xem cuộc gọi API có thành công hay không
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Xử lý khi thành công
+                            Console.WriteLine("Success");
+                            var token = await response.Content.ReadAsStringAsync();
+                            Console.WriteLine(token);
+                            // Lưu token trong session hoặc cookie
+                            HttpContext.Session.SetString("Token", token);
+                            ViewBag.SuccessMessage = $"User '{model.UserName}' has been logged.";
+                            return RedirectToAction("UserInfo", "Auth"); // Đổi thành action hoặc view mong muốn
+                        }
+                        else
+                        {
+                            // Xử lý khi cuộc gọi API không thành công
+                            Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            Console.WriteLine($"API response content: {responseContent}");
+
+                            // Log lỗi từ ModelState
+                            foreach (var entry in ModelState)
+                            {
+                                foreach (var error in entry.Value.Errors)
+                                {
+                                    Console.WriteLine($"ModelState error: {error.ErrorMessage}");
+                                }
+                            }
+
+                            Console.WriteLine("Fail");
+                            // Log dữ liệu đầu vào
+                            Console.WriteLine($"JSON data being sent: {jsonModel}");
+
+                            Console.WriteLine($"Received data: {model}");
+/*                            ViewBag.SuccessMessage = $"User '{model.UserName}' has been created.";*/
+                            return View("Register"); // Đổi thành action hoặc view mong muốn
+                        }
+                    }
+                }
+                else
+                {
+                    // Log lỗi từ ModelState
+                    foreach (var entry in ModelState)
+                    {
+                        foreach (var error in entry.Value.Errors)
+                        {
+                            Console.WriteLine($"ModelState error: {error.ErrorMessage}");
+                        }
+                    }
+
+                    Console.WriteLine("Validation failed");
+
+                    return View("Register"); // Đổi thành action hoặc view mong muốn
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Đăng nhập thất bại, xử lý tương ứng
-                return View("LoginFailed");
+                // Xử lý ngoại lệ nếu có lỗi
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return View("Register");
             }
         }
+
+
+        public async Task<IActionResult> UserInfo()
+        {
+            using (var httpClient  = new HttpClient())
+            {
+                var token = HttpContext.Session.GetString("Token");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var user = JsonConvert.DeserializeObject<User>(responseData);
+
+                    return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
+
+
+
+        
     }
 }

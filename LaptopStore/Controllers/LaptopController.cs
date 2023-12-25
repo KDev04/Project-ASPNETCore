@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using LaptopStore.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 namespace LaptopStore.Controllers
 {
     public class LaptopController : Controller
@@ -11,6 +12,8 @@ namespace LaptopStore.Controllers
         {
             using (var httpClient = new HttpClient())
             {
+                var token = HttpContext.Session.GetString("Token");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
 
                 if (response.IsSuccessStatusCode)
