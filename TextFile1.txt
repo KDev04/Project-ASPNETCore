@@ -1,2 +1,0 @@
-﻿Tạo một Database tên LaptopDB, có Tài khoản đăng nhập, User Id= LaptopDbAccount
-Password = LaptopDbAccount

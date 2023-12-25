@@ -23,3 +23,11 @@ Tính toán số lượng bán ra, doanh thu.
 Thống Kê và Xuất Báo Cáo:
 Tạo báo cáo xuất ra file Excel.
 Thống kê lượt xem sản phẩm.
+
+Thiết kế mô hình cơ sở dữ liệu (ER diagram): ít nhất 5 bảng dữ liệu trở lên.
+Chuẩn bị dữ liệu: Mỗi bảng phải có ít nhất 10 dòng dữ liệu.
+
+ tuân thủ theo mô hình MVC Framework, Razor 
+Pages, Blazor
+
+. Sử dụng Swagger UI để kiểm thử các Api.
