@@ -3,6 +3,7 @@ using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -58,7 +59,7 @@ namespace LaptopStoreApi.Controllers
         [HttpGet("{UserId}")]
         public IActionResult GetCart(string UserId)
         {
-            var carts = _dbContext.Carts.Where(c=>c.UserId == UserId).ToList();
+            var carts = _dbContext.Carts.Include(l=>l.Laptop).Include(c=>c.User).Where(c => c.UserId == UserId).ToList();
             return Ok(carts);
         }
         [HttpDelete("{id}")]
@@ -91,6 +92,7 @@ namespace LaptopStoreApi.Controllers
                     Price = cart.Price,
                     Quantity = cart.Quantity,
                     Total = cart.Price*cart.Quantity,
+                    StatusOrder = 0
                 };
                 _dbContext.Orders.Add(oder);
                 _dbContext.Carts.Remove(cart);
@@ -101,6 +103,12 @@ namespace LaptopStoreApi.Controllers
             {
                 return BadRequest("Dat hang khong thanh cong");
             }
+        }
+        [HttpGet("{UserId}")]
+        public IActionResult GetOrders(string UserId) 
+        { 
+            var orders = _dbContext.Orders.Include(l => l.Laptop).Include(c => c.User).Where(c => c.UserId == UserId).ToList();
+            return Ok(orders);
         }
     }
 }
