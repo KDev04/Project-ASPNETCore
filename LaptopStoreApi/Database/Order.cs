@@ -14,6 +14,11 @@ namespace LaptopStoreApi.Database
         public decimal Total { get; set; }
         public string UserId { get; set; } = string.Empty;
         public User? User { get; set; }
+        public StatusOrder StatusOrder { get; set; }
 
+    }
+    public enum StatusOrder
+    {
+        New = 0, Shipping = 1, Complete = 2, Cancel = -1
     }
 }

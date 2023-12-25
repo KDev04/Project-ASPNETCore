@@ -1,1 +1,37 @@
-﻿
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Cart Page";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<section class="container py-5 my-5">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr class="row text-center">
+                <th class="col-2">Sản phẩm</th>
+                <th class="col">Đơn giá</th>
+                <th class="col">Số lượng</th>
+                <th class="col">Số tiền</th>
+                <th class="col">Tình trạng đơn hàng</th>
+                <th class="col">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Model)
+            {
+                <tr class="row text-center">
+                    <td class="col-2">
+                        @cart?.Laptop?.Name
+                    </td>
+                    <td class="col">@cart?.Price</td>
+                    <td class="col">@cart?.Quantity</td>
+                    <td class="col">@(cart?.Price * cart?.Quantity)</td>
+                    <td class="col">@cart?.StatusOrder</td>
+                    <td class="col">
+                        <button class="btn btn-primary btn-sm OrderBtn" value=@cart?.Id>Đặt hàng cho @cart?.Id</button>
+                        <button class="btn btn-primary btn-sm deleteButton" value=@cart?.Id>Xóa @cart?.Id</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

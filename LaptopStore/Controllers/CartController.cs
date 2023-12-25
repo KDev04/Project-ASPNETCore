@@ -39,6 +39,28 @@ namespace LaptopStore.Controllers
                 }
             }
         }
+        public async Task<IActionResult> Order(string UserId = "eb991811-c293-41ab-9ead-08fd4a46b03c")
+        {
+            using (var httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Cart/GetOrders/" + UserId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var laptops = JsonConvert.DeserializeObject<List<Order>>(responseData);
+
+                    return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
         //Host 8000
         /* public async Task<IActionResult> AddToCart(string userId, int laptopId, int quantity)
          {
