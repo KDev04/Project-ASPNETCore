@@ -58,7 +58,7 @@ namespace LaptopStore.Controllers
                         {
                             // Xử lý khi đăng ký thành công
                             Console.WriteLine("Success");
-
+                            ViewBag.SuccessMessage = $"User '{model.UserName}' has been created.";
                             return View("Register"); // Đổi thành action hoặc view mong muốn
                         }
                         else
