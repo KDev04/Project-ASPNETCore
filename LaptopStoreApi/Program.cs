@@ -5,10 +5,13 @@ using LaptopStoreApi.Services;
 using LaptopStoreApi.Database;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using LaptopStoreApi.Swagger;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+using LaptopStoreApi.Constants;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -125,10 +128,33 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors();
 app.MapControllers();
 app.UseStaticFiles();
 /*SeedData.CreateData(app);
 LocationEndpointsConfig.AddEndpoints(app);*/
 SeedDatabase.CreateData(app);
+
+app.MapGet("/auth/test/1",
+    [Authorize]
+    [EnableCors("AnyOrigin")]
+    [ResponseCache(NoStore = true)] () =>
+    {
+        return Results.Ok("You are authorized!");
+    });
+app.MapGet("/auth/test/2",
+    [Authorize(Roles = RoleNames.Moderator)]
+    [EnableCors("AnyOrigin")]
+    [ResponseCache(NoStore = true)] () =>
+    {
+        return Results.Ok("You are authorized!");
+    });
+
+app.MapGet("/auth/test/3",
+    [Authorize(Roles = RoleNames.Administrator)]
+    [EnableCors("AnyOrigin")]
+    [ResponseCache(NoStore = true)] () =>
+    {
+        return Results.Ok("You are authorized!");
+    });
 app.Run();

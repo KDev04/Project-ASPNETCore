@@ -3,6 +3,7 @@ using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace LaptopStoreApi.Controllers
@@ -16,6 +17,7 @@ namespace LaptopStoreApi.Controllers
         {
             _dbContext = dbContext;
         }
+        [Authorize]
         [HttpPost]
         public IActionResult AddToCart([FromForm] CartModel cart)
         {
