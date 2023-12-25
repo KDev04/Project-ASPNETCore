@@ -31,13 +31,21 @@ namespace LaptopStoreApi.Database
                 .HasOne(i => i.LaptopStatus)
                 .WithMany(ls => ls.Images)
                 .HasForeignKey(i => i.LaptopStatusId);
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserId);
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Laptop)
+                .WithMany()
+                .HasForeignKey(o => o.LaptopId);
 
         }
         public DbSet<Laptop> Laptops => Set<Laptop>();
         public DbSet<LaptopStatus> LaptopStatuses => Set<LaptopStatus>();
         public DbSet<Image> Images => Set<Image>();
         public DbSet<Cart> Carts => Set<Cart>();
-
+        public DbSet<Order> Orders => Set<Order>();
 
     }
 }

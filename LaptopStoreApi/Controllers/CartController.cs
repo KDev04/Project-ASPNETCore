@@ -61,6 +61,20 @@ namespace LaptopStoreApi.Controllers
             var carts = _dbContext.Carts.Where(c=>c.UserId == UserId).ToList();
             return Ok(carts);
         }
-       
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCart(int id) 
+        { 
+            var cart = _dbContext.Carts.Where(cart=>cart.Id == id).FirstOrDefault();
+            if (cart != null)
+            {
+                _dbContext.Carts.Remove(cart);
+                _dbContext.SaveChanges();
+                return Ok("Xoa thanh cong");
+            }
+            else
+            {
+                return BadRequest("Xoa khong thanh cong");
+            }
+        }
     }
 }

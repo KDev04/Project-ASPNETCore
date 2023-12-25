@@ -2,21 +2,54 @@
 @{
     ViewData["Title"] = "Cart Page";
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <section class="container py-5 my-5">
-    @foreach (var cart in Model)
-    {
-        <div class="row">
-            <div class="col-3">
-                <img class="card-img-top img-card" src=http://localhost:4000/@cart.ImgPath />
-
-            </div>
-            <div class="col">
-                @cart.Name
-            </div>
-            <div class="col">
-                @cart.Quantity
-            </div>
-        </div>
-    }
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr class="row text-center">
+                <th class="col-2">Sản phẩm</th>
+                <th class="col">Đơn giá</th>
+                <th class="col">Số lượng</th>
+                <th class="col">Số tiền</th>
+                <th class="col">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Model)
+            {
+                <tr class="row text-center" >
+                    <td class="col-2">
+                        <img class="card-img-top img-thumbnail" src="http://localhost:4000/@cart.ImgPath" />
+                    </td>
+                    <td class="col">@cart.Price</td>
+                    <td class="col">@cart.Quantity</td>
+                    <td class="col">@(cart.Price * cart.Quantity)</td>
+                    <td class="col">
+                        <button class="btn btn-primary btn-sm">Thanh toán cho @cart.Id</button>
+                        <button class="btn btn-primary btn-sm deleteButton" value=@cart.Id>Xóa @cart.Id</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </section>
+<script>
+    $(document).ready(function () {
+        $('.deleteButton').click(function () {
+            var id = $(this).val()
 
+            $.ajax({
+                url: '/Cart/DeleteCart/' + id,
+                type: 'DELETE',
+                success: function (response) {
+                    alert(response);
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert('Xóa không thành công');
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>

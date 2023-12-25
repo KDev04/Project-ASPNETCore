@@ -14,6 +14,7 @@ namespace LaptopStore.Controllers
         public CartController()
         {
             _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://localhost:4000/api/");
         }
         public async Task<IActionResult> Index(string UserId = "eb991811-c293-41ab-9ead-08fd4a46b03c")
         {
@@ -102,6 +103,19 @@ namespace LaptopStore.Controllers
             }
             return Redirect("/");
 
+        }
+        public async Task<string> DeleteCart(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"Cart/DeleteCart/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return "Xoa thanh cong";
+            }
+            else
+            {
+                return "Xoa khong thanh cong";
+            }
         }
     }
 }
