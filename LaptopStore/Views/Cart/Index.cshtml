@@ -25,7 +25,7 @@
                     <td class="col">@cart.Quantity</td>
                     <td class="col">@(cart.Price * cart.Quantity)</td>
                     <td class="col">
-                        <button class="btn btn-primary btn-sm">Thanh toán cho @cart.Id</button>
+                        <button class="btn btn-primary btn-sm OrderBtn" value=@cart.Id>Đặt hàng cho @cart.Id</button>
                         <button class="btn btn-primary btn-sm deleteButton" value=@cart.Id>Xóa @cart.Id</button>
                     </td>
                 </tr>
@@ -47,6 +47,24 @@
                 },
                 error: function (xhr, status, error) {
                     alert('Xóa không thành công');
+                    location.reload();
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('.OrderBtn').click(function () {
+            var id = $(this).val()
+
+            $.ajax({
+                url: '/Cart/OrderCartById/' + id,
+                type: 'POST',
+                success: function (response) {
+                    alert(response);
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert('Đặt hàng không thành công');
                     location.reload();
                 }
             });

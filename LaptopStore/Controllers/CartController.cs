@@ -16,7 +16,8 @@ namespace LaptopStore.Controllers
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri("http://localhost:4000/api/");
         }
-        public async Task<IActionResult> Index(string UserId = "eb991811-c293-41ab-9ead-08fd4a46b03c")
+        // userId HieuLord bên máy thịnh eb991811-c293-41ab-9ead-08fd4a46b03c
+        public async Task<IActionResult> Index(string UserId = "eb991811-c293-41ab-9ead-08fd4a46b03c") 
         {
             using (var httpClient = new HttpClient())
             {
@@ -115,6 +116,19 @@ namespace LaptopStore.Controllers
             else
             {
                 return "Xoa khong thanh cong";
+            }
+        }
+        public async Task<string> OrderCartById(int id)
+        {
+            var response = await _httpClient.PostAsync($"Cart/OrderCartById/{id}", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return "Đặt hàng thành công";
+            }
+            else
+            {
+                return "Đặt hàng không thành công";
             }
         }
     }

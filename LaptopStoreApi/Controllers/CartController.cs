@@ -76,5 +76,31 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest("Xoa khong thanh cong");
             }
         }
+        [HttpPost("{id}")]
+        public IActionResult OrderCartById(int id)
+        {
+            var cart = _dbContext.Carts.Where(cart => cart.Id == id).FirstOrDefault();
+            if (cart != null)
+            {
+                Order oder = new Order()
+                {
+                    LaptopId = cart.LaptopId,
+                    Laptop = cart.Laptop,
+                    UserId = cart.UserId,
+                    User = cart.User,
+                    Price = cart.Price,
+                    Quantity = cart.Quantity,
+                    Total = cart.Price*cart.Quantity,
+                };
+                _dbContext.Orders.Add(oder);
+                _dbContext.Carts.Remove(cart);
+                _dbContext.SaveChanges();
+                return Ok("Dat hang thanh cong");
+            }
+            else
+            {
+                return BadRequest("Dat hang khong thanh cong");
+            }
+        }
     }
 }
