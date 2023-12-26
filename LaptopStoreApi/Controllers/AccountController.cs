@@ -146,6 +146,7 @@ namespace LaptopStoreApi.Controllers
                     exceptionDetails);
             }
         }
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUserInfo()
@@ -171,6 +172,7 @@ namespace LaptopStoreApi.Controllers
             return Ok(UserInfo);
 
         }
+        
         [Authorize]
         [HttpGet]
         public async Task<string> GetUserId()
