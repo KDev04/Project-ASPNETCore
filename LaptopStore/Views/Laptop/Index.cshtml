@@ -4,14 +4,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section class="container py-5 my-5">
+<section class="container py-5">
     <partial name="~/Views/Laptop/Filter.cshtml" />
+</section>
 
-    <div>
-        <a asp-controller="Laptop" asp-action="Create">
-            Create new
-        </a>
-    </div>
+<section class="container py-5 my-5">
+
     <div class="row gy-4">
         @foreach (var laptop in Model)
         {
@@ -20,4 +18,3 @@
         }
     </div>
 </section>
-

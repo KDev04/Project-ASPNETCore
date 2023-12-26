@@ -3,8 +3,50 @@
     ViewData["Title"] = "Account";
 }
 <section class="container py-5 my-5">
-   <h1>
-       @Model.UserName
-   </h1>
-   <p>@Model.Id</p>
+   <div class="row row-cols-1 row-cols-md-2">
+  <div class="col col-lg-4" style="background-color: #a8eee1;">
+    <div class="card-block text-center text-white">
+      <div class="row row-cols-lg-1">
+        <div class="col m-b-25">
+           <img src=http://localhost:4000/images/laptop1.jpg alt="Your Profile" class="img-fluid rounded" />
+        </div>
+        <div class="col text-lg-center text-start">
+          <h3 class="f-w-600">@Model.UserName</h3>
+          <p class="fs-4">@Model.Id</p>
+          <a href="">
+            <i class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16 fs-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="card-block">
+      <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Thông tin</h6>
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="m-b-10 f-w-600">Email</p>
+          <h6 class="text-muted f-w-400">@Model.Email</h6>
+        </div>
+        <div class="col-sm-6">
+          <p class="m-b-10 f-w-600">Phone</p>
+          <h6 class="text-muted f-w-400">@Model.PhoneNumber</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="m-b-10 f-w-600">Address</p>
+          <h6 class="text-muted f-w-400">@Model.Address</h6>
+        </div>
+      </div>
+      <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="m-b-10 f-w-600">Số dư tài khoản</p>
+          <h6 class="text-black f-w-400">@Model.Age</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>

@@ -25,8 +25,6 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
-
-        [HttpPost]
         public async Task<IActionResult> SignUp([FromForm] RegisterModel model)
         {
             try

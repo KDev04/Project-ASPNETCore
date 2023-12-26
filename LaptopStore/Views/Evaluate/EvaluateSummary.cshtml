@@ -1,0 +1,21 @@
+﻿@model Evaluate 
+@{
+    var rate = Model.Rate;
+}
+    <div class="media d-flex mt-5">
+        <img class="mr-3 align-self-center" style="width: 64px; height: 64px;" alt="Image" src=http://localhost:4000/@Model.Laptop.ImgPath />
+        <div class="media-body mt-3 ms-3">
+            <h5 class="mt-0">@Model.User.UserName</h5>
+            <h5 class="text-warning">
+                @if (rate >= 1)
+                {
+                    for (int i = 0; i < rate; i++)
+                    {
+                        <i class="fa-solid fa-star"></i>
+                    }
+                }
+            </h5>
+            @Model.Cmt
+        </div>
+    </div>
+  
