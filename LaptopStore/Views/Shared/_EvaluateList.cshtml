@@ -1,0 +1,11 @@
+﻿@model List<Evaluate>
+@{
+    ViewData["Title"] = "Evaluate Page";
+}
+<section class="container py-5 my-5">
+    @foreach (var eval in Model)
+    {
+        <partial name="EvaluateSummary.cshtml" model="eval" />
+
+    }
+</section>

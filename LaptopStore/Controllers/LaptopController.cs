@@ -8,6 +8,11 @@ namespace LaptopStore.Controllers
 {
     public class LaptopController : Controller
     {
+        private readonly HttpClient _httpClient;
+        public LaptopController(HttpClient httpClient) 
+        { 
+            _httpClient = httpClient;
+        }
         public async Task<IActionResult> Index()
         {
             using (var httpClient = new HttpClient())
@@ -61,46 +66,45 @@ namespace LaptopStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var httpClient = new HttpClient())
+                var token = HttpContext.Session.GetString("Token");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                try
                 {
-                    try
+                    using (var formData = new MultipartFormDataContent())
                     {
-                        using (var formData = new MultipartFormDataContent())
+                        formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
+                        formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
+                        formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity"); ;
+
+                        if (model.Image != null && model.Image.Length > 0)
                         {
-                            formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
-                            formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
-                            formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");;
-
-                            if (model.Image != null && model.Image.Length > 0)
+                            using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
                             {
-                                using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                                formData.Add(streamContent, "Image", model.Image.FileName);
+
+                                var response = await _httpClient.PostAsync("http://localhost:8000/api/Laptops/Add", formData);
+
+                                if (response.IsSuccessStatusCode)
                                 {
-                                    formData.Add(streamContent, "Image", model.Image.FileName);
-
-                                    var response = await httpClient.PostAsync("http://localhost:8000/api/Laptops/Add", formData);
-
-                                    if (response.IsSuccessStatusCode)
-                                    {
-                                        // Xử lý khi tạo laptop thành công
-                                        return Redirect("/Laptop/Index");
-                                    }
-                                    else
-                                    {
-                                        // Xử lý khi có lỗi từ API
-                                        ModelState.AddModelError("", "An error occurred while creating the laptop.");
-                                    }
+                                    // Xử lý khi tạo laptop thành công
+                                    return Redirect("/Laptop/Index");
+                                }
+                                else
+                                {
+                                    // Xử lý khi có lỗi từ API
+                                    ModelState.AddModelError("", "An error occurred while creating the laptop.");
                                 }
                             }
-                            else
-                            {
-                                ModelState.AddModelError("", "No image file found");
-                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "No image file found");
                         }
                     }
-                    catch
-                    {
-                        ModelState.AddModelError("", "An error occurred");
-                    }
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "An error occurred");
                 }
             }
 
@@ -142,6 +146,21 @@ namespace LaptopStore.Controllers
             }
             
         }
-        
+        public async Task<string> GetUserId()
+        {
+
+            var token = HttpContext.Session.GetString("Token");
+            /* var token = Request.Cookies["Token"];*/
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserId");
+            response.EnsureSuccessStatusCode();
+            var responseData = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(responseData);
+            return responseData;
+
+        }
+
     }
 }
