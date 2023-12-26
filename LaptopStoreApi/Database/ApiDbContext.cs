@@ -39,6 +39,14 @@ namespace LaptopStoreApi.Database
                 .HasOne(o => o.Laptop)
                 .WithMany()
                 .HasForeignKey(o => o.LaptopId);
+            modelBuilder.Entity< Evaluate>()
+                .HasOne(e=>e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId);
+            modelBuilder.Entity<Evaluate>()
+                .HasOne(e => e.Laptop)
+                .WithMany()
+                .HasForeignKey(e => e.LaptopId);
 
         }
         public DbSet<Laptop> Laptops => Set<Laptop>();
@@ -46,6 +54,7 @@ namespace LaptopStoreApi.Database
         public DbSet<Image> Images => Set<Image>();
         public DbSet<Cart> Carts => Set<Cart>();
         public DbSet<Order> Orders => Set<Order>();
+        public DbSet<Evaluate> Evaluates => Set<Evaluate>();
 
     }
 }
