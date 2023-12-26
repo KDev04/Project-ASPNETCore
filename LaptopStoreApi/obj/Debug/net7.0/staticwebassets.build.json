@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ke9vQ78qlTH5y408Q9hSRaKDZ1LlIjbJ9/iYpdVD8xI=",
+  "Hash": "RJxnMcTSihTsNDBKjAdAkU0b0fQbBGLBjYOsVF1hbSc=",
   "Source": "LaptopStoreApi",
   "BasePath": "_content/LaptopStoreApi",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "LaptopStoreApi\\wwwroot",
       "Source": "LaptopStoreApi",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\0fe69f3c-ed88-4bd6-ba96-e2d860d7ea37.webp",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\0fe69f3c-ed88-4bd6-ba96-e2d860d7ea37.webp",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/0fe69f3c-ed88-4bd6-ba96-e2d860d7ea37.webp",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\0fe69f3c-ed88-4bd6-ba96-e2d860d7ea37.webp"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\269e258f-627c-4782-9a90-4de8d801cdc8.ico",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\269e258f-627c-4782-9a90-4de8d801cdc8.ico",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/269e258f-627c-4782-9a90-4de8d801cdc8.ico",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\269e258f-627c-4782-9a90-4de8d801cdc8.ico"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\2aa3a81b-e587-4b5d-8b3f-8a4da7755aea.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\2aa3a81b-e587-4b5d-8b3f-8a4da7755aea.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/2aa3a81b-e587-4b5d-8b3f-8a4da7755aea.jpg",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\2aa3a81b-e587-4b5d-8b3f-8a4da7755aea.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\3f59a492-2713-410d-9c0b-a3c9de4caa5a.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\3f59a492-2713-410d-9c0b-a3c9de4caa5a.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/3f59a492-2713-410d-9c0b-a3c9de4caa5a.png",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\3f59a492-2713-410d-9c0b-a3c9de4caa5a.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\4723fc71-0b82-4f07-9214-6bdf2383b268.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\4723fc71-0b82-4f07-9214-6bdf2383b268.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/4723fc71-0b82-4f07-9214-6bdf2383b268.png",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\4723fc71-0b82-4f07-9214-6bdf2383b268.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\5ba563f2-d3cc-461b-82f3-41b33b6477cb.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\5ba563f2-d3cc-461b-82f3-41b33b6477cb.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/5ba563f2-d3cc-461b-82f3-41b33b6477cb.png",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\5ba563f2-d3cc-461b-82f3-41b33b6477cb.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\617b8bb5-f4b9-455a-b8b0-91ddb5b907d7.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\617b8bb5-f4b9-455a-b8b0-91ddb5b907d7.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/617b8bb5-f4b9-455a-b8b0-91ddb5b907d7.png",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\617b8bb5-f4b9-455a-b8b0-91ddb5b907d7.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\68792e61-4669-4e66-8773-051c035f07b3.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\68792e61-4669-4e66-8773-051c035f07b3.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/68792e61-4669-4e66-8773-051c035f07b3.jpg",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\68792e61-4669-4e66-8773-051c035f07b3.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\88723139-6d26-4fad-8348-5cc41e785b94.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\88723139-6d26-4fad-8348-5cc41e785b94.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/88723139-6d26-4fad-8348-5cc41e785b94.jpg",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\88723139-6d26-4fad-8348-5cc41e785b94.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\993030b8-e115-4b6f-b885-8eb7620f8969.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\993030b8-e115-4b6f-b885-8eb7620f8969.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/993030b8-e115-4b6f-b885-8eb7620f8969.jpg",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\993030b8-e115-4b6f-b885-8eb7620f8969.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\a9afe601-5991-4f34-a9bd-a7dafc3b6d56.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\a9afe601-5991-4f34-a9bd-a7dafc3b6d56.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/a9afe601-5991-4f34-a9bd-a7dafc3b6d56.png",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\a9afe601-5991-4f34-a9bd-a7dafc3b6d56.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\b70e53ea-5619-4695-8ab5-a79b266dc1e6.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\b70e53ea-5619-4695-8ab5-a79b266dc1e6.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/b70e53ea-5619-4695-8ab5-a79b266dc1e6.png",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\b70e53ea-5619-4695-8ab5-a79b266dc1e6.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\bd74eec7-952e-46fa-b32f-d10021866fcb.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\bd74eec7-952e-46fa-b32f-d10021866fcb.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/bd74eec7-952e-46fa-b32f-d10021866fcb.png",
       "AssetKind": "All",
@@ -264,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\bd74eec7-952e-46fa-b32f-d10021866fcb.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\cc87478d-ba13-4433-95f3-9802166343e8.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\cc87478d-ba13-4433-95f3-9802166343e8.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/cc87478d-ba13-4433-95f3-9802166343e8.png",
       "AssetKind": "All",
@@ -283,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\cc87478d-ba13-4433-95f3-9802166343e8.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg",
       "AssetKind": "All",
@@ -302,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\d12fe4f1-c8d9-40ad-826c-3d5fb9c31012.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\d972b230-1a0d-4222-8387-4418c7e30791.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\d972b230-1a0d-4222-8387-4418c7e30791.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/d972b230-1a0d-4222-8387-4418c7e30791.png",
       "AssetKind": "All",
@@ -321,10 +321,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\d972b230-1a0d-4222-8387-4418c7e30791.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\Image\\e36a5d12-92bd-4772-b7d4-8155f9a67edc.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\Image\\e36a5d12-92bd-4772-b7d4-8155f9a67edc.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "Image/e36a5d12-92bd-4772-b7d4-8155f9a67edc.jpg",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\Image\\e36a5d12-92bd-4772-b7d4-8155f9a67edc.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop1.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop1.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop1.jpg",
       "AssetKind": "All",
@@ -359,10 +359,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop1.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop10.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop10.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop10.png",
       "AssetKind": "All",
@@ -378,10 +378,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop10.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop11.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop11.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop11.png",
       "AssetKind": "All",
@@ -397,10 +397,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop11.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop12.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop12.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop12.png",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop12.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop2.jpg",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop2.jpg",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop2.jpg",
       "AssetKind": "All",
@@ -435,10 +435,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop2.jpg"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop3.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop3.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop3.png",
       "AssetKind": "All",
@@ -454,10 +454,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop3.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop4.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop4.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop4.png",
       "AssetKind": "All",
@@ -473,10 +473,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop4.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop5.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop5.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop5.png",
       "AssetKind": "All",
@@ -492,10 +492,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop5.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop6.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop6.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop6.png",
       "AssetKind": "All",
@@ -511,10 +511,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop6.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop7.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop7.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop7.png",
       "AssetKind": "All",
@@ -530,10 +530,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop7.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop8.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop8.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop8.png",
       "AssetKind": "All",
@@ -549,10 +549,10 @@
       "OriginalItemSpec": "wwwroot\\images\\laptop8.png"
     },
     {
-      "Identity": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\images\\laptop9.png",
+      "Identity": "D:\\D\\LaptopStoreApi\\wwwroot\\images\\laptop9.png",
       "SourceId": "LaptopStoreApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStoreApi\\wwwroot\\",
+      "ContentRoot": "D:\\D\\LaptopStoreApi\\wwwroot\\",
       "BasePath": "_content/LaptopStoreApi",
       "RelativePath": "images/laptop9.png",
       "AssetKind": "All",

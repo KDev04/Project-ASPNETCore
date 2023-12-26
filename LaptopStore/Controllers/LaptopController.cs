@@ -106,10 +106,7 @@ namespace LaptopStore.Controllers
 
             return Redirect("/Laptop/Index");
         }
-        public IActionResult Create()
-        {
-            return View();
-        }
+       
         public async Task<IActionResult> Filter (string name = "", string sortBy = "", int page = 1, int from = 0, int to = int.MaxValue)
         {
             using (var httpClient = new HttpClient())

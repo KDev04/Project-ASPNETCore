@@ -53,26 +53,22 @@
                                 <i class="fa-solid fa-car me-2"></i>Laptop
                             </a>
                         </li>
+                        @* <li>
+                        <a class="dropdown-item " asp-action="Create" asp-controller="Laptop">
+                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Create
+                        </a>
+                        </li> *@
                         <li>
-                            <a class="dropdown-item " asp-action="Create" asp-controller="Laptop">
-                                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Create
+                            <a class="dropdown-item" href="">
+                                <i class="fa-solid fa-headphones me-2"></i>Phụ kiện laptop
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="">
-                                <i class="fa-brands fa-servicestack  me-2"></i>Phụ kiện laptop
+                                <i class="fa-solid fa-gear me-2"></i>Dịch vụ
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="">
-                                <i class="fa-brands fa-servicestack  me-2"></i>Dịch vụ
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item " asp-action="Index" asp-controller="Cart">
-                                <i class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng
-                            </a>
-                        </li>
+
                         <li>
                             <a class="dropdown-item " asp-action="Order" asp-controller="Cart">
                                 <i class="fa-solid fa-cart-plus me-2"></i>Đơn hàng
@@ -80,25 +76,45 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="servicesDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-bookmark me-2"></i>Thư viện
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
 
-                        <li>
-                            <a class="dropdown-item" href="{{ route('home.team') }}">
-                                <i class="fa-solid fa-users  me-2"></i>Đội ngũ
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('home.testimonial') }}">
-                                <i class="fa-solid fa-meteor  me-2"></i>Phản hồi
-                            </a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link active text-uppercase" asp-action="Index" asp-controller="Cart"><i
+                            class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active text-uppercase" href="/Admin/Index">
+                        <i class="fa-solid fa-user-tie me-2"></i>Admin</a>
+                </li>
+
+
+                @* <li>
+                <a class="dropdown-item " asp-action="Index" asp-controller="Cart">
+                <i class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng
+                </a>
+                </li> *@
+
+
+
+                @* <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="servicesDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-bookmark me-2"></i>Thư viện
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+
+                <li>
+                <a class="dropdown-item" href="{{ route('home.team') }}">
+                <i class="fa-solid fa-users me-2"></i>Đội ngũ
+                </a>
+                </li>
+                <li>
+                <a class="dropdown-item" href="{{ route('home.testimonial') }}">
+                <i class="fa-solid fa-meteor me-2"></i>Phản hồi
+                </a>
+                </li>
+                </ul>
+                </li> *@
 
 
 

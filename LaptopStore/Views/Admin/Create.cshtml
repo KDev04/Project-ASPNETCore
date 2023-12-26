@@ -1,4 +1,8 @@
-﻿@model Laptop
+﻿@{
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+}
+
+@model Laptop
 <section class="container py-5 my-5">
     <form asp-action="SaveProduct" asp-controller="Laptop" method="post" enctype="multipart/form-data">
         <div class="form-group">
