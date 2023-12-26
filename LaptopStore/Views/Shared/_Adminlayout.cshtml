@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LaptopStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LaptopStore.styles.css" asp-append-version="true" />
+</head>
+LaptopStore/Views/Shared/_Adminlayout.cshtml
+<body>
+    Admin 
+    
+        <partial name="~/Views/Component/navbar.cshtml" />
+        @RenderBody()
+        <partial name="~/Views/Component/footer.cshtml" />
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <style>
+    .card-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    }
+
+    .text-title a {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.2em;
+    line-height: 1.5;
+    }
+
+    button.card-button {
+    border: #252525;
+    flex: 1;
+    padding: .3em;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: .3s ease-in-out;
+    }
+
+    .image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* You may need to adjust this based on your design */
+    }
+
+    .image-container img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+    }
+
+    .image-container:hover img {
+    transform: scale(1.1);
+    }
+
+    .card-button:hover {
+    background-color: #ffcaa6;
+    }
+    </style>
+
+</body>
+</html>
