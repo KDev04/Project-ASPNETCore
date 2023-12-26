@@ -4,6 +4,9 @@ using LaptopStore.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using Humanizer;
+using System.Globalization;
+using System.Xml.Linq;
 namespace LaptopStore.Controllers
 {
     public class LaptopController : Controller
@@ -17,8 +20,8 @@ namespace LaptopStore.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                var token = HttpContext.Session.GetString("Token");
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                /*var token = HttpContext.Session.GetString("Token");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
                 HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
 
                 if (response.IsSuccessStatusCode)
@@ -62,54 +65,6 @@ namespace LaptopStore.Controllers
             }
         }
 
-        public async Task<IActionResult> SaveProduct(Laptop model)
-        {
-            if (ModelState.IsValid)
-            {
-                var token = HttpContext.Session.GetString("Token");
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                try
-                {
-                    using (var formData = new MultipartFormDataContent())
-                    {
-                        formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
-                        formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
-                        formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity"); ;
-
-                        if (model.Image != null && model.Image.Length > 0)
-                        {
-                            using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
-                            {
-                                formData.Add(streamContent, "Image", model.Image.FileName);
-
-                                var response = await _httpClient.PostAsync("http://localhost:8000/api/Laptops/Add", formData);
-
-                                if (response.IsSuccessStatusCode)
-                                {
-                                    // Xử lý khi tạo laptop thành công
-                                    return Redirect("/Laptop/Index");
-                                }
-                                else
-                                {
-                                    // Xử lý khi có lỗi từ API
-                                    ModelState.AddModelError("", "An error occurred while creating the laptop.");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "No image file found");
-                        }
-                    }
-                }
-                catch
-                {
-                    ModelState.AddModelError("", "An error occurred");
-                }
-            }
-
-            return Redirect("/Laptop/Index");
-        }
        
         public async Task<IActionResult> Filter (string name = "", string sortBy = "", int page = 1, int from = 0, int to = int.MaxValue)
         {
@@ -118,7 +73,7 @@ namespace LaptopStore.Controllers
                 try
                 {
                     // Gửi yêu cầu GET tới API Filter và truyền các tham số
-                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:8000/api/Laptops/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}");
+                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -145,6 +100,37 @@ namespace LaptopStore.Controllers
                 }
             }
             
+        }
+        public async Task<IActionResult> Search (string keyword)
+        {
+            try
+            {
+                // Gửi yêu cầu GET tới API Filter và truyền các tham số
+                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/Search?keyword={keyword}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    response.EnsureSuccessStatusCode();
+
+                    // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
+                    // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                    var laptop = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                    return View("Index", laptop); // Trả về view mà bạn muốn hiển thị dữ liệu
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return View("Index", null);
+                }
+            }
+            catch
+            {
+                return BadRequest("khong hoat dong");
+            }
         }
         public async Task<string> GetUserId()
         {

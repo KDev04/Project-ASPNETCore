@@ -6,7 +6,7 @@ using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Authorization;
 namespace LaptopStoreApi.Controllers
 {
-/*    [Authorize]*/
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class EvaluateController : ControllerBase
@@ -69,7 +69,7 @@ namespace LaptopStoreApi.Controllers
             {
                 _context.Evaluates.Remove(eval);
                 _context.SaveChanges();
-                return Ok("Cucsess");
+                return Ok("Sucsess");
             }
         }
     }

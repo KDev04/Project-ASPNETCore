@@ -58,7 +58,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [Authorize]
+        [Authorize(Roles = RoleNames.Moderator)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -92,8 +92,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [Authorize]
-        /*        [Authorize(Roles = RoleNames.Administrator)]*/
+        [Authorize(Roles = RoleNames.Administrator)]
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
