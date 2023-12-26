@@ -171,5 +171,19 @@ namespace LaptopStoreApi.Controllers
             return Ok(UserInfo);
 
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<string> GetUserId()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return "không tìm thấy";
+            }
+            string Id = user.Id;
+            return Id;
+
+        }
     }
 }

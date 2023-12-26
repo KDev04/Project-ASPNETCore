@@ -3,6 +3,9 @@ using LaptopStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Linq.Dynamic.Core.Tokenizer;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Xml.Linq;
 
 namespace LaptopStore.Controllers
@@ -15,50 +18,49 @@ namespace LaptopStore.Controllers
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri("http://localhost:4000/api/");
+
         }
         // userId HieuLord bên máy thịnh eb991811-c293-41ab-9ead-08fd4a46b03c
-        public async Task<IActionResult> Index(string UserId = "eb991811-c293-41ab-9ead-08fd4a46b03c") 
+        public async Task<IActionResult> Index() 
         {
-            using (var httpClient = new HttpClient())
+            var userId = await GetUserId();
+
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Cart/GetCart/" + userId);
+
+            if (response.IsSuccessStatusCode)
             {
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Cart/GetCart/" + UserId);
+                var responseData = await response.Content.ReadAsStringAsync();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseData = await response.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var laptops = JsonConvert.DeserializeObject<List<Cart>>(responseData);
 
-                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                    var laptops = JsonConvert.DeserializeObject<List<Cart>>(responseData);
-
-                    return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
-                }
-                else
-                {
-                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                    return StatusCode((int)response.StatusCode);
-                }
+                return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
-        }
-        public async Task<IActionResult> Order(string UserId = "eb991811-c293-41ab-9ead-08fd4a46b03c")
-        {
-            using (var httpClient = new HttpClient())
+            else
             {
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Cart/GetOrders/" + UserId);
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
+            }
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseData = await response.Content.ReadAsStringAsync();
+        }
+        public async Task<IActionResult> Order()
+        {
+            var userId = await GetUserId();
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Cart/GetOrders/" + userId);
 
-                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                    var laptops = JsonConvert.DeserializeObject<List<Order>>(responseData);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
 
-                    return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
-                }
-                else
-                {
-                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                    return StatusCode((int)response.StatusCode);
-                }
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var laptops = JsonConvert.DeserializeObject<List<Order>>(responseData);
+
+                return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
             }
         }
         //Host 8000
@@ -91,58 +93,74 @@ namespace LaptopStore.Controllers
                  }
              }
          }*/
+        public async Task<string> GetUserId()
+        {
+
+            var token = HttpContext.Session.GetString("Token");
+            /* var token = Request.Cookies["Token"];*/
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserId");
+            response.EnsureSuccessStatusCode();
+            var responseData = await response.Content.ReadAsStringAsync();
+          
+            Console.WriteLine(responseData);
+            return responseData;
+
+        }
         public async Task<IActionResult> AddToCart(CartModel model)
         {
-            if (ModelState.IsValid) 
-            { 
-                using(var httpClient = new HttpClient())
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    try
+                    using (var formData = new MultipartFormDataContent())
                     {
-                        using (var formData = new MultipartFormDataContent())
+                        var userId = await GetUserId(); // Gọi phương thức GetUserId() để lấy giá trị UserId
+
+                        formData.Add(new StringContent(userId.ToString() ?? ""), "UserId");
+                        formData.Add(new StringContent(model.LaptopId.ToString() ?? ""), "LaptopId");
+                        formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
+
+                        /*var token = HttpContext.Session.GetString("Token");*/
+
+                        var res = await _httpClient.PostAsync("http://localhost:4000/api/Cart/AddToCart", formData);
+                        if (res.IsSuccessStatusCode)
                         {
-                            formData.Add(new StringContent(model.UserId?.ToString() ?? ""), "UserId");
-                            formData.Add(new StringContent(model.LaptopId.ToString() ?? ""), "LaptopId");
-                            formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
-                            var res = await httpClient.PostAsync("http://localhost:4000/api/Cart/AddToCart", formData);
-                            if (res.IsSuccessStatusCode)
-                            {
-                                // Xử lý khi tạo laptop thành công
-                                return Redirect("/");
-                            }
-                            else
-                            {
-                                // Xử lý khi có lỗi từ API
-                                ModelState.AddModelError("", "Thêm sản phẩm vào giỏ hàng không thành công.");
-                            }
+                            // Xử lý khi thêm sản phẩm vào giỏ hàng thành công
+                            return Redirect("/");
+                        }
+                        else
+                        {
+                            // Xử lý khi có lỗi từ API
+                            ModelState.AddModelError("", "Thêm sản phẩm vào giỏ hàng không thành công.");
                         }
                     }
-                    catch
-                    {
-                        ModelState.AddModelError("", "An error occurred");
-                    }
                 }
-
+                catch
+                {
+                    ModelState.AddModelError("", "An error occurred");
+                }
             }
             return Redirect("/");
-
         }
         public async Task<string> DeleteCart(int id)
         {
-            var response = await _httpClient.DeleteAsync($"Cart/DeleteCart/{id}");
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"Cart/DeleteCart/{id}");
 
             if (response.IsSuccessStatusCode)
             {
-                return "Xoa thanh cong";
+                return "Xóa thành công";
             }
             else
             {
-                return "Xoa khong thanh cong";
+                return "Xóa không thành công";
             }
         }
         public async Task<string> OrderCartById(int id)
         {
-            var response = await _httpClient.PostAsync($"Cart/OrderCartById/{id}", null);
+            /* var token = HttpContext.Session.GetString("Token");*/
+            HttpResponseMessage response = await _httpClient.PostAsync($"Cart/OrderCartById/{id}", null);
 
             if (response.IsSuccessStatusCode)
             {

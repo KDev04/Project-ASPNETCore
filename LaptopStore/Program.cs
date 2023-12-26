@@ -1,3 +1,4 @@
+using LaptopStore.Controllers;
 using LaptopStore.PublicHost;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<AuthController>();
+builder.Services.AddScoped<CartController>();
 builder.Services.AddSession();
 var app = builder.Build();
 
