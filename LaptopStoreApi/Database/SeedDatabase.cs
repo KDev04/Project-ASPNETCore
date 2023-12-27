@@ -6,7 +6,7 @@ namespace LaptopStoreApi.Database
     public class SeedDatabase
     {
 
-        public static async void CreateData(IApplicationBuilder app)
+        public static async Task CreateData(IApplicationBuilder app)
         {
 
             ApiDbContext context = app.ApplicationServices

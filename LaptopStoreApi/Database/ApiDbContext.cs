@@ -7,6 +7,7 @@ namespace LaptopStoreApi.Database
     public class ApiDbContext : IdentityDbContext<User>
     {
         public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options) { }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -74,6 +75,8 @@ namespace LaptopStoreApi.Database
         public DbSet<Cart> Carts => Set<Cart>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<Evaluate> Evaluates => Set<Evaluate>();
+
+        
 
     }
 }

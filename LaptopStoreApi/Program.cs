@@ -12,6 +12,11 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using LaptopStoreApi.Constants;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -134,7 +139,8 @@ app.UseStaticFiles();
 /*SeedData.CreateData(app);
 LocationEndpointsConfig.AddEndpoints(app);*/
 
-SeedDatabase.CreateData(app);
+await SeedDatabase.CreateData(app);
+
 
 app.MapGet("/auth/test/1",
     [Authorize]
