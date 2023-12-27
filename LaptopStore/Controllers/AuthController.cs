@@ -1,21 +1,25 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using LaptopStore.Models;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
 using System.Net.Http.Headers;
+using System.Text;
+using LaptopStore.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
 namespace LaptopStore.Controllers
 {
     public class AuthController : Controller
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<AuthController> _logger;
+
         public AuthController(ILogger<AuthController> logger)
         {
             _httpClient = new HttpClient();
             _logger = logger;
         }
+
         public IActionResult Login()
         {
             return View();
@@ -25,6 +29,7 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> SignUp([FromForm] RegisterModel model)
         {
             try
@@ -41,15 +46,16 @@ namespace LaptopStore.Controllers
                         var jsonModel = JsonConvert.SerializeObject(model);
 
                         // Tạo nội dung yêu cầu từ chuỗi JSON
-                        var content = new FormUrlEncodedContent(new[]
+                        var content = new FormUrlEncodedContent(
+                            new[]
                             {
                                 new KeyValuePair<string, string>("UserName", model.UserName),
                                 new KeyValuePair<string, string>("Email", model.Email),
                                 new KeyValuePair<string, string>("Password", model.Password)
-                            });
+                            }
+                        );
 
                         var response = await httpClient.PostAsync(apiUrl, content);
-
 
                         // Kiểm tra xem cuộc gọi API có thành công hay không
                         if (response.IsSuccessStatusCode)
@@ -62,7 +68,9 @@ namespace LaptopStore.Controllers
                         else
                         {
                             // Xử lý khi cuộc gọi API không thành công
-                            Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                            Console.WriteLine(
+                                $"API request failed with status code: {response.StatusCode}"
+                            );
                             var responseContent = await response.Content.ReadAsStringAsync();
                             Console.WriteLine($"API response content: {responseContent}");
 
@@ -109,8 +117,6 @@ namespace LaptopStore.Controllers
             }
         }
 
-
-
         public async Task<IActionResult> SignIn([FromForm] LoginModel model)
         {
             try
@@ -124,14 +130,15 @@ namespace LaptopStore.Controllers
                     var jsonModel = JsonConvert.SerializeObject(model);
 
                     // Tạo nội dung yêu cầu từ chuỗi JSON
-                    var content = new FormUrlEncodedContent(new[]
+                    var content = new FormUrlEncodedContent(
+                        new[]
                         {
-                                new KeyValuePair<string, string>("UserName", model.UserName),
-                                new KeyValuePair<string, string>("Password", model.Password)
-                            });
+                            new KeyValuePair<string, string>("UserName", model.UserName),
+                            new KeyValuePair<string, string>("Password", model.Password)
+                        }
+                    );
 
                     var response = await _httpClient.PostAsync(apiUrl, content);
-
 
                     // Kiểm tra xem cuộc gọi API có thành công hay không
                     if (response.IsSuccessStatusCode)
@@ -149,7 +156,9 @@ namespace LaptopStore.Controllers
                     else
                     {
                         // Xử lý khi cuộc gọi API không thành công
-                        Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                        Console.WriteLine(
+                            $"API request failed with status code: {response.StatusCode}"
+                        );
                         var responseContent = await response.Content.ReadAsStringAsync();
                         Console.WriteLine($"API response content: {responseContent}");
 
@@ -195,17 +204,23 @@ namespace LaptopStore.Controllers
             }
         }
 
-
         public async Task<IActionResult> UserInfo()
         {
             /*var token = HttpContext.Session.GetString("Token");*/
 
             var token = Request.Cookies["Token"];
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserInfo"
+            );
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
 
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
                 var user = JsonConvert.DeserializeObject<User>(responseData);
@@ -220,7 +235,20 @@ namespace LaptopStore.Controllers
         }
 
         
-
-
+        public async Task<IActionResult> Logout()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var apiResponse = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Account/Logout"
+                );
+                if (apiResponse.IsSuccessStatusCode)
+                {
+                    ViewBag.IsLoggedIn = false;
+                    Console.WriteLine(ViewBag.IsLoggedIn);
+                }
+               return View();
+            }
+        }
     }
 }

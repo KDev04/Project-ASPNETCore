@@ -29,6 +29,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.13" />
     
