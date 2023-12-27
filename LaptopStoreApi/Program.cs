@@ -133,6 +133,7 @@ app.MapControllers();
 app.UseStaticFiles();
 /*SeedData.CreateData(app);
 LocationEndpointsConfig.AddEndpoints(app);*/
+
 SeedDatabase.CreateData(app);
 
 app.MapGet("/auth/test/1",
