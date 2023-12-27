@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -84,10 +85,11 @@ namespace LaptopStoreApi.Controllers
         [HttpPost("{id}")]
         public IActionResult OrderCartById(int id)
         {
-            var cart = _dbContext.Carts.Where(cart => cart.Id == id).FirstOrDefault();
+            var cart = _dbContext.Carts.Where(c => c.Id == id).FirstOrDefault();
+
             if (cart != null)
             {
-                Order oder = new Order()
+                Order order = new Order()
                 {
                     LaptopId = cart.LaptopId,
                     Laptop = cart.Laptop,
@@ -95,17 +97,27 @@ namespace LaptopStoreApi.Controllers
                     User = cart.User,
                     Price = cart.Price,
                     Quantity = cart.Quantity,
-                    Total = cart.Price*cart.Quantity,
+                    Total = cart.Price * cart.Quantity,
                     StatusOrder = 0
                 };
-                _dbContext.Orders.Add(oder);
+
+                _dbContext.Orders.Add(order);
+
+                var laptop = _dbContext.Laptops.Find(cart.LaptopId);
+                if (laptop != null)
+                {
+                    laptop.Quantity -= cart.Quantity; // Giảm Quantity của Laptop theo giá trị Quantity của cart
+                    _dbContext.Laptops.Update(laptop); // Cập nhật giá trị Quantity của Laptop trong cơ sở dữ liệu
+                }
+
                 _dbContext.Carts.Remove(cart);
                 _dbContext.SaveChanges();
-                return Ok("Dat hang thanh cong");
+
+                return Ok("Đặt hàng thành công");
             }
             else
             {
-                return BadRequest("Dat hang khong thanh cong");
+                return BadRequest("Đặt hàng không thành công");
             }
         }
         [HttpGet("{UserId}")]

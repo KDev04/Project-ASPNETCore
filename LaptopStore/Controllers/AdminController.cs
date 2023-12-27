@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using LaptopStore.Models;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace LaptopStore.Controllers
 {
@@ -14,7 +15,25 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> LaptopPage()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
 
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
+
+                return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
+            }
+        }
         public IActionResult Create()
         {
             return View();
@@ -60,6 +79,26 @@ namespace LaptopStore.Controllers
             catch
             {
                 return Redirect("/Home/Error");
+            }
+        }
+        public async Task<IActionResult> UserPage()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetAllUser");
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var users = JsonConvert.DeserializeObject<List<User>>(responseData);
+
+                return View(users); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
             }
         }
     }

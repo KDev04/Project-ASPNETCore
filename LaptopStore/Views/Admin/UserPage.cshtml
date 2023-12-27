@@ -1,0 +1,45 @@
+﻿@model List<User>
+@{
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+    ViewData["Title"] = "Admin- Users";
+
+}
+<section class ="container">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birthday</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Thao tác</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.BirthDay.ToString("dd/MM/yy")</td>
+                    <td>@user.Address</td>
+                    <td>@user.Age</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm OrderBtn" value=@user.Id>Đặt hàng</button>
+                        <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+
