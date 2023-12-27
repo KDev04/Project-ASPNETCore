@@ -107,13 +107,13 @@ namespace LaptopStoreApi.Controllers
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                         claims.AddRange(
                             (await _userManager.GetRolesAsync(user))
-                                .Select(r => new Claim(ClaimTypes.Role, r)));
+                                .Select(r => new Claim(ClaimTypes.Role, r))); 
 
                         var jwtObject = new JwtSecurityToken(
                             issuer: _configuration["JWT:Issuer"],
                             audience: _configuration["JWT:Audience"],
                             claims: claims,
-                            expires: DateTime.Now.AddMinutes(30), /*DateTime.Now.AddSeconds(300),*/ /*chuyển từ 300 giây sang 30 phút*/
+                            expires: DateTime.Now.AddMinutes(180), /*DateTime.Now.AddSeconds(300),*/ /*chuyển từ 300 giây sang 30 phút*/
                             signingCredentials: signingCredentials);
 
                         var jwtString = new JwtSecurityTokenHandler()

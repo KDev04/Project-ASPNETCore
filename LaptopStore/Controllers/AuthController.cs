@@ -5,6 +5,9 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http.Headers;
+using System.IdentityModel.Tokens.Jwt;
+
+
 namespace LaptopStore.Controllers
 {
     public class AuthController : Controller
@@ -196,28 +199,72 @@ namespace LaptopStore.Controllers
         }
 
 
+        // public async Task<IActionResult> UserInfo()
+        // {
+        //     /*var token = HttpContext.Session.GetString("Token");*/
+
+        //     var token = Request.Cookies["Token"];
+        //     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        //     HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
+        //     if (response.IsSuccessStatusCode)
+        //     {
+        //         var responseData = await response.Content.ReadAsStringAsync();
+
+        //         // Xử lý dữ liệu responseData theo nhu cầu của bạn
+        //         var user = JsonConvert.DeserializeObject<User>(responseData);
+               
+
+        //         return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
+        //     }
+        //     else
+        //     {
+        //         // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+        //         return StatusCode((int)response.StatusCode);
+        //     }
+        // }
+
         public async Task<IActionResult> UserInfo()
-        {
-            /*var token = HttpContext.Session.GetString("Token");*/
+{
+    var token = Request.Cookies["Token"];
 
-            var token = Request.Cookies["Token"];
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
-            if (response.IsSuccessStatusCode)
-            {
-                var responseData = await response.Content.ReadAsStringAsync();
+    // Giải mã JWT để truy cập các thông tin chứa trong nó
+    var handler = new JwtSecurityTokenHandler();
+    var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
 
-                // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                var user = JsonConvert.DeserializeObject<User>(responseData);
+    // Trích xuất thông tin từ JWT
+    var userId = jsonToken?.Claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value;
+    var username = jsonToken?.Claims.FirstOrDefault(c => c.Type == "unique_name")?.Value;
+    var roles = jsonToken?.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
 
-                return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
-            }
-            else
-            {
-                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                return StatusCode((int)response.StatusCode);
-            }
-        }
+    // Log thông tin từ JWT
+    Console.WriteLine($"User ID: {userId}");
+    Console.WriteLine($"Username: {username}");
+    Console.WriteLine($"Roles: {string.Join(", ", roles)}");
+
+    // Gửi yêu cầu API để lấy thông tin khác (nếu cần)
+    HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
+    if (response.IsSuccessStatusCode)
+    {
+        var responseData = await response.Content.ReadAsStringAsync();
+
+        // Log thông tin từ API response
+        Console.WriteLine($"API Response Data: {responseData}");
+
+        // Xử lý dữ liệu responseData theo nhu cầu của bạn
+        var user = JsonConvert.DeserializeObject<User>(responseData);
+
+        return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
+    }
+    else
+    {
+        // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+        Console.WriteLine($"API Request Failed with Status Code: {response.StatusCode}");
+        Console.WriteLine($"API Response Content: {await response.Content.ReadAsStringAsync()}");
+
+        return StatusCode((int)response.StatusCode);
+    }
+}
+
 
         
 

@@ -58,12 +58,14 @@ namespace LaptopStoreApi.Controllers
 
 
         }
+
         [HttpGet("{UserId}")]
         public IActionResult GetCart(string UserId)
         {
             var carts = _dbContext.Carts.Include(l=>l.Laptop).Include(c=>c.User).Where(c => c.UserId == UserId).ToList();
             return Ok(carts);
         }
+        
         [HttpDelete("{id}")]
         public IActionResult DeleteCart(int id) 
         { 
