@@ -69,7 +69,7 @@ namespace LaptopStoreApi.Controllers
             {
                 _context.Evaluates.Remove(eval);
                 _context.SaveChanges();
-                return Ok("Cucsess");
+                return Ok("Sucsess");
             }
         }
     }

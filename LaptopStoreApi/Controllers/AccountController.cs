@@ -113,7 +113,7 @@ namespace LaptopStoreApi.Controllers
                             issuer: _configuration["JWT:Issuer"],
                             audience: _configuration["JWT:Audience"],
                             claims: claims,
-                            expires: DateTime.Now.AddSeconds(300),
+                            expires: DateTime.Now.AddMinutes(30), /*DateTime.Now.AddSeconds(300),*/ /*chuyển từ 300 giây sang 30 phút*/
                             signingCredentials: signingCredentials);
 
                         var jwtString = new JwtSecurityTokenHandler()

@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaptopStoreApi.Database
 {
     public class SeedDatabase
     {
-        public static void CreateData(IApplicationBuilder app)
+
+        public static async void CreateData(IApplicationBuilder app)
         {
+
             ApiDbContext context = app.ApplicationServices
                 .CreateScope().ServiceProvider
                 .GetRequiredService<ApiDbContext>();

@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Detail Page";
 }
+@using LaptopStore.Controllers
 
 <style>
     .img-card {
@@ -63,3 +64,9 @@
         </div>
     </div>
 </section>
+@{
+    HttpClient httpClient = new HttpClient();
+    var evaluateController = new EvaluateController(httpClient);
+    List<Evaluate> evals = await evaluateController.Gd(Model.LaptopId);
+}
+@await Html.PartialAsync("EvalSummary", evals)

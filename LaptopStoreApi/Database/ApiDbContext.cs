@@ -47,6 +47,25 @@ namespace LaptopStoreApi.Database
                 .HasOne(e => e.Laptop)
                 .WithMany()
                 .HasForeignKey(e => e.LaptopId);
+            modelBuilder.Entity<Cart>()
+                .Property(c => c.Price)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<Laptop>()
+                .Property(l => l.Price)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<LaptopStatus>()
+                .Property(ls => ls.Size)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Price)
+                .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Total)
+                .HasColumnType("decimal(18, 2)");
 
         }
         public DbSet<Laptop> Laptops => Set<Laptop>();

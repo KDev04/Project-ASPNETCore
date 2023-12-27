@@ -1,0 +1,82 @@
+﻿@model List<Evaluate>
+@{
+    int total = 0;
+    int all = 0;
+    foreach (var a in Model)
+    {
+        total += a.Rate;
+        all += 5;
+    }
+    double percentage = 0;
+    percentage = ((double)total / all)*100;
+}
+<section class="container bg-light rounded-5">
+    <h3>Đánh giá sản phẩm</h3>
+
+    <div class="row px-2 mx-3" style="background-color:moccasin">
+        <div class="col-3">
+            <h3 class="mx-1 text-center text-danger">@((percentage/20).ToString("n1")) Trên 5</h3>
+
+            <div class="rating">
+                @for (int i = 5; i >= 1; i--)
+                {
+                    <span class="rating-star @(i <= percentage ? string.Empty : "rating-star-empty")">&#9733;</span>
+                    percentage = percentage - 20;
+                }
+            </div>
+        </div>
+        <div class="col">
+            abc @{
+                var na= 0 / 3;
+            }
+        </div>
+    </div>
+    @* ltr laf left to right *@
+    <style>
+        
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: ltr;
+            text-align: center;
+        }
+
+        .rating-star {
+            display: inline-block;
+            padding: 0 1px;
+            font-size: 30px;
+            color: gold;
+        }
+
+        .rating-star-empty {
+            color: lightgray;
+        }
+    </style>
+
+    @if (Model.Count > 0)
+    {
+        @foreach (var evaluation in Model)
+        {
+            var rate = evaluation.Rate;
+            <div class="media d-flex mt-5">
+                <img class="mr-3 align-self-center" style="width: 70px; height: 70px;" alt="Image" src="http://localhost:4000/@evaluation.Laptop.ImgPath" />
+                <div class="media-body mt-3 ms-3">
+                    <h5 class="mt-0">@evaluation.User.UserName </h5>
+
+                    <h5 class="text-warning">
+                        @if (rate >= 1)
+                        {
+                            for (int i = 0; i < rate; i++)
+                            {
+                                <i class="fa-solid fa-star" style="font-size:10px"></i>
+                            }
+                        }
+                    </h5>
+                    @evaluation.Cmt
+                </div>
+            </div>
+        }
+    }
+    else {
+        <h3>Chưa có đánh giá nào</h3>
+    }
+</section>

@@ -78,17 +78,21 @@
                                 class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active text-uppercase" href="/Admin/Index">
-                            <i class="fa-solid fa-user-tie me-2"></i>Admin</a>
-                    </li>
-
-
-                    @* <li>
-                    <a class="dropdown-item " asp-action="Index" asp-controller="Cart">
-                    <i class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng
+                <li class="nav-item">
+                    <a class="nav-link active text-uppercase" href="/Admin/Index">
+                        <i class="fa-solid fa-user-tie me-2"></i>Admin</a>
+                </li>
+                <li class="nav-item d-none" id="NavFilter">
+                    <a class="nav-link active text-uppercase" id="FilterBtn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Filter
                     </a>
-                    </li> *@
+                </li>
+                
+                @* <li>
+                <a class="dropdown-item " asp-action="Index" asp-controller="Cart">
+                <i class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng
+                </a>
+                </li> *@
 
 
 
@@ -195,12 +199,17 @@
 
                     </li>
 
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle" href="#" id="UserDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-user"></i>
-                        </a>
+                <li class="nav-item">
+                    <form class="d-flex" role="search" asp-action="Search" asp-controller="Laptop">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" id="UserDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
 
                         <ul class="dropdown-menu" aria-labelledby="UserDropdown">
                             <li>
@@ -264,7 +273,17 @@
                         <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
                     </li>
 
-                </ul>
-            </div>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var currentPath = window.location.pathname;
+
+        if (currentPath.startsWith("/Laptop")) {
+            $("#NavFilter").removeClass("d-none");
+        }
+    });
+</script>
