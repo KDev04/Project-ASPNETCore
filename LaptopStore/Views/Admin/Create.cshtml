@@ -8,6 +8,7 @@
         <div class="form-group">
             <label asp-for="Name">Tên Laptop:</label>
             <input asp-for="Name" class="form-control" required>
+            @* <textarea asp-for="Name" class="form-controly ckeditor"></textarea> *@
         </div>
         <div class="form-group">
             <label asp-for="Price">Giá:</label>
@@ -26,3 +27,34 @@
         <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
     </form>
 </section>
+<script>
+    ClassicEditor
+        .create(document.querySelector('.ckeditor'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('.ckeditor1'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('.ckeditor2'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('.ckeditor3'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('.ckeditor4'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
