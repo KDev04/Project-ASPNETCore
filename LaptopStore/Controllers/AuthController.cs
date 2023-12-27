@@ -1,12 +1,11 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using LaptopStore.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
-using System.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
-
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using LaptopStore.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace LaptopStore.Controllers
 {
@@ -14,11 +13,13 @@ namespace LaptopStore.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<AuthController> _logger;
+
         public AuthController(ILogger<AuthController> logger)
         {
             _httpClient = new HttpClient();
             _logger = logger;
         }
+
         public IActionResult Login()
         {
             return View();
@@ -28,6 +29,7 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> SignUp([FromForm] RegisterModel model)
         {
             try
@@ -44,15 +46,16 @@ namespace LaptopStore.Controllers
                         var jsonModel = JsonConvert.SerializeObject(model);
 
                         // Tạo nội dung yêu cầu từ chuỗi JSON
-                        var content = new FormUrlEncodedContent(new[]
+                        var content = new FormUrlEncodedContent(
+                            new[]
                             {
                                 new KeyValuePair<string, string>("UserName", model.UserName),
                                 new KeyValuePair<string, string>("Email", model.Email),
                                 new KeyValuePair<string, string>("Password", model.Password)
-                            });
+                            }
+                        );
 
                         var response = await httpClient.PostAsync(apiUrl, content);
-
 
                         // Kiểm tra xem cuộc gọi API có thành công hay không
                         if (response.IsSuccessStatusCode)
@@ -65,7 +68,9 @@ namespace LaptopStore.Controllers
                         else
                         {
                             // Xử lý khi cuộc gọi API không thành công
-                            Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                            Console.WriteLine(
+                                $"API request failed with status code: {response.StatusCode}"
+                            );
                             var responseContent = await response.Content.ReadAsStringAsync();
                             Console.WriteLine($"API response content: {responseContent}");
 
@@ -112,8 +117,6 @@ namespace LaptopStore.Controllers
             }
         }
 
-
-
         public async Task<IActionResult> SignIn([FromForm] LoginModel model)
         {
             try
@@ -127,14 +130,15 @@ namespace LaptopStore.Controllers
                     var jsonModel = JsonConvert.SerializeObject(model);
 
                     // Tạo nội dung yêu cầu từ chuỗi JSON
-                    var content = new FormUrlEncodedContent(new[]
+                    var content = new FormUrlEncodedContent(
+                        new[]
                         {
-                                new KeyValuePair<string, string>("UserName", model.UserName),
-                                new KeyValuePair<string, string>("Password", model.Password)
-                            });
+                            new KeyValuePair<string, string>("UserName", model.UserName),
+                            new KeyValuePair<string, string>("Password", model.Password)
+                        }
+                    );
 
                     var response = await _httpClient.PostAsync(apiUrl, content);
-
 
                     // Kiểm tra xem cuộc gọi API có thành công hay không
                     if (response.IsSuccessStatusCode)
@@ -152,7 +156,9 @@ namespace LaptopStore.Controllers
                     else
                     {
                         // Xử lý khi cuộc gọi API không thành công
-                        Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                        Console.WriteLine(
+                            $"API request failed with status code: {response.StatusCode}"
+                        );
                         var responseContent = await response.Content.ReadAsStringAsync();
                         Console.WriteLine($"API response content: {responseContent}");
 
@@ -198,76 +204,51 @@ namespace LaptopStore.Controllers
             }
         }
 
-
-        // public async Task<IActionResult> UserInfo()
-        // {
-        //     /*var token = HttpContext.Session.GetString("Token");*/
-
-        //     var token = Request.Cookies["Token"];
-        //     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        //     HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
-        //     if (response.IsSuccessStatusCode)
-        //     {
-        //         var responseData = await response.Content.ReadAsStringAsync();
-
-        //         // Xử lý dữ liệu responseData theo nhu cầu của bạn
-        //         var user = JsonConvert.DeserializeObject<User>(responseData);
-               
-
-        //         return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
-        //     }
-        //     else
-        //     {
-        //         // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-        //         return StatusCode((int)response.StatusCode);
-        //     }
-        // }
-
         public async Task<IActionResult> UserInfo()
-{
-    var token = Request.Cookies["Token"];
+        {
+            /*var token = HttpContext.Session.GetString("Token");*/
 
-    // Giải mã JWT để truy cập các thông tin chứa trong nó
-    var handler = new JwtSecurityTokenHandler();
-    var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+            var token = Request.Cookies["Token"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserInfo"
+            );
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
 
-    // Trích xuất thông tin từ JWT
-    var userId = jsonToken?.Claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value;
-    var username = jsonToken?.Claims.FirstOrDefault(c => c.Type == "unique_name")?.Value;
-    var roles = jsonToken?.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var user = JsonConvert.DeserializeObject<User>(responseData);
 
-    // Log thông tin từ JWT
-    Console.WriteLine($"User ID: {userId}");
-    Console.WriteLine($"Username: {username}");
-    Console.WriteLine($"Roles: {string.Join(", ", roles)}");
-
-    // Gửi yêu cầu API để lấy thông tin khác (nếu cần)
-    HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserInfo");
-    if (response.IsSuccessStatusCode)
-    {
-        var responseData = await response.Content.ReadAsStringAsync();
-
-        // Log thông tin từ API response
-        Console.WriteLine($"API Response Data: {responseData}");
-
-        // Xử lý dữ liệu responseData theo nhu cầu của bạn
-        var user = JsonConvert.DeserializeObject<User>(responseData);
-
-        return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
-    }
-    else
-    {
-        // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-        Console.WriteLine($"API Request Failed with Status Code: {response.StatusCode}");
-        Console.WriteLine($"API Response Content: {await response.Content.ReadAsStringAsync()}");
-
-        return StatusCode((int)response.StatusCode);
-    }
-}
-
+                return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
+            }
+        }
 
         
-
-
+        public async Task<IActionResult> Logout()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var apiResponse = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Account/Logout"
+                );
+                if (apiResponse.IsSuccessStatusCode)
+                {
+                    ViewBag.IsLoggedIn = false;
+                    Console.WriteLine(ViewBag.IsLoggedIn);
+                }
+               return View();
+            }
+        }
     }
 }
