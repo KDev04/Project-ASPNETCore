@@ -73,7 +73,7 @@ namespace LaptopStore.Controllers
                 try
                 {
                     // Gửi yêu cầu GET tới API Filter và truyền các tham số
-                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}");
+                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}&page={page}");
 
                     if (response.IsSuccessStatusCode)
                     {

@@ -8,6 +8,7 @@
         <thead class="thead-dark">
             <tr class="row text-center">
                 <th class="col-2">Sản phẩm</th>
+                <th class="col">Tên sản phẩm</th>
                 <th class="col">Đơn giá</th>
                 <th class="col">Số lượng</th>
                 <th class="col">Số tiền</th>
@@ -21,6 +22,7 @@
                     <td class="col-2">
                         <img class="card-img-top img-thumbnail" src="http://localhost:4000/@cart.ImgPath" />
                     </td>
+                    <td class="col">@cart.Name</td>
                     <td class="col">@cart.Price</td>
                     <td class="col">@cart.Quantity</td>
                     <td class="col">@(cart.Price * cart.Quantity)</td>

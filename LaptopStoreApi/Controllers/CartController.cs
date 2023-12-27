@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
+using LaptopStoreApi.Constants;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -107,7 +108,7 @@ namespace LaptopStoreApi.Controllers
                 if (laptop != null)
                 {
                     laptop.Quantity -= cart.Quantity; // Giảm Quantity của Laptop theo giá trị Quantity của cart
-                    _dbContext.Laptops.Update(laptop); // Cập nhật giá trị Quantity của Laptop trong cơ sở dữ liệu
+                    _dbContext.SaveChanges(); // Cập nhật giá trị Quantity của Laptop trong cơ sở dữ liệu
                 }
 
                 _dbContext.Carts.Remove(cart);
@@ -124,6 +125,13 @@ namespace LaptopStoreApi.Controllers
         public IActionResult GetOrders(string UserId) 
         { 
             var orders = _dbContext.Orders.Include(l => l.Laptop).Include(c => c.User).Where(c => c.UserId == UserId).ToList();
+            return Ok(orders);
+        }
+        [Authorize(Roles =RoleNames.Moderator)]
+        [HttpGet]
+        public IActionResult GetAllOrders()
+        {
+            var orders = _dbContext.Orders.Include(l => l.Laptop).Include(c => c.User).ToList();
             return Ok(orders);
         }
     }

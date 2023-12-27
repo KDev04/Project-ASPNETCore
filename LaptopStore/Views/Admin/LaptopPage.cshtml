@@ -3,7 +3,9 @@
     ViewData["Title"] = "Admin - Laptops ";
 }
 @model List<Laptop>
+
 <section class="container">
+    <p id="errorMessage" class="text-center text-success bg-black">@ViewBag.ErrorMessage</p>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -18,13 +20,23 @@
             @foreach (var laptop in Model)
             {
                 <tr>
-                    <td>@Html.Raw(laptop.Name)</td>
-                    <td>@laptop.Price</td>
-                    <td>@laptop.Quantity</td>
-                    <td><img src="http://localhost:4000/@laptop.ImgPath" alt="Laptop Image" style="width: 70px; height: 70px;"></td>
+                    <td style="word-break: break-all;">@Html.Raw(laptop.Name)</td>
+                    <td style="word-break: break-all;">@laptop.Price</td>
+                    <td style="word-break: break-all;">@laptop.Quantity</td>
+                    <td style="word-break: break-all;">
+                        <img src="http://localhost:4000/@laptop.ImgPath"
+                             alt="Laptop Image" style="width: 100px; height: 100px;">
+                    </td>
                     <td>
-                        <button class="btn btn-primary btn-sm OrderBtn" value="@laptop.LaptopId">Đặt hàng</button>
-                        <button class="btn btn-primary btn-sm deleteButton" value="@laptop.LaptopId">Xóa</button>
+                        <div style="display: flex; gap: 8px;">
+                            <form method="post" asp-action="" asp-route-LaptopId="">
+                                <button class="btn btn-primary btn-sm" type="submit">Cập nhật</button>
+                            </form>
+                            <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"
+                                  asp-route-LaptopId="@laptop.LaptopId" class="">
+                                <button class="btn btn-primary btn-sm" type="submit">Xóa Laptop</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             }
