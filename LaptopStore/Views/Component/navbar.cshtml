@@ -127,14 +127,18 @@
                             if (checkLoginCookie != null)
                             {
                                 <li>
+                                    <a class="dropdown-item " asp-action="UserInfo" asp-controller="Auth">
+                                        <i class="fa-regular fa-user me-2"></i>Tài khoản
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item " asp-action="Order" asp-controller="Cart">
                                         <i class="fa-solid fa-cart-plus me-2"></i>Đơn hàng
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" asp-action="Logout" asp-controller="Auth">
-                                        <i class="fa-solid fa-right-from-bracket"></i>Đăng
-                                        xuất
+                                        <i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất
                                     </a>
                                 </li>
                             }

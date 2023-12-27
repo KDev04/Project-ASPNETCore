@@ -121,6 +121,7 @@ namespace LaptopStoreApi.Services
             var db = Paging<Laptop>.Create(allLaptops, page, Page_size);
             var result = db.Select(model => new Laptop
             {
+                LaptopId = model.LaptopId,
                 Name = model.Name, 
                 Price = model.Price,
                 Quantity = model.Quantity,

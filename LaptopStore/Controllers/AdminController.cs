@@ -61,7 +61,7 @@ namespace LaptopStore.Controllers
                             if (response.IsSuccessStatusCode)
                             {
                                 // Xử lý khi tạo laptop thành công
-                                return Redirect("/Laptop/Index");
+                                return Redirect("/Admin/LaptopPage");
                             }
                             else
                             {
@@ -81,6 +81,21 @@ namespace LaptopStore.Controllers
                 return Redirect("/Home/Error");
             }
         }
+        public async Task<IActionResult> DeleteLaptop(int LaptopId)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:4000/api/Laptop/Delete/{LaptopId}");
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.ErrorMessage = "Đã xóa";
+                return Redirect("/Admin/LaptopPage");
+            } else
+            {
+                ViewBag.ErrorMessage = "Xóa thất bại";
+                return Redirect("/Admin/LaptopPage");
+            }
+        }
         public async Task<IActionResult> UserPage()
         {
             var token = HttpContext.Session.GetString("Token");
@@ -94,6 +109,26 @@ namespace LaptopStore.Controllers
                 var users = JsonConvert.DeserializeObject<List<User>>(responseData);
 
                 return View(users); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult>OrderPage()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Cart/GetAllOrders");
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var orders = JsonConvert.DeserializeObject<List<Order>>(responseData);
+
+                return View(orders); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
             else
             {
