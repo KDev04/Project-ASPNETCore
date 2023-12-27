@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -153,6 +154,14 @@ namespace LaptopStore.Controllers
                         ViewBag.SuccessMessage = $"User '{model.UserName}' has been logged.";
                         Response.Cookies.Append("CheckLogin", "Inlogged");
                         Console.WriteLine(model.UserName);
+                        Response.Cookies.Append("Username", model.UserName);
+                        var role = await GetUserRoles();
+
+                        if (role != null)
+                        {
+                            Response.Cookies.Append("Role", role.ToString());
+                        }
+                        Console.WriteLine(role);
                         return RedirectToAction("UserInfo", "Auth"); // Đổi thành action hoặc view mong muốn
                     }
                     else
@@ -260,6 +269,8 @@ namespace LaptopStore.Controllers
             // Xóa Cookie "Token"
             Response.Cookies.Delete("Token");
             Response.Cookies.Delete("CheckLogin");
+            Response.Cookies.Delete("Role");
+            Response.Cookies.Delete("Username");
             ViewBag.IsLoggedIn = false;
             Console.WriteLine(ViewBag.IsLoggedIn);
             Console.WriteLine("No Login");
@@ -267,6 +278,51 @@ namespace LaptopStore.Controllers
             // Chuyển hướng đến trang Logout thành công hoặc trang khác
             return Redirect("/Auth/Login");
             /*return View("Login");*/
+        }
+        public async Task<string> GetUserRoles()
+        {
+            var token = HttpContext.Session.GetString("Token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserRoles");
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.NoContent)
+                {
+                    return null!;
+                }
+
+                response.EnsureSuccessStatusCode();
+                var responseData = await response.Content.ReadAsStringAsync();
+
+                // Chuyển đổi chuỗi JSON thành một danh sách (List) hoặc một đối tượng (object)
+                var roles = JsonConvert.DeserializeObject<List<string>>(responseData);
+                // Hoặc: var role = JsonConvert.DeserializeObject<string>(responseData);
+
+                if (roles != null && roles.Count > 0)
+                {
+                    // Trả về giá trị cụ thể (ví dụ: roles[0]) thay vì chuỗi JSON gốc
+                    return roles[0];
+                    // Hoặc: return role;
+                }
+                else
+                {
+                    // Xử lý trường hợp không có vai trò nào được trả về
+                    return null!;
+                }
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                // Chuyển hướng đến trang "/Auth/Login"
+                HttpContext.Response.Redirect("/Auth/Login");
+                return null!;
+            }
+            else
+            {
+                // Xử lý các mã lỗi khác (nếu cần)
+                throw new Exception($"Error: {response.StatusCode}");
+            }
         }
     }
 }

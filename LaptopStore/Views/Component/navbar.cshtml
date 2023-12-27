@@ -75,17 +75,24 @@
                               class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng</a>
                   </li>
 
-                  <li class="nav-item">
-                      <a class="nav-link active text-uppercase" href="/Admin/Index">
-                          <i class="fa-solid fa-user-tie me-2"></i>Admin</a>
-                  </li>
                   <li class="nav-item d-none" id="NavFilter">
                       <a class="nav-link active text-uppercase" id="FilterBtn" data-bs-toggle="collapse"
                           href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                           Filter
                       </a>
                   </li>
-
+                @{
+                    string CheckRole = Context.Request.Cookies["Role"]!;
+                    if (CheckRole!= null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" href="/Admin/Index">
+                                <i class="fa-solid fa-user-tie me-2"></i>Admin
+                            </a>
+                        </li>
+                    }
+                }
+                 
               </ul>
               <!-- /nav left -->
               <ul class="navbar-nav ms-auto">
@@ -104,14 +111,19 @@
                   <li class="nav-item dropdown">
                       <a class="nav-link active dropdown-toggle" href="#" id="UserDropdown" role="button"
                           data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa-regular fa-user"></i>
+                        <i class="fa-regular fa-user"></i>
+                        @{
+                            string Username = Context.Request.Cookies["Username"]!;
+                            if (Username != null)
+                            {
+                                <span class="text-uppercase active">@Username</span>
+                            }
+                        }
                       </a>
 
                       <ul class="dropdown-menu" aria-labelledby="UserDropdown">
                         @{
-                            string checkLoginCookie = "";
-                            checkLoginCookie = Context.Request.Cookies["CheckLogin"]!;
-
+                            string checkLoginCookie = Context.Request.Cookies["CheckLogin"]!;
                             if (checkLoginCookie != null)
                             {
                                 <li>

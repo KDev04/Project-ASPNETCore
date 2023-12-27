@@ -262,5 +262,21 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetUserRoles()
+        {
+            var currentUser = _userManager.GetUserAsync(User).Result;
+            var userRoles = _userManager.GetRolesAsync(currentUser).Result;
+
+            if (userRoles != null && userRoles.Any())
+            {
+                return Ok(userRoles);
+            }
+            else
+            {
+                return NoContent(); // Hoặc trả về giá trị tùy chỉnh khác thể hiện rằng người dùng không có vai trò nào
+            }
+        }
+
     }
 }
