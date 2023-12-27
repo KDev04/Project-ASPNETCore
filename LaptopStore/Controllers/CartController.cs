@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Linq.Dynamic.Core.Tokenizer;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Xml.Linq;
@@ -24,7 +25,11 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> Index() 
         {
             var userId = await GetUserId();
-
+            if (userId == null)
+            {
+                TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                return Redirect("/Auth/Login");
+            }
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Cart/GetCart/" + userId);
 
             if (response.IsSuccessStatusCode)
@@ -46,6 +51,11 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> Order()
         {
             var userId = await GetUserId();
+            if (userId == null)
+            {
+                TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                return Redirect("/Auth/Login");
+            }
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Cart/GetOrders/" + userId);
 
             if (response.IsSuccessStatusCode)
@@ -95,18 +105,30 @@ namespace LaptopStore.Controllers
          }*/
         public async Task<string> GetUserId()
         {
-
             var token = HttpContext.Session.GetString("Token");
-            /* var token = Request.Cookies["Token"];*/
+
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserId");
-            response.EnsureSuccessStatusCode();
-            var responseData = await response.Content.ReadAsStringAsync();
-          
-            Console.WriteLine(responseData);
-            return responseData;
 
+            if (response.IsSuccessStatusCode)
+            {
+                response.EnsureSuccessStatusCode();
+                var responseData = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseData);
+                return responseData;
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                // Chuyển hướng đến trang "/Auth/Login"
+                HttpContext.Response.Redirect("/Auth/Login");
+                return null;
+            }
+            else
+            {
+                // Xử lý các mã lỗi khác (nếu cần)
+                throw new Exception($"Error: {response.StatusCode}");
+            }
         }
         public async Task<IActionResult> AddToCart(CartModel model)
         {
@@ -117,7 +139,10 @@ namespace LaptopStore.Controllers
                     using (var formData = new MultipartFormDataContent())
                     {
                         var userId = await GetUserId(); // Gọi phương thức GetUserId() để lấy giá trị UserId
-
+                        if (userId == null) {
+                            TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                            return Redirect("/Auth/Login");
+                        }
                         formData.Add(new StringContent(userId.ToString() ?? ""), "UserId");
                         formData.Add(new StringContent(model.LaptopId.ToString() ?? ""), "LaptopId");
                         formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
@@ -128,12 +153,18 @@ namespace LaptopStore.Controllers
                         if (res.IsSuccessStatusCode)
                         {
                             // Xử lý khi thêm sản phẩm vào giỏ hàng thành công
-                            return Redirect("/");
+                            return Redirect("/Cart");
+                        }
+                        else if (res.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            // Mã lỗi 401: Unauthorized (Chưa xác thực)
+                            // Hiển thị thông báo và chuyển hướng đến trang đăng nhập
+                            TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                            return Redirect("/Auth/Login");
                         }
                         else
                         {
-                            // Xử lý khi có lỗi từ API
-                            ModelState.AddModelError("", "Thêm sản phẩm vào giỏ hàng không thành công.");
+                            // Xử lý các mã lỗi khác (nếu cần)
                         }
                     }
                 }

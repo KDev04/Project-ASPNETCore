@@ -192,13 +192,13 @@ namespace LaptopStoreApi.Controllers
             return Id;
         }
 
-        [Authorize]
+        /*[Authorize]
         [HttpGet]
         public void Logout()
         {
             // Xóa token từ cookie hoặc session
             HttpContext.Response.Cookies.Delete("Token");
             // Không có lệnh chuyển hướng, chỉ thực hiện các thao tác xóa token
-        }
+        }*/
     }
 }

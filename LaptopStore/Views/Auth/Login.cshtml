@@ -1,8 +1,17 @@
 @{
     ViewData["Title"] = "Login";
 }
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+
 @model LoginModel
 <section class="vh-100">
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
             

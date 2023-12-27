@@ -151,6 +151,8 @@ namespace LaptopStore.Controllers
                         HttpContext.Session.SetString("Token", token);
                         Response.Cookies.Append("Token", token);
                         ViewBag.SuccessMessage = $"User '{model.UserName}' has been logged.";
+                        Response.Cookies.Append("CheckLogin", "Inlogged");
+                        Console.WriteLine(model.UserName);
                         return RedirectToAction("UserInfo", "Auth"); // Đổi thành action hoặc view mong muốn
                     }
                     else
@@ -234,21 +236,37 @@ namespace LaptopStore.Controllers
             }
         }
 
-        
-        public async Task<IActionResult> Logout()
+
+        /* public async Task<IActionResult> Logout()
+         {
+             using (var httpClient = new HttpClient())
+             {
+                 var apiResponse = await httpClient.GetAsync(
+                     "http://localhost:4000/api/Account/Logout"
+                 );
+                 if (apiResponse.IsSuccessStatusCode)
+                 {
+                     ViewBag.IsLoggedIn = false;
+                     Console.WriteLine(ViewBag.IsLoggedIn);
+                 }
+                return View();
+             }
+         }*/
+        public IActionResult Logout()
         {
-            using (var httpClient = new HttpClient())
-            {
-                var apiResponse = await httpClient.GetAsync(
-                    "http://localhost:4000/api/Account/Logout"
-                );
-                if (apiResponse.IsSuccessStatusCode)
-                {
-                    ViewBag.IsLoggedIn = false;
-                    Console.WriteLine(ViewBag.IsLoggedIn);
-                }
-               return View();
-            }
+            // Xóa Token khỏi Session
+            HttpContext.Session.Remove("Token");
+
+            // Xóa Cookie "Token"
+            Response.Cookies.Delete("Token");
+            Response.Cookies.Delete("CheckLogin");
+            ViewBag.IsLoggedIn = false;
+            Console.WriteLine(ViewBag.IsLoggedIn);
+            Console.WriteLine("No Login");
+
+            // Chuyển hướng đến trang Logout thành công hoặc trang khác
+            return Redirect("/Auth/Login");
+            /*return View("Login");*/
         }
     }
 }
