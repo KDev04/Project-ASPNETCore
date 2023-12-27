@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using LaptopStoreApi.Constants;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -192,13 +193,74 @@ namespace LaptopStoreApi.Controllers
             return Id;
         }
 
-        /*[Authorize]
-        [HttpGet]
-        public void Logout()
+        [Authorize(Roles = RoleNames.Administrator)]
+        [HttpPost("{UserId}")]
+        public async Task<IActionResult> AddRoleModerator(string UserId)
         {
-            // Xóa token từ cookie hoặc session
-            HttpContext.Response.Cookies.Delete("Token");
-            // Không có lệnh chuyển hướng, chỉ thực hiện các thao tác xóa token
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user == null)
+            {
+                return NotFound("không tìm thấy người dùng");
+            }
+            else if (user!=null && !await _userManager.IsInRoleAsync(user, RoleNames.Moderator))
+            {
+                await _userManager.AddToRoleAsync(user, RoleNames.Moderator);
+                return new JsonResult(new
+                {
+                    Result = "Thêm Role thành công"
+                });
+            }
+            else
+            {
+                return new JsonResult(new
+                {
+                    Result = "Người dùng đã có sẵn quyền Moderator"
+                });
+            }
+        }
+        /*[Authorize(Roles =RoleNames.Moderator)]
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+           var users = await _context.Users.ToListAsync();
+            return Ok(users);
         }*/
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                return Unauthorized(); // Người dùng chưa đăng nhập
+            }
+
+            if (await _userManager.IsInRoleAsync(currentUser, RoleNames.Administrator))
+            {
+                // Người dùng đăng nhập có vai trò Administrator, trả về tất cả danh sách người dùng
+                var users = await _context.Users.ToListAsync();
+                return Ok(users);
+            }
+            else if (await _userManager.IsInRoleAsync(currentUser, RoleNames.Moderator))
+            {
+                // Lấy danh sách tất cả người dùng
+                var users = await _userManager.Users.ToListAsync();
+
+                // Lọc danh sách người dùng không có vai trò Moderator và không có vai trò Administrator
+                var filteredUsers = users.Where(user =>
+                {
+                    var isInModeratorRole = _userManager.IsInRoleAsync(user, RoleNames.Moderator).GetAwaiter().GetResult();
+                    var isInAdministratorRole = _userManager.IsInRoleAsync(user, RoleNames.Administrator).GetAwaiter().GetResult();
+                    return !isInModeratorRole && !isInAdministratorRole;
+                }).ToList();
+
+                return Ok(filteredUsers);
+            }
+            else
+            {
+                return Forbid(); // Người dùng không có vai trò Administrator hoặc Moderator, trả về mã lỗi 403 (Forbidden)
+            }
+        }
+
     }
 }
