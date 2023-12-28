@@ -253,10 +253,14 @@ ViewData["Title"] = "Detail Page";
             </div>
         </div>
     </div>
-</section>
-@{
-HttpClient httpClient = new HttpClient();
-var evaluateController = new EvaluateController(httpClient);
-List<Evaluate> evals = await evaluateController.Gd(Model.LaptopId);
+    @{
+        int laptopId = Model.LaptopId;
+        HttpClient httpClient = new HttpClient();
+        var evaluateController = new EvaluateController(httpClient);
+        Console.WriteLine("Before");
+        List<Evaluate> evals = await evaluateController.Gd(laptopId);
+        Console.WriteLine("after");
+
     }
     @await Html.PartialAsync("EvalSummary", evals)
+</section>

@@ -75,10 +75,6 @@ namespace LaptopStore.Controllers
         {
             try
             {
-                var token = HttpContext.Session.GetString("Token");
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var userId = await GetUserId();
-                Console.WriteLine(userId);
 
                 HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:4000/api/Evaluate/GetEvaluatesByLaptopId/{laptopId}");
                 response.EnsureSuccessStatusCode(); // Đảm bảo yêu cầu thành công, nếu không sẽ ném ra một HttpRequestException
@@ -104,6 +100,57 @@ namespace LaptopStore.Controllers
                 Console.WriteLine("Lỗi xảy ra: " + ex.Message);
                 return new List<Evaluate>(); // Trả về một danh sách đánh giá rỗng
             }
+        }
+        public async Task<IActionResult> AddEval(int LaptopId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/GetLaptop/{LaptopId}");
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                var laptop = JsonConvert.DeserializeObject<Laptop>(content);
+                return View(laptop);
+            }
+            catch (Exception)
+            {
+                // Xử lý lỗi khi gặp vấn đề khi gọi API
+                // Ví dụ:
+                return RedirectToAction("Error", "Home");
+            }
+        }
+        public async Task<IActionResult> SaveEval (int Rate, string Cmt, int LaptopId)
+        {
+            try
+            {
+                var token = HttpContext.Session.GetString("Token");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var userId = await GetUserId();
+                Console.WriteLine(userId);
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(Rate.ToString() ?? ""), "Rate");
+                    formData.Add(new StringContent(Cmt ?? ""), "Cmt");
+                    formData.Add(new StringContent(LaptopId.ToString() ?? ""), "LaptopId");
+                    formData.Add(new StringContent(userId ?? ""), "UserId");
+                    var response = await _httpClient.PostAsync($"http://localhost:4000/api/Evaluate/AddEvaluate", formData);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("cmt thanh cong");
+                        return Redirect("/Laptop");
+                    }
+                    else
+                    {
+                        Console.WriteLine("cmt that bai");
+
+                        return BadRequest(response);
+                    }
+
+                   
+                }
+
+               
+            }
+            catch { Console.WriteLine("Loi gi do"); return Redirect("/Home/Error"); }
         }
     }
 }

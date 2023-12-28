@@ -6,7 +6,6 @@ using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Authorization;
 namespace LaptopStoreApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class EvaluateController : ControllerBase
@@ -29,7 +28,7 @@ namespace LaptopStoreApi.Controllers
             var Evals = _context.Evaluates.Include(e => e.Laptop).Include(x => x.User).Where(e => e.UserId == UserId).ToList();
             return Ok(Evals);
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult AddEvaluate([FromForm] EvalModel evaluate)
         {
@@ -57,6 +56,7 @@ namespace LaptopStoreApi.Controllers
             return Ok(eval);
 
         }
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteEval (int id)
         {
