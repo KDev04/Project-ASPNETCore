@@ -29,7 +29,7 @@
                     </td>
                     <td>
                         <div style="display: flex; gap: 8px;">
-                            <form method="post" asp-action="" asp-route-LaptopId="">
+                            <form method="post" asp-action="UpdateLaptop" asp-route-LaptopId=@laptop.LaptopId>
                                 <button class="btn btn-primary btn-sm" type="submit">Cập nhật</button>
                             </form>
                             <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"

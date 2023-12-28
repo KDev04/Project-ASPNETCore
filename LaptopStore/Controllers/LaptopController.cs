@@ -13,9 +13,10 @@ namespace LaptopStore.Controllers
     public class LaptopController : Controller
     {
         private readonly HttpClient _httpClient;
+        public int PageSize = 4;
 
-        public LaptopController(HttpClient httpClient)
-        {
+        public LaptopController(HttpClient httpClient) 
+        { 
             _httpClient = httpClient;
         }
 
@@ -45,7 +46,42 @@ namespace LaptopStore.Controllers
                 }
             }
         }
+        public async Task<IActionResult> LaptopDemo(int page = 1)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                /*var token = HttpContext.Session.GetString("Token");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
+                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
 
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
+                    
+
+                    return View(new ProductsListViewModel
+                    {
+                        Products = laptops.OrderBy(x => x.Name)
+                        .Skip((page - 1) * PageSize)
+                        .Take(PageSize),
+                        PagingInfo = new PagingInfo
+                        {
+                            CurrentPage = page,
+                            ItemsPerPage = PageSize,
+                            TotalItems = laptops.Count()
+                        }
+                    }); // Trả về view mà bạn muốn hiển thị dữ liệu
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
         public async Task<IActionResult> Detail(int id)
         {
             using (var httpClient = new HttpClient())
@@ -73,13 +109,52 @@ namespace LaptopStore.Controllers
             }
         }
 
-        public async Task<IActionResult> Filter(
-            string name = "",
-            string sortBy = "",
-            int page = 1,
-            int from = 0,
-            int to = int.MaxValue
-        )
+        public async Task<IActionResult> SaveProduct(Laptop model)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
+                    formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
+                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity"); ;
+
+                    if (model.Image != null && model.Image.Length > 0)
+                    {
+                        using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                        {
+                            formData.Add(streamContent, "Image", model.Image.FileName);
+
+                            var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
+                            Console.WriteLine("goi qua api roi");
+                            Console.WriteLine(response.StatusCode);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                // Xử lý khi tạo laptop thành công
+                                return Redirect("/Admin/LaptopPage");
+                            }
+                            else
+                            {
+                                // Xử lý khi có lỗi từ API
+                                return Redirect("Admin/Index");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
+                }
+            }
+            catch
+            {
+                return Redirect("/Home/Error");
+            }
+        }
+        public async Task<IActionResult> Filter (string name = "", string sortBy = "", int page = 1, int from = 0, int to = int.MaxValue)
         {
             using (var httpClient = new HttpClient())
             {

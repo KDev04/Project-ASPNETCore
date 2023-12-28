@@ -130,7 +130,7 @@ namespace LaptopStore.Controllers
                 throw new Exception($"Error: {response.StatusCode}");
             }
         }
-        public async Task<IActionResult> AddToCart(CartModel model)
+        /*public async Task<IActionResult> AddToCart(CartModel model)
         {
             if (ModelState.IsValid)
             {
@@ -147,7 +147,7 @@ namespace LaptopStore.Controllers
                         formData.Add(new StringContent(model.LaptopId.ToString() ?? ""), "LaptopId");
                         formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
 
-                        /*var token = HttpContext.Session.GetString("Token");*/
+                        *//*var token = HttpContext.Session.GetString("Token");*//*
 
                         var res = await _httpClient.PostAsync("http://localhost:4000/api/Cart/AddToCart", formData);
                         if (res.IsSuccessStatusCode)
@@ -174,6 +174,47 @@ namespace LaptopStore.Controllers
                 }
             }
             return Redirect("/");
+        }*/
+        public async Task<IActionResult> AddToCart(CartModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (var formData = new MultipartFormDataContent())
+                    {
+                        var userId = await GetUserId();
+                        if (userId == null)
+                        {
+                            TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                            return Redirect("/Auth/Login");
+                        }
+                        formData.Add(new StringContent(userId.ToString() ?? ""), "UserId");
+                        formData.Add(new StringContent(model.LaptopId.ToString() ?? ""), "LaptopId");
+                        formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
+
+                        var res = await _httpClient.PostAsync("http://localhost:4000/api/Cart/AddToCart", formData);
+                        if (res.IsSuccessStatusCode)
+                        {
+                            TempData["SuccessMessage"] = "Đã thêm vào giỏ hàng.";
+                        }
+                        else if (res.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                            return Redirect("/Auth/Login");
+                        }
+                        else
+                        {
+                            // Xử lý các mã lỗi khác (nếu cần)
+                        }
+                    }
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "An error occurred");
+                }
+            }
+            return Redirect("/Laptop");
         }
         public async Task<string> DeleteCart(int id)
         {

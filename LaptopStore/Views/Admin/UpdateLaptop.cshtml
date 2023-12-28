@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+    ViewData["Title"] = "Admin - Laptop - Update";
+}
+
+@model Laptop
+<section class="container mb-2 pb-4">
+    <form asp-action="SaveUpdate" asp-controller="Admin"  method="post" enctype="multipart/form-data" class="py-2 my-2">
+        <input type="hidden" asp-for="LaptopId" value=@Model.LaptopId />
+        <div class="form-group">
+            <label asp-for="Name">Tên Laptop:</label>
+            <input asp-for="Name" class="form-control" required value=@Model.Name>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price">Giá:</label>
+            <input asp-for="Price" type="number" class="form-control" required value="@Model.Price">
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity">Số lượng kho:</label>
+            <input asp-for="Quantity" type="number" class="form-control" value=@Model.Quantity>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Image">Ảnh:</label>
+            <input asp-for="Image" type="file" class="form-control-file" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Mô tả</label>
+            <input asp-for="Description" class="form-control" required value=@Model.Description>
+
+            @*             <textarea asp-for="Description" class="form-control ckeditor" required></textarea> *@
+        </div>
+        <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
+    </form>
+</section>
