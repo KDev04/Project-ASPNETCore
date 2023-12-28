@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LaptopStoreApi.Database
+namespace LaptopStore.Models
 {
     [Table("Images")]
     public class Image

@@ -11,6 +11,7 @@
 </head>
 
 <body>
+ 
     
         <partial name="~/Views/Component/navbar.cshtml" />
         @RenderBody()
@@ -66,6 +67,56 @@
     background-color: #ffcaa6;
     }
     </style>
+    <!-- Trong _Layout.cshtml -->
+
+<!-- Đoạn mã JavaScript cho hiệu ứng tuyết rơi -->
+<script>
+    // Hàm để tạo hạt tuyết
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = '❄';
+        document.body.appendChild(snowflake);
+
+        // Vị trí xuất hiện ngẫu nhiên theo chiều rộng trình duyệt
+        const randomX = Math.random() * window.innerWidth;
+        snowflake.style.left = randomX + 'px';
+
+        // Thời gian rơi xuống ngẫu nhiên từ 2s đến 5s
+        const fallTime = (Math.random() * 5) + 2 + 's';
+        snowflake.style.animationDuration = fallTime;
+
+        // Tự động xóa hạt tuyết khi kết thúc animation
+        snowflake.addEventListener('animationend', () => {
+            document.body.removeChild(snowflake);
+        });
+    }
+
+    // Tạo hạt tuyết mỗi giây
+    setInterval(createSnowflake, 900);
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const snowflakes = document.querySelectorAll(".snowflake");
+
+    snowflakes.forEach(function (snowflake) {
+        setSnowflakePosition(snowflake);
+        setSnowflakeAnimationDelay(snowflake);
+    });
+
+    function setSnowflakePosition(snowflake) {
+        const leftPosition = Math.random() * window.innerWidth;
+        snowflake.style.left = `${leftPosition}px`;
+    }
+
+    function setSnowflakeAnimationDelay(snowflake) {
+        const delay = Math.random() * 5; // Thay đổi giá trị để điều chỉnh thời gian trễ
+        snowflake.style.animationDelay = `-${delay}s`;
+    }
+});
+
+</script>
+
+    
 
 </body>
 </html>
