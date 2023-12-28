@@ -1,4 +1,4 @@
-﻿@model Laptop 
+﻿@model Laptop
 <style>
     .img-card {
         max-height: 200px;
@@ -7,9 +7,8 @@
 </style>
 <div class="col-lg-4 col-md-6">
     <div class="card mb-4 d-flex flex-column border-0">
-        <a asp-action="Detail" asp-controller="Laptop" asp-route-id ="@Model.LaptopId">
-            <div class="image-container"
-                 style="overflow: hidden; margin-top: 10px;">
+        <a asp-action="Detail" asp-controller="Laptop" asp-route-id="@Model.LaptopId">
+            <div class="image-container" style="overflow: hidden; margin-top: 10px;">
                 <img class="card-img-top img-card" src=http://localhost:4000/@Model.ImgPath />
             </div>
         </a>
@@ -20,16 +19,29 @@
 
         </div>
         <div class="row ms-3 ms-md-5 pt-3 text-black">
-            <pre class="fs-7" style="font-family:Roboto Mono">
-                @Model.Quantity
+            <pre class="p-0" style="font-family:Roboto Mono">
+                  @Model.Description
             </pre>
         </div>
-        <div class="row ms-3 ms-md-5 pt-3 text-black-50" >
+        <style>
+            pre {
+                
+                white-space: pre-wrap;
+                margin: 0;
+                /* Loại bỏ margin để giảm khoảng trắng xung quanh */
+                padding: 0;
+                /* Loại bỏ padding để giảm khoảng trắng xung quanh */
+                overflow: hidden;
+                /* Ngăn chặn tràn nếu có */
+            }
+        </style>
+
+        <div class="row ms-3 ms-md-5 pt-3 text-black-50">
             <h3>
                 @Model.Price <i class="fa-solid fa-lira-sign"> </i>
             </h3>
         </div>
-        <div class="mt-auto" >
+        <div class="mt-auto">
             <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="UserId" value="eb991811-c293-41ab-9ead-08fd4a46b03c" />
                 <input type="hidden" name="LaptopId" value="@Model.LaptopId" />
