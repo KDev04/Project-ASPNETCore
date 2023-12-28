@@ -162,7 +162,7 @@ namespace LaptopStore.Controllers
                             Response.Cookies.Append("Role", role.ToString());
                         }
                         Console.WriteLine(role);
-                        return RedirectToAction("UserInfo", "Auth"); // Đổi thành action hoặc view mong muốn
+                        return RedirectToAction("Index", "Laptop"); // Đổi thành action hoặc view mong muốn
                     }
                     else
                     {
