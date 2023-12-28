@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaptopStoreApi.Controllers
 {
-    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class LaptopController : ControllerBase
     {
         private readonly ILapRepo2 _repository;
+
         public LaptopController(ILapRepo2 repo2)
         {
             _repository = repo2;
         }
-/*        [Authorize]*/
+
+        /*        [Authorize]*/
         [HttpGet]
         public async Task<IActionResult> GetLaptops()
         {
@@ -31,9 +32,16 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-/*        [Authorize]*/
+
+        /*        [Authorize]*/
         [HttpGet]
-        public IActionResult Filter(string name, decimal? from, decimal? to, string sortBy, int page = 1)
+        public IActionResult Filter(
+            string name,
+            decimal? from,
+            decimal? to,
+            string sortBy,
+            int page = 1
+        )
         {
             try
             {
@@ -45,6 +53,7 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest("khong hoat dong");
             }
         }
+
         [HttpGet]
         public async Task<IActionResult> Search(string keyword)
         {
@@ -58,6 +67,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
         [Authorize(Roles = RoleNames.Moderator)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -72,6 +82,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLaptop(int id)
         {
@@ -92,6 +103,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
         [Authorize(Roles = RoleNames.Administrator)]
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
@@ -115,5 +127,72 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetLinhkien()
+        {
+            try
+            {
+                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
+                var allLaptops = await _repository.GetAll();
+                var linhkien = allLaptops.Where(laptop => laptop.Type == "LK").ToList();
+
+                return Ok(linhkien);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllLaptop()
+        {
+            try
+            {
+                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
+                var allLaptops = await _repository.GetAll();
+                var linhkien = allLaptops.Where(laptop => laptop.Type == "Laptop").ToList();
+
+                return Ok(linhkien);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+         [HttpGet]
+        public async Task<IActionResult> GetPK()
+        {
+            try
+            {
+                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
+                var allLaptops = await _repository.GetAll();
+                var linhkien = allLaptops.Where(laptop => laptop.Type == "PK").ToList();
+
+                return Ok(linhkien);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCard()
+        {
+            try
+            {
+                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
+                var allLaptops = await _repository.GetAll();
+                var linhkien = allLaptops.Where(laptop => laptop.Type == "Card").ToList();
+
+                return Ok(linhkien);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
