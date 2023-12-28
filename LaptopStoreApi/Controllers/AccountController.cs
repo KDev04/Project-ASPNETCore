@@ -370,5 +370,37 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest(errors);
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(string username, string newPassword, string confirmPassword)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                // Người dùng không tồn tại
+                return NotFound();
+            }
+
+            // Kiểm tra newPassword và confirmPassword
+            if (newPassword != confirmPassword)
+            {
+                // Mật khẩu mới và xác nhận mật khẩu không khớp
+                return BadRequest("Passwords do not match");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+
+            if (result.Succeeded)
+            {
+                // Mật khẩu đã được đặt lại thành công
+                return Ok("Password reset successfully");
+            }
+            else
+            {
+                // Đã xảy ra lỗi khi đặt lại mật khẩu
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(errors);
+            }
+        }
     }
 }

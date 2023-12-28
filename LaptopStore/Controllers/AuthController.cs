@@ -461,5 +461,32 @@ namespace LaptopStore.Controllers
 
             }
         }
+        public IActionResult ForgetPasswordView()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ForgetPassword(string username, string newPassword, string confirmPassword)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsync($"http://localhost:4000/api/Account/ForgetPassword?username={username}&newPassword={newPassword}&confirmPassword={confirmPassword}", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Đổi mật khẩu thành công!");
+                    return Redirect("/Auth/Login");
+
+                }
+                else
+                {
+                    Console.WriteLine("Đỏi mật khẩu thất bại!");
+                    return Redirect("/Home/Error");
+                }
+            }
+            catch
+            {
+                return Redirect("/Home/Error");
+
+            }
+        }
     }
 }
