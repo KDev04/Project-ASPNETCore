@@ -48,7 +48,8 @@ namespace LaptopStore.Controllers
                 {
                     formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
-                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity"); ;
+                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
+                    formData.Add(new StringContent(model.Description.ToString() ?? ""), "Description");
 
                     if (model.Image != null && model.Image.Length > 0)
                     {
@@ -57,6 +58,8 @@ namespace LaptopStore.Controllers
                             formData.Add(streamContent, "Image", model.Image.FileName);
 
                             var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
+                            Console.WriteLine("goi qua api roi");
+                            Console.WriteLine(response.StatusCode);
 
                             if (response.IsSuccessStatusCode)
                             {
@@ -66,13 +69,13 @@ namespace LaptopStore.Controllers
                             else
                             {
                                 // Xử lý khi có lỗi từ API
-                                return Redirect("Admin/Create");
+                                return Redirect("/Admin/Index");
                             }
                         }
                     }
                     else
                     {
-                        return Redirect("Admin/Create");
+                        return Redirect("/");
                     }
                 }
             }
@@ -94,6 +97,78 @@ namespace LaptopStore.Controllers
             {
                 ViewBag.ErrorMessage = "Xóa thất bại";
                 return Redirect("/Admin/LaptopPage");
+            }
+        }
+        public async Task<IActionResult> UpdateLaptop(int LaptopId)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                var response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptop/" + LaptopId);
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
+                // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
+
+                var laptop = JsonConvert.DeserializeObject<Laptop>(content);
+                return View(laptop);
+            }
+            catch (Exception)
+            {
+                // Xử lý lỗi khi gặp vấn đề khi gọi API
+                // Ví dụ:
+                return RedirectToAction("Error", "Home");
+            }
+        }
+        public async Task<IActionResult> SaveUpdate(Laptop model)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
+                    formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
+                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
+                    formData.Add(new StringContent(model.Description.ToString() ?? ""), "Description");
+                    if (model.Image != null && model.Image.Length > 0)
+                    {
+                        using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                        {
+                            formData.Add(streamContent, "Image", model.Image.FileName);
+                            Console.WriteLine(model.LaptopId);
+
+                            var response = await _httpClient.PutAsync($"http://localhost:4000/api/Laptop/UpdateLaptop/{model.LaptopId}", formData);
+                            Console.WriteLine("goi qua api roi");
+
+                            Console.WriteLine(response.StatusCode);
+                            
+                            if (response.IsSuccessStatusCode)
+                            {
+                                // Xử lý khi tạo laptop thành công
+                                Console.WriteLine("Cap nhat thanh cong");
+                                return Redirect("/Admin/LaptopPage");
+                            }
+                            else
+                            {
+                                // Xử lý khi có lỗi từ API
+                                Console.WriteLine("Cap nhat that bai");
+                                return Redirect("/Admin/Index");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
+                }
+            }
+            catch
+            {
+                return Redirect("/Home/Error");
             }
         }
         public async Task<IActionResult> UserPage()

@@ -1,4 +1,5 @@
 ﻿using LaptopStoreApi.Constants;
+using LaptopStoreApi.Database;
 using LaptopStoreApi.Models;
 using LaptopStoreApi.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +14,11 @@ namespace LaptopStoreApi.Controllers
     public class LaptopController : ControllerBase
     {
         private readonly ILapRepo2 _repository;
-        public LaptopController(ILapRepo2 repo2)
+        private readonly ApiDbContext _dbContext;
+        public LaptopController(ILapRepo2 repo2, ApiDbContext dbContext)
         {
             _repository = repo2;
+            _dbContext = dbContext;
         }
 /*        [Authorize]*/
         [HttpGet]
@@ -92,7 +95,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [Authorize(Roles = RoleNames.Administrator)]
+        [Authorize(Roles = RoleNames.Moderator)]
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
@@ -114,6 +117,43 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest();
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateLaptop(int id, [FromForm] LapModel2 Loadlaptop)
+        {
+            if (Loadlaptop.Image == null || Loadlaptop.Image.Length == 0)
+            {
+                // Xử lý khi không có tệp hình ảnh được gửi lên
+                // Ví dụ: trả về lỗi hoặc thông báo không có tệp hình ảnh
+                throw new Exception("Không có tệp hình ảnh được gửi lên.");
+            }
 
+            string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(Loadlaptop?.Image?.FileName);
+            string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
+            string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+
+            if (!Directory.Exists(imgFolderPath))
+            {
+                Directory.CreateDirectory(imgFolderPath);
+            }
+
+            using (var stream = new FileStream(imgFilePath, FileMode.Create))
+            {
+                await Loadlaptop.Image.CopyToAsync(stream);
+            }
+            var laptop = await _dbContext.Laptops.FindAsync(id);
+            if (laptop == null)
+            {
+                return NotFound();
+            }
+            laptop.Name = Loadlaptop.Name;
+            laptop.Price = Loadlaptop.Price;
+            laptop.Quantity = Loadlaptop.Quantity;
+            laptop.Description = Loadlaptop.Description;
+            laptop.ImgPath = "Image/" + imgFileName;
+            laptop.LastModifiedDate = DateTime.Now;
+            _dbContext.Laptops.Update(laptop);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

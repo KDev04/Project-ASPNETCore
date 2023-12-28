@@ -39,6 +39,7 @@ namespace LaptopStoreApi.Services
                 Name = model.Name,
                 Price = model.Price,
                 Quantity = model.Quantity,
+                Description = model.Description,
                 CreateDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 ImgPath = "Image/" + imgFileName
@@ -125,6 +126,7 @@ namespace LaptopStoreApi.Services
                 Name = model.Name, 
                 Price = model.Price,
                 Quantity = model.Quantity,
+                Description = model.Description,
                 CreateDate = model.CreateDate,
                 LastModifiedDate = model.LastModifiedDate,
                 ImgPath = model.ImgPath,

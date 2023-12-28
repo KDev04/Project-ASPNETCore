@@ -160,6 +160,11 @@ namespace LaptopStore.Controllers
                         if (role != null)
                         {
                             Response.Cookies.Append("Role", role.ToString());
+                            if(role == "Moderator" || role == "Administrator")
+                            {
+                                return Redirect("/Admin/Index");
+                            }
+                           
                         }
                         Console.WriteLine(role);
                         return RedirectToAction("UserInfo", "Auth"); // Đổi thành action hoặc view mong muốn
