@@ -1,0 +1,31 @@
+@model List<LaptopStore.Models.LaptopStatus>
+
+<!-- Your HTML and Razor code here -->
+<h2>Laptop Status List</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Date</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var laptopStatus in Model)
+            {
+                <tr>
+                    <td>@laptopStatus.Infomation</td>
+               
+                    <!-- Add more columns as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No laptop status data available.</p>
+}

@@ -20,3 +20,40 @@ html {
 body {
   margin-bottom: 60px;
 }
+.special-bar {
+  background: linear-gradient(90deg, #000000, #000000); /* Gradient màu */
+  animation: slideIn 1s ease-in-out; /* Hiệu ứng chuyển động */
+}
+
+@keyframes slideIn {
+  0% {
+      transform: translateY(-50px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+
+
+.snowflake {
+  position: absolute;
+  color: #fff;
+  font-size: 1em;
+  pointer-events: none;
+  animation: fall linear infinite;
+  animation-duration: 5s;
+  
+}
+
+@keyframes fall {
+  0% {
+      transform: translateY(0) translateX(0);
+  }
+  100% {
+      transform: translateY(100vh) translateX(0);
+  }
+}
+

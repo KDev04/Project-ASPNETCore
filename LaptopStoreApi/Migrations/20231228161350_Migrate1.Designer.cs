@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20231228072338_Migrate1")]
+    [Migration("20231228161350_Migrate1")]
     partial class Migrate1
     {
         /// <inheritdoc />
@@ -119,10 +119,13 @@ namespace LaptopStoreApi.Migrations
             modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
                 {
                     b.Property<int>("LaptopId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LaptopId"));
+                    b.Property<decimal?>("BigPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -163,21 +166,16 @@ namespace LaptopStoreApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LaptopStatusId"));
 
-                    b.Property<string>("Categoty")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
+                    b.Property<string>("Information")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LaptopId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Size")
-                        .HasColumnType("decimal(18, 2)");
-
                     b.HasKey("LaptopStatusId");
+
+                    b.HasIndex("LaptopId");
 
                     b.ToTable("LaptopStatus");
                 });
@@ -483,6 +481,17 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("LaptopStatus");
                 });
 
+            modelBuilder.Entity("LaptopStoreApi.Database.LaptopStatus", b =>
+                {
+                    b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
+                        .WithMany("LaptopStatuses")
+                        .HasForeignKey("LaptopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Laptop");
+                });
+
             modelBuilder.Entity("LaptopStoreApi.Database.Order", b =>
                 {
                     b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
@@ -551,6 +560,11 @@ namespace LaptopStoreApi.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
+                {
+                    b.Navigation("LaptopStatuses");
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Database.LaptopStatus", b =>

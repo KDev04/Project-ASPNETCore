@@ -5,6 +5,7 @@ using LaptopStoreApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -14,6 +15,7 @@ namespace LaptopStoreApi.Controllers
     {
         private readonly ILapRepo2 _repository;
         private readonly ApiDbContext _dbContext;
+
         public LaptopController(ILapRepo2 repo2, ApiDbContext dbContext)
         {
             _repository = repo2;
@@ -105,6 +107,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
         [Authorize(Roles = RoleNames.Moderator)]
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
@@ -127,6 +130,7 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest();
             }
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLaptop(int id, [FromForm] LapModel2 Loadlaptop)
         {
@@ -137,7 +141,8 @@ namespace LaptopStoreApi.Controllers
                 throw new Exception("Không có tệp hình ảnh được gửi lên.");
             }
 
-            string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(Loadlaptop?.Image?.FileName);
+            string imgFileName =
+                Guid.NewGuid().ToString() + Path.GetExtension(Loadlaptop?.Image?.FileName);
             string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
             string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
 
@@ -200,7 +205,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> GetPK()
         {
             try
@@ -227,6 +232,31 @@ namespace LaptopStoreApi.Controllers
                 var linhkien = allLaptops.Where(laptop => laptop.Type == "Card").ToList();
 
                 return Ok(linhkien);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetStatus(int id)
+        {
+            try
+            {
+                // Truy vấn bảng LaptopStatus dựa trên id
+                var laptopStatusList = await _dbContext
+                    .LaptopStatuses.Where(ls => ls.LaptopId == id)
+                    .ToListAsync();
+
+                if (laptopStatusList == null || !laptopStatusList.Any())
+                {
+                    return NotFound(); // Trả về HTTP 404 Not Found nếu không tìm thấy dữ liệu
+                }
+                else
+                {
+                    return Ok(laptopStatusList); // Trả về dữ liệu dưới dạng JSON
+                }
             }
             catch
             {

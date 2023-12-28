@@ -15,8 +15,8 @@ namespace LaptopStore.Controllers
         private readonly HttpClient _httpClient;
         public int PageSize = 4;
 
-        public LaptopController(HttpClient httpClient) 
-        { 
+        public LaptopController(HttpClient httpClient)
+        {
             _httpClient = httpClient;
         }
 
@@ -46,6 +46,7 @@ namespace LaptopStore.Controllers
                 }
             }
         }
+
         public async Task<IActionResult> Detail(int id)
         {
             using (var httpClient = new HttpClient())
@@ -62,6 +63,7 @@ namespace LaptopStore.Controllers
                     // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
 
                     var laptop = JsonConvert.DeserializeObject<Laptop>(content);
+
                     return View(laptop);
                 }
                 catch (Exception)
@@ -73,17 +75,51 @@ namespace LaptopStore.Controllers
             }
         }
 
+        public async Task<IActionResult> Detail2(int id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    var response = await httpClient.GetAsync(
+                        "http://localhost:4000/api/Laptop/GetStatus/" + id
+                    );
+
+                    response.EnsureSuccessStatusCode();
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    // Handle the JSON response
+                    var laptopStatusList = JsonConvert.DeserializeObject<List<LaptopStatus>>(
+                        content
+                    );
+
+                    // You can now use the laptopStatusList as needed, for example, pass it to the view
+                    return View(laptopStatusList);
+                }
+                catch (Exception)
+                {
+                    // Handle errors when calling the API
+                    // For example, you can redirect to an error page
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+        }
+
         public async Task<IActionResult> SaveProduct(Laptop model)
         {
             var token = HttpContext.Session.GetString("Token");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
             try
             {
                 using (var formData = new MultipartFormDataContent())
                 {
                     formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
-                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity"); ;
+                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
+                    ;
 
                     if (model.Image != null && model.Image.Length > 0)
                     {
@@ -91,7 +127,10 @@ namespace LaptopStore.Controllers
                         {
                             formData.Add(streamContent, "Image", model.Image.FileName);
 
-                            var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/Add", formData);
+                            var response = await _httpClient.PostAsync(
+                                "http://localhost:4000/api/Laptop/Add",
+                                formData
+                            );
                             Console.WriteLine("goi qua api roi");
                             Console.WriteLine(response.StatusCode);
 
@@ -118,7 +157,14 @@ namespace LaptopStore.Controllers
                 return Redirect("/Home/Error");
             }
         }
-        public async Task<IActionResult> Filter (string name = "", string sortBy = "", int page = 1, int from = 0, int to = int.MaxValue)
+
+        public async Task<IActionResult> Filter(
+            string name = "",
+            string sortBy = "",
+            int page = 1,
+            int from = 0,
+            int to = int.MaxValue
+        )
         {
             using (var httpClient = new HttpClient())
             {
@@ -159,6 +205,11 @@ namespace LaptopStore.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(keyword))
+                {
+                    return View("Searchnull");
+                }
+
                 // Gửi yêu cầu GET tới API Filter và truyền các tham số
                 HttpResponseMessage response = await _httpClient.GetAsync(
                     $"http://localhost:4000/api/Laptop/Search?keyword={keyword}"
@@ -167,19 +218,22 @@ namespace LaptopStore.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
                     response.EnsureSuccessStatusCode();
 
-                    // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
-                    // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
 
-                    var laptop = JsonConvert.DeserializeObject<List<Laptop>>(content);
-
-                    return View("Index", laptop); // Trả về view mà bạn muốn hiển thị dữ liệu
+                    if (laptops != null && laptops.Any())
+                    {
+                        return View("Index", laptops);
+                    }
+                    else
+                    {
+                        // Chuyển hướng đến trang Searchnull khi không có sản phẩm
+                        return View("Searchnull");
+                    }
                 }
                 else
                 {
-                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
                     return View("Index", null);
                 }
             }
@@ -257,7 +311,7 @@ namespace LaptopStore.Controllers
             }
         }
 
-         public async Task<IActionResult> Phukien()
+        public async Task<IActionResult> Phukien()
         {
             using (var httpClient = new HttpClient())
             {
@@ -279,8 +333,7 @@ namespace LaptopStore.Controllers
             }
         }
 
-
-          public async Task<IActionResult> Card()
+        public async Task<IActionResult> Card()
         {
             using (var httpClient = new HttpClient())
             {

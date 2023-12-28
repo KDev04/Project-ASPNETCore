@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj": {}
+    "D:\\D\\LaptopStore\\LaptopStore.csproj": {}
   },
   "projects": {
-    "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj": {
+    "D:\\D\\LaptopStore\\LaptopStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj",
+        "projectUniqueName": "D:\\D\\LaptopStore\\LaptopStore.csproj",
         "projectName": "LaptopStore",
-        "projectPath": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\",
+        "projectPath": "D:\\D\\LaptopStore\\LaptopStore.csproj",
+        "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
+        "outputPath": "D:\\D\\LaptopStore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -66,6 +66,18 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -90,6 +102,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
