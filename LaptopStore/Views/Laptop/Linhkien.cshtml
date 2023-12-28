@@ -1,0 +1,19 @@
+@model List<Laptop>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="container py-5">
+    <partial name="~/Views/Laptop/Filter.cshtml" />
+</section>
+
+<section class="container py-5 my-5">
+
+    <div class="row gy-4">
+        @foreach (var laptop in Model)
+        {
+            <partial name="LaptopSummary.cshtml" model="laptop" />
+
+        }
+    </div>
+</section>

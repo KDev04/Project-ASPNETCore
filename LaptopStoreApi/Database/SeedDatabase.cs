@@ -226,7 +226,217 @@ namespace LaptopStoreApi.Database
                         ImgPath = "/images/lk5.webp",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
+                    },
+                      new Laptop
+                    {
+                        Name = "Predator XB1",
+                        Description ="sRGB 100% Coverage IPS1 \nUP TO 152Hz 4K UHD 3480 x 2160 \nULMB Ultra Low Motion Blur" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk6.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR XB3",
+                        Description ="Full HD (1920 x 1080) 240 Hz \nDisplayPort, HDMI \nG-sync Compatible" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk7.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR XB3 VISIONCARE",
+                        Description ="QHD 2560 X 14401 \n95% DCI-P3 Color Gamut1 \nDELTA E<1 Color Accuracy1" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk8.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR X27",
+                        Description ="34-inch Agile-Splendor IPS1 \nUP TO 152Hz 4K UHD 3480 x 2160 \nZEROFRAME Media Profile" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk9.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR X32 FP",
+                        Description ="32-INCH 4K 3840 X 21601 UHD \nMINI LED Quantum Dot Technology \n576 ZONES" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk10.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk1.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk2.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk3.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk4.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk5.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk6.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk7.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk8.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk9.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "Predator Galea 311",
+                        Description ="PHW910 | NP.HDS11.00B" ,
+                        Type = "PK",
+                        Price = 79,
+                        Quantity = 72,
+                        ImgPath = "/images/pk10.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR BIFROST Intel® Arc™ A770 OC",
+                        Description ="APBF-IA770-16G-OC | DP.BKCWW.P02" ,
+                        Type = "Card",
+                        Price = 329,
+                        Quantity = 72,
+                        ImgPath = "/images/card1.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR BIFROST Radeon™ RX 7600",
+                        Description ="APBF-ARX7600-8G | DP.Z36WW.P01" ,
+                        Type = "Card",
+                        Price = 289,
+                        Quantity = 72,
+                        ImgPath = "/images/card2.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR BIFROST Radeon™ RX 7600 OC",
+                        Description ="APBF-ARX7600-8G-OC | DP.Z36WW.P02" ,
+                        Type = "Card",
+                        Price = 269,
+                        Quantity = 72,
+                        ImgPath = "/images/card3.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "PREDATOR BIFROST Intel® Arc™ A750 OC",
+                        Description ="APBF-IA750-8G-OC | DP.Z35WW.P01" ,
+                        Type = "Card",
+                        Price = 229,
+                        Quantity = 72,
+                        ImgPath = "/images/card4.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
                     }
+                    
                 );
                 context.SaveChanges();
             }

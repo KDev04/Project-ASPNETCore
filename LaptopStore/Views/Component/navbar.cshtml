@@ -54,16 +54,31 @@
                       <ul class="dropdown-menu" aria-labelledby="StoreDropdown">
                           <li>
                               <a class="dropdown-item" asp-action="Index" asp-controller="Laptop">
-                                  <i class="fa-solid fa-car me-2"></i>Laptop
+                                 <i class="fa-solid fa-list-check me-2"></i>Sản phẩm
+                              </a>
+                          </li>
+                           <li>
+                              <a class="dropdown-item" href="/Laptop/AllLaptop">
+                                <i class="fa-solid fa-laptop-code me-2 "></i>Laptop
                               </a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="">
-                                  <i class="fa-solid fa-headphones me-2"></i>Phụ kiện laptop
+                              <a class="dropdown-item" href="/Laptop/Linhkien">
+                                <i class="fa-solid fa-tv me-2"></i>Màn hình
+                              </a>
+                          </li>
+                           <li>
+                              <a class="dropdown-item" href="/Laptop/Phukien">
+                                  <i class="fa-solid fa-headphones me-2"></i>Phụ kiện
                               </a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="">
+                              <a class="dropdown-item" href="/Laptop/Card">
+                                  <i class="fa-solid fa-wrench me-2 "></i> Card màn hình
+                              </a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="/Laptop/Dichvu">
                                   <i class="fa-solid fa-gear me-2"></i>Dịch vụ
                               </a>
                           </li>
@@ -103,7 +118,7 @@
 
                   <li class="nav-item">
                       <form class="d-flex" role="search" asp-action="Search" asp-controller="Laptop">
-                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                          <input class="form-control me-2" type="search" placeholder="Nhập tên sản phẩm... " aria-label="Search"
                               name="keyword">
                           <button class="btn btn-outline-success" type="submit">Search</button>
                       </form>
@@ -133,7 +148,12 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item " asp-action="Order" asp-controller="Cart">
-                                        <i class="fa-solid fa-cart-plus me-2"></i>Đơn hàng
+                                       <i class="fa-solid fa-clipboard-list me-2"></i>Chi tiết đơn hàng
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item " asp-action="Order" asp-controller="Cart">
+                                      <i class="fa-solid fa-receipt me-2"></i>Hóa đơn
                                     </a>
                                 </li>
                                 <li>

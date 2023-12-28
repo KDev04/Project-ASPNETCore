@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using LaptopStore.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using Humanizer;
 using System.Globalization;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Xml.Linq;
+using Humanizer;
+using LaptopStore.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
 namespace LaptopStore.Controllers
 {
     public class LaptopController : Controller
@@ -18,13 +19,16 @@ namespace LaptopStore.Controllers
         { 
             _httpClient = httpClient;
         }
+
         public async Task<IActionResult> Index()
         {
             using (var httpClient = new HttpClient())
             {
                 /*var token = HttpContext.Session.GetString("Token");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+                HttpResponseMessage response = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Laptop/GetLaptops"
+                );
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -48,7 +52,9 @@ namespace LaptopStore.Controllers
             {
                 try
                 {
-                    var response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptop/" + id);
+                    var response = await httpClient.GetAsync(
+                        "http://localhost:4000/api/Laptop/GetLaptop/" + id
+                    );
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -119,7 +125,9 @@ namespace LaptopStore.Controllers
                 try
                 {
                     // Gửi yêu cầu GET tới API Filter và truyền các tham số
-                    HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:4000/api/Laptop/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}&page={page}");
+                    HttpResponseMessage response = await httpClient.GetAsync(
+                        $"http://localhost:4000/api/Laptop/Filter?name={name}&sortBy={sortBy}&from={from}&to={to}&page={page}"
+                    );
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -145,14 +153,16 @@ namespace LaptopStore.Controllers
                     return BadRequest("khong hoat dong");
                 }
             }
-            
         }
-        public async Task<IActionResult> Search (string keyword)
+
+        public async Task<IActionResult> Search(string keyword)
         {
             try
             {
                 // Gửi yêu cầu GET tới API Filter và truyền các tham số
-                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/Search?keyword={keyword}");
+                HttpResponseMessage response = await _httpClient.GetAsync(
+                    $"http://localhost:4000/api/Laptop/Search?keyword={keyword}"
+                );
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -178,21 +188,118 @@ namespace LaptopStore.Controllers
                 return BadRequest("khong hoat dong");
             }
         }
+
         public async Task<string> GetUserId()
         {
-
             var token = HttpContext.Session.GetString("Token");
             /* var token = Request.Cookies["Token"];*/
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
 
-            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetUserId");
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserId"
+            );
             response.EnsureSuccessStatusCode();
             var responseData = await response.Content.ReadAsStringAsync();
 
             Console.WriteLine(responseData);
             return responseData;
-
         }
 
+        public async Task<IActionResult> Linhkien()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                /*var token = HttpContext.Session.GetString("Token");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
+                HttpResponseMessage response = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Laptop/GetLinhkien"
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
+
+                    return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
+
+        public async Task<IActionResult> AllLaptop()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Laptop/GetAllLaptop"
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
+
+                    return View(laptops); // Truyền danh sách laptops vào view
+                }
+                else
+                {
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
+
+         public async Task<IActionResult> Phukien()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Laptop/GetPK"
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
+
+                    return View(laptops); // Truyền danh sách laptops vào view
+                }
+                else
+                {
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
+
+
+          public async Task<IActionResult> Card()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(
+                    "http://localhost:4000/api/Laptop/GetCard"
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
+
+                    return View(laptops); // Truyền danh sách laptops vào view
+                }
+                else
+                {
+                    return StatusCode((int)response.StatusCode);
+                }
+            }
+        }
     }
 }

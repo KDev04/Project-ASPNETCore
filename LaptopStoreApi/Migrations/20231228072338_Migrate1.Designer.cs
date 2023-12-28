@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20231228042020_Migrate1")]
+    [Migration("20231228072338_Migrate1")]
     partial class Migrate1
     {
         /// <inheritdoc />
@@ -146,6 +146,9 @@ namespace LaptopStoreApi.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LaptopId");
 
