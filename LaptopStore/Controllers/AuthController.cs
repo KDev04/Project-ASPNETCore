@@ -317,6 +317,8 @@ namespace LaptopStore.Controllers
                     return null!;
                 }
             }
+
+
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 // Chuyển hướng đến trang "/Auth/Login"
@@ -327,6 +329,136 @@ namespace LaptopStore.Controllers
             {
                 // Xử lý các mã lỗi khác (nếu cần)
                 throw new Exception($"Error: {response.StatusCode}");
+            }
+        }
+        public  async Task<IActionResult> UpdateUser ()
+        {
+            var token = Request.Cookies["Token"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserInfo"
+            );
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
+
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var user = JsonConvert.DeserializeObject<User>(responseData);
+
+                return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> SaveUpdateUser(User model)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(model.UserName ?? ""), "UserName");
+                    formData.Add(new StringContent(model.FirstName ?? ""), "FirstName");
+                    formData.Add(new StringContent(model.LastName ?? ""), "LastName");
+                    formData.Add(new StringContent(model.BirthDay.ToString("yyyy-MM-dd") ?? ""), "BirthDay");
+                    formData.Add(new StringContent(model.Address ?? ""), "Address");
+                    formData.Add(new StringContent(model.Age?.ToString() ?? ""), "Age");
+                    formData.Add(new StringContent(model.Email ?? ""), "Email");
+                    formData.Add(new StringContent(model.PhoneNumber ?? ""), "PhoneNumber");
+
+                    if (model.Image != null && model.Image.Length > 0)
+                    {
+                        using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                        {
+                            formData.Add(streamContent, "Image", model.Image.FileName);
+
+                            var response = await _httpClient.PutAsync($"http://localhost:4000/api/Account/UpdateUser/{model.Id}", formData);
+                            Console.WriteLine("Gọi qua API rồi");
+                            Console.WriteLine(response.StatusCode);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                // Xử lý khi cập nhật người dùng thành công
+                                Console.WriteLine("Cap nhat thanh cong");
+
+                                return Redirect("/Auth/UserInfo");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Cap nhat that bai");
+                                // Xử lý khi có lỗi từ API
+                                return Redirect("/Admin/Index");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
+                }
+            }
+            catch
+            {
+                return Redirect("/Home/Error");
+            }
+        }
+        public async Task<IActionResult> ChangePassword()
+        {
+            var token = Request.Cookies["Token"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserInfo"
+            );
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
+
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var user = JsonConvert.DeserializeObject<User>(responseData);
+
+                return View(user); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> SavePassword(string userId, string currentPassword, string newPassword, string confirmPassword)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsync($"http://localhost:4000/api/Account/ChangePassword?userId={userId}&currentPassword={currentPassword}&newPassword={newPassword}&confirmPassword={confirmPassword}", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Đổi mật khẩu thành công!");
+                    return Redirect("/Auth/UserInfo");
+
+                }
+                else 
+                { 
+                    Console.WriteLine("Đỏi mật khẩu thất bại!");
+                    return Redirect("/Home/Error");
+                }
+            }
+            catch
+            {
+                return Redirect("/Home/Error");
+
             }
         }
     }

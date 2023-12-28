@@ -170,6 +170,7 @@ namespace LaptopStoreApi.Controllers
                 Email = user.Email,
                 AvatarUrl = user.AvatarUrl,
                 FirstName = user.FirstName,
+                LastName = user.LastName,
                 Address = user.Address,
                 Age = user.Age,
                 BirthDay = user.BirthDay,
@@ -277,6 +278,97 @@ namespace LaptopStoreApi.Controllers
                 return NoContent(); // Hoặc trả về giá trị tùy chỉnh khác thể hiện rằng người dùng không có vai trò nào
             }
         }
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(string id, [FromForm] UserModel updatedUser)
+        {
+            var user = await _userManager.FindByIdAsync(id);
 
+            if (user == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không tìm thấy người dùng với Id tương ứng
+            }
+            if (updatedUser.Image == null || updatedUser.Image.Length == 0)
+            {
+                // Xử lý khi không có tệp hình ảnh được gửi lên
+                // Ví dụ: trả về lỗi hoặc thông báo không có tệp hình ảnh
+                throw new Exception("Không có tệp hình ảnh được gửi lên.");
+            }
+
+            string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(updatedUser?.Image?.FileName);
+            string imgFolderPath = Path.Combine("wwwroot/Avatars"); // Thư mục "wwwroot/Image"
+            string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+
+            if (!Directory.Exists(imgFolderPath))
+            {
+                Directory.CreateDirectory(imgFolderPath);
+            }
+
+            using (var stream = new FileStream(imgFilePath, FileMode.Create))
+            {
+                await updatedUser.Image.CopyToAsync(stream);
+            }
+            // Cập nhật thông tin người dùng
+            user.UserName = updatedUser.UserName;
+            user.Email = updatedUser.Email;
+            user.FirstName = updatedUser.FirstName;
+            user.LastName = updatedUser.LastName;
+            user.PhoneNumber = updatedUser.PhoneNumber;
+            user.Address = updatedUser.Address;
+            user.Age = updatedUser.Age;
+            user.AvatarUrl = "Avatars/"+imgFileName ;
+            // Cập nhật các thuộc tính khác tùy ý
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return Ok(); // Trả về thành công nếu cập nhật thành công
+            }
+            else
+            {
+                return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(string userId, string currentPassword, string newPassword, string confirmPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                // Người dùng không tồn tại
+                return NotFound();
+            }
+
+            // Kiểm tra mật khẩu hiện tại
+            var passwordCheckResult = await _userManager.CheckPasswordAsync(user, currentPassword);
+            if (!passwordCheckResult)
+            {
+                // Mật khẩu hiện tại không đúng
+                return BadRequest("Incorrect current password");
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                // Mật khẩu mới và xác nhận mật khẩu không khớp
+                return BadRequest("Passwords do not match");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+
+            if (result.Succeeded)
+            {
+                // Mật khẩu đã được thay đổi thành công
+                return Ok("Password changed successfully");
+            }
+            else
+            {
+                // Đã xảy ra lỗi khi thay đổi mật khẩu
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(errors);
+            }
+        }
     }
 }
