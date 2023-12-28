@@ -5,6 +5,36 @@
 
 }
 <section class ="container">
+    @* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hiển thị thông báo
+            $('.alert').show();
+
+            // Tự động ẩn thông báo sau 2 giây
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 2000);
+        });
+    </script>
+
+    <style>
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: none;
+        }
+    </style> *@
+
+    <div class="alert alert-success text-black">
+        <p>@ViewBag.SuccessMessage</p>
+    </div>
+    <div class="alert alert-danger text-black">
+        <p>@ViewBag.ErrorMessage</p>
+    </div>
+
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -33,8 +63,11 @@
                     <td>@user.Email</td>
                     <td>@user.PhoneNumber</td>
                     <td>
-                        <button class="btn btn-primary btn-sm OrderBtn" value=@user.Id>Đặt hàng</button>
-                        <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
+                        <form method="post" asp-action="AddRole" asp-controller="Admin" asp-route-USerId=@user.Id>
+                            <button class="btn btn-primary btn-sm" type="submit">Them quyen Moderate</button>
+                        </form>
+                        @* <button class="btn btn-primary btn-sm OrderBtn" value=@user.Id>Cấp role</button>
+                        <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button> *@
                     </td>
                 </tr>
             }

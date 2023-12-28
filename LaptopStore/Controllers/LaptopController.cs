@@ -42,42 +42,6 @@ namespace LaptopStore.Controllers
                 }
             }
         }
-        public async Task<IActionResult> LaptopDemo(int page = 1)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                /*var token = HttpContext.Session.GetString("Token");
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
-                HttpResponseMessage response = await httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseData = await response.Content.ReadAsStringAsync();
-
-                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                    var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
-                    
-
-                    return View(new ProductsListViewModel
-                    {
-                        Products = laptops.OrderBy(x => x.Name)
-                        .Skip((page - 1) * PageSize)
-                        .Take(PageSize),
-                        PagingInfo = new PagingInfo
-                        {
-                            CurrentPage = page,
-                            ItemsPerPage = PageSize,
-                            TotalItems = laptops.Count()
-                        }
-                    }); // Trả về view mà bạn muốn hiển thị dữ liệu
-                }
-                else
-                {
-                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                    return StatusCode((int)response.StatusCode);
-                }
-            }
-        }
         public async Task<IActionResult> Detail(int id)
         {
             using (var httpClient = new HttpClient())

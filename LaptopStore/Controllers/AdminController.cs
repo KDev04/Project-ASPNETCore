@@ -4,6 +4,7 @@ using LaptopStore.Models;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace LaptopStore.Controllers
 {
@@ -189,6 +190,46 @@ namespace LaptopStore.Controllers
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
                 return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> AddRole(string UserId)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await _httpClient.PostAsync($"http://localhost:4000/api/Account/AddRoleModerator/{UserId}", null);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                // Trả về lỗi 401 - Unauthorized
+                Console.WriteLine("Chưa đăng nhập");
+                ViewBag.ErrorMessage = "Lỗi xác thực";
+                return Redirect("/Admin/UserPage");
+
+            }
+            else if (response.StatusCode == HttpStatusCode.Forbidden)
+            {
+                // Trả về lỗi 403 - Forbidden
+                Console.WriteLine("Không đủ quyền");
+                ViewBag.ErrorMessage = "Không đủ quyền hạn";
+                return Redirect("/Admin/UserPage");
+            }
+            else if (response.IsSuccessStatusCode)
+            {
+                // Trả về thành công với kết quả Result từ response
+                var resultString = await response.Content.ReadAsStringAsync();
+                var resultObject = JsonConvert.DeserializeAnonymousType(resultString, new { Result = "" });
+
+                Console.WriteLine(resultObject.Result);
+                ViewBag.SuccessMessage = resultObject.Result;
+                return Redirect("/Admin/UserPage");
+
+            }
+            else
+            {
+                // Xử lý các mã lỗi khác (nếu cần)
+                ViewBag.ErrorMessage = "Lỗi không xác định";
+                return Redirect("/Admin/UserPage");
+
             }
         }
         public async Task<IActionResult>OrderPage()
