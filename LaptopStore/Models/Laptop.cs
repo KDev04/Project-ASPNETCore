@@ -8,7 +8,6 @@
             public string? Type { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int Quantity { get; set; } // so luong ton kho
-        public string Description { get; set; } = string.Empty;
         public string ImgPath { get; set; } = string.Empty;
         public DateTime CreateDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
