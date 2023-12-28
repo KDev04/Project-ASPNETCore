@@ -170,15 +170,60 @@ namespace LaptopStoreApi.Database
                         ImgPath = "/images/caro-14.webp",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                    }
+                    },
                     new Laptop
                     {
                         Name = "PREDATOR CG48",
-                        Description = "AMD Ryzen™ 5 7640HS processor\r\nNVIDIA® GeForce RTX™ 4050\r\n8 GB, DDR5 SDRAM\r\n512 GB SSD\r\n",
-                          Type = "Laptop",
+                        Description ="4K OLED 3480 x 2160 \n98.5% DCI-P3 Wide Color Gamut \nHDR 10 Media Profile" ,
+                        Type = "LK",
                         Price = 1099,
                         Quantity = 72,
-                        ImgPath = "/images/caro-14.webp",
+                        ImgPath = "/images/lk1.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                    new Laptop
+                    {
+                        Name = "PREDATOR CG7",
+                        Description ="42.5-inch VA Panel \n4K UHD 3480 x 2160 \nHDR 10 Media Profile" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk2.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                     new Laptop
+                    {
+                        Name = "PREDATOR X25",
+                        Description ="FULL HD 1920 X 1080 \n4K UHD 3480 x 2160 \nZEROFRAME Media Profile" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk3.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+
+                       new Laptop
+                    {
+                        Name = "PREDATOR X28",
+                        Description ="4K UHD 3840 X 2160 \nUP TO 152Hz 4K UHD 3480 x 2160 \nZEROFRAME Media Profile" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk4.webp",
+                        CreateDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                    },
+                      new Laptop
+                    {
+                        Name = "PREDATOR X34",
+                        Description ="34-inch Agile-Splendor IPS1 \nUP TO 152Hz 4K UHD 3480 x 2160 \nZEROFRAME Media Profile" ,
+                        Type = "LK",
+                        Price = 1099,
+                        Quantity = 72,
+                        ImgPath = "/images/lk5.webp",
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
                     }
