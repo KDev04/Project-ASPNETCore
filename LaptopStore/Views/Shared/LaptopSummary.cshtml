@@ -30,17 +30,20 @@
             </h3>
         </div>
         <div class="mt-auto" >
-            <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data">
+            @* <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="LaptopId" value="@Model.LaptopId" />
                 <input type="hidden" name="Quantity" value="1" />
                 <div class="container d-flex justify-content-center justify-content-md-around">
                     <button class="btn btn-outline-warning text-black" type="submit">
                         Thêm vào giỏ hàng <i class="fa-solid fa-cart-plus"></i>
                     </button>
-                    <button class="btn btn-outline-success text-black">
-                        Bình luận <i class="fa-regular fa-credit-card"></i>
-                    </button>
+                    
                 </div>
+            </form> *@
+            <form asp-action="AddEval" asp-controller="Evaluate" method="post" asp-route-LaptopId=@Model.LaptopId>
+                <button class="btn btn-outline-success text-black" type="submit">
+                    Bình luận <i class="fa-regular fa-credit-card"></i>
+                </button>
             </form>
         </div>
     </div>

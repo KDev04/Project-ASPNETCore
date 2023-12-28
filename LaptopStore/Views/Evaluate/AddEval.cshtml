@@ -1,12 +1,21 @@
-﻿@model EvalModel
-<form asp-action="SaveProduct" asp-controller="Laptop" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="Cmt">Đánh giá</label>
-        <input asp-for="Cmt" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label asp-for="Rate">Giá:</label>
-        <input asp-for="Rate" type="number" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
-</form>
+﻿@model Laptop
+<section class="container">
+    <form asp-action="SaveEval" asp-controller="Evaluate" method="post" enctype="multipart/form-data">
+        <div class="row justify-content-center">
+            <div class="col col-sm-10 col-md-8">
+                <input type="hidden" name="LaptopId" value=@Model.LaptopId />
+                <div class="form-group">
+                    <label for="Cmt">Đánh giá</label>
+                    <input name="Cmt" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Rate">Số sao</label>
+                    <input name="Rate" type="number" class="form-control" required min="1" max="5">
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Đăng</button>
+                <a class="btn btn-secondary" href="/Laptop">Hủy</a>
+            </div>
+        </div>
+    </form>
+</section>

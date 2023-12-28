@@ -41,8 +41,8 @@
                 @Model.Price <i class="fa-solid fa-lira-sign"> </i>
             </h3>
         </div>
-        <div class="mt-auto">
-            <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data">
+        <div class="mt-auto d-flex row-cols-2">
+            <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data" class="col-auto">
                 <input type="hidden" name="UserId" value="eb991811-c293-41ab-9ead-08fd4a46b03c" />
                 <input type="hidden" name="LaptopId" value="@Model.LaptopId" />
                 <input type="hidden" name="Quantity" value="1" />
@@ -50,10 +50,12 @@
                     <button class="btn btn-outline-warning text-black" type="submit">
                         Thêm vào giỏ hàng <i class="fa-solid fa-cart-plus"></i>
                     </button>
-                    <button class="btn btn-outline-success text-black">
-                        Bình luận <i class="fa-regular fa-credit-card"></i>
-                    </button>
                 </div>
+            </form>
+            <form asp-action="AddEval" asp-controller="Evaluate" method="post" asp-route-LaptopId=@Model.LaptopId class="col">
+                <button class="btn btn-outline-success text-black" type="submit">
+                    Bình luận <i class="fa-regular fa-credit-card"></i>
+                </button>
             </form>
         </div>
     </div>
