@@ -40,6 +40,9 @@ namespace LaptopStoreApi.Services
                 Price = model.Price,
                 Quantity = model.Quantity,
                 Description = model.Description,
+                BigPrice = model.BigPrice,
+                Color = model.Color,
+                Type = model.Type,
                 CreateDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 ImgPath = "Image/" + imgFileName

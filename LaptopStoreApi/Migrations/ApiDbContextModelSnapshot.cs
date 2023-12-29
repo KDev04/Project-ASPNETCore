@@ -116,7 +116,10 @@ namespace LaptopStoreApi.Migrations
             modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
                 {
                     b.Property<int>("LaptopId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LaptopId"));
 
                     b.Property<decimal?>("BigPrice")
                         .HasColumnType("decimal(18, 2)");
@@ -171,8 +174,6 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("LaptopStatusId");
-
-                    b.HasIndex("LaptopId");
 
                     b.ToTable("LaptopStatus");
                 });
@@ -478,17 +479,6 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("LaptopStatus");
                 });
 
-            modelBuilder.Entity("LaptopStoreApi.Database.LaptopStatus", b =>
-                {
-                    b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
-                        .WithMany("LaptopStatuses")
-                        .HasForeignKey("LaptopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Laptop");
-                });
-
             modelBuilder.Entity("LaptopStoreApi.Database.Order", b =>
                 {
                     b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
@@ -557,11 +547,6 @@ namespace LaptopStoreApi.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
-                {
-                    b.Navigation("LaptopStatuses");
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Database.LaptopStatus", b =>

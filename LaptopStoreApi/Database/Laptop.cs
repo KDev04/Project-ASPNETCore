@@ -9,7 +9,6 @@ namespace LaptopStoreApi.Database
     public class Laptop
     {
         [Key]
-         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int LaptopId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
@@ -21,7 +20,5 @@ namespace LaptopStoreApi.Database
         public string? Type { get; set; } = string.Empty;
         public DateTime CreateDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
-        
-        public ICollection<LaptopStatus> LaptopStatuses { get; set; } // Navigation Property
     }
 }

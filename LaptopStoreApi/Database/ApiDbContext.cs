@@ -65,11 +65,7 @@ namespace LaptopStoreApi.Database
 
             modelBuilder.Entity<Order>().Property(o => o.Total).HasColumnType("decimal(18, 2)");
 
-            modelBuilder
-                .Entity<LaptopStatus>()
-                .HasOne(ls => ls.Laptop)
-                .WithMany(l => l.LaptopStatuses)
-                .HasForeignKey(ls => ls.LaptopId);
+ 
             // .OnDelete(DeleteBehavior.Cascade); // Nếu bạn muốn xóa tất cả LaptopStatus liên quan khi Laptop bị xóa
         }
 

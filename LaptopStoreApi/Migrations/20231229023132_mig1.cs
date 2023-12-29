@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LaptopStoreApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrate1 : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,8 @@ namespace LaptopStoreApi.Migrations
                 name: "Laptops",
                 columns: table => new
                 {
-                    LaptopId = table.Column<int>(type: "int", nullable: false),
+                    LaptopId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -75,6 +76,20 @@ namespace LaptopStoreApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Laptops", x => x.LaptopId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LaptopStatus",
+                columns: table => new
+                {
+                    LaptopStatusId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Information = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LaptopId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LaptopStatus", x => x.LaptopStatusId);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,26 +257,6 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LaptopStatus",
-                columns: table => new
-                {
-                    LaptopStatusId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Information = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LaptopId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LaptopStatus", x => x.LaptopStatusId);
-                    table.ForeignKey(
-                        name: "FK_LaptopStatus_Laptops_LaptopId",
-                        column: x => x.LaptopId,
-                        principalTable: "Laptops",
-                        principalColumn: "LaptopId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -374,11 +369,6 @@ namespace LaptopStoreApi.Migrations
                 name: "IX_Images_LaptopStatusId",
                 table: "Images",
                 column: "LaptopStatusId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LaptopStatus_LaptopId",
-                table: "LaptopStatus",
-                column: "LaptopId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_LaptopId",
