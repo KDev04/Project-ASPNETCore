@@ -96,23 +96,23 @@
     setInterval(createSnowflake, 900);
 
     document.addEventListener("DOMContentLoaded", function () {
-    const snowflakes = document.querySelectorAll(".snowflake");
+        const snowflakes = document.querySelectorAll(".snowflake");
 
-    snowflakes.forEach(function (snowflake) {
-        setSnowflakePosition(snowflake);
-        setSnowflakeAnimationDelay(snowflake);
+        snowflakes.forEach(function (snowflake) {
+            setSnowflakePosition(snowflake);
+            setSnowflakeAnimationDelay(snowflake);
+        });
+
+        function setSnowflakePosition(snowflake) {
+            const leftPosition = Math.random() * window.innerWidth;
+            snowflake.style.left = `${leftPosition}px`;
+        }
+
+        function setSnowflakeAnimationDelay(snowflake) {
+            const delay = Math.random() * 5; // Thay đổi giá trị để điều chỉnh thời gian trễ
+            snowflake.style.animationDelay = `-${delay}s`;
+        }
     });
-
-    function setSnowflakePosition(snowflake) {
-        const leftPosition = Math.random() * window.innerWidth;
-        snowflake.style.left = `${leftPosition}px`;
-    }
-
-    function setSnowflakeAnimationDelay(snowflake) {
-        const delay = Math.random() * 5; // Thay đổi giá trị để điều chỉnh thời gian trễ
-        snowflake.style.animationDelay = `-${delay}s`;
-    }
-});
 
 </script> -->
 

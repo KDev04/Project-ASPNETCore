@@ -104,6 +104,38 @@ namespace LaptopStore.Controllers
                 }
             }
         }
+        public async Task<List<LaptopStatus>> GetStatus (int laptopId)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/GetStatus/{laptopId}");
+
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Handle the JSON response
+                var laptopStatusList = JsonConvert.DeserializeObject<List<LaptopStatus>>(
+                    content
+                );
+                Console.WriteLine(laptopStatusList);
+                // You can now use the laptopStatusList as needed, for example, pass it to the view
+                return laptopStatusList.ToList();
+            }
+            catch (HttpRequestException ex)
+            {
+                // Xử lý ngoại lệ HttpRequestException
+                // Ví dụ: Ghi log, thông báo lỗi, hoặc trả về một giá trị mặc định
+                Console.WriteLine("Lỗi khi thực hiện yêu cầu HTTP: " + ex.Message);
+                return new List<LaptopStatus>(); // Trả về một danh sách đánh giá rỗng
+            }
+            catch (Exception ex)
+            {
+                // Handle errors when calling the API
+                // For example, you can redirect to an error page
+                Console.WriteLine("Lỗi khi thực hiện yêu cầu HTTP: " + ex.Message);
+                return new List<LaptopStatus>();
+            }
+        }
 
         public async Task<IActionResult> SaveProduct(Laptop model)
         {
