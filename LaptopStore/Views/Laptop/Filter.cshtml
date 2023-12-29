@@ -1,6 +1,6 @@
 ﻿@using (Html.BeginForm("Filter", "Laptop", FormMethod.Get))
 {
-    <div class="row collapse" id="collapseExample">
+    <div class="row" id="collapseExample">
         <div class="col-md-3">
             <div class="form-group">
                 <label for="name">Tên laptop:</label>
@@ -39,12 +39,12 @@
                 <button type="submit" class="btn btn-primary form-control">Lọc</button>
             </div>
         </div>
-        <div class="col-md-2">
+@*         <div class="col-md-2">
             <div class="form-group">
                 <label for="to">Trang:</label>
                 <input type="number" name="page" id="page" class="form-control" />
             </div>
-        </div>
+        </div> *@
     </div>
 
 }

@@ -256,6 +256,7 @@ ViewData["Title"] = "Detail Page";
                         var Status = new LaptopController(httpClient);
                         Console.WriteLine("Before");
                         List<LaptopStatus> Stutus = await Status.GetStatus(laptopId);
+                        await Html.PartialAsync("Detail2", Stutus);
                         Console.WriteLine("after");
                     }
                </span>

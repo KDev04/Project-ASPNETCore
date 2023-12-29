@@ -119,7 +119,7 @@ namespace LaptopStore.Controllers
                 );
                 Console.WriteLine(laptopStatusList);
                 // You can now use the laptopStatusList as needed, for example, pass it to the view
-                return laptopStatusList;
+                return laptopStatusList.ToList();
             }
             catch (HttpRequestException ex)
             {
