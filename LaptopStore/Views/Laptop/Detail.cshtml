@@ -249,13 +249,21 @@ ViewData["Title"] = "Detail Page";
             <div class="col-lg-9 col-md-12 col-sm-12 mb-4">
                <h6 class=" pb-2 border-bottom fw-bold">Thông tin kỹ thuật sản phẩm</h6>
                <span> 
+                    @{
+                        int laptopId = Model.LaptopId;
+                        Console.WriteLine(laptopId);
+                        HttpClient httpClient = new HttpClient();
+                        var Status = new LaptopController(httpClient);
+                        Console.WriteLine("Before");
+                        List<LaptopStatus> Stutus = await Status.GetStatus(laptopId);
+                        Console.WriteLine("after");
+                    }
                </span>
             </div>
         </div>
     </div>
     @{
-        int laptopId = Model.LaptopId;
-        HttpClient httpClient = new HttpClient();
+        laptopId = Model.LaptopId;
         var evaluateController = new EvaluateController(httpClient);
         Console.WriteLine("Before");
         List<Evaluate> evals = await evaluateController.Gd(laptopId);

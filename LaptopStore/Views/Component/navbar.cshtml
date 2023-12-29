@@ -93,12 +93,12 @@
                               class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng</a>
                   </li>
 
-                  <li class="nav-item d-none" id="NavFilter">
+@*                   <li class="nav-item d-none" id="NavFilter">
                       <a class="nav-link active text-uppercase" id="FilterBtn" data-bs-toggle="collapse"
                           href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                           Filter
                       </a>
-                  </li>
+                  </li> *@
                 @{
                     string CheckRole = Context.Request.Cookies["Role"]!;
                     if (CheckRole!= null)

@@ -1,0 +1,9 @@
+@model List<LaptopStatus>
+<section class="container">
+
+    @foreach ( var status in Model)
+    {
+        <h1>@status.LaptopId</h1>
+        <h3>@status.Information</h3>
+    }
+</section>
