@@ -191,8 +191,8 @@ namespace LaptopStore.Controllers
         }
 
         public async Task<IActionResult> Filter(
-            string name = "",
-            string sortBy = "",
+            string name = "PREDATOR",
+            string sortBy = "TenLaptop_asc",
             int page = 1,
             int from = 0,
             int to = int.MaxValue

@@ -171,6 +171,7 @@ namespace LaptopStoreApi.Controllers
                 AvatarUrl = user.AvatarUrl,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                PhoneNumber= user.PhoneNumber,
                 Address = user.Address,
                 Age = user.Age,
                 BirthDay = user.BirthDay,

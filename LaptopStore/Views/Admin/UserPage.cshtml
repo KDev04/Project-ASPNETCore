@@ -43,6 +43,10 @@
             </tr>
         </thead>
         <tbody>
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div id="successMessage" class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
             @foreach (var user in Model)
             {
                 <tr>
@@ -56,7 +60,7 @@
                     <td>@user.PhoneNumber</td>
                     <td>
                         <form method="post" asp-action="AddRole" asp-controller="Admin" asp-route-USerId=@user.Id>
-                            <button class="btn btn-primary btn-sm" type="submit">Them quyen Moderate</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Cấp quyền Moderate</button>
                         </form>
                         @* <button class="btn btn-primary btn-sm OrderBtn" value=@user.Id>Cấp role</button>
                         <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button> *@
@@ -66,5 +70,13 @@
         </tbody>
     </table>
 </section>
+<script>
+    // Sử dụng JavaScript để tự động ẩn thông báo thành công sau 2 giây
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#successMessage').fadeOut('slow');
+        }, 2000); // 2 giây
+    });
+</script>
 
 

@@ -12,7 +12,7 @@
                 <th class="col">Số lượng</th>
                 <th class="col">Số tiền</th>
                 <th class="col">Tình trạng đơn hàng</th>
-                <th class="col">Thao tác</th>
+                @* <th class="col">Thao tác</th> *@
             </tr>
         </thead>
         <tbody>
@@ -26,10 +26,9 @@
                     <td class="col">@cart?.Quantity</td>
                     <td class="col">@(cart?.Price * cart?.Quantity)</td>
                     <td class="col">@cart?.StatusOrder</td>
-                    <td class="col">
-                        <button class="btn btn-primary btn-sm OrderBtn" value=@cart?.Id>Đặt hàng </button>
+@*                     <td class="col">
                         <button class="btn btn-primary btn-sm deleteButton" value=@cart?.Id>Xóa </button>
-                    </td>
+                    </td> *@
                 </tr>
             }
         </tbody>

@@ -221,6 +221,7 @@ namespace LaptopStore.Controllers
 
                 Console.WriteLine(resultObject.Result);
                 ViewBag.SuccessMessage = resultObject.Result;
+                TempData["SuccessMessage"] = "Đã thêm quyền.";
                 return Redirect("/Admin/UserPage");
 
             }

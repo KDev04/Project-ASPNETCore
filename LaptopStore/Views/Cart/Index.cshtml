@@ -3,38 +3,54 @@
     ViewData["Title"] = "Cart Page";
 }
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<section class="container py-5 my-5">
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr class="row text-center">
-                <th class="col-2">Sản phẩm</th>
-                <th class="col">Tên sản phẩm</th>
-                <th class="col">Đơn giá</th>
-                <th class="col">Số lượng</th>
-                <th class="col">Số tiền</th>
-                <th class="col">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cart in Model)
-            {
-                <tr class="row text-center" >
-                    <td class="col-2">
-                        <img class="card-img-top img-thumbnail" src="http://localhost:4000/@cart.ImgPath" />
-                    </td>
-                    <td class="col">@cart.Name</td>
-                    <td class="col">@cart.Price</td>
-                    <td class="col">@cart.Quantity</td>
-                    <td class="col">@(cart.Price * cart.Quantity)</td>
-                    <td class="col">
-                        <button class="btn btn-primary btn-sm OrderBtn" value=@cart.Id>Đặt hàng</button>
-                        <button class="btn btn-primary btn-sm deleteButton" value=@cart.Id>Xóa</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</section>
+<div class="container-fluid" style="background-color:#FFFBD1" >
+    <section class="container py-5 my-5">
+        @if (Model.Count > 0)
+        {
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr class="row text-center">
+                        <th class="col-2">Sản phẩm</th>
+                        <th class="col">Tên sản phẩm</th>
+                        <th class="col">Đơn giá</th>
+                        <th class="col">Số lượng</th>
+                        <th class="col">Số tiền</th>
+                        <th class="col">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cart in Model)
+                    {
+                        <tr class="row text-center">
+                            <td class="col-2">
+                                <img class="card-img-top img-thumbnail" src="http://localhost:4000/@cart.ImgPath" />
+                            </td>
+                            <td class="col">@cart.Name</td>
+                            <td class="col">@cart.Price</td>
+                            <td class="col">@cart.Quantity</td>
+                            <td class="col">@(cart.Price * cart.Quantity)</td>
+                            <td class="col">
+                                <button class="btn btn-primary btn-sm OrderBtn" value=@cart.Id>Đặt hàng</button>
+                                <button class="btn btn-primary btn-sm deleteButton" value=@cart.Id>Xóa</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <div class="text-center">
+                <img class="mx-auto d-block" style="height: 150px; width: 150px" src="/img/cart.png" />
+                <span class="d-block my-4"><strong style="color:#43CD80">Giỏ hàng của bạn đang trống</strong></span>
+                <a class="btn btn-sm" href="/Laptop" style="background-color:cornflowerblue; color: white">Mua ngay</a>
+            </div>
+        }
+    </section>
+</div>
+
 <script>
     $(document).ready(function () {
         $('.deleteButton').click(function () {

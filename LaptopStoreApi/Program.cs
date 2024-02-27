@@ -136,8 +136,7 @@ app.UseAuthorization();
 app.UseCors();
 app.MapControllers();
 app.UseStaticFiles();
-/*SeedData.CreateData(app);
-LocationEndpointsConfig.AddEndpoints(app);*/
+LocationEndpointsConfig.AddEndpoints(app);
 
 await SeedDatabase.CreateData(app);
 

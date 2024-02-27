@@ -1,24 +1,23 @@
-﻿@using (Html.BeginForm("Filter", "Laptop", FormMethod.Get))
-{
+﻿<form asp-action="Filter" asp-controller="Laptop" method="post">
     <div class="row" id="collapseExample">
         <div class="col-md-3">
             <div class="form-group">
                 <label for="name">Tên laptop:</label>
-                <input type="text" name="name" id="name" class="form-control" />
+                <input type="text" name="name" id="name" class="form-control" value="PREDATOR" />
             </div>
         </div>
 
         <div class="col-md-2">
             <div class="form-group">
                 <label for="from">Giá từ:</label>
-                <input type="number" name="from" id="from" class="form-control" />
+                <input type="number" name="from" id="from" class="form-control" value="1" />
             </div>
         </div>
 
         <div class="col-md-2">
             <div class="form-group">
                 <label for="to">Giá đến:</label>
-                <input type="number" name="to" id="to" class="form-control" />
+                <input type="number" name="to" id="to" class="form-control" value="20000" />
             </div>
         </div>
 
@@ -33,18 +32,11 @@
                 </select>
             </div>
         </div>
-        <div class ="col">
+        <div class="col">
             <div class="form-group">
                 <label for="sortBy" class="text-white">Sắp xếp theo:</label>
                 <button type="submit" class="btn btn-primary form-control">Lọc</button>
             </div>
         </div>
-@*         <div class="col-md-2">
-            <div class="form-group">
-                <label for="to">Trang:</label>
-                <input type="number" name="page" id="page" class="form-control" />
-            </div>
-        </div> *@
     </div>
-
-}
+</form>
