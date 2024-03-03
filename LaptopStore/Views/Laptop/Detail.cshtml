@@ -1,6 +1,6 @@
 ﻿@model Laptop
 @{
-ViewData["Title"] = "Detail Page";
+    ViewData["Title"] = "Detail Page";
 }
 @using LaptopStore.Controllers
 
@@ -49,7 +49,7 @@ ViewData["Title"] = "Detail Page";
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-6 col-sm-12">
+            <div class="col-lg-5 col-md-6 col-sm-12">@Model.Price
                 <div class="card text-black">
                     <div class="card-body">
                         <h6 class=" pb-2 border-bottom fw-bold">Thông tin sản phẩm</h6>
@@ -97,19 +97,39 @@ ViewData["Title"] = "Detail Page";
                                 <input type="hidden" name="UserId" value="eb991811-c293-41ab-9ead-08fd4a46b03c" />
                                 <input type="hidden" name="LaptopId" value="@Model.LaptopId" />
                                 <input type="hidden" name="Quantity" value="1" />
-                                <button class="btn btn-success ms-2" type="submit">
-                                    <i class="fa-solid fa-cart-plus me-2"></i> Mua ngay
+                                <button class="btn btn-success ms-2" type="submit" title="Thêm vào giỏ hàng">
+                                    <i class="fa-solid fa-cart-plus"></i>
                                 </button>
                             </form>
-                            <button class="btn btn-warning ms-2">
-                                <i class="fa-regular fa-credit-card me-2"></i> Mua trả góp
+                            <a href="#" class="btn ms-2" onclick="toggleIcon(event)" style="background-color: #ffd1d1;" title="Yêu thích">
+                                <i id="heartIcon" class="fa-regular fa-heart" data-state="regular"
+                                    style="color: #74C0FC;"></i>
+                            </a>
+
+                            <script>
+                                function toggleIcon(event) {
+                                    event.preventDefault();
+                                    var heartIcon = document.getElementById('heartIcon');
+                                    var currentState = heartIcon.getAttribute('data-state');
+
+                                    if (currentState === 'regular') {
+                                        heartIcon.className = 'fa-solid fa-heart';
+                                        heartIcon.setAttribute('data-state', 'solid');
+                                    } else {
+                                        heartIcon.className = 'fa-regular fa-heart';
+                                        heartIcon.setAttribute('data-state', 'regular');
+                                    }
+                                }
+                            </script>
+                            <button class="btn btn-warning ms-2" title="Mua ngay">
+                                <i class="fa-regular fa-credit-card" ></i> 
                             </button>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-12">@Model.Price
                 <div class="vertical-box border ">
                     <div class="content   ">
                         <p class="border p-2 text-center text-white bg-danger  fw-bold">YÊN TÂM MUA HÀNG</p>
@@ -244,11 +264,57 @@ ViewData["Title"] = "Detail Page";
             </div>
 
         </div>
+        <div class="row mt-3">
+            <div class="col-lg-9 col-md-12 col-sm-12">
+                <h6 class=" pb-2 border-bottom fw-bold">Mô tả sản phẩm</h6>
+                Đang cập nhật...
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                <h6 class=" pb-2 border-bottom fw-bold">Chi tiết sản phẩm</h6>
+                <a class="text-decoration-none border-bottom fw-bold" data-bs-toggle="modal"
+                    data-bs-target="#myModal">modal</a>
+                <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Thông số kỹ thuật</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body container">
+                                <div class="row row-cols-2">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">@Model.Price </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-9 col-md-12 col-sm-12 mb-4">
-               <h6 class=" pb-2 border-bottom fw-bold">Thông tin kỹ thuật sản phẩm</h6>
-               <span> 
+
+                <!-- Button to Open the Modal -->
+
+                <span>
                     @{
                         int laptopId = Model.LaptopId;
                         Console.WriteLine(laptopId);
@@ -259,7 +325,7 @@ ViewData["Title"] = "Detail Page";
                         await Html.PartialAsync("Detail2", Stutus);
                         Console.WriteLine("after");
                     }
-               </span>
+                </span>
             </div>
         </div>
     </div>

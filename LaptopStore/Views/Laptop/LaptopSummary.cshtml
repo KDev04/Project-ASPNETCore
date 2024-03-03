@@ -5,7 +5,7 @@
         object-fit: contain;
     }
 </style>
-<div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6 text-center">
     <div class="card mb-4 d-flex flex-column border-0">
         <a asp-action="Detail" asp-controller="Laptop" asp-route-id="@Model.LaptopId">
             <div class="image-container" style="overflow: hidden; margin-top: 10px;">
@@ -18,14 +18,14 @@
             <h4>@Html.Raw(Model.Name)</h4>
 
         </div>
-        <div class="row ms-3 ms-md-5 pt-3 text-black">
+        @* <div class="row ms-3 ms-md-5 pt-3 text-black">
             <pre class="p-0" style="font-family:Roboto Mono">
-                  @Model.Description
+                @Model.Description
             </pre>
-        </div>
+        </div> *@
         <style>
             pre {
-                
+
                 white-space: pre-wrap;
                 margin: 0;
                 /* Loại bỏ margin để giảm khoảng trắng xung quanh */
@@ -36,25 +36,47 @@
             }
         </style>
 
-        <div class="row ms-3 ms-md-5 pt-3 text-black-50">
+        <div class="row pt-1 text-black-50">
             <h3>
                 @Model.Price <i class="fa-solid fa-dollar-sign"></i>
             </h3>
         </div>
-        <div class="mt-auto d-flex row-cols-2">
-            <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data" class="col-auto">
+        <div class="mt-auto row row-cols-3 d-flex justify-content-center">
+            <form asp-action="AddToCart" asp-controller="Cart" method="post" enctype="multipart/form-data" class="col col-auto">
                 <input type="hidden" name="UserId" value="eb991811-c293-41ab-9ead-08fd4a46b03c" />
                 <input type="hidden" name="LaptopId" value="@Model.LaptopId" />
                 <input type="hidden" name="Quantity" value="1" />
-                <div class="container d-flex justify-content-center justify-content-md-around">
-                    <button class="btn btn-outline-warning text-black" type="submit">
-                        Thêm vào giỏ hàng <i class="fa-solid fa-cart-plus"></i>
-                    </button>
-                </div>
+                @* <div class="container d-flex justify-content-center justify-content-md-around">
+
+                </div> *@
+                <button class="btn btn-outline-warning text-black container-fluid" type="submit" title="Thêm vào giỏ hàng">
+                    <i class="fa-solid fa-cart-plus"></i>
+                </button>
             </form>
-            <form asp-action="AddEval" asp-controller="Evaluate" method="post" asp-route-LaptopId=@Model.LaptopId class="col">
-                <button class="btn btn-outline-success text-black" type="submit">
-                    Bình luận <i class="fa-regular fa-credit-card"></i>
+            <a href="#" class="btn col col-auto" onclick="toggleIcon(event)" style="background-color: #ffd1d1;"
+                title="Yêu thích">
+                <i id="heartIcon" class="fa-regular fa-heart" data-state="regular" style="color: #74C0FC;"></i>
+            </a>
+
+            <script>
+                function toggleIcon(event) {
+                    event.preventDefault();
+                    var heartIcon = document.getElementById('heartIcon');
+                    var currentState = heartIcon.getAttribute('data-state');
+
+                    if (currentState === 'regular') {
+                        heartIcon.className = 'fa-solid fa-heart';
+                        heartIcon.setAttribute('data-state', 'solid');
+                    } else {
+                        heartIcon.className = 'fa-regular fa-heart';
+                        heartIcon.setAttribute('data-state', 'regular');
+                    }
+                }
+            </script>
+            <form asp-action="AddEval" asp-controller="Evaluate" method="post" asp-route-LaptopId=@Model.LaptopId
+                class="col col-auto">
+                <button class="btn btn-outline-success text-black" type="submit" title="Đánh giá">
+                    <i class="fa-regular fa-credit-card"></i>
                 </button>
             </form>
         </div>
