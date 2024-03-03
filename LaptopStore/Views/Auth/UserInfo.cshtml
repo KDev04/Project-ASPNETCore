@@ -15,9 +15,7 @@
             var role = Context.Request.Cookies["Role"];
             if (role != null)
             {
-                <h5>
-                    Tên người dùng: @Model.UserName
-                </h5>
+                
                 <h6>
                     Quyền hạn:
                     @{
@@ -32,6 +30,12 @@
                     }
                 </h6>
 
+            }
+            else 
+            {
+                <h5>
+                    Tên người dùng: @Model.UserName
+                </h5>
             }
 
         }
