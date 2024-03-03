@@ -10,22 +10,17 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="container emp-profile mt-2 mb-3">
-    <div class="row">
-       <div class="col-md-4">
-            <div class="profile-img">
-                <img src="http://localhost:4000/@Model.AvatarUrl" alt=@Model.AvatarUrl class="img-fluid rounded-circle">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="profile-head">
+    <div class="row my-2">
+        @{
+            var role = Context.Request.Cookies["Role"];
+            if (role != null)
+            {
                 <h5>
-                    @Model.UserName
+                    Tên người dùng: @Model.UserName
                 </h5>
                 <h6>
                     Quyền hạn:
                     @{
-
-                        var role = Context.Request.Cookies["Role"];
                         if (role != null)
                         {
                             role.ToString();
@@ -36,137 +31,143 @@
                         }
                     }
                 </h6>
-                <div class="container-fluid mt-5 ms-0 ps-0">
-                    <div class="row me-0 mt-5">
-                    </div>
-                    <div class="row me-0 mt-5">
-                    </div>
+
+            }
+
+        }
+
+    </div>
+    <div class="row">
+        <div class="col-2 ">
+            <div class="profile-img border rounded-circle border-dark border-5 d-flex  justify-content-center align-items-center" style=" overflow: hidden;">
+                <img src="/img/user.jpg" alt="Defaut avt" class="img-fluid" style="max-width: 100%; object-fit: cover;">
+            </div>
+        </div>
+
+        <div class="col-9 g-1">
+            <div class="profile-head ">
+                <div class="container-fluid border border-dark rounded">
                     <div class="row d-flex">
                         <div class="col justify-content-end">
-                            <p class="proile-rating">Thông tin:</p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tài khoản </a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                        aria-controls="home" aria-selected="true">Tài khoản </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cá nhân </a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                        aria-controls="profile" aria-selected="false">Cá nhân </a>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div class="col m-3">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Tên tài khoản</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.UserName</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Họ</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.FirstName</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Tên</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.LastName</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.Email</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.PhoneNumber</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Địa chỉ</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.Address</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Sinh nhật</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.BirthDay.ToString("dd/MM/yy")</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Độ tuổi</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.Age</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Họ</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.FirstName</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="font-weight-bold">Tên</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.LastName</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <a asp-action="UpdateUser" asp-controller="Auth" class="profile-edit-btn btn btn-success">Sửa</a>
-        </div>
     </div>
-    <div class="row">
+
+    <div class="row my-2">
         <div class="col-md-4">
             <div class="profile-work">
-                <p> <i class="fa-solid fa-gear me-2"></i>Cài đặt</p>
+                <span> <i class="fa-solid fa-gear me-2"></i>Cài đặt</span> <br>
                 <a asp-action="UpdateUser" asp-controller="Auth">Thay đổi thông tin</a><br />
                 <a asp-action="ChangePassword" asp-controller="Auth">Thay đổi mật khẩu</a><br />
-                <a asp-action="Order" asp-controller="Cart">
-                    <i class="fa-solid fa-receipt me-2"></i>Hóa đơn
-                </a><br /> <br/>
-                <p><i class="fa-solid fa-store me-2"></i>Cửa hàng</p>
-                <a href="/Cart"><i class="fa-solid fa-cart-plus me-2"></i>Giỏ hàng</a><br />
-                <a href="/Laptop/AllLaptop"><i class="fa-solid fa-laptop-code me-2 "></i>Laptop</a><br />
-                <a href="/Laptop/Linhkien"><i class="fa-solid fa-tv me-2"></i>Màn hình</a><br />
-                <a href="/Laptop/Phukien"><i class="fa-solid fa-headphones me-2"></i>Phụ kiện</a><br />
-                <a href="/Laptop/Card"><i class="fa-solid fa-wrench me-2 "></i> Card màn hình</a><br />
-                <a href="/Laptop/Dichvu"><i class="fa-solid fa-gear me-2"></i>Dịch vụ</a><br />
-            </div>
-        </div>
-        <div class="col-md-8">
-    <div class="tab-content profile-tab" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Tên tài khoản</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.UserName</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Họ</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.FirstName</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Tên</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.LastName</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Email</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.Email</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Phone</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.PhoneNumber</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Địa chỉ</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.Address</p>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Sinh nhật</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.BirthDay.ToString("dd/MM/yy")</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Độ tuổi</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.Age</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Họ</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.FirstName</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="font-weight-bold">Tên</label>
-                </div>
-                <div class="col-md-6">
-                    <p>@Model.LastName</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <br>
+                <span><i class="fa-solid fa-store me-2"></i>Cửa hàng</span> <br>
+                <a href="/Laptop">Sản phẩm</a><br />
+                <a href="/Cart">Giỏ hàng</a><br />
+                <a href="/Cart/Order">Hoá đơn</a><br />
+                <a href="/Laptop/Dichvu">Dịch vụ</a><br />
 
+            </div>
+        </div>
     </div>
 </div>
