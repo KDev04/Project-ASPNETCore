@@ -45,6 +45,7 @@
         <div class="col-2 ">
             <div class="profile-img border rounded-circle border-dark border-5 d-flex  justify-content-center align-items-center" style=" overflow: hidden;">
                 <img src="/img/user.jpg" alt="Defaut avt" class="img-fluid" style="max-width: 100%; object-fit: cover;">
+                @* <img src={@Model.AvatarUrl} alt="Defaut avt" class="img-fluid" style="max-width: 100%; object-fit: cover;"> *@
             </div>
         </div>
 
@@ -55,18 +56,27 @@
                         <div class="col justify-content-end">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    <a class="nav-link text-black border-bottom-0" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                         aria-controls="home" aria-selected="true">Tài khoản </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                    <a class="nav-link text-black border-bottom-0" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                         aria-controls="profile" aria-selected="false">Cá nhân </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-black border-bottom-0" id="change-profile-tab" data-toggle="tab" href="#profile-change" role="tab"
+                                       aria-controls="profile" aria-selected="false">Chỉnh sửa thông tin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-black border-bottom-0" id="change-password-tab" data-toggle="tab" href="#password-change" role="tab"
+                                       aria-controls="profile" aria-selected="false">Thay đổi mật khẩu</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col m-3">
                         <div class="tab-content profile-tab" id="myTabContent">
+                            @* Home Tab *@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -117,6 +127,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @* Profile Tab *@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -150,6 +161,105 @@
                                         <p>@Model.LastName</p>
                                     </div>
                                 </div>
+                            </div>
+                            @* Change Profile Tab  *@
+                            <div class="tab-pane fade show active" id="profile-change" role="tabpanel" aria-labelledby="change-profile-tab">
+                                <form asp-action="SaveUpdateUser" asp-controller="Auth" method="post" enctype="multipart/form-data" class="py-2 my-2">
+                                    <img src="/img/user.jpg" alt="Profile" style="max-width: 150px; height: auto;" />
+                                    <div class="pt-2">
+                                        <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                                        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                    </div>
+                                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+                                    <div class="form-group row">
+                                        <label asp-for="UserName" class="col-sm-2 col-form-label">Tên người dùng:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="UserName" class="form-control" required value="@Model.UserName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="FirstName" class="col-sm-2 col-form-label">Họ:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="FirstName" class="form-control" required value="@Model.FirstName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="LastName" class="col-sm-2 col-form-label">Tên:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="LastName" class="form-control" required value="@Model.LastName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="BirthDay" class="col-sm-2 col-form-label">Ngày sinh:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="BirthDay" type="date" class="form-control" required value="@Model.BirthDay.ToString("yyyy-MM-dd")">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Address" class="col-sm-2 col-form-label">Địa chỉ:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Address" class="form-control" required value="@Model.Address">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Age" class="col-sm-2 col-form-label">Tuổi:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Age" type="number" class="form-control" value="@Model.Age">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Email" class="col-sm-2 col-form-label">Email:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Email" type="email" class="form-control" required value="@Model.Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="PhoneNumber" class="col-sm-2 col-form-label">Số điện thoại:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="PhoneNumber" class="form-control" required value="@Model.PhoneNumber">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Image" class="col-sm-2 col-form-label">Ảnh:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Image" type="file" class="form-control-file" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10 offset-sm-2">
+                                            <button type="submit" class="btn btn-primary">Cập nhật người dùng</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            @* Change Password Tab  *@
+                            <div class="tab-pane fade show active" id="password-change" role="tabpanel" aria-labelledby="change-password-tab">
+                                <form asp-action="SavePassword" asp-controller="Auth" method="post">
+                                    <input type="hidden" name="userId" value="@Model.Id" />
+                                    <div class="row">
+                                        <label for="currentPassword" class="col-sm-4">Mật khẩu cũ:</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="newPassword" class="col-sm-4">Mật khẩu mới:</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="confirmPassword" class="col-sm-4">Xác nhận mật khẩu:</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8 offset-sm-4">
+                                            <button type="submit" class="btn btn-primary">Thay đổi mật khẩu</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

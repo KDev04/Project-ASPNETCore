@@ -39,6 +39,10 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+        public IActionResult Setting()
+        {
+            return View();
+        }
         public async Task<IActionResult> SaveProduct(Laptop model)
         {
             var token = HttpContext.Session.GetString("Token");
