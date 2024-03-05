@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -107,7 +108,44 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet]
+        public async Task<List<Laptop>> SearchByLaptopName(string name)
+        {
+            try
+            {
+                var laptops = await _dbContext.Laptops
+                    .Where(l => l.Name.Contains(name))
+                    .ToListAsync();
 
+                return laptops;
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ tại đây
+                throw new Exception("Có lỗi xảy ra khi tìm kiếm laptop.", ex);
+            }
+        }
+        [HttpGet]
+        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from , decimal to)
+        {
+            try
+            {
+                if (to >= from )
+                {
+                    var laptops = await _dbContext.Laptops
+                    .Where(l => l.Price >= from && l.Price <= to)
+                    .ToListAsync();
+
+                    return laptops;
+                }
+                else return new List<Laptop> { };
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ tại đây
+                throw new Exception("Có lỗi xảy ra khi tìm kiếm laptop.", ex);
+            }
+        }
         [Authorize(Roles = RoleNames.Moderator)]
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]

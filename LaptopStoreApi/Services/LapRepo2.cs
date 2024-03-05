@@ -1,5 +1,6 @@
 ﻿using LaptopStoreApi.Database;
 using LaptopStoreApi.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace LaptopStoreApi.Services
@@ -81,6 +82,7 @@ namespace LaptopStoreApi.Services
         public async Task<List<Laptop>> Search(string keyword)
         {
             var searchResult = await _context.Laptops.Where(l => l.Name.Contains(keyword)).ToListAsync();
+
             return searchResult;
         }
 
