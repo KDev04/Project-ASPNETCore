@@ -8,8 +8,9 @@
     <partial name="~/Views/Laptop/Filter.cshtml" />
 </section>
 
-<section class="container py-5 my-5">
-    <div class="row gy-4">
+<section class="container py-5 my-2">
+    <div class="row gy-2">
+       
         @foreach (var laptop in Model)
         {
             <partial name="LaptopSummary.cshtml" model="laptop" />

@@ -3,7 +3,9 @@
     Layout = "~/Views/Shared/_Adminlayout.cshtml";
     ViewData["Title"] = "Admin - Orders";
 
+    decimal totalSum = 0; // Biến để tính tổng
 }
+
 <section class="container">
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
@@ -31,7 +33,12 @@
                         <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
                     </td>
                 </tr>
+                totalSum += user.Total; // Tính tổng
             }
         </tbody>
     </table>
+
+    <div class="total-sum">
+        Tổng cộng: @totalSum
+    </div>
 </section>

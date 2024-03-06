@@ -127,7 +127,7 @@ namespace LaptopStoreApi.Controllers
             var orders = _dbContext.Orders.Include(l => l.Laptop).Include(c => c.User).Where(c => c.UserId == UserId).ToList();
             return Ok(orders);
         }
-        [Authorize(Roles =RoleNames.Moderator)]
+/*        [Authorize(Roles =RoleNames.Moderator)]*/
         [HttpGet]
         public IActionResult GetAllOrders()
         {
