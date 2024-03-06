@@ -4,9 +4,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section class="container py-5">
+@* <section class="container py-5">
     <partial name="~/Views/Laptop/Filter.cshtml" />
-</section>
+</section> *@
 
 
 <section class="container py-5 my-5">
@@ -14,11 +14,20 @@
     {
         <div id="successMessage" class="alert alert-success">@TempData["SuccessMessage"]</div>
     }
-    <div class="row gy-4">
-        @foreach (var laptop in Model)
-        {
-            <partial name="LaptopSummary.cshtml" model="laptop" />
-        }
+    <div class="row gy-2">
+        <div class="col-2">
+            <partial name="~/Views/Laptop/DanhMuc.cshtml" />
+        </div>
+        <div class="col-10">
+            <div class="container">
+                <div class="row row-cols-4">
+                    @foreach (var laptop in Model)
+                    {
+                        <partial name="LaptopSummary.cshtml" model="laptop" />
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -1,0 +1,510 @@
+<form class="d-flex form-floating mb-3" role="search">
+    <input class="form-control" type="search" placeholder="Search"  id="SearchLabel">
+    <label for="SearchLabel">Search</label>
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+<label for="customRange3" class="form-label">Giá khoảng: 0</label>
+<input type="range" class="form-range" min="0" max="50000000" step="100000" id="customRange3">
+
+<script>
+    const rangeInput = document.getElementById('customRange3');
+    const label = document.querySelector('label[for="customRange3"]');
+
+    rangeInput.addEventListener('input', function () {
+        label.textContent = 'Giá khoảng: ' + this.value;
+    });
+</script>
+<a class="text-decoration-none text-black d-flex justify-content-between " data-bs-toggle="collapse"
+    href="#LaptopSeriesCollapse" role="button" aria-expanded="false" aria-controls="LaptopSeriesCollapse">
+    <span>Dòng Laptop</span>
+    <span>
+        <i id="arrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="LaptopSeriesCollapse">
+    <div class="card card-body">
+        <!-- Nội dung của collapse -->
+
+        <script>
+            const arrowIcon = document.getElementById('arrowIcon');
+            const collapseElement = document.getElementById('LaptopSeriesCollapse');
+
+            collapseElement.addEventListener('show.bs.collapse', function () {
+                arrowIcon.classList.remove('fa-angle-down');
+                arrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+            });
+
+            collapseElement.addEventListener('hide.bs.collapse', function () {
+                arrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+                arrowIcon.classList.add('fa-angle-down');
+            });
+        </script>
+    </div>
+</div>
+<div class="collapse" id="LaptopSeriesCollapse">
+    @* <div class="card card-body">
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+    Default checkbox
+    </label>
+    </div>
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+    <label class="form-check-label" for="flexCheckChecked">
+    Checked checkbox
+    </label>
+    </div>
+
+    <!-- Các form check mới -->
+
+    </div> *@
+    <script>
+        const laptopThemes = [
+            'Gaming Laptop',
+            'Ultrabook',
+            '2-in-1 Laptop',
+            'Workstation Laptop',
+            'Budget Laptop',
+            'Business Laptop',
+            'Convertible Laptop',
+            'Chromebook',
+            'Student Laptop',
+            'MacBook',
+        ];
+
+        const formCheckContainer = document.querySelector('.card.card-body');
+
+        laptopThemes.forEach((theme) => {
+            const checkboxId = 'flexCheck' + theme.replace(/\s/g, ''); // Tạo ID duy nhất cho checkbox
+            const checkbox = document.createElement('input');
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.setAttribute('value', '');
+            checkbox.setAttribute('id', checkboxId);
+            checkbox.classList.add('form-check-input');
+
+            const label = document.createElement('label');
+            label.classList.add('form-check-label');
+            label.setAttribute('for', checkboxId);
+            label.textContent = theme;
+
+            const formCheck = document.createElement('div');
+            formCheck.classList.add('form-check');
+
+            formCheck.appendChild(checkbox);
+            formCheck.appendChild(label);
+
+            formCheckContainer.appendChild(formCheck);
+        });
+    </script>
+</div>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#ColorCollapse" role="button" aria-expanded="false" aria-controls="ColorCollapse">
+    Màu sắc <span>
+        <i id="colorArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="ColorCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="whiteCheckbox">
+            <label class="form-check-label" for="whiteCheckbox">
+                Trắng
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="silverCheckbox">
+            <label class="form-check-label" for="silverCheckbox">
+                Bạc
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="goldCheckbox">
+            <label class="form-check-label" for="goldCheckbox">
+                Vàng (Gold)
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="blackCheckbox">
+            <label class="form-check-label" for="blackCheckbox">
+                Đen
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="blueCheckbox">
+            <label class="form-check-label" for="blueCheckbox">
+                Xanh
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="grayCheckbox">
+            <label class="form-check-label" for="grayCheckbox">
+                Xám
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const colorArrowIcon = document.getElementById('colorArrowIcon');
+    const colorCollapseElement = document.getElementById('ColorCollapse');
+
+    colorCollapseElement.addEventListener('show.bs.collapse', function () {
+        colorArrowIcon.classList.remove('fa-angle-down');
+        colorArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    colorCollapseElement.addEventListener('hide.bs.collapse', function () {
+        colorArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        colorArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse" href="#ChipCollapse"
+    role="button" aria-expanded="false" aria-controls="ChipCollapse">
+    Dòng Chip Laptop <span>
+        <i id="chipArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="ChipCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="corei3Checkbox">
+            <label class="form-check-label" for="corei3Checkbox">
+                Core i3
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="corei5Checkbox">
+            <label class="form-check-label" for="corei5Checkbox">
+                Core i5
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="corei7Checkbox">
+            <label class="form-check-label" for="corei7Checkbox">
+                Core i7
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="ryzen5Checkbox">
+            <label class="form-check-label" for="ryzen5Checkbox">
+                Ryzen 5
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="ryzen7Checkbox">
+            <label class="form-check-label" for="ryzen7Checkbox">
+                Ryzen 7
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const chipArrowIcon = document.getElementById('chipArrowIcon');
+    const chipCollapseElement = document.getElementById('ChipCollapse');
+
+    chipCollapseElement.addEventListener('show.bs.collapse', function () {
+        chipArrowIcon.classList.remove('fa-angle-down');
+        chipArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    chipCollapseElement.addEventListener('hide.bs.collapse', function () {
+        chipArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        chipArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#ScreenSizeCollapse" role="button" aria-expanded="false" aria-controls="ScreenSizeCollapse">
+    Kích thước màn hình<span>
+        <i id="screenSizeArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="ScreenSizeCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="14inchCheckbox">
+            <label class="form-check-label" for="14inchCheckbox">
+                14"
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="15inchCheckbox">
+            <label class="form-check-label" for="15inchCheckbox">
+                15"
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="15point6inchCheckbox">
+            <label class="form-check-label" for="15point6inchCheckbox">
+                15.6"
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="17inchCheckbox">
+            <label class="form-check-label" for="17inchCheckbox">
+                17"
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const screenSizeArrowIcon = document.getElementById('screenSizeArrowIcon');
+    const screenSizeCollapseElement = document.getElementById('ScreenSizeCollapse');
+
+    screenSizeCollapseElement.addEventListener('show.bs.collapse', function () {
+        screenSizeArrowIcon.classList.remove('fa-angle-down');
+        screenSizeArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    screenSizeCollapseElement.addEventListener('hide.bs.collapse', function () {
+        screenSizeArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        screenSizeArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#GraphicsCardCollapse" role="button" aria-expanded="false" aria-controls="GraphicsCardCollapse">
+    Card Đồ họa Rời<span>
+        <i id="graphicsCardArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="GraphicsCardCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="nvidiaGtxCheckbox">
+            <label class="form-check-label" for="nvidiaGtxCheckbox">
+                NVIDIA GTX
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="nvidiaRtxCheckbox">
+            <label class="form-check-label" for="nvidiaRtxCheckbox">
+                NVIDIA RTX
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="amdRadeonCheckbox">
+            <label class="form-check-label" for="amdRadeonCheckbox">
+                AMD Radeon
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const graphicsCardArrowIcon = document.getElementById('graphicsCardArrowIcon');
+    const graphicsCardCollapseElement = document.getElementById('GraphicsCardCollapse');
+
+    graphicsCardCollapseElement.addEventListener('show.bs.collapse', function () {
+        graphicsCardArrowIcon.classList.remove('fa-angle-down');
+        graphicsCardArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    graphicsCardCollapseElement.addEventListener('hide.bs.collapse', function () {
+        graphicsCardArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        graphicsCardArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#CPUGenerationCollapse" role="button" aria-expanded="false" aria-controls="CPUGenerationCollapse">
+    Thế hệ CPU <span>
+        <i id="cpuGenerationArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="CPUGenerationCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="amdCheckbox">
+            <label class="form-check-label" for="amdCheckbox">
+                AMD
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="intelCheckbox">
+            <label class="form-check-label" for="intelCheckbox">
+                Intel
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cpuGenerationArrowIcon = document.getElementById('cpuGenerationArrowIcon');
+    const cpuGenerationCollapseElement = document.getElementById('CPUGenerationCollapse');
+
+    cpuGenerationCollapseElement.addEventListener('show.bs.collapse', function () {
+        cpuGenerationArrowIcon.classList.remove('fa-angle-down');
+        cpuGenerationArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    cpuGenerationCollapseElement.addEventListener('hide.bs.collapse', function () {
+        cpuGenerationArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        cpuGenerationArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#RAMCapacityCollapse" role="button" aria-expanded="false" aria-controls="RAMCapacityCollapse">
+    Dung lượng RAM <span>
+        <i id="ramCapacityArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="RAMCapacityCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="4gbCheckbox">
+            <label class="form-check-label" for="4gbCheckbox">
+                4GB
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="8gbCheckbox">
+            <label class="form-check-label" for="8gbCheckbox">
+                8GB
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="16gbCheckbox">
+            <label class="form-check-label" for="16gbCheckbox">
+                16GB
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="32gbCheckbox">
+            <label class="form-check-label" for="32gbCheckbox">
+                32GB
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ramCapacityArrowIcon = document.getElementById('ramCapacityArrowIcon');
+    const ramCapacityCollapseElement = document.getElementById('RAMCapacityCollapse');
+
+    ramCapacityCollapseElement.addEventListener('show.bs.collapse', function () {
+        ramCapacityArrowIcon.classList.remove('fa-angle-down');
+        ramCapacityArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    ramCapacityCollapseElement.addEventListener('hide.bs.collapse', function () {
+        ramCapacityArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        ramCapacityArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#ResolutionCollapse" role="button" aria-expanded="false" aria-controls="ResolutionCollapse">
+    Độ phân giải <span>
+        <i id="resolutionArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="ResolutionCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="hdCheckbox">
+            <label class="form-check-label" for="hdCheckbox">
+                HD (1366x768)
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="fullHdCheckbox">
+            <label class="form-check-label" for="fullHdCheckbox">
+                Full HD (1920x1080)
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="qhdCheckbox">
+            <label class="form-check-label" for="qhdCheckbox">
+                QHD (2560x1440)
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="uhdCheckbox">
+            <label class="form-check-label" for="uhdCheckbox">
+                UHD/4K (3840x2160)
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const resolutionArrowIcon = document.getElementById('resolutionArrowIcon');
+    const resolutionCollapseElement = document.getElementById('ResolutionCollapse');
+
+    resolutionCollapseElement.addEventListener('show.bs.collapse', function () {
+        resolutionArrowIcon.classList.remove('fa-angle-down');
+        resolutionArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    resolutionCollapseElement.addEventListener('hide.bs.collapse', function () {
+        resolutionArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        resolutionArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
+<a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+    href="#BrandCollapse" role="button" aria-expanded="false" aria-controls="BrandCollapse">
+    Thương hiệu <span>
+        <i id="brandArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+    </span>
+</a>
+
+<div class="collapse" id="BrandCollapse">
+    <div class="card card-body">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="appleCheckbox">
+            <label class="form-check-label" for="appleCheckbox">
+                Apple
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="dellCheckbox">
+            <label class="form-check-label" for="dellCheckbox">
+                Dell
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="hpCheckbox">
+            <label class="form-check-label" for="hpCheckbox">
+                HP
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="lenovoCheckbox">
+            <label class="form-check-label" for="lenovoCheckbox">
+                Lenovo
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const brandArrowIcon = document.getElementById('brandArrowIcon');
+    const brandCollapseElement = document.getElementById('BrandCollapse');
+
+    brandCollapseElement.addEventListener('show.bs.collapse', function () {
+        brandArrowIcon.classList.remove('fa-angle-down');
+        brandArrowIcon.classList.add('fa-angle-down', 'fa-rotate-180');
+    });
+
+    brandCollapseElement.addEventListener('hide.bs.collapse', function () {
+        brandArrowIcon.classList.remove('fa-angle-down', 'fa-rotate-180');
+        brandArrowIcon.classList.add('fa-angle-down');
+    });
+</script>
+<br>
