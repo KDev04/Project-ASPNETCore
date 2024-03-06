@@ -1,0 +1,175 @@
+@{
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+    ViewData["Title"] = "Admin - Settings - Authority";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h3>Chỉnh sửa quyền hạn</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row row-cols-3 gy-3">
+        <div class="col">
+            <a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+                href="#AccessPermissionCollapse" role="button" aria-expanded="false"
+                aria-controls="AccessPermissionCollapse">
+                <span>Quyền hạn truy cập</span>
+                <span>
+                    <i id="accessPermissionArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+                </span>
+            </a>
+            <hr>
+            <div class="collapse" id="AccessPermissionCollapse">
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="accessPermissionCheckbox1">
+                    <label class="form-check-label" for="accessPermissionCheckbox1">Quyền 1</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="accessPermissionCheckbox2"
+                        checked>
+                    <label class="form-check-label" for="accessPermissionCheckbox2">Quyền 2</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="accessPermissionCheckbox3"
+                        disabled>
+                    <label class="form-check-label" for="accessPermissionCheckbox3">Quyền 3</label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+                href="#UserPermissionCollapse" role="button" aria-expanded="false"
+                aria-controls="UserPermissionCollapse">
+                <span>Quyền hạn người dùng</span>
+                <span>
+                    <i id="userPermissionArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+                </span>
+            </a>
+            <hr>
+            <div class="collapse" id="UserPermissionCollapse">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="userPermissionCheckbox1">
+                    <label class="form-check-label" for="userPermissionCheckbox1">Quyền 1</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="userPermissionCheckbox2" checked>
+                    <label class="form-check-label" for="userPermissionCheckbox2">Quyền 2</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="userPermissionCheckbox3" disabled>
+                    <label class="form-check-label" for="userPermissionCheckbox3">Quyền 3</label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+                href="#AdminPermissionCollapse" role="button" aria-expanded="false"
+                aria-controls="AdminPermissionCollapse">
+                <span>Admin</span>
+                <span>
+                    <i id="adminPermissionArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+                </span>
+            </a>
+            <hr>
+            <div class="collapse" id="AdminPermissionCollapse">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="adminPermissionCheckbox1">
+                    <label class="form-check-label" for="adminPermissionCheckbox1">Quyền 1</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="adminPermissionCheckbox2" checked>
+                    <label class="form-check-label" for="adminPermissionCheckbox2">Quyền 2</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="adminPermissionCheckbox3"
+                        disabled>
+                    <label class="form-check-label" for="adminPermissionCheckbox3">Quyền 3</label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+                href="#Editor" role="button" aria-expanded="false"
+                aria-controls="Editor">
+                <span>Editor</span>
+                <span>
+                    <i id="EditorArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+                </span>
+            </a>
+            <hr>
+            <div class="collapse" id="Editor">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="EditorCheckbox1">
+                    <label class="form-check-label" for="EditorCheckbox1">Quyền 1</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="EditorCheckbox2" checked>
+                    <label class="form-check-label" for="EditorCheckbox2">Quyền 2</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="EditorCheckbox3"
+                        disabled>
+                    <label class="form-check-label" for="EditorCheckbox3">Quyền 3</label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+                href="#Manager" role="button" aria-expanded="false"
+                aria-controls="Manager">
+                <span>Manager</span>
+                <span>
+                    <i id="ManagerArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+                </span>
+            </a>
+            <hr>
+            <div class="collapse" id="Manager">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="ManagerCheckbox1">
+                    <label class="form-check-label" for="ManagerCheckbox1">Quyền 1</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="ManagerCheckbox2" checked>
+                    <label class="form-check-label" for="ManagerCheckbox2">Quyền 2</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="ManagerCheckbox3"
+                        disabled>
+                    <label class="form-check-label" for="ManagerCheckbox3">Quyền 3</label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <a class="text-decoration-none text-black d-flex justify-content-between" data-bs-toggle="collapse"
+                href="#Employee" role="button" aria-expanded="false"
+                aria-controls="Employee">
+                <span>Employee</span>
+                <span>
+                    <i id="EmployeeArrowIcon" class="fa-solid fa-angle-down float-end"></i>
+                </span>
+            </a>
+            <hr>
+            <div class="collapse" id="Employee">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="EmployeeCheckbox1">
+                    <label class="form-check-label" for="EmployeeCheckbox1">Quyền 1</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="EmployeeCheckbox2" checked>
+                    <label class="form-check-label" for="EmployeeCheckbox2">Quyền 2</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="EmployeeCheckbox3"
+                        disabled>
+                    <label class="form-check-label" for="EmployeeCheckbox3">Quyền 3</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
