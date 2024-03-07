@@ -6,6 +6,8 @@
 
 <section class="container">
     <p id="errorMessage" class="text-center text-success bg-black">@ViewBag.ErrorMessage</p>
+
+    <partial name="~/Views/Component/SearchAndAdd.cshtml" />
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -24,8 +26,8 @@
                     <td style="word-break: break-all;">@laptop.Price</td>
                     <td style="word-break: break-all;">@laptop.Quantity</td>
                     <td style="word-break: break-all;">
-                        <img src="http://localhost:4000/@laptop.ImgPath"
-                             alt="Laptop Image" style="width: 100px; height: 100px;">
+                        <img src="http://localhost:4000/@laptop.ImgPath" alt="Laptop Image"
+                            style="width: 100px; height: 100px;">
                     </td>
                     <td>
                         <div style="display: flex; gap: 8px;">
@@ -33,7 +35,7 @@
                                 <button class="btn btn-primary btn-sm" type="submit">Cập nhật</button>
                             </form>
                             <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"
-                                  asp-route-LaptopId="@laptop.LaptopId" class="">
+                                asp-route-LaptopId="@laptop.LaptopId" class="">
                                 <button class="btn btn-primary btn-sm" type="submit">Xóa Laptop</button>
                             </form>
                         </div>

@@ -6,6 +6,7 @@
 
 }
 <section class="container">
+    <partial name="~/Views/Component/SearchAndAdd.cshtml" />
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -47,16 +48,18 @@
     </table>
 </section>
 <section class=" container">
-    
+
 
     <div class="row row-cols-4">
         <div class="col-sm-2">Quản lý sản phẩm</div>
         <div class="col-sm-4">
-            <a class="nav-link active text-uppercase" asp-action="LaptopPage" asp-controller="Admin"><i class="fa-solid fa-screwdriver-wrench me-2"></i>Sản phẩm</a>
+            <a class="nav-link active text-uppercase" asp-action="LaptopPage" asp-controller="Admin"><i
+                    class="fa-solid fa-screwdriver-wrench me-2"></i>Sản phẩm</a>
         </div>
-        <div class="col-sm-2">Quản lý sản phẩm</div>
+        <div class="col-sm-2">Người dùng</div>
         <div class="col-sm-4">
-            <a class="nav-link active text-uppercase" asp-action="LaptopPage" asp-controller="Admin"><i class="fa-solid fa-screwdriver-wrench me-2"></i>Người dùng</a>
+            <a class="nav-link active text-uppercase" asp-action="UserPage" asp-controller="Admin"><i
+                    class="fa-solid fa-screwdriver-wrench me-2"></i>Người dùng</a>
         </div>
     </div>
 </section>

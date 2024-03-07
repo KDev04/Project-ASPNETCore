@@ -55,16 +55,63 @@
     </div>
 </div>
 <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container-fluid.bg-dark.text-light.footer {
-            margin-top: auto;
-            padding: 0;
-        }
-    </style>
+    .container-fluid.bg-dark.text-light.footer {
+        margin-top: auto;
+        padding: 0;
+    }
+</style>
+<style>
+    .card-footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    .text-title a {
+        text-decoration: none;
+        font-weight: 900;
+        font-size: 1.2em;
+        line-height: 1.5;
+    }
+
+    button.card-button {
+        border: #252525;
+        flex: 1;
+        padding: .3em;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: .3s ease-in-out;
+    }
+
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        /* You may need to adjust this based on your design */
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s;
+    }
+
+    .image-container:hover img {
+        transform: scale(1.1);
+    }
+
+    .card-button:hover {
+        background-color: #ffcaa6;
+    }
+</style>

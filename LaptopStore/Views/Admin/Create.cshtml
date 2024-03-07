@@ -1,65 +1,67 @@
-﻿@{
+﻿@model Laptop
+@{
     Layout = "~/Views/Shared/_Adminlayout.cshtml";
     ViewData["Title"] = "Admin - Laptop - Create";
 }
+<section class="container">
+    <h3 class="text-center">Thêm sản phẩm mới</h3>
+    <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data"
+        class="form-inline">
+        <div class="row row-cols-2 mb-2">
+            <div class="col-4 col-sm-2 offset-md-2">
+                <label asp-for="Name" class="mr-2">Tên Laptop:</label>
 
-@model Laptop
-<section class="container mb-2 pb-4">
-    <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data" class="py-2 my-2">
-        <div class="form-group">
-            <label asp-for="Name">Tên Laptop:</label>
-            <input asp-for="Name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label asp-for="Price">Giá:</label>
-            <input asp-for="Price" type="number" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label asp-for="Quantity">Số lượng kho:</label>
-            <input asp-for="Quantity" type="number" class="form-control">
-        </div>
+            </div>
+            <div class="col">
+                <input asp-for="Name" class="form-control" required>
 
-        <div class="form-group">
-            <label asp-for="Image">Ảnh:</label>
-            <input asp-for="Image" type="file" class="form-control-file" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Description">Mô tả</label>
-            <input asp-for="Description" class="form-control" required>
+        <div class="row row-cols-2 mb-2">
+            <div class="col-4 col-sm-2 offset-md-2">
+                <label asp-for="Price" class="mr-2">Giá:</label>
 
-@*             <textarea asp-for="Description" class="form-control ckeditor" required></textarea> *@
+            </div>
+            <div class="col">
+                <input asp-for="Price" type="number" class="form-control" required>
+
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
+        <div class="row row-cols-2 mb-2">
+            <div class="col-4 col-sm-2 offset-md-2">
+                <label asp-for="Quantity" class="mr-2">Số lượng kho:</label>
+
+            </div>
+            <div class="col">
+                <input asp-for="Quantity" type="number" class="form-control">
+
+            </div>
+        </div>
+        <div class="row row-cols-2 mb-2">
+            <div class="col-4 col-sm-2 offset-md-2">
+                <label asp-for="Image" class="mr-2">Ảnh:</label>
+
+            </div>
+            <div class="col">
+                <input asp-for="Image" type="file" class="form-control-file" required>
+
+            </div>
+        </div>
+        <div class="row row-cols-2 mb-2">
+            <div class="col-4 col-sm-2 offset-md-2">
+                <label asp-for="Description" class="mr-2">Mô tả</label>
+
+            </div>
+            <div class="col">
+                <input asp-for="Description" class="form-control" required>
+
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
+
+            </div>
+        </div>
     </form>
 </section>
-@* <script>
-    ClassicEditor
-        .create(document.querySelector('.ckeditor'))
-        .catch(error => {
-            console.error(error);
-        });
-
-    ClassicEditor
-        .create(document.querySelector('.ckeditor1'))
-        .catch(error => {
-            console.error(error);
-        });
-
-    ClassicEditor
-        .create(document.querySelector('.ckeditor2'))
-        .catch(error => {
-            console.error(error);
-        });
-
-    ClassicEditor
-        .create(document.querySelector('.ckeditor3'))
-        .catch(error => {
-            console.error(error);
-        });
-
-    ClassicEditor
-        .create(document.querySelector('.ckeditor4'))
-        .catch(error => {
-            console.error(error);
-        });
-</script> *@
