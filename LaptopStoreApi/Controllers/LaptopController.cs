@@ -108,6 +108,21 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("{categoryId}")]
+        public ActionResult<IEnumerable<Laptop>> GetLaptopsByCategoryId(int categoryId)
+        {
+            var laptops = _dbContext.LaptopCategories
+                .Where(lc => lc.CategoryId == categoryId)
+                .Select(lc => lc.Laptop)
+                .ToList();
+
+            if (laptops.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(laptops);
+        }
         [HttpGet]
         public async Task<List<Laptop>> SearchByLaptopName(string name)
         {

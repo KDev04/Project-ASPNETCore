@@ -134,5 +134,20 @@ namespace LaptopStoreApi.Controllers
             var orders = _dbContext.Orders.Include(l => l.Laptop).Include(c => c.User).ToList();
             return Ok(orders);
         }
+       /* [HttpPost] 
+        public IActionResult ItemsByCart([FromForm] int id)
+        {
+            var cart = _dbContext.Carts.Where(c => c.Id == id).FirstOrDefault();
+            if (cart != null)
+            {
+                OrderItem item = new OrderItem()
+                {
+                    LaptopId = cart.LaptopId,
+                    Laptop = cart.Laptop,
+                    
+
+                };
+            }
+        }*/
     }
 }

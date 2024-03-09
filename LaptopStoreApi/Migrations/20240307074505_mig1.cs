@@ -57,6 +57,19 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Laptops",
                 columns: table => new
                 {
@@ -257,6 +270,30 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LaptopCategories",
+                columns: table => new
+                {
+                    LaptopId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LaptopCategories", x => new { x.LaptopId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_LaptopCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LaptopCategories_Laptops_LaptopId",
+                        column: x => x.LaptopId,
+                        principalTable: "Laptops",
+                        principalColumn: "LaptopId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -371,6 +408,11 @@ namespace LaptopStoreApi.Migrations
                 column: "LaptopStatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LaptopCategories_CategoryId",
+                table: "LaptopCategories",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_LaptopId",
                 table: "Orders",
                 column: "LaptopId");
@@ -409,6 +451,9 @@ namespace LaptopStoreApi.Migrations
                 name: "Images");
 
             migrationBuilder.DropTable(
+                name: "LaptopCategories");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
@@ -416,6 +461,9 @@ namespace LaptopStoreApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "LaptopStatus");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
