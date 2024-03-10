@@ -94,7 +94,7 @@
                       </a>
                   </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="Dashboard" asp-controller="Settings"><i class="fa-solid fa-screwdriver-wrench me-2"></i>Cài đặt</a>
+                    <a class="nav-link active text-uppercase" asp-action="Setting" asp-controller="Settings"><i class="fa-solid fa-screwdriver-wrench me-2"></i>Cài đặt</a>
                 </li>
                 @{
                     string CheckRole = Context.Request.Cookies["Role"]!;
@@ -116,17 +116,19 @@
 
                   </li>
 
-                  <li class="nav-item">
+                  <li class="nav-item d-flex align-items-center ">
                       <form class="d-flex" role="search" asp-action="Search" asp-controller="Laptop">
                           <input class="form-control me-2" type="search" placeholder="Nhập tên sản phẩm... " aria-label="Search"
                               name="keyword">
                           <button class="btn btn-outline-success" type="submit">Search</button>
                       </form>
                   </li>
+                  
                   <li class="nav-item dropdown">
                       <a class="nav-link active dropdown-toggle" href="#" id="UserDropdown" role="button"
                           data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-user"></i>
+                        <img src="~/img/user.jpg" alt="Profile" class="rounded-circle "
+                            style="width: 35px; height: auto;">
                         @{
                             string Username = Context.Request.Cookies["Username"]!;
                             if (Username != null)
@@ -207,7 +209,7 @@
                       </ul>
                   </li>
 
-                  <li class="nav-item">
+                  <li class="nav-item  d-flex align-items-center ">
                       <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
                   </li>
 
