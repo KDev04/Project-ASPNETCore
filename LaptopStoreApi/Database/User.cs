@@ -10,5 +10,6 @@ namespace LaptopStoreApi.Database
         public DateTime? BirthDay { get; set; } = DateTime.MinValue;
         public string? Address { get; set; } = null!;
         public int? Age { get; set; }
+        public ICollection<LikeProduct> LikeProducts { get; set; }
     }
 }

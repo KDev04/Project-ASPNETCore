@@ -19,7 +19,7 @@ namespace LaptopStoreApi.Database
         public string ImgPath { get; set; } = string.Empty;
         public string? Type { get; set; } = string.Empty;
         public ICollection<LaptopCategory> LaptopCategories { get; set; }
-
+        public ICollection<LikeProduct> LikeProducts { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
     }

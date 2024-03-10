@@ -23,18 +23,23 @@ namespace LaptopStoreApi.Database
 
             modelBuilder.Entity<Laptop>().HasKey(l => l.LaptopId);
             modelBuilder.Entity<Laptop>().HasMany(l => l.LaptopCategories).WithOne(lc => lc.Laptop);
-/*            modelBuilder.Entity<Laptop>().HasMany(l => l.LaptopOrderItems).WithOne(oi => oi.Laptop);*/
+            modelBuilder.Entity<Laptop>().HasMany(l => l.LikeProducts).WithOne(oi => oi.Laptop);
             //LaptopCategory
             modelBuilder.Entity<LaptopCategory>().HasKey(lc => new { lc.LaptopId, lc.CategoryId });
             modelBuilder.Entity<LaptopCategory>().HasOne(lc => lc.Laptop).WithMany(l => l.LaptopCategories).HasForeignKey(lc => lc.LaptopId);
             modelBuilder.Entity<LaptopCategory>().HasOne(lc => lc.Category).WithMany(c => c.LaptopCategories).HasForeignKey(lc => lc.CategoryId);
-            //Order Item 
-/*            modelBuilder.Entity<OrderItem>().HasKey(lc => new { lc.LaptopId, lc.BillId });
-            modelBuilder.Entity<OrderItem>().HasOne(lc => lc.Laptop).WithMany(l => l.LaptopOrderItems).HasForeignKey(lc => lc.LaptopId);
-            modelBuilder.Entity<OrderItem>().HasOne(lc => lc.Bill).WithMany(l => l.LaptopOrderItems).HasForeignKey(lc => lc.BillId);
 
-            modelBuilder.Entity<Bill>().HasMany(l => l.LaptopOrderItems).WithOne(oi => oi.Bill);
-            modelBuilder.Entity<Bill>().HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId);*/
+            //LikeProducts
+            modelBuilder.Entity<LikeProduct>().HasKey(lp => new { lp.LaptopId, lp.UserId });
+            modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.Laptop).WithMany(l=>l.LikeProducts).HasForeignKey(lp => lp.LaptopId);
+            modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.User).WithMany(l => l.LikeProducts).HasForeignKey(lp => lp.UserId);
+            //Order Item 
+            /*            modelBuilder.Entity<OrderItem>().HasKey(lc => new { lc.LaptopId, lc.BillId });
+                        modelBuilder.Entity<OrderItem>().HasOne(lc => lc.Laptop).WithMany(l => l.LaptopOrderItems).HasForeignKey(lc => lc.LaptopId);
+                        modelBuilder.Entity<OrderItem>().HasOne(lc => lc.Bill).WithMany(l => l.LaptopOrderItems).HasForeignKey(lc => lc.BillId);
+
+                        modelBuilder.Entity<Bill>().HasMany(l => l.LaptopOrderItems).WithOne(oi => oi.Bill);
+                        modelBuilder.Entity<Bill>().HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId);*/
 
             modelBuilder.Entity<Cart>().HasKey(c => c.Id);
 
@@ -89,5 +94,6 @@ namespace LaptopStoreApi.Database
         public DbSet<Evaluate> Evaluates => Set<Evaluate>();
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<LaptopCategory> LaptopCategories { get; set; }
+        public DbSet<LikeProduct> LikeProducts { get; set; }
     }
 }

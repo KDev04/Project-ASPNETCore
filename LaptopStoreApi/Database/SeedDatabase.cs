@@ -90,8 +90,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "Nitro 16 AMD",
-                        Description =
-                            "12th Gen Intel® Core™ processors\r\nTwinAir cooling\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
+                        Description ="12th Gen Intel® Core™ processors\r\nTwinAir cooling\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
                         Type = "Laptop",
                         Price = 6000,
                         BigPrice = 2000,
