@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1000; position:relative; ">
     <div class="container text-black-50">
         <a href="/">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 64 64">
@@ -38,44 +38,55 @@
             <!-- Nav right -->
             <ul class="navbar-nav me-auto text-uppercase ">
 
-                <li class="nav-item">
+                <li class="nav-item d-flex align-items-center ">
                     <a class="nav-link active text-uppercase" href="/">Dream Laptop</a>
+
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-uppercase">
+                        <i class="fa-solid fa-bars-staggered  toggle-sidebar-btn fa-2x"
+                            style="color: #63E6BE;  cursor: pointer;">
+                        </i>
+                    </a>
+                </li>
+
+
+
 
                 @* <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="Create" asp-controller="Admin">
-                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Thêm sản phẩm mới
-                    </a>
+                <a class="nav-link active text-uppercase" asp-action="Create" asp-controller="Admin">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Thêm sản phẩm mới
+                </a>
                 </li> *@
-                <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="UserPage" asp-controller="Admin">
-                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Người dùng
-                    </a>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="LaptopPage" asp-controller="Admin">
-                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Sản phẩm
-                    </a>
-
-                </li>
                 @* <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="OrderPage" asp-controller="Admin">
-                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Đơn hàng
-                    </a>
+                <a class="nav-link active text-uppercase" asp-action="UserPage" asp-controller="Admin">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Người dùng
+                </a>
+
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active text-uppercase" asp-action="LaptopPage" asp-controller="Admin">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Sản phẩm
+                </a>
 
                 </li> *@
-                <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="Dashboard" asp-controller="Settings">
-                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Cài đặt
-                    </a>
+                @* <li class="nav-item">
+                <a class="nav-link active text-uppercase" asp-action="OrderPage" asp-controller="Admin">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Đơn hàng
+                </a>
+
+                </li> *@
+                @* <li class="nav-item">
+                <a class="nav-link active text-uppercase" asp-action="Dashboard" asp-controller="Settings">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Cài đặt
+                </a>
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-uppercase" asp-action="Authority" asp-controller="Settings">
-                        <i class="fa-solid fa-screwdriver-wrench me-2"></i>Quyền hạn
-                    </a>
-                </li>
+                <a class="nav-link active text-uppercase" asp-action="Authority" asp-controller="Settings">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>Quyền hạn
+                </a>
+                </li> *@
             </ul>
             <!-- /nav left -->
             <ul class="navbar-nav ms-auto">
@@ -99,11 +110,73 @@
                 </ul>
 
                 </li> *@
-                <li class="nav-item">
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="~/img/profile-img.jpg" alt="Profile" class="rounded-circle  "
+                            style="width: 35px; height: auto; object-fit: cover; padding :0 ;">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>Kevin Anderson</h6>
+                            <span>Web Designer</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Need Help?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li>
+
+                <li class="nav-item d-flex align-items-center   ">
                     <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
                 </li>
 
             </ul>
         </div>
     </div>
+    
 </nav>
+
+
+
+
