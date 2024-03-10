@@ -219,7 +219,139 @@ namespace LaptopStore.Controllers
                 return View("Register");
             }
         }
+        public async Task<IActionResult> AddToLikeList(int LaptopId)
+        {
+            var token = Request.Cookies["Token"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserId"
+            );
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
+                Console.WriteLine(responseData);
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var content = new FormUrlEncodedContent(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>("LaptopId", LaptopId.ToString()),
+                            new KeyValuePair<string, string>("UserId", responseData)
+                        }
+                    );
 
+                HttpResponseMessage resLap = await _httpClient.PostAsync(
+                    "http://localhost:4000/api/LikeProduct/AddToLikeList",content
+                );
+
+                if (resLap.IsSuccessStatusCode)
+                {
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+
+                    return Redirect("/Laptop");
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)resLap.StatusCode);
+                }
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> LikeList()
+        {
+            var token = Request.Cookies["Token"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserId"
+            );
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
+                Console.WriteLine(responseData);
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+                HttpResponseMessage resLap= await _httpClient.GetAsync(
+                   $"http://localhost:4000/api/LikeProduct/GetLaptopsByUserId/{responseData}"
+                );
+
+                if (resLap.IsSuccessStatusCode)
+                {
+                    var Laptops = await resLap.Content.ReadAsStringAsync();
+                    Console.WriteLine(Laptops);
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var laps = JsonConvert.DeserializeObject<List<Laptop>>(Laptops);
+
+                    return View(laps); // Trả về view mà bạn muốn hiển thị dữ liệu
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ AP
+                    List<Laptop> list = new List<Laptop>() {};
+                    return View(list);
+                }
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> DeleteLikeProduct(int LaptopId)
+        {
+            var token = Request.Cookies["Token"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserId"
+            );
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                ViewBag.IsLoggedIn = true;
+                Console.WriteLine(ViewBag.IsLoggedIn);
+                Console.WriteLine(responseData);
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+                HttpResponseMessage resLap = await _httpClient.DeleteAsync(
+                    $"http://localhost:4000/api/LikeProduct/DeleteLaptopCategory/{responseData}/{LaptopId}"
+                );
+
+                if (resLap.IsSuccessStatusCode)
+                {
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+
+                    return Redirect("/Auth/LikeList");
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)resLap.StatusCode);
+                }
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
+                return StatusCode((int)response.StatusCode);
+            }
+        }
         public async Task<IActionResult> UserInfo()
         {
             /*var token = HttpContext.Session.GetString("Token");*/
@@ -250,22 +382,6 @@ namespace LaptopStore.Controllers
             }
         }
 
-
-        /* public async Task<IActionResult> Logout()
-         {
-             using (var httpClient = new HttpClient())
-             {
-                 var apiResponse = await httpClient.GetAsync(
-                     "http://localhost:4000/api/Account/Logout"
-                 );
-                 if (apiResponse.IsSuccessStatusCode)
-                 {
-                     ViewBag.IsLoggedIn = false;
-                     Console.WriteLine(ViewBag.IsLoggedIn);
-                 }
-                return View();
-             }
-         }*/
         public IActionResult Logout()
         {
             // Xóa Token khỏi Session

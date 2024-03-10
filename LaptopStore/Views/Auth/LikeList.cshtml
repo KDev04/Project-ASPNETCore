@@ -1,0 +1,70 @@
+﻿@model List<Laptop>
+
+@{
+    ViewData["Title"] = "Likes List";
+}
+
+<div class="container-fluid" style="background-color:#FFFBD1">
+    <section class="container py-5 my-5">
+        @if (Model.Count > 0)
+        {
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr class="row text-center">
+                        <th class="col-2">Sản phẩm</th>
+                        <th class="col">Tên sản phẩm</th>
+                        <th class="col">Giá</th>
+                        <th class="col">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var laptop in Model)
+                    {
+                        <tr class="row text-center">
+                            <td class="col-2">
+                                <img class="card-img-top img-thumbnail" src="http://localhost:4000/@laptop.ImgPath" />
+                            </td>
+                            <td class="col">@laptop.Name</td>
+                            <td class="col">@laptop.Price</td>
+                            <td class="col">
+                                <a asp-action="DeleteLikeProduct" asp-controller="Auth" asp-route-LaptopId="@laptop.LaptopId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center">
+                <img class="mx-auto d-block" style="height: 150px; width: 150px" src="/img/cart.png" />
+                <span class="d-block my-4"><strong style="color:#43CD80">Bạn chưa có sản phẩm yêu thích nào</strong></span>
+                <a class="btn btn-sm" href="/Laptop" style="background-color:cornflowerblue; color: white">Mua ngay</a>
+            </div>
+        }
+    </section>
+</div>
+
+@* @section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            $('.deleteButton').click(function () {
+                var LaptopId = $(this).val()
+
+                $.ajax({
+                    url: '/Auth/DeleteLikeProduct/' + LaptopId,
+                    type: 'DELETE',
+                    success: function () {
+                        alert("Đã xóa");
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Xóa không thành công');
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+} *@
