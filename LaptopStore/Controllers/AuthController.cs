@@ -264,7 +264,7 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
-                return StatusCode((int)response.StatusCode);
+                return Redirect("/auth/login");
             }
         }
         public async Task<IActionResult> LikeList()
@@ -308,7 +308,7 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
-                return StatusCode((int)response.StatusCode);
+                return Redirect("/auth/login");
             }
         }
         public async Task<IActionResult> DeleteLikeProduct(int LaptopId)
@@ -349,7 +349,7 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
-                return StatusCode((int)response.StatusCode);
+                return Redirect("/auth/login");
             }
         }
         public async Task<IActionResult> UserInfo()
