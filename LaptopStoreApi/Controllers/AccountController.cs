@@ -228,7 +228,7 @@ namespace LaptopStoreApi.Controllers
             return Ok(users);
         }*/
         [HttpGet]
-        public async Task<IActionResult> GetAllUser()
+/*        public async Task<IActionResult> GetAllUser()
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
@@ -262,8 +262,13 @@ namespace LaptopStoreApi.Controllers
             {
                 return Forbid(); // Người dùng không có vai trò Administrator hoặc Moderator, trả về mã lỗi 403 (Forbidden)
             }
+        }*/
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return Ok(users);
         }
-
         [HttpGet]
         public IActionResult GetUserRoles()
         {

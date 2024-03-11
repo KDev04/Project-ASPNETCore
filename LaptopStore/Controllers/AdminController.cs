@@ -74,7 +74,7 @@ namespace LaptopStore.Controllers
                             else
                             {
                                 // Xử lý khi có lỗi từ API
-                                return Redirect("/Admin/Index");
+                                return Redirect("/Admin/LaptopPage");
                             }
                         }
                     }
@@ -167,7 +167,7 @@ namespace LaptopStore.Controllers
                     }
                     else
                     {
-                        return Redirect("/");
+                        return Redirect("/Admin/LaptopPage");
                     }
                 }
             }
