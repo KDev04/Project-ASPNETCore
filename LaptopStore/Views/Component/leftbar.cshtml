@@ -6,21 +6,21 @@
     <li class="nav-heading">Manager</li>
 
     <li class="nav-item">
-      <a class="nav-link " href="/Settings/Dashboard">
+      <a class="nav-link " href="/Settings/Setting">
         <i class="fa-solid fa-grip"></i>
         <span>Analyze </span>
       </a>
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" asp-action="LaptopPage" asp-controller="Admin">
         <i class="fa-solid fa-layer-group"></i>
         <span>Product Manager</span>
       </a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#">
+    <li class="nav-item"> 
+      <a class="nav-link collapsed" asp-action="Order" asp-controller="Settings">
         <i class="fa-solid fa-cube"></i>
         <span>Order Manager</span>
       </a>
@@ -34,7 +34,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" asp-action="Authority" asp-controller="Settings">
         <i class="fa-solid fa-sliders"></i>
         <span>Authorrize Manager</span>
       </a>
@@ -94,6 +94,10 @@
   </ul>
 
 </aside><!-- End Sidebar-->
+
+
+
+
 
 <script>
   /**

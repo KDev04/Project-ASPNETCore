@@ -1,0 +1,73 @@
+@model List<Order>
+@{
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+    ViewData["Title"] = "Admin - Settings";
+    decimal totalSums = 0; // Biến để tính tổng
+
+}
+
+<section id="main" style="position: absolute; ">
+     <section >
+
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Người đặt</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng cộng</th>
+                    <th>Tình trạng</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.User?.LastName</td>
+                        <td>@user.Laptop?.Name</td>
+                        <td>@user.Price</td>
+                        <td>@user.Quantity</td>
+                        <td>@user.Total</td>
+                        <td>@user.StatusOrder</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
+                        </td>
+                    </tr>
+                    totalSums += user.Total; // Tính tổng
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Tổng cộng</td>
+                    <td>@totalSums</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+<style>
+  #main {
+    position: absolute;
+    top: 69px;
+    /* Khoảng cách từ trên xuống */
+    bottom: 0;
+    /* Chiều cao sẽ chiếm đến cuối trang */
+    left: 0;
+    /* Khoảng cách từ bên trái sang */
+    right: 0;
+    /* Khoảng cách từ bên phải sang */
+    padding-left: 10px;
+    font-family: var(--bs-font-monospace);
+    color: #012970;
+    text-overflow: ellipsis;
+    text-decoration: none;
+  }
+</style>
