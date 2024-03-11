@@ -61,13 +61,83 @@
                     <td>@user.PhoneNumber</td>
                     <td>
                         <form method="post" asp-action="AddRole" asp-controller="Admin" asp-route-USerId=@user.Id>
-                            <button class="btn btn-primary btn-sm" type="submit">Cấp quyền Moderate</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Cấp quyền</button>
                         </form>
-                        @* <button class="btn btn-primary btn-sm OrderBtn" value=@user.Id>Cấp role</button>
-                        <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button> *@
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                            chỉnh sửa
+                        </button>
+                        <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
                     </td>
+
                 </tr>
+
             }
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="SaveUser" method="post" enctype="multipart/form-data" class="form-inline">
+                                <div class="row row-cols-2 mb-2">
+                                    <div class="col-4 col-sm-2 offset-md-2">
+                                        <label for="Name" class="mr-2">Họ và tên:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input name="Name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2 mb-2">
+                                    <div class="col-4 col-sm-2 offset-md-2">
+                                        <label for="Age" class="mr-2">Tuổi:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input name="Age" type="number" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2 mb-2">
+                                    <div class="col-4 col-sm-2 offset-md-2">
+                                        <label for="Email" class="mr-2">Email:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input name="Email" type="email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2 mb-2">
+                                    <div class="col-4 col-sm-2 offset-md-2">
+                                        <label for="Avatar" class="mr-2">Avatar:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input name="Avatar" type="file" class="form-control-file" required>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2 mb-2">
+                                    <div class="col-4 col-sm-2 offset-md-2">
+                                        <label for="Bio" class="mr-2">Tiểu sử:</label>
+                                    </div>
+                                    <div class="col">
+                                        <textarea name="Bio" class="form-control" required></textarea>
+                                    </div>
+                                </div>
+@*                                 <div class="row text-center">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-secondary">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+
+                                    </div>
+                                </div> *@
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary">Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </tbody>
     </table>
 </section>

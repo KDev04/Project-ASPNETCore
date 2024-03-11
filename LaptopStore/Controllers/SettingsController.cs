@@ -39,6 +39,10 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
-        
+        public IActionResult Inventory()
+        {
+            return View();
+        }
+
     }
 }

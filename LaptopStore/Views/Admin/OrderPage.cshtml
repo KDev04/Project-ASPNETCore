@@ -15,7 +15,9 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Người đặt</th>
+                    <th>Ngày đặt</th>
                     <th>Tên sản phẩm</th>
+
                     <th>Đơn giá</th>
                     <th>Số lượng</th>
                     <th>Tổng cộng</th>
@@ -28,18 +30,21 @@
                 {
                     <tr>
                         <td>@user.User?.LastName</td>
+                        <td>05:20 10/02/2024</td>
                         <td>@user.Laptop?.Name</td>
                         <td>@user.Price</td>
                         <td>@user.Quantity</td>
                         <td>@user.Total</td>
                         <td>@user.StatusOrder</td>
                         <td>
+                            <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
                             <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
                         </td>
                     </tr>
                     totalSums += user.Total; // Tính tổng
                 }
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

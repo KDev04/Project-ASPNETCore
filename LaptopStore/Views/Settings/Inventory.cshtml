@@ -1,0 +1,122 @@
+﻿@{
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+    ViewData["Title"] = "Admin - Orders";
+
+}
+<section id="main" style="position: absolute; ">
+    <partial name="~/Views/Component/SearchAndAdd.cshtml" />
+    <section>
+
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nhập từ </th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng cộng</th>
+                    <th>Ngày nhập</th>
+                    <th>Tình trạng</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Công ty ABC</td>
+                    <td>Laptop Acer</td>
+                    <td>12000000</td>
+                    <td>200</td>
+                    <td>2400000000</td>
+                    <td>08:24 11/3/2024</td>
+                    <td>Đang về kho</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
+                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Công ty ABC</td>
+                    <td>Laptop Acer</td>
+                    <td>12000000</td>
+                    <td>200</td>
+                    <td>2400000000</td>
+                    <td>08:24 11/3/2024</td>
+                    <td>Đang về kho</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
+                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Công ty ABC</td>
+                    <td>Laptop Acer</td>
+                    <td>12000000</td>
+                    <td>200</td>
+                    <td>2400000000</td>
+                    <td>08:24 11/3/2024</td>
+                    <td>Đang về kho</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
+                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Công ty ABC</td>
+                    <td>Laptop Acer</td>
+                    <td>12000000</td>
+                    <td>200</td>
+                    <td>2400000000</td>
+                    <td>08:24 11/3/2024</td>
+                    <td>Đang về kho</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
+                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Công ty ABC</td>
+                    <td>Laptop Acer</td>
+                    <td>12000000</td>
+                    <td>200</td>
+                    <td>2400000000</td>
+                    <td>08:24 11/3/2024</td>
+                    <td>Đang về kho</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
+                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Tổng cộng</td>
+                    <td>....</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+<style>
+    #main {
+        position: absolute;
+        top: 69px;
+        /* Khoảng cách từ trên xuống */
+        bottom: 0;
+        /* Chiều cao sẽ chiếm đến cuối trang */
+        left: 0;
+        /* Khoảng cách từ bên trái sang */
+        right: 0;
+        /* Khoảng cách từ bên phải sang */
+        padding-left: 10px;
+        font-family: var(--bs-font-monospace);
+        color: #012970;
+        text-overflow: ellipsis;
+        text-decoration: none;
+    }
+</style>
