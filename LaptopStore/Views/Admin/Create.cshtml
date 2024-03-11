@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Adminlayout.cshtml";
     ViewData["Title"] = "Admin - Laptop - Create";
 }
-<section class="container">
+<section class="container" id="main" style="position: absolute;  margin-top:60">
     <h3 class="text-center">Thêm sản phẩm mới</h3>
     <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data"
         class="form-inline">

@@ -254,7 +254,8 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                return StatusCode((int)response.StatusCode);
+                List<Order> orders = new List<Order>();
+                return View(orders);
             }
         }
     }
