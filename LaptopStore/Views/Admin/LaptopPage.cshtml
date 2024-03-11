@@ -4,11 +4,11 @@
 }
 @model List<Laptop>
 
-<section class="container">
+<section id="main" style="position: absolute;  margin-top:60">
     <p id="errorMessage" class="text-center text-success bg-black">@ViewBag.ErrorMessage</p>
 
     <partial name="~/Views/Component/SearchAndAdd.cshtml" />
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered " >
         <thead class="thead-dark">
             <tr>
                 <th>Tên sản phẩm</th>
@@ -30,18 +30,37 @@
                             style="width: 100px; height: 100px;">
                     </td>
                     <td>
-                        <div style="display: flex; gap: 8px;">
+                        <div style="display: flex; gap: 8px;" class=" p-3 ">
                             <form method="post" asp-action="UpdateLaptop" asp-route-LaptopId=@laptop.LaptopId>
                                 <button class="btn btn-primary btn-sm" type="submit">Cập nhật</button>
                             </form>
-                            <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"
+                        </div>
+                         <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"
                                 asp-route-LaptopId="@laptop.LaptopId" class="">
                                 <button class="btn btn-primary btn-sm" type="submit">Xóa Laptop</button>
                             </form>
-                        </div>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </section>
+
+<style>
+  #main {
+    position: absolute;
+    top: 69px;
+    /* Khoảng cách từ trên xuống */
+    bottom: 0;
+    /* Chiều cao sẽ chiếm đến cuối trang */
+    left: 0;
+    /* Khoảng cách từ bên trái sang */
+    right: 0;
+    /* Khoảng cách từ bên phải sang */
+    padding-left: 10px;
+    font-family: var(--bs-font-monospace);
+    color: #012970;
+    text-overflow: ellipsis;
+    text-decoration: none;
+  }
+</style>
