@@ -10,18 +10,27 @@ using Newtonsoft.Json;
 
 namespace LaptopStore.Controllers
 {
-     public class HtmlController : Controller
+    public class HtmlController : Controller
     {
-          public IActionResult Userpage()
+
+        public IActionResult Profilepage()
         {
             return View();
         }
-        public IActionResult Blankpage()
+        public IActionResult Faqpage()
+        {
+            return View();
+        }
+        public IActionResult Contactpage()
+        {
+            return View();
+        }
+        public IActionResult Errorpage()
         {
             return View();
         }
 
-        public IActionResult Profilepage()
+        public IActionResult Blankpage()
         {
             return View();
         }
