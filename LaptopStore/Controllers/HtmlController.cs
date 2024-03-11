@@ -20,5 +20,10 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+
+        public IActionResult Profilepage()
+        {
+            return View();
+        }
     }
 }
