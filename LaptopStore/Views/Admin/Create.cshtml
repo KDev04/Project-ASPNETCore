@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Adminlayout.cshtml";
     ViewData["Title"] = "Admin - Laptop - Create";
 }
-<section class="container" id="main" style="position: absolute;  margin-top:60">
+<section id="main" style="position: absolute;  margin-top:60">
     <h3 class="text-center">Thêm sản phẩm mới</h3>
     <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data"
         class="form-inline">
@@ -65,3 +65,21 @@
         </div>
     </form>
 </section>
+<style>
+    #main {
+        position: absolute;
+        top: 69px;
+        /* Khoảng cách từ trên xuống */
+        bottom: 0;
+        /* Chiều cao sẽ chiếm đến cuối trang */
+        left: 0;
+        /* Khoảng cách từ bên trái sang */
+        right: 0;
+        /* Khoảng cách từ bên phải sang */
+        padding-left: 10px;
+        font-family: var(--bs-font-monospace);
+        color: #012970;
+        text-overflow: ellipsis;
+        text-decoration: none;
+    }
+</style>
