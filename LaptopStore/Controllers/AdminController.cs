@@ -35,6 +35,8 @@ namespace LaptopStore.Controllers
                 return StatusCode((int)response.StatusCode);
             }
         }
+
+
         public IActionResult Create()
         {
             return View();
@@ -98,7 +100,8 @@ namespace LaptopStore.Controllers
             {
                 ViewBag.ErrorMessage = "Đã xóa";
                 return Redirect("/Admin/LaptopPage");
-            } else
+            }
+            else
             {
                 ViewBag.ErrorMessage = "Xóa thất bại";
                 return Redirect("/Admin/LaptopPage");
@@ -150,7 +153,7 @@ namespace LaptopStore.Controllers
                             Console.WriteLine("goi qua api roi");
 
                             Console.WriteLine(response.StatusCode);
-                            
+
                             if (response.IsSuccessStatusCode)
                             {
                                 // Xử lý khi tạo laptop thành công
@@ -237,7 +240,7 @@ namespace LaptopStore.Controllers
 
             }
         }
-        public async Task<IActionResult>OrderPage()
+        public async Task<IActionResult> OrderPage()
         {
             var token = HttpContext.Session.GetString("Token");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

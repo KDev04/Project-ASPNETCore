@@ -12,7 +12,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 </head>
 
-<body>
+<body style="background-color: #f6f9ff;">
     <partial name="~/Views/Component/adminnavbar.cshtml" />
     <partial name="~/Views/Component/leftbar.cshtml" />
     @RenderBody()
@@ -22,6 +22,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 
 </html>
