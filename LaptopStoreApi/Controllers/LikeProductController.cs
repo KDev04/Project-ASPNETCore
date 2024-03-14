@@ -43,6 +43,7 @@ namespace LaptopStoreApi.Controllers
 
             return Ok(laptops);
         }
+
         [HttpPost]
         public async Task<ActionResult<LikeProduct>> AddToLikeList([FromForm] int LaptopId, [FromForm] string UserId)
         {
@@ -79,6 +80,7 @@ namespace LaptopStoreApi.Controllers
 
             return Ok("Đã thêm vào danh sách yêu thích!");
         }
+        
         [HttpDelete("{UserId}/{LaptopId}")]
         public async Task<IActionResult> DeleteLaptopLike(string UserId, int LaptopId)
         {

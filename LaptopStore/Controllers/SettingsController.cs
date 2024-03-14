@@ -51,5 +51,10 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+        public IActionResult Ticket()
+        {
+            return View();
+        }
+
     }
 }

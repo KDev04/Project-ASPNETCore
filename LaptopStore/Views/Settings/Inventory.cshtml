@@ -242,7 +242,7 @@
                         <form id="exportForm ">
                             <div class="form-group">
                                 <label for="fileFormat">Định dạng:</label>
-                                <select class="form-control my-2"  id="fileFormat" name="fileFormat">
+                                <select class="form-control my-2" id="fileFormat" name="fileFormat">
                                     <option value="pdf">PDF</option>
                                     <option value="excel">Excel</option>
                                     <option value="csv">CSV</option>
@@ -262,6 +262,7 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
+                    <th>Mã phiếu</th>
                     <th>Người làm phiếu</th>
                     <th>Tên sản phẩm</th>
                     <th>Giá mỗi cái</th>
@@ -275,6 +276,7 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>N0001</td>
                     <td>Công ty ABC</td>
                     <td>Laptop Acer</td>
                     <td>12000000</td>
@@ -289,8 +291,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>N0001</td>
                     <td>Công ty ABC</td>
-                    <td>Laptop Acer</td>
+                    <td>Sản phẩm 2 </td>
                     <td>12000000</td>
                     <td>200</td>
                     <td>2400000000</td>
@@ -303,8 +306,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>N0001</td>
                     <td>Công ty ABC</td>
-                    <td>Laptop Acer</td>
+                    <td>Sản phẩm 3</td>
                     <td>12000000</td>
                     <td>200</td>
                     <td>2400000000</td>
@@ -317,8 +321,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>X0001</td>
                     <td>Công ty ABC</td>
-                    <td>Laptop Acer</td>
+                    <td>Sản phẩm 4</td>
                     <td>12000000</td>
                     <td>200</td>
                     <td>2400000000</td>
@@ -331,8 +336,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>X0001</td>
                     <td>Công ty ABC</td>
-                    <td>Laptop Acer</td>
+                    <td>Sản phẩm 5</td>
                     <td>12000000</td>
                     <td>200</td>
                     <td>2400000000</td>
@@ -377,3 +383,49 @@
         text-decoration: none;
     }
 </style>
+
+
+<!-- Multi select library -->
+<script>
+    new MultiSelectTag('countries', {
+        rounded: true,    // default true
+        shadow: true,      // default false
+        placeholder: 'Search',  // default Search...
+        tagColor: {
+            textColor: '#327b2c',
+            borderColor: '#92e681',
+            bgColor: '#eaffe6',
+        },
+        onChange: function (values) {
+            console.log(values)
+        }
+    })
+
+    new MultiSelectTag('sp2', {
+        rounded: true,    // default true
+        shadow: true,      // default false
+        placeholder: 'Search',  // default Search...
+        tagColor: {
+            textColor: '#327b2c',
+            borderColor: '#92e681',
+            bgColor: '#eaffe6',
+        },
+        onChange: function (values) {
+            console.log(values)
+        }
+    })
+
+     new MultiSelectTag('changeinven', {
+        rounded: true,    // default true
+        shadow: true,      // default false
+        placeholder: 'Search',  // default Search...
+        tagColor: {
+            textColor: '#327b2c',
+            borderColor: '#92e681',
+            bgColor: '#eaffe6',
+        },
+        onChange: function (values) {
+            console.log(values)
+        }
+    })
+</script>
