@@ -15,19 +15,19 @@ namespace LaptopStoreApi.Database
     }
     public class PromotionInputModel
     {
-        [Required]
+/*        [Required]*/
         public string PromotionName { get; set; }
 
-        [Required]
+      /*  [Required]*/
         public string Description { get; set; }
 
-        [Required]
+/*        [Required]*/
         public DateTime Start { get; set; }
 
-        [Required]
+/*        [Required]*/
         public DateTime End { get; set; }
 
-        [Required]
+/*        [Required]*/
         public decimal PromotionValue { get; set; }
     }
 }
