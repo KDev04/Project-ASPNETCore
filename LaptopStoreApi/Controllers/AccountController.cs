@@ -189,7 +189,8 @@ namespace LaptopStoreApi.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return "không tìm thấy";
+                var testbase = await _userManager.FindByNameAsync("Base");
+                user = testbase;
             }
             string Id = user.Id;
             return Id;

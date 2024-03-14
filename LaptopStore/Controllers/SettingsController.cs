@@ -43,6 +43,13 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
-
+        public IActionResult Promotion()
+        {
+            return View();
+        }
+        public IActionResult Category()
+        {
+            return View();
+        }
     }
 }

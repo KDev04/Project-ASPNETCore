@@ -264,7 +264,30 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
-                return Redirect("/auth/login");
+                var content = new FormUrlEncodedContent(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>("LaptopId", LaptopId.ToString()),
+                            new KeyValuePair<string, string>("UserId", "test")
+                        }
+                    );
+
+                HttpResponseMessage resLap = await _httpClient.PostAsync(
+                    "http://localhost:4000/api/LikeProduct/AddToLikeList", content
+                );
+
+                if (resLap.IsSuccessStatusCode)
+                {
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+
+                    return Redirect("/Laptop");
+                }
+                else
+                {
+                    // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                    return StatusCode((int)resLap.StatusCode);
+                }
             }
         }
         public async Task<IActionResult> LikeList()
@@ -308,32 +331,28 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
-                return Redirect("/auth/login");
+                HttpResponseMessage resLap = await _httpClient.GetAsync(
+                   "http://localhost:4000/api/LikeProduct/GetLikes"
+                );
+
+                var Laptops = await resLap.Content.ReadAsStringAsync();
+                Console.WriteLine(Laptops);
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var laps = JsonConvert.DeserializeObject<List<Laptop>>(Laptops);
+
+                return View(laps);
             }
         }
         public async Task<IActionResult> DeleteLikeProduct(int LaptopId)
         {
             var token = Request.Cookies["Token"];
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                "Bearer",
-                token
-            );
-            HttpResponseMessage response = await _httpClient.GetAsync(
-                "http://localhost:4000/api/Account/GetUserId"
-            );
-            if (response.IsSuccessStatusCode)
+            if (token == null)
             {
-                var responseData = await response.Content.ReadAsStringAsync();
-                ViewBag.IsLoggedIn = true;
-                Console.WriteLine(ViewBag.IsLoggedIn);
-                Console.WriteLine(responseData);
-                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                HttpResponseMessage res = await _httpClient.DeleteAsync(
+                $"http://localhost:4000/api/LikeProduct/DeleteLaptopLike/ABC/{LaptopId}"
+            );
 
-                HttpResponseMessage resLap = await _httpClient.DeleteAsync(
-                    $"http://localhost:4000/api/LikeProduct/DeleteLaptopCategory/{responseData}/{LaptopId}"
-                );
-
-                if (resLap.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode)
                 {
                     // Xử lý dữ liệu responseData theo nhu cầu của bạn
 
@@ -343,14 +362,37 @@ namespace LaptopStore.Controllers
                 else
                 {
                     // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                    return StatusCode((int)resLap.StatusCode);
+                    return StatusCode((int)res.StatusCode);
                 }
+            }
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                token
+            );
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                "http://localhost:4000/api/Account/GetUserId"
+            );
+            Console.WriteLine(response);
+            var responseData = await response.Content.ReadAsStringAsync();
+            HttpResponseMessage resLap = await _httpClient.DeleteAsync(
+                $"http://localhost:4000/api/LikeProduct/DeleteLaptopLike/{responseData}/{LaptopId}"
+            );
+            
+            if (resLap.IsSuccessStatusCode)
+            {
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+
+                return Redirect("/Auth/LikeList");
             }
             else
             {
-                // Xử lý lỗi khi không nhận được phản hồi thành công từ APIs
-                return Redirect("/auth/login");
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return StatusCode((int)resLap.StatusCode);
             }
+            // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
+            
         }
         public async Task<IActionResult> UserInfo()
         {

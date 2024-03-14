@@ -19,7 +19,7 @@ namespace LaptopStoreApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Laptop>> GetLikes()
         {
-            var laptops = _dbContext.LikeProducts.ToList();
+            var laptops = _dbContext.LikeProducts.Select(lp => lp.Laptop).ToList();
               
             if (laptops.Count == 0)
             {
@@ -80,8 +80,18 @@ namespace LaptopStoreApi.Controllers
             return Ok("Đã thêm vào danh sách yêu thích!");
         }
         [HttpDelete("{UserId}/{LaptopId}")]
-        public async Task<IActionResult> DeleteLaptopCategory(string UserId, int LaptopId)
+        public async Task<IActionResult> DeleteLaptopLike(string UserId, int LaptopId)
         {
+            var User = await _dbContext.Users.FindAsync(UserId);
+            if (User == null)
+            {
+                var testbase = await _userManager.FindByNameAsync("Base");
+                UserId = testbase.Id;
+            }
+            else
+            {
+                UserId = User.Id;
+            }
             var Liked = await _dbContext.LikeProducts.FindAsync(LaptopId, UserId);
 
             if (Liked == null)
