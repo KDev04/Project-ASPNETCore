@@ -84,7 +84,20 @@ namespace LaptopStoreApi.Migrations
                     ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SeriesLaptop = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cpu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Chip = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RAM = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Memory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlueTooth = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Keyboard = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OperatingSystem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    weight = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Accessory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Screen = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,6 +116,23 @@ namespace LaptopStoreApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LaptopStatus", x => x.LaptopStatusId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Promotions",
+                columns: table => new
+                {
+                    PromotionCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PromotionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Start = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    End = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PromotionValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Promotions", x => x.PromotionCode);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +242,27 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Order2s",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PromotionCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order2s", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order2s_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
                 {
@@ -294,6 +345,30 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LikeProducts",
+                columns: table => new
+                {
+                    LaptopId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikeProducts", x => new { x.LaptopId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_LikeProducts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LikeProducts_Laptops_LaptopId",
+                        column: x => x.LaptopId,
+                        principalTable: "Laptops",
+                        principalColumn: "LaptopId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -303,6 +378,8 @@ namespace LaptopStoreApi.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsExport = table.Column<bool>(type: "bit", nullable: false),
+                    PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StatusOrder = table.Column<int>(type: "int", nullable: false)
                 },
@@ -340,6 +417,32 @@ namespace LaptopStoreApi.Migrations
                         column: x => x.LaptopStatusId,
                         principalTable: "LaptopStatus",
                         principalColumn: "LaptopStatusId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetails",
+                columns: table => new
+                {
+                    LaptopId = table.Column<int>(type: "int", nullable: false),
+                    Order2Id = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetails", x => new { x.LaptopId, x.Order2Id });
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Laptops_LaptopId",
+                        column: x => x.LaptopId,
+                        principalTable: "Laptops",
+                        principalColumn: "LaptopId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Order2s_Order2Id",
+                        column: x => x.Order2Id,
+                        principalTable: "Order2s",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -413,6 +516,21 @@ namespace LaptopStoreApi.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LikeProducts_UserId",
+                table: "LikeProducts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order2s_UserId",
+                table: "Order2s",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_Order2Id",
+                table: "OrderDetails",
+                column: "Order2Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_LaptopId",
                 table: "Orders",
                 column: "LaptopId");
@@ -454,7 +572,16 @@ namespace LaptopStoreApi.Migrations
                 name: "LaptopCategories");
 
             migrationBuilder.DropTable(
+                name: "LikeProducts");
+
+            migrationBuilder.DropTable(
+                name: "OrderDetails");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Promotions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -466,10 +593,13 @@ namespace LaptopStoreApi.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Order2s");
 
             migrationBuilder.DropTable(
                 name: "Laptops");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

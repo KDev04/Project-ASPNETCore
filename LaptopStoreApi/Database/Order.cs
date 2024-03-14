@@ -12,6 +12,8 @@ namespace LaptopStoreApi.Database
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public decimal Total { get; set; }
+        public bool IsExport { get; set; } = true;
+        public string PromotionCode { get; set; }
         public string UserId { get; set; } = string.Empty;
         public User? User { get; set; }
         public StatusOrder StatusOrder { get; set; }

@@ -34,12 +34,8 @@ namespace LaptopStoreApi.Database
             modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.Laptop).WithMany(l=>l.LikeProducts).HasForeignKey(lp => lp.LaptopId);
             modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.User).WithMany(l => l.LikeProducts).HasForeignKey(lp => lp.UserId);
             //Order Item 
-            /*            modelBuilder.Entity<OrderItem>().HasKey(lc => new { lc.LaptopId, lc.BillId });
-                        modelBuilder.Entity<OrderItem>().HasOne(lc => lc.Laptop).WithMany(l => l.LaptopOrderItems).HasForeignKey(lc => lc.LaptopId);
-                        modelBuilder.Entity<OrderItem>().HasOne(lc => lc.Bill).WithMany(l => l.LaptopOrderItems).HasForeignKey(lc => lc.BillId);
-
-                        modelBuilder.Entity<Bill>().HasMany(l => l.LaptopOrderItems).WithOne(oi => oi.Bill);
-                        modelBuilder.Entity<Bill>().HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId);*/
+            modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.LaptopId, od.Order2Id });
+            modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.Laptop).WithMany(l => l.LikeProducts).HasForeignKey(lp => lp.LaptopId);
 
             modelBuilder.Entity<Cart>().HasKey(c => c.Id);
 
@@ -95,5 +91,8 @@ namespace LaptopStoreApi.Database
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<LaptopCategory> LaptopCategories { get; set; }
         public DbSet<LikeProduct> LikeProducts { get; set; }
+        public DbSet<Promotion> Promotions { get; set; } // Khuyến mãi
+        public DbSet<OrderDetail> OrderDetails { get; set;}
+        public DbSet<Order2> Order2s { get; set; }
     }
 }

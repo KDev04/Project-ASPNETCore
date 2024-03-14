@@ -46,7 +46,20 @@ namespace LaptopStoreApi.Services
                 Type = model.Type,
                 CreateDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
-                ImgPath = "Image/" + imgFileName
+                ImgPath = "Image/" + imgFileName,
+                Brand = model.Brand,
+                SeriesLaptop = model.SeriesLaptop,
+                Cpu = model.Cpu,
+                Chip = model.Chip,
+                RAM = model.RAM,
+                Memory = model.Memory,
+                BlueTooth = model.BlueTooth,
+                Keyboard = model.Keyboard,
+                OperatingSystem = model.OperatingSystem,
+                Pin = model.Pin,
+                weight = model.weight,
+                Accessory = model.Accessory,
+                Screen = model.Screen,
             };
             _context.Laptops.Add(laptop);
             await _context.SaveChangesAsync();
@@ -135,6 +148,7 @@ namespace LaptopStoreApi.Services
                 CreateDate = model.CreateDate,
                 LastModifiedDate = model.LastModifiedDate,
                 ImgPath = model.ImgPath,
+
             });
 
             return result.ToList();
