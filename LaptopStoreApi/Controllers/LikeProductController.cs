@@ -1,5 +1,6 @@
 ﻿using LaptopStoreApi.Database;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaptopStoreApi.Controllers
@@ -9,10 +10,23 @@ namespace LaptopStoreApi.Controllers
     public class LikeProductController : ControllerBase
     {
         private readonly ApiDbContext _dbContext;
-
-        public LikeProductController(ApiDbContext dbContext)
+        private readonly UserManager<User> _userManager;
+        public LikeProductController(ApiDbContext dbContext, UserManager<User> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
+        }
+        [HttpGet]
+        public ActionResult<IEnumerable<Laptop>> GetLikes()
+        {
+            var laptops = _dbContext.LikeProducts.ToList();
+              
+            if (laptops.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(laptops);
         }
         [HttpGet("{UserId}")]
         public ActionResult<IEnumerable<Laptop>> GetLaptopsByUserId(string UserId)
@@ -35,7 +49,8 @@ namespace LaptopStoreApi.Controllers
             if (!_dbContext.Users.Any(u => u.Id == UserId))
             {
                 // Không tìm thấy danh mục
-                return BadRequest("Không tìm thấy người dùng này!");
+                var testbase = await _userManager.FindByNameAsync("Base");
+                UserId = testbase.Id;
             }
 
             if (!_dbContext.Laptops.Any(l => l.LaptopId == LaptopId))

@@ -35,7 +35,7 @@ namespace LaptopStoreApi.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
-        [Authorize]
+
         [HttpPost]
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> AuthData()
@@ -94,6 +94,7 @@ namespace LaptopStoreApi.Controllers
             string testAd = "Admin chưa được khởi tạo.";
             string testMod = "Moderator chưa được khởi tạo";
             string testCli = "Client chưa được khởi tạo";
+
 
             var testAdministrator = await _userManager.FindByNameAsync("Admin");
             if (testAdministrator != null) 
@@ -162,6 +163,25 @@ namespace LaptopStoreApi.Controllers
                 var resultClient = await _userManager.CreateAsync(Client, ClientPassword);
             }
 
+            var testbase = await _userManager.FindByNameAsync("Base");
+            if (testbase != null)
+            {
+                Acc++;
+            }
+            else
+            {
+                var Base = new User();
+                Base.UserName = "Base";
+                Base.Email = "Base@gmail.com";
+                Base.FirstName = "Mr .";
+                Base.LastName = "Gpt";
+                Base.AvatarUrl = "Avatars/user3.jpg";
+                Base.BirthDay = DateTime.Now;
+                Base.Address = "Cao Đẳng Sài Gòn";
+                Base.Age = 22;
+                string BasePassword = "Base123";
+                var resultClient = await _userManager.CreateAsync(Base, BasePassword);
+            }
 
             return new JsonResult(new
             {
