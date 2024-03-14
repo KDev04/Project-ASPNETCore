@@ -10,6 +10,19 @@
         public string? Type { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public IFormFile? Image { get; set; }
+        public string Brand { get; set; } // Thuong hieu 
+        public string SeriesLaptop { get; set; }
+        public string Cpu { get; set; }
+        public string Chip { get; set; }
+        public string RAM { get; set; }
+        public string Memory { get; set; } // bo nho
+        public string BlueTooth { get; set; }
+        public string Keyboard { get; set; }
+        public string OperatingSystem { get; set; }
+        public string Pin { get; set; }
+        public string weight { get; set; }
+        public string Accessory { get; set; } // Phụ kiện
+        public string Screen { get; set; }
 
     }
 }
