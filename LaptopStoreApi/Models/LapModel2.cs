@@ -21,7 +21,6 @@
         public string OperatingSystem { get; set; }
         public string Pin { get; set; }
         public string weight { get; set; }
-        public string LED { get; set; }
         public string Accessory { get; set; } // Phụ kiện
         public string Screen { get; set; }
 
