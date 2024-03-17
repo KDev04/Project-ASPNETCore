@@ -5,20 +5,53 @@
 }
 
 @* <section class="container py-5">
-    <partial name="~/Views/Laptop/Filter.cshtml" />
+<partial name="~/Views/Laptop/Filter.cshtml" />
 </section> *@
 
 
-<section class="container py-5 my-5">
+<div class="container p-3 ">
+    <div class="row ">
+        <ul class="nav " style="padding-left: 10px;">
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif;" class=" nav-link px-0"
+                    aria-current="page" href="/">Home /</a>
+            </li>
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif; " class="nav-link px-0"
+                    href="/Laptop"> Store /</a>
+            </li>
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif;" class="nav-link px-0"
+                    href="/Laptop">All Products</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+<section class="container ">
     @if (TempData["SuccessMessage"] != null)
     {
         <div id="successMessage" class="alert alert-success">@TempData["SuccessMessage"]</div>
     }
+
+    <div class="row ">
+        <partial name="~/Views/Laptop/Filter.cshtml" />
+    </div>
+
+
+
+
+
+
     <div class="row gy-2">
-        <div class="col-2">
-            <partial name="~/Views/Laptop/DanhMuc.cshtml" />
-        </div>
-        <div class="col-10">
+
+
+
+
+        <div class="col-12 py-3">
             <div class="container">
                 <div class="row row-cols-4">
                     @foreach (var laptop in Model)
