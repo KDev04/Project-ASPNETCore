@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 
 namespace LaptopStoreApi.Controllers
@@ -16,7 +18,23 @@ namespace LaptopStoreApi.Controllers
         {
             _dbContext = dbContext;
         }
+        [HttpGet]
+        public async Task<ActionResult<List<ConsolidatedCategory>>> GetAllData()
+        {
+            var consolidatedData = await _dbContext.LaptopCategories
+                .Include(lc => lc.Category)
+                .Include(lc => lc.Laptop)
+                .GroupBy(lc => lc.CategoryId)
+                .Select(g => new ConsolidatedCategory
+                {
+                    CategoryId = g.Key,
+                    CategoryName = g.FirstOrDefault().Category.CategoryName,
+                    Laptops = g.Select(lc => lc.Laptop).ToList()
+                })
+                .ToListAsync();
 
+            return Ok(consolidatedData);
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LaptopCategory>>> GetLaptopCategories()
         {
@@ -27,26 +45,38 @@ namespace LaptopStoreApi.Controllers
         [HttpGet("{laptopId}/{categoryId}")]
         public async Task<ActionResult<LaptopCategory>> GetLaptopCategory(int laptopId, int categoryId)
         {
-            var laptopCategory = await _dbContext.LaptopCategories.FindAsync(laptopId, categoryId);
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            var laptopCategory = await _dbContext.LaptopCategories
+                .Include(lc => lc.Category)
+                .Include(lc => lc.Laptop)
+                .FirstOrDefaultAsync(lc => lc.LaptopId == laptopId && lc.CategoryId == categoryId);
 
             if (laptopCategory == null)
             {
                 return NotFound();
             }
 
-            return Ok(laptopCategory);
+            var serializedLaptopCategory = JsonSerializer.Serialize(laptopCategory, options);
+
+            return Ok(serializedLaptopCategory);
         }
-      
         [HttpPost]
-        public async Task<ActionResult<LaptopCategory>> CreateLaptopCategory([FromForm] int LaptopId, [FromForm] int CategoryId)
+        public async Task<ActionResult> CreateLaptopCategory([FromForm] int LaptopId, [FromForm] int CategoryId)
         {
-            if (!_dbContext.Categories.Any(c => c.CategoryId == CategoryId))
+            var category = await _dbContext.Categories.FindAsync(CategoryId);
+            var laptop = await _dbContext.Laptops.FindAsync(LaptopId);
+
+            if (category == null)
             {
                 // Không tìm thấy danh mục
                 return BadRequest("Không tìm thấy danh mục này!");
             }
 
-            if (!_dbContext.Laptops.Any(l => l.LaptopId == LaptopId))
+            if (laptop == null)
             {
                 // Không tìm thấy Laptop
                 return BadRequest("Không tìm thấy Laptop này!");
@@ -58,22 +88,24 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest("LaptopCategory đã tồn tại!");
             }
 
-            var Category = await _dbContext.Categories.FindAsync(CategoryId);
-            var Laptop = await _dbContext.Laptops.FindAsync(LaptopId);
-            Console.WriteLine("OK con dee");
             LaptopCategory lap_cate = new LaptopCategory
             {
                 CategoryId = CategoryId,
-                Category = Category,
+                Category = category,
                 LaptopId = LaptopId,
-                Laptop = Laptop
+                Laptop = laptop
             };
+
             _dbContext.LaptopCategories.Add(lap_cate);
+            category.LaptopCategories.Add(lap_cate);
+            _dbContext.Categories.Update(category);
+            laptop.LaptopCategories.Add(lap_cate);
+            _dbContext.Laptops.Update(laptop);
+
             await _dbContext.SaveChangesAsync();
 
             return Ok("Đã thêm vào danh mục");
         }
-
         [HttpDelete("{laptopId}/{categoryId}")]
         public async Task<IActionResult> DeleteLaptopCategory(int laptopId, int categoryId)
         {
