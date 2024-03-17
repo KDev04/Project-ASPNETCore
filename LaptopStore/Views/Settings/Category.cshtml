@@ -100,28 +100,7 @@
                 </div>
             </div>
         </div>
-        @* Modal xóa  *@
-        <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            Xóa danh mục
-                        </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form asp-action="CreateCategory" asp-controller="Settings" method="post">
-                        <div class="modal-body ">
-                            Bạn chắc chắn muốn xóa danh mục này ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Xóa danh mục</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -155,72 +134,35 @@
 
                         <td>
                             <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal2">Cập nhật</button>
-                            <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal3">Xóa</button>
+                            <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal-@res.CategoryId">Xóa</button>
+                            @* Modal xóa  *@
+                            <form asp-action="DeleteCategory" asp-controller="Settings" method="post">
+                                <div class="modal fade" id="modal-@res.CategoryId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                Xóa danh mục @res.CategoryName
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                            <div class="modal-body ">
+                                                Bạn chắc chắn muốn xóa danh mục @res.CategoryName
+                                                <input type="text" class="form-control d-none" name="CategoryId" value=@res.CategoryId />
+                                           </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                <button type="submit" class="btn btn-primary">Xóa danh mục</button>
+                                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
                         </td>
                     </tr>
                 }
-
-                
-                @* <tr>
-                    <td>Acer</td>
-                    <td>
-                        <p>
-                            Pradator
-                        </p>
-                        <p>
-                            Gigabyte MD3
-                        </p>
-                        <p>Nitro 5</p>
-                    </td>
-
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal2">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Gygabyte</td>
-                    <td>
-                        <p>
-                            Gigabyte MD3
-                        </p>
-
-                    </td>
-
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal2">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Leveno</td>
-                    <td>
-                        <p>
-                            Laptop Leveno
-                        </p>
-
-                    </td>
-
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal2">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hp</td>
-                    <td>
-                        <p>
-                            Laptop Hp
-                        </p>
-
-                    </td>
-
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal2">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr> *@
-                
             </tbody>
         </table>
     </section>

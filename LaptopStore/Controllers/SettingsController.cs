@@ -3,6 +3,7 @@ using LaptopStore.Models;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Net;
 
 namespace LaptopStore.Controllers
 {
@@ -138,6 +139,30 @@ namespace LaptopStore.Controllers
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
                 return RedirectToAction("Category");
+            }
+        }
+
+        public async Task<IActionResult> DeleteCategory(int CategoryId)
+        {
+            var apiUrl = $"http://localhost:4000/api/Category/DeleteCategory/{CategoryId}";
+
+            var response = await _httpClient.DeleteAsync(apiUrl);
+            Console.WriteLine("Toi day roi ne");
+            if (response.IsSuccessStatusCode)
+            {
+                // Xử lý kết quả thành công
+                Console.WriteLine("da vo day roi");
+                return RedirectToAction("Category");
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                // Xử lý khi không tìm thấy danh mục
+                return NotFound("Không có danh mục này");
+            }
+            else
+            {
+                // Xử lý lỗi
+                return StatusCode((int)response.StatusCode);
             }
         }
         public IActionResult Ticket()

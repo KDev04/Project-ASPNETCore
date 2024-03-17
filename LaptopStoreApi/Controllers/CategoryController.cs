@@ -164,15 +164,20 @@ namespace LaptopStoreApi.Controllers
             return Ok("Không tìm thấy danh mục");
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        [HttpDelete("{CategoryId}")]
+        public async Task<IActionResult> DeleteCategory(int CategoryId)
         {
-            var category = await _dbContext.Categories.FindAsync(id);
+            var category = await _dbContext.Categories.FindAsync(CategoryId);
 
             if (category == null)
             {
                 return NotFound("Không có danh mục này");
             }
+            var laptopCategories = await _dbContext.LaptopCategories
+            .Where(lc => lc.CategoryId == CategoryId)
+            .ToListAsync();
+            _dbContext.LaptopCategories.RemoveRange(laptopCategories);
+            var affectedRows = await _dbContext.SaveChangesAsync();
             _dbContext.Categories.Remove(category);
             await _dbContext.SaveChangesAsync();
 
