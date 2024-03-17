@@ -66,11 +66,17 @@ namespace LaptopStoreApi.Services
             return laptop;
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int LaptopId)
         {
-            var laptop = await _context.Laptops.FirstOrDefaultAsync(lp => lp.LaptopId == id);
+            var laptop = await _context.Laptops.FirstOrDefaultAsync(lp => lp.LaptopId == LaptopId);
+            var laptopCategories = await _context.LaptopCategories
+            .Where(lc => lc.LaptopId == LaptopId)
+            .ToListAsync();
+            _context.LaptopCategories.RemoveRange(laptopCategories);
             if (laptop != null)
             {
+                _context.LaptopCategories.RemoveRange(laptopCategories);
+                await _context.SaveChangesAsync();
                 _context.Laptops.Remove(laptop);
                 await _context.SaveChangesAsync();
             }

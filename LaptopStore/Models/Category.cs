@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-namespace LaptopStoreApi.Database
+﻿namespace LaptopStore.Models
 {
     public class Category
     {
-        [Key]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
         public ICollection<LaptopCategory> LaptopCategories { get; set; }
@@ -14,5 +11,15 @@ namespace LaptopStoreApi.Database
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public List<Laptop> Laptops { get; set; }
+    }
+    public class LaptopCategory
+    {
+        public int LaptopId { get; set; }
+
+        public Laptop Laptop { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }
