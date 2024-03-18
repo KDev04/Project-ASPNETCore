@@ -11,7 +11,12 @@ namespace LaptopStore.Controllers
     public class AdminController : Controller
     {
         private readonly HttpClient _httpClient;
-        public AdminController(HttpClient httpClient) { _httpClient = httpClient; }
+        private readonly ILogger<AdminController> _logger;
+        public AdminController(HttpClient httpClient, ILogger<AdminController> logger)
+        {
+            _httpClient = httpClient;
+            _logger = logger;
+        }
         public IActionResult Index()
         {
             return View();
@@ -263,9 +268,12 @@ namespace LaptopStore.Controllers
         }
 
 
-           public async Task<IActionResult> OrderOffline()
+        public async Task<IActionResult> OrderOffline()
         {
-             return View("OrderConfirmation");
+
+        
+
+            return View("OrderConfirmation");
 
         }
     }
