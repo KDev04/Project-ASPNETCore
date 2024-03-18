@@ -242,24 +242,31 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> OrderPage()
         {
-            var token = HttpContext.Session.GetString("Token");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Cart/GetAllOrders");
-            if (response.IsSuccessStatusCode)
+
+            HttpResponseMessage response1 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+
+            if (response1.IsSuccessStatusCode)
             {
-                var responseData = await response.Content.ReadAsStringAsync();
+                var response1Data = await response1.Content.ReadAsStringAsync();
 
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                var orders = JsonConvert.DeserializeObject<List<Order>>(responseData);
+                var laptopOption = JsonConvert.DeserializeObject<List<Laptop>>(response1Data);
 
-                return View(orders); // Trả về view mà bạn muốn hiển thị dữ liệu
+                return View(laptopOption); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                List<Order> orders = new List<Order>();
-                return View(orders);
+                List<Laptop> laptopOption = new List<Laptop>();
+                return View(laptopOption);
             }
+        }
+
+
+           public async Task<IActionResult> OrderOffline()
+        {
+             return View("OrderConfirmation");
+
         }
     }
 }

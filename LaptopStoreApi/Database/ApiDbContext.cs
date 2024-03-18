@@ -31,7 +31,7 @@ namespace LaptopStoreApi.Database
 
             //LikeProducts
             modelBuilder.Entity<LikeProduct>().HasKey(lp => new { lp.LaptopId, lp.UserId });
-            modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.Laptop).WithMany(l=>l.LikeProducts).HasForeignKey(lp => lp.LaptopId);
+            modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.Laptop).WithMany(l => l.LikeProducts).HasForeignKey(lp => lp.LaptopId);
             modelBuilder.Entity<LikeProduct>().HasOne(lp => lp.User).WithMany(l => l.LikeProducts).HasForeignKey(lp => lp.UserId);
             //Order Item 
             modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.LaptopId, od.Order2Id });
@@ -67,6 +67,11 @@ namespace LaptopStoreApi.Database
                 .HasOne(e => e.User)
                 .WithMany()
                 .HasForeignKey(e => e.UserId);
+
+                 modelBuilder.Entity<OrderOffline>().HasKey(l => l.IdOrder);
+
+          
+
             modelBuilder.Entity<Evaluate>().HasOne(e => e.Laptop).WithMany().HasForeignKey(e => e.LaptopId);
             modelBuilder.Entity<Cart>().Property(c => c.Price).HasColumnType("decimal(18, 2)");
 
@@ -77,8 +82,6 @@ namespace LaptopStoreApi.Database
             modelBuilder.Entity<Order>().Property(o => o.Price).HasColumnType("decimal(18, 2)");
 
             modelBuilder.Entity<Order>().Property(o => o.Total).HasColumnType("decimal(18, 2)");
-
- 
             // .OnDelete(DeleteBehavior.Cascade); // Nếu bạn muốn xóa tất cả LaptopStatus liên quan khi Laptop bị xóa
         }
 
@@ -92,7 +95,8 @@ namespace LaptopStoreApi.Database
         public DbSet<LaptopCategory> LaptopCategories { get; set; }
         public DbSet<LikeProduct> LikeProducts { get; set; }
         public DbSet<Promotion> Promotions { get; set; } // Khuyến mãi
-        public DbSet<OrderDetail> OrderDetails { get; set;}
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Order2> Order2s { get; set; }
+        public DbSet<OrderOffline> OrderOfflines { get; set; }
     }
 }

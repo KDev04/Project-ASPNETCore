@@ -31,6 +31,8 @@ namespace LaptopStore.Controllers
                 return StatusCode((int)response.StatusCode);
             }
         }
+
+
         public IActionResult Authority()
         {
             return View();
@@ -169,6 +171,9 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+
+
+   
 
     }
 }

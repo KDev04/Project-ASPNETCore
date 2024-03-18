@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240314040523_mig1")]
-    partial class mig1
+    [Migration("20240318033659_migrate1")]
+    partial class migrate1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -367,6 +367,37 @@ namespace LaptopStoreApi.Migrations
                     b.HasIndex("Order2Id");
 
                     b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("LaptopStoreApi.Database.OrderOffline", b =>
+                {
+                    b.Property<int>("IdOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrder"));
+
+                    b.Property<int>("LaptopId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LaptopName")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdOrder");
+
+                    b.ToTable("OrderOfflines");
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Database.Promotion", b =>
