@@ -184,7 +184,7 @@ namespace LaptopStore.Controllers
             if (res.IsSuccessStatusCode)
             {
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                return RedirectToAction("Category");
+                return NoContent();
             }
             else
             {
