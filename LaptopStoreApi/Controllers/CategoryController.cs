@@ -150,10 +150,10 @@ namespace LaptopStoreApi.Controllers
             return Ok("Thêm danh mục thành công");
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategory(int id, string CategoryName)
+        [HttpPut("{CategoryId}/{CategoryName}")]
+        public async Task<IActionResult> UpdateCategoryName(int CategoryId, string CategoryName)
         {
-            var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
+            var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.CategoryId == CategoryId);
             if (existingCategory != null)
             {
                 existingCategory.CategoryName = CategoryName;

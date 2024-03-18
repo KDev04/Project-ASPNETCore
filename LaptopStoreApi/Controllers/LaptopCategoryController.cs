@@ -119,7 +119,7 @@ namespace LaptopStoreApi.Controllers
             _dbContext.LaptopCategories.Remove(laptopCategory);
             await _dbContext.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
     }
 }

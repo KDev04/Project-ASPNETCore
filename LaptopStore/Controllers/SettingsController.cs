@@ -167,6 +167,79 @@ namespace LaptopStore.Controllers
                 return StatusCode((int)response.StatusCode);
             }
         }
+        public async Task<ActionResult> AddLaptopIntoCategory(int LaptopId, int CategoryId)
+        {
+            // Xử lý dữ liệu responseData theo nhu cầu của bạn
+            var req = new FormUrlEncodedContent(
+                    new[]
+                    {
+                            new KeyValuePair<string, string>("CategoryId",CategoryId.ToString()),
+                            new KeyValuePair<string, string>("LaptopId",LaptopId.ToString())
+
+                    }
+                );
+
+            HttpResponseMessage res = await _httpClient.PostAsync(
+                "http://localhost:4000/api/LaptopCategory/CreateLaptopCategory", req
+            );
+
+            if (res.IsSuccessStatusCode)
+            {
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                return RedirectToAction("Category");
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                return RedirectToAction("Category");
+            }
+        }
+        public async Task<IActionResult> DeleteLaptopInCategory(int LaptopId, int CategoryId)
+        {
+            var apiUrl = $"http://localhost:4000/api/LaptopCategory/DeleteLaptopCategory/{LaptopId}/{CategoryId}";
+
+            var response = await _httpClient.DeleteAsync(apiUrl);
+            Console.WriteLine("Toi day roi ne");
+            if (response.IsSuccessStatusCode)
+            {
+                // Xử lý kết quả thành công
+                Console.WriteLine("da vo day roi");
+                return RedirectToAction("Category");
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                // Xử lý khi không tìm thấy danh mục
+                return NotFound("Không có danh mục này");
+            }
+            else
+            {
+                // Xử lý lỗi
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> UpdateCategoryName(int CategoryId, string CategoryName)
+        {
+            var apiUrl = $"http://localhost:4000/api/Category/UpdateCategoryName/{CategoryId}/{CategoryName}";
+
+            var response = await _httpClient.PutAsync(apiUrl, null);
+            Console.WriteLine("Toi day roi ne");
+            if (response.IsSuccessStatusCode)
+            {
+                // Xử lý kết quả thành công
+                Console.WriteLine("da cap nhat roi");
+                return RedirectToAction("Category");
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                // Xử lý khi không tìm thấy danh mục
+                return NotFound("Không có danh mục này");
+            }
+            else
+            {
+                // Xử lý lỗi
+                return StatusCode((int)response.StatusCode);
+            }
+        }
         public IActionResult Ticket()
         {
             return View();
