@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model PageCategoryModel 
+
+<div class="container p-3 ">
+    <div class="row ">
+        <ul class="nav " style="padding-left: 10px;">
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif;" class=" nav-link px-0"
+                   aria-current="page" href="/">Home /</a>
+            </li>
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif; " class="nav-link px-0"
+                   href="/Laptop"> Store /</a>
+            </li>
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif;" class="nav-link px-0"
+                   href="/Laptop">Laptop Gaming</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<section class="container  ">
+    <div class="row gy-2">
+        <div class="col-12 py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="CategoryId">
+                                    Chọn danh mục
+                                </label>
+                            </div>
+                            <div class="col">
+                                <form asp-action="GetLaptopsByCategoryId" asp-controller="Laptop" method="post">
+                                    <select name="CategoryId" class="form-control" required onchange="this.form.submit()">
+                                        <option value="" disabled selected>Chọn Laptop</option>
+                                        @foreach (var cate in Model.Categories)
+                                        {
+                                            <option value="@cate.CategoryId">
+                                                @cate.CategoryName
+                                            </option>
+                                        }
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col">
+                                <form asp-action="SearchLaptopByName" asp-controller="Laptop" method="post">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control" name="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" aria-describedby="basic-addon2">
+                                        <button type="submit" class="btn btn-primary input-group-text" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-4">
+                    @if (Model.Laptops.Count > 0)
+                    {
+                        @foreach (var laptop in Model.Laptops)
+                        {
+                            <partial name="LaptopSummary.cshtml" model="laptop" />
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-black-50">
+                            Hiện chưa có Laptop thuộc danh mục này
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

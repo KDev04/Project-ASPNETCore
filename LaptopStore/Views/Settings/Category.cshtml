@@ -6,6 +6,10 @@
 <div class="" id="main" style="position: absolute;">
 
     <section>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
         <form class="my-3" asp-action="SearchCategory" asp-controller="Settings" method="post">
             <div class="row">
                 <div class="col-7">
@@ -156,7 +160,7 @@
                                                         <label for="Status" class="mr-2">Thêm Laptop</label>
                                                     </div>
                                                         @* Thêm laptop vào danh mục *@
-                                                <form asp-action="AddLaptopIntoCategory" name="AddLaptopForm" asp-controller="Settings" method="post" onsubmit="handleFormSubmit($(this)); return false;" enctype="multipart/form-data" name="AddLaptopForm" class="form-inline">
+                                                <form asp-action="AddLaptopIntoCategory" name="AddLaptopForm" asp-controller="Settings" method="post" enctype="multipart/form-data" name="AddLaptopForm" class="form-inline">
                                                     <div class="col">
                                                         <div class="row mt-2">
                                                             <div class="col-6">
@@ -223,31 +227,6 @@
 
 
 </div>
-<script>
-    $(document).ready(function () {
-        $('form[name="AddLaptopForm"]').submit(function (event) {
-            event.preventDefault(); // Ngăn chặn sự kiện submit mặc định
-
-            // Lấy dữ liệu từ form
-            var formData = $(this).serialize();
-
-            // Gửi yêu cầu Ajax đến máy chủ
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: formData,
-                success: function (response) {
-                    // Cập nhật nội dung modal
-                    $('.modalupdate .modal-body').html(response);
-                },
-                error: function (xhr, status, error) {
-                    // Xử lý lỗi nếu có
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>
 
 <style>
     #main {

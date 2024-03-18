@@ -59,7 +59,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("{keyword}")]
         public async Task<IActionResult> Search(string keyword)
         {
             try

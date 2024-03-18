@@ -46,7 +46,68 @@ namespace LaptopStore.Controllers
                 }
             }
         }
-
+        public async Task<IActionResult> GetLaptopsByCategoryId(int CategoryId)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync($"http://localhost:4000/api/Category/GetLaptopsByCategoryId/{CategoryId}");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                if (reslaps == null) { reslaps = new List<Laptop>(); }
+                PageCategoryModel model = new PageCategoryModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View("LaptopCategoryPage", model);
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return RedirectToAction("LaptopCategoryPage");
+            }
+        }
+        public async Task<IActionResult> LaptopCategoryPage()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                if (reslaps == null) { reslaps = new List<Laptop>(); }
+                PageCategoryModel model = new PageCategoryModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View(model); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return View(model);
+            }
+        }
         public async Task<IActionResult> Detail(int id)
         {
             using (var httpClient = new HttpClient())
@@ -189,7 +250,42 @@ namespace LaptopStore.Controllers
                 return Redirect("/Home/Error");
             }
         }
-
+        public async Task<IActionResult> SearchLaptopByName(string keyword)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+                HttpResponseMessage responselap = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/Search/{keyword}");
+                if (responselap == null)
+                {
+                    return NotFound("Danh sach laptop rong ");
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var laps = await responselap.Content.ReadAsStringAsync();
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                    if (res == null) { res = new List<ConsolidatedCategory>(); }
+                    var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                    if (reslaps == null) { reslaps = new List<Laptop>(); }
+                    PageCategoryModel model = new PageCategoryModel()
+                    {
+                        Categories = res,
+                        Laptops = reslaps
+                    };
+                    return View("LaptopCategoryPage", model);
+                }
+                else
+                {
+                    return RedirectToAction("LaptopCategoryPage");
+                }
+            }
+            catch
+            {
+                return BadRequest("khong hoat dong");
+            }
+        }
         public async Task<IActionResult> Filter(
             string name = "PREDATOR",
             string sortBy = "TenLaptop_asc",

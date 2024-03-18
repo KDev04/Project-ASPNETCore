@@ -137,7 +137,12 @@ namespace LaptopStore.Controllers
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
                 return RedirectToAction("Category");
             }
-            else
+            else if (res.StatusCode == HttpStatusCode.BadRequest)
+            {
+                TempData["ErrorMessage"] = "Tên danh mục đã tồn tại.";
+                return RedirectToAction("Category");
+            }
+            else 
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
                 return RedirectToAction("Category");
@@ -233,6 +238,11 @@ namespace LaptopStore.Controllers
             {
                 // Xử lý khi không tìm thấy danh mục
                 return NotFound("Không có danh mục này");
+            }
+            else if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                TempData["ErrorMessage"] = "Trùng tên danh mục.";
+                return RedirectToAction("Category");
             }
             else
             {
