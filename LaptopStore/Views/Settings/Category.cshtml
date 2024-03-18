@@ -6,6 +6,10 @@
 <div class="" id="main" style="position: absolute;">
 
     <section>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
         <form class="my-3" asp-action="SearchCategory" asp-controller="Settings" method="post">
             <div class="row">
                 <div class="col-7">
@@ -90,7 +94,7 @@
                         <td>
                             <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modalupdate-@res.CategoryId">Cập nhật</button>
                             <!-- Modal update -->
-                            <div class="modal fade" id="modalupdate-@res.CategoryId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal modalupdate fade" id="modalupdate-@res.CategoryId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -156,7 +160,7 @@
                                                         <label for="Status" class="mr-2">Thêm Laptop</label>
                                                     </div>
                                                         @* Thêm laptop vào danh mục *@
-                                                    <form asp-action="AddLaptopIntoCategory" asp-controller="Settings" method="post" enctype="multipart/form-data" class="form-inline">
+                                                <form asp-action="AddLaptopIntoCategory" name="AddLaptopForm" asp-controller="Settings" method="post" enctype="multipart/form-data" name="AddLaptopForm" class="form-inline">
                                                     <div class="col">
                                                         <div class="row mt-2">
                                                             <div class="col-6">
@@ -183,7 +187,6 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +227,6 @@
 
 
 </div>
-
 
 <style>
     #main {

@@ -45,6 +45,26 @@ namespace LaptopStoreApi.Controllers
             return new JsonResult(consolidatedCategories, options);
         }
         [HttpGet("{categoryId}")]
+        public async Task<ActionResult<List<ConsolidatedCategory>>> GetAllCategoriesWithCategoryId(int categoryId)
+        {
+            var categories = await _dbContext.Categories.Where(c=> c.CategoryId == categoryId).Include(c => c.LaptopCategories).ToListAsync();
+
+            var consolidatedCategories = categories.Select(c => new ConsolidatedCategory
+            {
+                CategoryId = c.CategoryId,
+                CategoryName = c.CategoryName,
+                Laptops = GetLaptopsByCategoryId(c.CategoryId)
+            }).ToList();
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                MaxDepth = 32 // Nếu cần thiết, bạn có thể tăng giới hạn độ sâu của đối tượng lên
+            };
+
+            return new JsonResult(consolidatedCategories, options);
+        }
+        [HttpGet("{categoryId}")]
         public List<Laptop> GetLaptopsByCategoryId(int categoryId)
         {
             var laptops = _dbContext.LaptopCategories
@@ -139,7 +159,7 @@ namespace LaptopStoreApi.Controllers
             var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.CategoryName == CategoryName);
             if (existingCategory != null)
             {
-                return Ok("Danh mục đã có sẵn");
+                return BadRequest(existingCategory.CategoryName);
             }
 
             // Tạo danh mục mới
@@ -154,14 +174,22 @@ namespace LaptopStoreApi.Controllers
         public async Task<IActionResult> UpdateCategoryName(int CategoryId, string CategoryName)
         {
             var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.CategoryId == CategoryId);
+            var existingCategoryName = await _dbContext.Categories.Where(c=> c.CategoryName == CategoryName).FirstOrDefaultAsync();
+            Console.WriteLine("1dd");
+            if (existingCategoryName != null)
+            {
+                Console.WriteLine("ddd");
+                return BadRequest("Tên danh mục đã tồn tại.");
+            }
             if (existingCategory != null)
             {
+                
                 existingCategory.CategoryName = CategoryName;
                 await _dbContext.SaveChangesAsync();
                 return Ok("Đã thay đổi tên danh mục");
             }
 
-            return Ok("Không tìm thấy danh mục");
+            return NotFound();
         }
 
         [HttpDelete("{CategoryId}")]
