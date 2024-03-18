@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LaptopStoreApi.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class migrate1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -116,6 +116,24 @@ namespace LaptopStoreApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LaptopStatus", x => x.LaptopStatusId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderOfflines",
+                columns: table => new
+                {
+                    IdOrder = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LaptopId = table.Column<int>(type: "int", nullable: false),
+                    LaptopName = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderOfflines", x => x.IdOrder);
                 });
 
             migrationBuilder.CreateTable(
@@ -576,6 +594,9 @@ namespace LaptopStoreApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "OrderOfflines");
 
             migrationBuilder.DropTable(
                 name: "Orders");

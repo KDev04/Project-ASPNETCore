@@ -366,6 +366,37 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("OrderDetails");
                 });
 
+            modelBuilder.Entity("LaptopStoreApi.Database.OrderOffline", b =>
+                {
+                    b.Property<int>("IdOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrder"));
+
+                    b.Property<int>("LaptopId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LaptopName")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdOrder");
+
+                    b.ToTable("OrderOfflines");
+                });
+
             modelBuilder.Entity("LaptopStoreApi.Database.Promotion", b =>
                 {
                     b.Property<Guid>("PromotionCode")

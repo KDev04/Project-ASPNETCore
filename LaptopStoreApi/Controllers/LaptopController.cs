@@ -305,6 +305,8 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
+        
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStatus(int id)
         {
@@ -329,5 +331,19 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+
+        //  [HttpPost]
+        // public async Task<IActionResult> PostOrderOffline()
+        // {
+        //     try
+        //     {
+                
+        //     }
+        //     catch
+        //     {
+        //         return StatusCode(StatusCodes.Status500InternalServerError);
+        //     }
+        // }
     }
 }
