@@ -4,12 +4,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section class="container py-5">
+<div class="container p-3 ">
+    <div class="row ">
+        <ul class="nav " style="padding-left: 10px;">
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif;" class=" nav-link px-0"
+                    aria-current="page" href="/">Home /</a>
+            </li>
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif; " class="nav-link px-0"
+                    href="/Laptop"> Store /</a>
+            </li>
+            <li class="nav-item ">
+                <a style="margin-right: 4px; color: black; font-family: 'Noto Sans', sans-serif;" class="nav-link px-0"
+                    href="/Laptop">Accessory</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="container ">
     <partial name="~/Views/Laptop/Filter.cshtml" />
 </section>
 
-<section class="container py-5 my-5">
-    <div class="row gy-4">
+<section class="container ">
+    <div class="row row-cols-4 py-3 ">
         @foreach (var laptop in Model)
         {
             <partial name="LaptopSummary.cshtml" model="laptop" />
