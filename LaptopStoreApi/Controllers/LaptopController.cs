@@ -162,6 +162,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [Authorize(Roles = RoleNames.Moderator)]
+
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
@@ -333,17 +334,17 @@ namespace LaptopStoreApi.Controllers
         }
 
 
-        //  [HttpPost]
-        // public async Task<IActionResult> PostOrderOffline()
-        // {
-        //     try
-        //     {
+         [HttpPost]
+        public async Task<IActionResult> PostOrderOffline([FromForm] OrderOffline AddOrderOffline)
+        {
+            try
+            {
                 
-        //     }
-        //     catch
-        //     {
-        //         return StatusCode(StatusCodes.Status500InternalServerError);
-        //     }
-        // }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

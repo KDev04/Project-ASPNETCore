@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LaptopStoreApi.Database
+namespace LaptopStore.Models 
 {
    
     public class OrderOffline
     {
         [Key]
+        public int? Phone { get; set; }
+        public string? Name  { get; set; }
         public int IdOrder { get; set; }
         public int LaptopId { get; set; }
         public string Products { get; set; }

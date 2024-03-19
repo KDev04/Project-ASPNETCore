@@ -268,10 +268,13 @@ namespace LaptopStore.Controllers
         }
 
 
-        public async Task<IActionResult> OrderOffline()
+        public async Task<IActionResult> OrderOffline(OrderOffline formOrderRequest)
         {
 
-        
+            Console.WriteLine("Phone: " + formOrderRequest.Phone);
+            Console.WriteLine("Name: " + formOrderRequest.Name);
+            Console.WriteLine("OrderDate: " + formOrderRequest.OrderDate);
+            Console.WriteLine("Products: " + formOrderRequest.Products);
 
             return View("OrderConfirmation");
 
