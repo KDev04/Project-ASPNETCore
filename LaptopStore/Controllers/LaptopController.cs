@@ -200,11 +200,11 @@ namespace LaptopStore.Controllers
 
         public async Task<IActionResult> SaveProduct(Laptop model)
         {
-            var token = HttpContext.Session.GetString("Token");
+/*            var token = HttpContext.Session.GetString("Token");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 "Bearer",
                 token
-            );
+            );*/
             try
             {
                 using (var formData = new MultipartFormDataContent())
@@ -212,7 +212,23 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
-                    ;
+                    formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");
+                    formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
+                    formData.Add(new StringContent(model.Color.ToString() ?? ""), "Color");
+                    formData.Add(new StringContent(model.Brand.ToString() ?? ""), "Brand");
+                    formData.Add(new StringContent(model.SeriesLaptop.ToString() ?? ""), "SeriesLaptop");
+                    formData.Add(new StringContent(model.Cpu.ToString() ?? ""), "Cpu");
+                    formData.Add(new StringContent(model.Chip.ToString() ?? ""), "Chip");
+                    formData.Add(new StringContent(model.RAM.ToString() ?? ""), "RAM");
+                    formData.Add(new StringContent(model.Memory.ToString() ?? ""), "Memory");
+                    formData.Add(new StringContent(model.BlueTooth.ToString() ?? ""), "BlueTooth");
+                    formData.Add(new StringContent(model.Keyboard.ToString() ?? ""), "Keyboard");
+                    formData.Add(new StringContent(model.OperatingSystem.ToString() ?? ""), "OperatingSystem");
+                    formData.Add(new StringContent(model.Pin.ToString() ?? ""), "Pin");
+                    formData.Add(new StringContent(model.weight.ToString() ?? ""), "weight");
+                    formData.Add(new StringContent(model.Accessory.ToString() ?? ""), "Accessory");
+                    formData.Add(new StringContent(model.Screen.ToString() ?? ""), "Screen");
+
 
                     if (model.Image != null && model.Image.Length > 0)
                     {

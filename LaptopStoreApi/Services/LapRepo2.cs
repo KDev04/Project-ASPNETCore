@@ -2,6 +2,8 @@
 using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace LaptopStoreApi.Services
 {
@@ -35,7 +37,7 @@ namespace LaptopStoreApi.Services
             {
                 await model.Image.CopyToAsync(stream);
             }
-            var laptop = new Laptop
+            Laptop laptop = new Laptop
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -63,6 +65,27 @@ namespace LaptopStoreApi.Services
             };
             _context.Laptops.Add(laptop);
             await _context.SaveChangesAsync();
+            var category = await _context.Categories.FindAsync(model.CategoryId);
+            if (category == null)
+            {
+                // Không tìm thấy danh mục
+                throw new Exception("Không tìm thấy danh mục.");
+            }
+            LaptopCategory lap_cate = new LaptopCategory()
+            {
+                CategoryId = model.CategoryId,
+                Category = category,
+                LaptopId = laptop.LaptopId,
+                Laptop = laptop
+            };
+            _context.LaptopCategories.Add(lap_cate);
+            await _context.SaveChangesAsync();
+            laptop.LaptopCategories.Add(lap_cate);
+            _context.Laptops.Update(laptop);
+            category.LaptopCategories.Add(lap_cate);
+            _context.Categories.Update(category);
+
+            await _context.SaveChangesAsync();
             return laptop;
         }
 
@@ -84,6 +107,7 @@ namespace LaptopStoreApi.Services
 
         public async Task<List<Laptop>> GetAll()
         {
+
             var laptops = await _context.Laptops.ToListAsync();
             return laptops;
         }

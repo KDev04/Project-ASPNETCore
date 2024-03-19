@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -22,7 +25,35 @@ namespace LaptopStoreApi.Controllers
             _repository = repo2;
             _dbContext = dbContext;
         }
+        [HttpGet]
+        public async Task<ActionResult<List<ConsolidatedLaptop>>> GetLaptopWithAllCategory()
+        {
+            var laptops = await _dbContext.Laptops.Include(l => l.LaptopCategories).ToListAsync();
 
+            var consolidatedLaptops = laptops.Select(c => new ConsolidatedLaptop
+            {
+               Laptop = c,
+                Categories = GetCategoriesByLaptopId(c.LaptopId)
+            }).ToList();
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                MaxDepth = 32 // Nếu cần thiết, bạn có thể tăng giới hạn độ sâu của đối tượng lên
+            };
+
+            return new JsonResult(consolidatedLaptops, options);
+        }
+        [HttpGet("{LaptopId}")]
+        public List<Category> GetCategoriesByLaptopId(int LaptopId)
+        {
+            var Categories = _dbContext.LaptopCategories
+                .Where(lc => lc.LaptopId == LaptopId)
+                .Select(lc => lc.Category)
+                .ToList();
+
+            return Categories;
+        }
         /*        [Authorize]*/
         [HttpGet]
         public async Task<IActionResult> GetLaptops()
@@ -161,7 +192,7 @@ namespace LaptopStoreApi.Controllers
                 throw new Exception("Có lỗi xảy ra khi tìm kiếm laptop.", ex);
             }
         }
-        [Authorize(Roles = RoleNames.Moderator)]
+/*        [Authorize(Roles = RoleNames.Moderator)]*/
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
@@ -187,53 +218,181 @@ namespace LaptopStoreApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLaptop(int id, [FromForm] LapModel2 Loadlaptop)
         {
-            if (Loadlaptop.Image == null || Loadlaptop.Image.Length == 0)
-            {
-                // Xử lý khi không có tệp hình ảnh được gửi lên
-                // Ví dụ: trả về lỗi hoặc thông báo không có tệp hình ảnh
-                throw new Exception("Không có tệp hình ảnh được gửi lên.");
-            }
-
-            string imgFileName =
-                Guid.NewGuid().ToString() + Path.GetExtension(Loadlaptop?.Image?.FileName);
-            string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
-            string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
-
-            if (!Directory.Exists(imgFolderPath))
-            {
-                Directory.CreateDirectory(imgFolderPath);
-            }
-
-            using (var stream = new FileStream(imgFilePath, FileMode.Create))
-            {
-                await Loadlaptop.Image.CopyToAsync(stream);
-            }
+            
             var laptop = await _dbContext.Laptops.FindAsync(id);
             if (laptop == null)
             {
                 return NotFound();
             }
-            laptop.Name = Loadlaptop.Name;
-            laptop.Price = Loadlaptop.Price;
-            laptop.Quantity = Loadlaptop.Quantity;
-            laptop.Description = Loadlaptop.Description;
-            laptop.ImgPath = "Image/" + imgFileName;
-            laptop.Brand = Loadlaptop.Brand;
-            laptop.SeriesLaptop = Loadlaptop.SeriesLaptop;
-            laptop.Cpu = Loadlaptop.Cpu;
-            laptop.Chip = Loadlaptop.Chip;
-            laptop.RAM = Loadlaptop.RAM;
-            laptop.Memory = Loadlaptop.Memory;
-            laptop.BlueTooth = Loadlaptop.BlueTooth;
-            laptop.Keyboard= Loadlaptop.Keyboard;
-            laptop.OperatingSystem = Loadlaptop.OperatingSystem;
-            laptop.Pin = Loadlaptop.Pin;
-            laptop.weight = Loadlaptop.weight;
-            laptop.Accessory = Loadlaptop.Accessory;
-            laptop.Screen = Loadlaptop.Screen;
-            laptop.LastModifiedDate = DateTime.Now;
-            _dbContext.Laptops.Update(laptop);
-            await _dbContext.SaveChangesAsync();
+            if (!string.IsNullOrEmpty(Loadlaptop.Name))
+            {
+                laptop.Name = Loadlaptop.Name;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (laptop.Price!=Loadlaptop.Price)
+            {
+                laptop.Price = Loadlaptop.Price;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (laptop.BigPrice != Loadlaptop.BigPrice)
+            {
+                laptop.BigPrice = Loadlaptop.BigPrice;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (laptop.Quantity != Loadlaptop.Quantity)
+            {
+                laptop.Quantity = Loadlaptop.Quantity;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Description))
+            {
+                laptop.Description = Loadlaptop.Description;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Color))
+            {
+                laptop.Color = Loadlaptop.Color;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Type))
+            {
+                laptop.Type = Loadlaptop.Type;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Brand))
+            {
+                laptop.Brand = Loadlaptop.Brand;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.SeriesLaptop))
+            {
+                laptop.SeriesLaptop = Loadlaptop.SeriesLaptop;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Cpu))
+            {
+                laptop.Cpu = Loadlaptop.Cpu;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Chip))
+            {
+                laptop.Chip = Loadlaptop.Chip;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.RAM))
+            {
+                laptop.RAM = Loadlaptop.RAM;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Memory))
+            {
+                laptop.Memory = Loadlaptop.Memory;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.BlueTooth))
+            {
+                laptop.BlueTooth = Loadlaptop.BlueTooth;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Keyboard))
+            {
+                laptop.Keyboard = Loadlaptop.Keyboard;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.OperatingSystem))
+            {
+                laptop.OperatingSystem = Loadlaptop.OperatingSystem;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Pin))
+            {
+                laptop.Pin = Loadlaptop.Pin;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.weight))
+            {
+                laptop.weight = Loadlaptop.weight;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Accessory))
+            {
+                laptop.Accessory = Loadlaptop.Accessory;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (!string.IsNullOrEmpty(Loadlaptop.Screen))
+            {
+                laptop.Screen = Loadlaptop.Screen;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            if (Loadlaptop.Image == null || Loadlaptop.Image.Length == 0)
+            {
+                laptop.ImgPath = laptop.ImgPath;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                string imgFileName =
+                Guid.NewGuid().ToString() + Path.GetExtension(Loadlaptop?.Image?.FileName);
+                string imgFolderPath = Path.Combine("wwwroot/Image"); // Thư mục "wwwroot/Image"
+                string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+
+                if (!Directory.Exists(imgFolderPath))
+                {
+                    Directory.CreateDirectory(imgFolderPath);
+                }
+
+                using (var stream = new FileStream(imgFilePath, FileMode.Create))
+                {
+                    await Loadlaptop.Image.CopyToAsync(stream);
+                }
+                laptop.ImgPath = "Image/" + imgFileName;
+                laptop.LastModifiedDate = DateTime.Now;
+                _dbContext.Laptops.Update(laptop);
+                await _dbContext.SaveChangesAsync();
+            }
+
             return Ok();
         }
 
