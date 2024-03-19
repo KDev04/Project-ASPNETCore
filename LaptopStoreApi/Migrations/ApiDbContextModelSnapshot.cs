@@ -354,34 +354,44 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Database.OrderOffline", b =>
                 {
-                    b.Property<int>("IdOrder")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrder"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LaptopId")
+                    b.Property<int>("IdOrder")
                         .HasColumnType("int");
 
-                    b.Property<int>("LaptopName")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("Phone")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Products")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatusOrder")
+                    b.Property<int?>("StatusOrder")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("IdOrder");
+                    b.HasKey("Id");
 
                     b.ToTable("OrderOfflines");
                 });

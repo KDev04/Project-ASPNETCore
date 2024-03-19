@@ -68,9 +68,9 @@ namespace LaptopStoreApi.Database
                 .WithMany()
                 .HasForeignKey(e => e.UserId);
 
-                 modelBuilder.Entity<OrderOffline>().HasKey(l => l.IdOrder);
 
-          
+
+
 
             modelBuilder.Entity<Evaluate>().HasOne(e => e.Laptop).WithMany().HasForeignKey(e => e.LaptopId);
             modelBuilder.Entity<Cart>().Property(c => c.Price).HasColumnType("decimal(18, 2)");
@@ -83,6 +83,15 @@ namespace LaptopStoreApi.Database
 
             modelBuilder.Entity<Order>().Property(o => o.Total).HasColumnType("decimal(18, 2)");
             // .OnDelete(DeleteBehavior.Cascade); // Nếu bạn muốn xóa tất cả LaptopStatus liên quan khi Laptop bị xóa
+
+
+            // Thiết lập Id làm khóa chính
+            modelBuilder.Entity<OrderOffline>().HasKey(l => l.Id);
+
+            // Thiết lập cột Id để tự động tăng dần
+            modelBuilder.Entity<OrderOffline>()
+                .Property(o => o.Id)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<Laptop> Laptops => Set<Laptop>();

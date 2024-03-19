@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BEEyM/+J33llzltxd2YgyvU3PlHSThhvmlolUHW0OddpIM+eTe8W1vv6mKNar1F2oJ5tdMoQwJf9wLRpfyibnQ==",
+  "dgSpecHash": "j1yugGSxyYUqYunJNXB2b6cMS309cUhzFj+BnM/o1zVyt0s5iqjV3KldnNuOgcTf3/wWDWq8e3U2QB5bUP49Rg==",
   "success": true,
   "projectFilePath": "D:\\D\\LaptopStore\\LaptopStore.csproj",
   "expectedPackageFiles": [
@@ -183,6 +183,7 @@
     "C:\\Users\\khanh\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
     "C:\\Users\\khanh\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
     "C:\\Users\\khanh\\.nuget\\packages\\system.net.http\\4.3.0\\system.net.http.4.3.0.nupkg.sha512",
+    "C:\\Users\\khanh\\.nuget\\packages\\system.net.http.json\\8.0.0\\system.net.http.json.8.0.0.nupkg.sha512",
     "C:\\Users\\khanh\\.nuget\\packages\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\khanh\\.nuget\\packages\\system.net.sockets\\4.3.0\\system.net.sockets.4.3.0.nupkg.sha512",
     "C:\\Users\\khanh\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
