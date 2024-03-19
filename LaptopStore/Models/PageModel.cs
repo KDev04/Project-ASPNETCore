@@ -7,6 +7,7 @@
     }
     public class PageLaptopModel
     {
-     
+        public List<ConsolidatedLaptop> Laptops { get; set;}
+        public List<ConsolidatedCategory> Categories { get; set; }
     }
 }

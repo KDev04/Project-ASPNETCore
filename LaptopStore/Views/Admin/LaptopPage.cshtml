@@ -4,7 +4,8 @@
     // Định nghĩa số sản phẩm trên mỗi trang và trang hiện tại
 
 }
-@model List<Laptop>
+@model PageLaptopModel
+
 
 <section id="main" style="position: absolute;  margin-top:60">
     <p id="errorMessage" class="text-center text-success bg-black">@ViewBag.ErrorMessage</p>
@@ -15,9 +16,9 @@
                 <input class="form-control" type="search" id="SearchLabel" placeholder="Tìm kiếm">
             </div>
             <div class="col-1">
-                <a class="btn btn-outline-secondary" type="submit">
+                <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                </a>
+                </button>
             </div>
 
 
@@ -41,7 +42,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
-                    <form action="SaveProduct" method="post" enctype="multipart/form-data" class="form-inline">
+                    <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data" class="form-inline">
 
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
@@ -51,190 +52,191 @@
                                 <input name="Name" class="form-control" required>
                             </div>
                         </div>
-
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Name" class="mr-2">Đơn giá</label>
+                                <label for="Type" class="mr-2">Loại sản phẩm</label>
                             </div>
                             <div class="col">
-                                <input name="Name" class="form-control" required>
+                                <input name="Type" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row row-cols-2 mb-3">
+                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                <label for="Price" class="mr-2">Đơn giá</label>
+                            </div>
+                            <div class="col">
+                                <input name="Price" class="form-control" required type="number">
+                            </div>
+                        </div>
+                        <div class="row row-cols-2 mb-3">
+                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                <label for="BigPrice" class="mr-2">Giá gốc</label>
+                            </div>
+                            <div class="col">
+                                <input name="BigPrice" class="form-control" required type="number">
+                            </div>
+                        </div>
+                        <div class="row row-cols-2 mb-3">
+                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                <label for="Image" class="mr-2">Hình ảnh</label>
+                            </div>
+                            <div class="col">
+                                <input type="file" name="Image" class="form-control-file" required>
                             </div>
                         </div>
 
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Price" class="mr-2">Hình ảnh</label>
+                                <label for="Description" class="mr-2">Mô tả </label>
                             </div>
                             <div class="col">
-                                <input type="file" class="form-control-file" required>
-                            </div>
-                        </div>
-                        <div class="row row-cols-2 mb-3">
-                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Quantity" class="mr-2">Mô tả </label>
-                            </div>
-                            <div class="col">
-                                <input name="Quantity"  class="form-control">
+                                <input name="Description" class="form-control">
                             </div>
                         </div>
 
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Quantity" class="mr-2">Danh mục</label>
+                                <label for="CategoryId" class="mr-2">Danh mục</label>
                             </div>
                             <div class="col">
-                                <select name="Status" class="form-control" required>
+                                <select name="CategoryId" class="form-control" required>
                                     <option value="" disabled selected>Chọn danh mục</option>
-                                    <option value="Pradator">Pradator</option>
-                                    <option value="Acer Nitro 5">Acer Nitro 5</option>
-                                    <option value="Gigabyte">Gigabyte</option>
-                                    <option value="Lenovo">Lenovo</option>
+                                    @foreach (var cate in Model.Categories)
+                                    {
+                                        <option value="@cate.CategoryId">
+                                            @cate.CategoryName
+                                        </option>
+                                    }
 
                                 </select>
                             </div>
                         </div>
 
-                        @* <div class="row row-cols-2 mb-3">
-                        <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                        <label for="Image" class="mr-2">Ảnh:</label>
-                        </div>
-                        <div class="col">
-                        <input name="Image" type="file" class="form-control-file" required>
-                        </div>
-                        </div> *@
 
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Thương hiệu </label>
+                                <label for="Brand" class="mr-2">Thương hiệu </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Brand" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Dòng máy </label>
+                                <label for="SeriesLaptop" class="mr-2">Dòng máy </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="SeriesLaptop" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Màu sắc </label>
+                                <label for="Color" class="mr-2">Màu sắc </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Color" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">CPU </label>
+                                <label for="Cpu" class="mr-2">CPU </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Cpu" class="form-control" required>
                             </div>
 
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Chip đồ họa </label>
+                                <label for="Chip" class="mr-2">Chip đồ họa </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Chip" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">RAM </label>
+                                <label for="RAM" class="mr-2">RAM </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="RAM" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Màn hình </label>
+                                <label for="Screen" class="mr-2">Màn hình </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Screen" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Bộ nhớ </label>
+                                <label for="Memory" class="mr-2">Bộ nhớ </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Memory" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Kết nối không dây </label>
+                                <label for="BlueTooth" class="mr-2">Kết nối không dây </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="BlueTooth" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Bàn phím </label>
+                                <label for="Keyboard" class="mr-2">Bàn phím </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Keyboard" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Hệ điều hành </label>
+                                <label for="OperatingSystem" class="mr-2">Hệ điều hành </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="OperatingSystem" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Kích thước</label>
+                                <label for="Pin" class="mr-2">Pin </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Pin" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Pin </label>
+                                <label for="weight" class="mr-2">Khối lượng </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="weight" class="form-control" required>
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Khối lượng </label>
+                                <label for="Accessory" class="mr-2">Phụ kiện đi kèm </label>
                             </div>
                             <div class="col">
-                                <input name="Date" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="row row-cols-2 mb-3">
-                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="Date" class="mr-2">Phụ kiện đi kèm </label>
-                            </div>
-                            <div class="col">
-                                <input name="Date" class="form-control" required>
+                                <input name="Accessory" class="form-control" required>
                             </div>
                         </div>
 
-                        @* <div class="row text-center">
+                        <div class="row text-center">
                         <div class="col">
                         <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
                         </div>
-                        </div> *@
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>"
                 </div>
             </div>
         </div>
@@ -251,253 +253,268 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var laptop in Model)
+            @foreach (var laptop in Model.Laptops)
             {
                 <tr>
-                    <td style="word-break: break-all;">@Html.Raw(laptop.Name)</td>
-                    <td style="word-break: break-all;">@laptop.Price</td>
-                    <td style="word-break: break-all;">Acer</td>
+                    <td style="word-break: break-all;">@Html.Raw(laptop.Laptop.Name)</td>
+                    <td style="word-break: break-all;">@laptop.Laptop.Price</td>
+                    <td style="word-break: break-all;">
+                        @if (laptop.Categories.Count > 0)
+                        {
+                            @foreach (var category in laptop.Categories)
+                            {
+                                <p>
+                                    @category.CategoryName
+                                </p>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-black-50">
+                                Laptop này chưa thuộc danh mục nào
+                            </p>
+                        }
+                    </td>
                     @* <td style="word-break: break-all;">@laptop.Quantity</td> *@
                     <td style="word-break: break-all;">
-                        <img src="http://localhost:4000/@laptop.ImgPath" alt="Laptop Image"
+                        <img src="http://localhost:4000/@laptop.Laptop.ImgPath" alt="Laptop Image"
                             style="width: 100px; height: 100px;">
                     </td>
 
                     <td>
                         <div style="display: flex; gap: 8px;" class=" p-3 ">
-                            @* <form method="post" asp-action="UpdateLaptop" asp-route-LaptopId=@laptop.LaptopId ></form>
-                        <button class="btn btn-primary btn-sm" type="submit">Cập nhật</button>
-                        </form> *@
 
-                            <a href="http://localhost:1111/Laptop/Detail/1" class="btn btn-primary btn-sm">Chi tiết sản phẩm</a>
+                            <a href="/Laptop/Detail/@laptop.Laptop.LaptopId" class="btn " title="Chi tiết sản phẩm">
+                                <i class="fa-solid fa-circle-info" style="color: #15e092;"></i>
+                            </a>
                             <!-- Form update-->
                             <form>
                                 <!-- Nút để mở modal -->
-                                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#myModal">
-                                    Cập nhật
+                                <button class="btn " type="button" data-bs-toggle="modal"
+                                    data-bs-target="#UpdateModal-@laptop.Laptop.LaptopId" title="Cập nhật sản phẩm">
+                                    <i class="fa-solid fa-wrench" style="color: #1e8adc;"></i>
                                 </button>
                             </form>
 
 
                             <!-- Modal update -->
-                            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            <div class="modal fade" id="UpdateModal-@laptop.Laptop.LaptopId" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Cập nhật laptop ID</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Cập nhật @laptop.Laptop.Name</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
 
                                         <div class="modal-body ">
-                                            <form action="SaveProduct" method="post" enctype="multipart/form-data" class="form-inline">
-
-                                                 <div class="row row-cols-2 mb-3">
-                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Name" class="mr-2">Phân loại:</label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input name="Name" class="form-control" required>
-                                                    </div>
-                                                </div>
+                                            <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data" class="form-inline">
 
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
                                                         <label for="Name" class="mr-2">Tên sản phẩm</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Name" class="form-control" required>
+                                                        <input name="Name" class="form-control" placeholder="@laptop.Laptop.Name">
                                                     </div>
                                                 </div>
-                                                
+                                                <div class="row row-cols-2 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label for="Type" class="mr-2">Loại sản phẩm</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input name="Type" class="form-control" placeholder="@laptop.Laptop.Type">
+                                                    </div>
+                                                </div>
+                                                <div class="row row-cols-2 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label for="Price" class="mr-2">Đơn giá</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input name="Price" class="form-control" type="number" placeholder="@laptop.Laptop.Price">
+                                                    </div>
+                                                </div>
+                                                <div class="row row-cols-2 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label for="BigPrice" class="mr-2">Giá gốc</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input name="BigPrice" class="form-control" type="number" placeholder="@laptop.Laptop.BigPrice">
+                                                    </div>
+                                                </div>
+                                                <div class="row row-cols-2 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label for="Image" class="mr-2">Hình ảnh</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="file" name="Image" class="form-control-file">
+                                                    </div>
+                                                </div>
 
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Name" class="mr-2">Đơn giá</label>
+                                                        <label for="Description" class="mr-2">Mô tả </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Name" class="form-control" required>
+                                                        <input name="Description" class="form-control" placeholder="@laptop.Laptop.Description">
                                                     </div>
                                                 </div>
 
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Price" class="mr-2">Hình ảnh</label>
+                                                        <label for="CategoryId" class="mr-2">Danh mục</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="file" class="form-control-file" required>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-cols-2 mb-3">
-                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Quantity" class="mr-2">Mô tả </label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input name="Quantity" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="row row-cols-2 mb-3">
-                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Quantity" class="mr-2">Danh mục</label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <select name="Status" class="form-control" required>
+                                                        <select name="CategoryId" class="form-control">
                                                             <option value="" disabled selected>Chọn danh mục</option>
-                                                            <option value="Pradator">Pradator</option>
-                                                            <option value="Acer Nitro 5">Acer Nitro 5</option>
-                                                            <option value="Gigabyte">Gigabyte</option>
-                                                            <option value="Lenovo">Lenovo</option>
+                                                            @foreach (var cate in Model.Categories)
+                                                            {
+                                                                <option value="@cate.CategoryId">
+                                                                    @cate.CategoryName
+                                                                </option>
+                                                            }
 
                                                         </select>
                                                     </div>
                                                 </div>
 
-                                                @* <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                            <label for="Image" class="mr-2">Ảnh:</label>
-                                            </div>
-                                            <div class="col">
-                                            <input name="Image" type="file" class="form-control-file" required>
-                                            </div>
-                                            </div> *@
 
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Thương hiệu </label>
+                                                        <label for="Brand" class="mr-2">Thương hiệu </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Brand" class="form-control" placeholder="@laptop.Laptop.Brand">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Dòng máy </label>
+                                                        <label for="SeriesLaptop" class="mr-2">Dòng máy </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="SeriesLaptop" class="form-control" placeholder="@laptop.Laptop.SeriesLaptop">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Màu sắc </label>
+                                                        <label for="Color" class="mr-2">Màu sắc </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <select class="form-control" name="Color">
+                                                            <option value="">--Chọn màu--</option>
+                                                            <option value="Đen">Đen</option>
+                                                            <option value="Bạc">Bạc</option>
+                                                            <option value="Vàng">Vàng</option>
+                                                            <option value="Trắng">Trắng</option>
+                                                            <option value="Xám">Xám</option>
+                                                            <option value="Xanh dương">Xanh dương</option>
+                                                            <option value="Đỏ">Đỏ</option>
+                                                            <option value="Hồng">Hồng</option>
+                                                            <option value="Cam">Cam</option>
+                                                            <option value="Xanh lá">Xanh lá</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">CPU </label>
+                                                        <label for="Cpu" class="mr-2">CPU </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Cpu" class="form-control" placeholder="@laptop.Laptop.Cpu">
                                                     </div>
 
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Chip đồ họa </label>
+                                                        <label for="Chip" class="mr-2">Chip đồ họa </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Chip" class="form-control" placeholder="@laptop.Laptop.Chip">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">RAM </label>
+                                                        <label for="RAM" class="mr-2">RAM </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="RAM" class="form-control" placeholder="@laptop.Laptop.RAM">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Màn hình </label>
+                                                        <label for="Screen" class="mr-2">Màn hình </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Screen" class="form-control" placeholder="@laptop.Laptop.Screen">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Bộ nhớ </label>
+                                                        <label for="Memory" class="mr-2">Bộ nhớ </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Memory" class="form-control" placeholder="@laptop.Laptop.Memory">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Kết nối không dây </label>
+                                                        <label for="BlueTooth" class="mr-2">Kết nối không dây </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="BlueTooth" class="form-control" placeholder="@laptop.Laptop.BlueTooth">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Bàn phím </label>
+                                                        <label for="Keyboard" class="mr-2">Bàn phím </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Keyboard" class="form-control" placeholder="@laptop.Laptop.Keyboard">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Hệ điều hành </label>
+                                                        <label for="OperatingSystem" class="mr-2">Hệ điều hành </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="OperatingSystem" class="form-control" placeholder="@laptop.Laptop.OperatingSystem">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Kích thước</label>
+                                                        <label for="Pin" class="mr-2">Pin </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Pin" class="form-control" placeholder="@laptop.Laptop.Pin">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Pin </label>
+                                                        <label for="weight" class="mr-2">Khối lượng </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="weight" class="form-control" placeholder="@laptop.Laptop.weight">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Khối lượng </label>
+                                                        <label for="Accessory" class="mr-2">Phụ kiện đi kèm </label>
                                                     </div>
                                                     <div class="col">
-                                                        <input name="Date" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-cols-2 mb-3">
-                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                        <label for="Date" class="mr-2">Phụ kiện đi kèm </label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input name="Date" class="form-control" required>
+                                                        <input name="Accessory" class="form-control" placeholder="@laptop.Laptop.Accessory">
                                                     </div>
                                                 </div>
 
-                                                @* <div class="row text-center">
-                                            <div class="col">
-                                            <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
-                                            </div>
-                                            </div> *@
+                                                <div class="row text-center">
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Hủy
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </form>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -506,8 +523,8 @@
 
                             <!-- Modal delete -->
                             <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"
-                                asp-route-LaptopId="@laptop.LaptopId" onsubmit="return confirmDelete();">
-                                <button class="btn btn-primary btn-sm" type="submit">Xóa</button>
+                                  asp-route-LaptopId="@laptop.Laptop.LaptopId" onsubmit="return confirmDelete();">
+                                <button class="btn " type="submit" title="Xóa sản phẩm"><i class="fa-solid fa-trash-can" style="color: #ec1818;"></i></button>
                             </form>
                             <script>
                                 function confirmDelete() {

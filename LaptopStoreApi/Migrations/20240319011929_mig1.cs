@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LaptopStoreApi.Migrations
 {
     /// <inheritdoc />
-    public partial class migrate1 : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -77,27 +77,27 @@ namespace LaptopStoreApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     BigPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SeriesLaptop = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cpu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Chip = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RAM = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Memory = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BlueTooth = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Keyboard = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OperatingSystem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Pin = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    weight = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Accessory = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Screen = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SeriesLaptop = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cpu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Chip = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RAM = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Memory = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BlueTooth = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Keyboard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OperatingSystem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Pin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    weight = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Accessory = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Screen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -129,6 +129,7 @@ namespace LaptopStoreApi.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    StatusOrder = table.Column<int>(type: "int", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -289,7 +290,7 @@ namespace LaptopStoreApi.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     LaptopId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -393,9 +394,9 @@ namespace LaptopStoreApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LaptopId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     IsExport = table.Column<bool>(type: "bit", nullable: false),
                     PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),

@@ -33,6 +33,7 @@
         public string weight { get; set; }
         public string Accessory { get; set; } // Phụ kiện
         public string Screen { get; set; }
+        public int CategoryId { get; set; } //dùng để đẩy qua api 
 
     }
 

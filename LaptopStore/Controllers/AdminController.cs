@@ -23,30 +23,38 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> LaptopPage()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
-
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptopWithAllCategory");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
-
+                var laps = await responselap.Content.ReadAsStringAsync();
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                var laptops = JsonConvert.DeserializeObject<List<Laptop>>(responseData);
-
-                return View(laptops); // Trả về view mà bạn muốn hiển thị dữ liệu
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                var reslaps = JsonConvert.DeserializeObject<List<ConsolidatedLaptop>>(laps);
+                if (reslaps == null) { reslaps = new List<ConsolidatedLaptop>(); }
+                PageLaptopModel model = new PageLaptopModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View(model); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                return StatusCode((int)response.StatusCode);
+                PageCategoryModel model = new PageCategoryModel();
+                return View(model);
             }
         }
 
 
         public IActionResult Create()
-        {
-            return View();
-        }
-        public IActionResult Setting()
         {
             return View();
         }
@@ -62,7 +70,23 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
                     formData.Add(new StringContent(model.Description.ToString() ?? ""), "Description");
-
+                    formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");
+                    formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
+                    formData.Add(new StringContent(model.Color.ToString() ?? ""), "Color");
+                    formData.Add(new StringContent(model.Brand.ToString() ?? ""), "Brand");
+                    formData.Add(new StringContent(model.SeriesLaptop.ToString() ?? ""), "SeriesLaptop");
+                    formData.Add(new StringContent(model.Cpu.ToString() ?? ""), "Cpu");
+                    formData.Add(new StringContent(model.Chip.ToString() ?? ""), "Chip");
+                    formData.Add(new StringContent(model.RAM.ToString() ?? ""), "RAM");
+                    formData.Add(new StringContent(model.Memory.ToString() ?? ""), "Memory");
+                    formData.Add(new StringContent(model.BlueTooth.ToString() ?? ""), "BlueTooth");
+                    formData.Add(new StringContent(model.Keyboard.ToString() ?? ""), "Keyboard");
+                    formData.Add(new StringContent(model.OperatingSystem.ToString() ?? ""), "OperatingSystem");
+                    formData.Add(new StringContent(model.Pin.ToString() ?? ""), "Pin");
+                    formData.Add(new StringContent(model.weight.ToString() ?? ""), "weight");
+                    formData.Add(new StringContent(model.Accessory.ToString() ?? ""), "Accessory");
+                    formData.Add(new StringContent(model.Screen.ToString() ?? ""), "Screen");
+                    formData.Add(new StringContent(model.CategoryId.ToString() ?? ""), "CategoryId");
                     if (model.Image != null && model.Image.Length > 0)
                     {
                         using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
@@ -112,27 +136,59 @@ namespace LaptopStore.Controllers
                 return Redirect("/Admin/LaptopPage");
             }
         }
-        public async Task<IActionResult> UpdateLaptop(int LaptopId)
+        public async Task<IActionResult> UpdateLaptop(int LaptopId, Laptop model)
         {
-            var token = HttpContext.Session.GetString("Token");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             try
             {
-                var response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptop/" + LaptopId);
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
+                    formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
+                    formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
+                    formData.Add(new StringContent(model.Description.ToString() ?? ""), "Description");
+                    formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");
+                    formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
+                    formData.Add(new StringContent(model.Color.ToString() ?? ""), "Color");
+                    formData.Add(new StringContent(model.Brand.ToString() ?? ""), "Brand");
+                    formData.Add(new StringContent(model.SeriesLaptop.ToString() ?? ""), "SeriesLaptop");
+                    formData.Add(new StringContent(model.Cpu.ToString() ?? ""), "Cpu");
+                    formData.Add(new StringContent(model.Chip.ToString() ?? ""), "Chip");
+                    formData.Add(new StringContent(model.RAM.ToString() ?? ""), "RAM");
+                    formData.Add(new StringContent(model.Memory.ToString() ?? ""), "Memory");
+                    formData.Add(new StringContent(model.BlueTooth.ToString() ?? ""), "BlueTooth");
+                    formData.Add(new StringContent(model.Keyboard.ToString() ?? ""), "Keyboard");
+                    formData.Add(new StringContent(model.OperatingSystem.ToString() ?? ""), "OperatingSystem");
+                    formData.Add(new StringContent(model.Pin.ToString() ?? ""), "Pin");
+                    formData.Add(new StringContent(model.weight.ToString() ?? ""), "weight");
+                    formData.Add(new StringContent(model.Accessory.ToString() ?? ""), "Accessory");
+                    formData.Add(new StringContent(model.Screen.ToString() ?? ""), "Screen");
+                    formData.Add(new StringContent(model.CategoryId.ToString() ?? ""), "CategoryId");
+                    if (model.Image != null && model.Image.Length > 0)
+                    {
+                        using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
+                        {
+                            formData.Add(streamContent, "Image", model.Image.FileName);
+                        }
+                    }
+                    var response = await _httpClient.PutAsync("http://localhost:4000/api/Laptop/Add", formData);
+                    Console.WriteLine("goi qua api roi");
+                    Console.WriteLine(response.StatusCode);
 
-                // Tiếp theo, bạn có thể xử lý dữ liệu JSON nhận được ở đây
-                // Ví dụ: var laptops = JsonConvert.DeserializeObject<List<Laptop>>(content);
-
-                var laptop = JsonConvert.DeserializeObject<Laptop>(content);
-                return View(laptop);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Xử lý khi tạo laptop thành công
+                        return Redirect("/Admin/LaptopPage");
+                    }
+                    else
+                    {
+                        // Xử lý khi có lỗi từ API
+                        return Redirect("/Admin/LaptopPage");
+                    }
+                }
             }
-            catch (Exception)
+            catch
             {
-                // Xử lý lỗi khi gặp vấn đề khi gọi API
-                // Ví dụ:
-                return RedirectToAction("Error", "Home");
+                return Redirect("/Home/Error");
             }
         }
         public async Task<IActionResult> SaveUpdate(Laptop model)
@@ -147,6 +203,23 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
                     formData.Add(new StringContent(model.Description.ToString() ?? ""), "Description");
+                    formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");
+                    formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
+                    formData.Add(new StringContent(model.Color.ToString() ?? ""), "Color");
+                    formData.Add(new StringContent(model.Brand.ToString() ?? ""), "Brand");
+                    formData.Add(new StringContent(model.SeriesLaptop.ToString() ?? ""), "SeriesLaptop");
+                    formData.Add(new StringContent(model.Cpu.ToString() ?? ""), "Cpu");
+                    formData.Add(new StringContent(model.Chip.ToString() ?? ""), "Chip");
+                    formData.Add(new StringContent(model.RAM.ToString() ?? ""), "RAM");
+                    formData.Add(new StringContent(model.Memory.ToString() ?? ""), "Memory");
+                    formData.Add(new StringContent(model.BlueTooth.ToString() ?? ""), "BlueTooth");
+                    formData.Add(new StringContent(model.Keyboard.ToString() ?? ""), "Keyboard");
+                    formData.Add(new StringContent(model.OperatingSystem.ToString() ?? ""), "OperatingSystem");
+                    formData.Add(new StringContent(model.Pin.ToString() ?? ""), "Pin");
+                    formData.Add(new StringContent(model.weight.ToString() ?? ""), "weight");
+                    formData.Add(new StringContent(model.Accessory.ToString() ?? ""), "Accessory");
+                    formData.Add(new StringContent(model.Screen.ToString() ?? ""), "Screen");
+
                     if (model.Image != null && model.Image.Length > 0)
                     {
                         using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
