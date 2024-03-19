@@ -2,8 +2,8 @@
 {
     public class ConsolidatedCategory
     {
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public List<Laptop> Laptops { get; set; }
+        public int? CategoryId { get; set; }
+        public string? CategoryName { get; set; }
+        public List<Laptop>? Laptops { get; set; }
     }
 }

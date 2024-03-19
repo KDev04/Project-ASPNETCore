@@ -65,25 +65,34 @@ namespace LaptopStoreApi.Services
             };
             _context.Laptops.Add(laptop);
             await _context.SaveChangesAsync();
+
             var category = await _context.Categories.FindAsync(model.CategoryId);
             if (category == null)
             {
                 // Không tìm thấy danh mục
                 throw new Exception("Không tìm thấy danh mục.");
             }
-            LaptopCategory lap_cate = new LaptopCategory()
+            if (model.CategoryId != null)
             {
-                CategoryId = model.CategoryId,
-                Category = category,
-                LaptopId = laptop.LaptopId,
-                Laptop = laptop
-            };
-            _context.LaptopCategories.Add(lap_cate);
-            await _context.SaveChangesAsync();
-            laptop.LaptopCategories.Add(lap_cate);
-            _context.Laptops.Update(laptop);
-            category.LaptopCategories.Add(lap_cate);
-            _context.Categories.Update(category);
+                int? CateId = model.CategoryId;
+                LaptopCategory lap_cate = new LaptopCategory()
+                {
+
+                    CategoryId = CateId,
+                    Category = category,
+                    LaptopId = laptop.LaptopId,
+                    Laptop = laptop
+                };
+
+                _context.LaptopCategories.Add(lap_cate);
+                await _context.SaveChangesAsync();
+                laptop.LaptopCategories.Add(lap_cate);
+                _context.Laptops.Update(laptop);
+                category.LaptopCategories.Add(lap_cate);
+                _context.Categories.Update(category);
+
+                await _context.SaveChangesAsync();
+            }
 
             await _context.SaveChangesAsync();
             return laptop;

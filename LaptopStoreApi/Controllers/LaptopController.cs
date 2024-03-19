@@ -231,21 +231,21 @@ namespace LaptopStoreApi.Controllers
                 _dbContext.Laptops.Update(laptop);
                 await _dbContext.SaveChangesAsync();
             }
-            if (laptop.Price != Loadlaptop.Price)
+            if (Loadlaptop.Price!=0 && Loadlaptop.Price != null && Loadlaptop.Price > 0)
             {
                 laptop.Price = Loadlaptop.Price;
                 laptop.LastModifiedDate = DateTime.Now;
                 _dbContext.Laptops.Update(laptop);
                 await _dbContext.SaveChangesAsync();
             }
-            if (laptop.BigPrice != Loadlaptop.BigPrice)
+            if (Loadlaptop.BigPrice != 0 && Loadlaptop.BigPrice != null && Loadlaptop.BigPrice > 0)
             {
                 laptop.BigPrice = Loadlaptop.BigPrice;
                 laptop.LastModifiedDate = DateTime.Now;
                 _dbContext.Laptops.Update(laptop);
                 await _dbContext.SaveChangesAsync();
             }
-            if (laptop.Quantity != Loadlaptop.Quantity)
+            if (Loadlaptop.Quantity != 0 && Loadlaptop.Quantity != null && Loadlaptop.Quantity > 0)
             {
                 laptop.Quantity = Loadlaptop.Quantity;
                 laptop.LastModifiedDate = DateTime.Now;
