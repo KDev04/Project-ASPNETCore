@@ -86,17 +86,15 @@ namespace LaptopStoreApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cmt")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LaptopId")
+                    b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rate")
+                    b.Property<int?>("Rate")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -215,10 +213,10 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Database.LaptopCategory", b =>
                 {
-                    b.Property<int>("LaptopId")
+                    b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("LaptopId", "CategoryId");
@@ -250,7 +248,7 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Database.LikeProduct", b =>
                 {
-                    b.Property<int>("LaptopId")
+                    b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -271,7 +269,7 @@ namespace LaptopStoreApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsExport")
+                    b.Property<bool?>("IsExport")
                         .HasColumnType("bit");
 
                     b.Property<int>("LaptopId")
@@ -281,7 +279,6 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("PromotionCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Quantity")
@@ -294,7 +291,6 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -333,16 +329,16 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Database.OrderDetail", b =>
                 {
-                    b.Property<int>("LaptopId")
+                    b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Order2Id")
+                    b.Property<int?>("Order2Id")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("LaptopId", "Order2Id");
@@ -360,25 +356,25 @@ namespace LaptopStoreApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrder"));
 
-                    b.Property<int>("LaptopId")
+                    b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LaptopName")
+                    b.Property<int?>("LaptopName")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatusOrder")
+                    b.Property<int?>("StatusOrder")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Total")
+                    b.Property<decimal?>("Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdOrder");
@@ -393,17 +389,15 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PromotionName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("PromotionValue")
+                    b.Property<decimal?>("PromotionValue")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("Start")
@@ -656,15 +650,11 @@ namespace LaptopStoreApi.Migrations
                 {
                     b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
                         .WithMany()
-                        .HasForeignKey("LaptopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LaptopId");
 
                     b.HasOne("LaptopStoreApi.Database.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Laptop");
 
@@ -730,9 +720,7 @@ namespace LaptopStoreApi.Migrations
 
                     b.HasOne("LaptopStoreApi.Database.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Laptop");
 

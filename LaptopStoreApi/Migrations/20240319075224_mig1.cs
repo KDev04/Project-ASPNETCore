@@ -124,12 +124,12 @@ namespace LaptopStoreApi.Migrations
                 {
                     IdOrder = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LaptopId = table.Column<int>(type: "int", nullable: false),
-                    LaptopName = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StatusOrder = table.Column<int>(type: "int", nullable: false),
+                    LaptopId = table.Column<int>(type: "int", nullable: true),
+                    LaptopName = table.Column<int>(type: "int", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    StatusOrder = table.Column<int>(type: "int", nullable: true),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -142,12 +142,12 @@ namespace LaptopStoreApi.Migrations
                 columns: table => new
                 {
                     PromotionCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PromotionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PromotionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PromotionValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    PromotionValue = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -317,10 +317,10 @@ namespace LaptopStoreApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Rate = table.Column<int>(type: "int", nullable: false),
-                    Cmt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LaptopId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Rate = table.Column<int>(type: "int", nullable: true),
+                    Cmt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LaptopId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -329,14 +329,12 @@ namespace LaptopStoreApi.Migrations
                         name: "FK_Evaluates_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Evaluates_Laptops_LaptopId",
                         column: x => x.LaptopId,
                         principalTable: "Laptops",
-                        principalColumn: "LaptopId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "LaptopId");
                 });
 
             migrationBuilder.CreateTable(
@@ -397,9 +395,9 @@ namespace LaptopStoreApi.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    IsExport = table.Column<bool>(type: "bit", nullable: false),
-                    PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsExport = table.Column<bool>(type: "bit", nullable: true),
+                    PromotionCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     StatusOrder = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -409,8 +407,7 @@ namespace LaptopStoreApi.Migrations
                         name: "FK_Orders_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Laptops_LaptopId",
                         column: x => x.LaptopId,
@@ -445,8 +442,8 @@ namespace LaptopStoreApi.Migrations
                 {
                     LaptopId = table.Column<int>(type: "int", nullable: false),
                     Order2Id = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {

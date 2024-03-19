@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <!-- Modal nhập  -->
+    <!-- Modal Tao san pham -->
     <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -57,7 +57,7 @@
                                 <label for="Type" class="mr-2">Loại sản phẩm</label>
                             </div>
                             <div class="col">
-                                <input name="Type" class="form-control" required>
+                                <input name="Type" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -74,6 +74,14 @@
                             </div>
                             <div class="col">
                                 <input name="BigPrice" class="form-control" required type="number">
+                            </div>
+                        </div>
+                        <div class="row row-cols-2 mb-3">
+                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                <label for="Quantity" class="mr-2">Số lượng kho ban đầu</label>
+                            </div>
+                            <div class="col">
+                                <input name="Quantity" class="form-control" required type="number">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -99,7 +107,7 @@
                                 <label for="CategoryId" class="mr-2">Danh mục</label>
                             </div>
                             <div class="col">
-                                <select name="CategoryId" class="form-control" required>
+                                <select name="CategoryId" class="form-control">
                                     <option value="" disabled selected>Chọn danh mục</option>
                                     @foreach (var cate in Model.Categories)
                                     {
@@ -118,7 +126,7 @@
                                 <label for="Brand" class="mr-2">Thương hiệu </label>
                             </div>
                             <div class="col">
-                                <input name="Brand" class="form-control" required>
+                                <input name="Brand" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -126,7 +134,7 @@
                                 <label for="SeriesLaptop" class="mr-2">Dòng máy </label>
                             </div>
                             <div class="col">
-                                <input name="SeriesLaptop" class="form-control" required>
+                                <input name="SeriesLaptop" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -134,7 +142,7 @@
                                 <label for="Color" class="mr-2">Màu sắc </label>
                             </div>
                             <div class="col">
-                                <input name="Color" class="form-control" required>
+                                <input name="Color" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -142,7 +150,7 @@
                                 <label for="Cpu" class="mr-2">CPU </label>
                             </div>
                             <div class="col">
-                                <input name="Cpu" class="form-control" required>
+                                <input name="Cpu" class="form-control" >
                             </div>
 
                         </div>
@@ -151,7 +159,7 @@
                                 <label for="Chip" class="mr-2">Chip đồ họa </label>
                             </div>
                             <div class="col">
-                                <input name="Chip" class="form-control" required>
+                                <input name="Chip" class="form-control" >
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -159,7 +167,7 @@
                                 <label for="RAM" class="mr-2">RAM </label>
                             </div>
                             <div class="col">
-                                <input name="RAM" class="form-control" required>
+                                <input name="RAM" class="form-control" >
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -167,7 +175,7 @@
                                 <label for="Screen" class="mr-2">Màn hình </label>
                             </div>
                             <div class="col">
-                                <input name="Screen" class="form-control" required>
+                                <input name="Screen" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -175,7 +183,7 @@
                                 <label for="Memory" class="mr-2">Bộ nhớ </label>
                             </div>
                             <div class="col">
-                                <input name="Memory" class="form-control" required>
+                                <input name="Memory" class="form-control" >
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -183,7 +191,7 @@
                                 <label for="BlueTooth" class="mr-2">Kết nối không dây </label>
                             </div>
                             <div class="col">
-                                <input name="BlueTooth" class="form-control" required>
+                                <input name="BlueTooth" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -191,7 +199,7 @@
                                 <label for="Keyboard" class="mr-2">Bàn phím </label>
                             </div>
                             <div class="col">
-                                <input name="Keyboard" class="form-control" required>
+                                <input name="Keyboard" class="form-control" >
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -199,7 +207,7 @@
                                 <label for="OperatingSystem" class="mr-2">Hệ điều hành </label>
                             </div>
                             <div class="col">
-                                <input name="OperatingSystem" class="form-control" required>
+                                <input name="OperatingSystem" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -207,7 +215,7 @@
                                 <label for="Pin" class="mr-2">Pin </label>
                             </div>
                             <div class="col">
-                                <input name="Pin" class="form-control" required>
+                                <input name="Pin" class="form-control">
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -215,7 +223,7 @@
                                 <label for="weight" class="mr-2">Khối lượng </label>
                             </div>
                             <div class="col">
-                                <input name="weight" class="form-control" required>
+                                <input name="weight" class="form-control" >
                             </div>
                         </div>
                         <div class="row row-cols-2 mb-3">
@@ -223,7 +231,7 @@
                                 <label for="Accessory" class="mr-2">Phụ kiện đi kèm </label>
                             </div>
                             <div class="col">
-                                <input name="Accessory" class="form-control" required>
+                                <input name="Accessory" class="form-control">
                             </div>
                         </div>
 
@@ -309,8 +317,8 @@
                                         </div>
 
                                         <div class="modal-body ">
-                                            <form asp-action="SaveProduct" asp-controller="Admin" method="post" enctype="multipart/form-data" class="form-inline">
-
+                                            <form asp-action="UpdateLaptop" asp-controller="Admin" method="post" enctype="multipart/form-data" class="form-inline">
+                                                <input name="LaptopId" value="@laptop.Laptop.LaptopId" class="d-none"/>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
                                                         <label for="Name" class="mr-2">Tên sản phẩm</label>
@@ -341,6 +349,14 @@
                                                     </div>
                                                     <div class="col">
                                                         <input name="BigPrice" class="form-control" type="number" placeholder="@laptop.Laptop.BigPrice">
+                                                    </div>
+                                                </div>
+                                                <div class="row row-cols-2 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label for="Quantity" class="mr-2">Số lượng nhập kho</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input name="Quantity" class="form-control" type="number" placeholder="@laptop.Laptop.Quantity">
                                                     </div>
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
