@@ -8,127 +8,126 @@
 @model List<Laptop>
 
 <section id="main" style="position: absolute; ">
-    <form class="my-2">
-        <div class="row">
-            <div class="col-8">
-                <input class="form-control" type="search" id="SearchLabel" placeholder="Tìm kiếm">
-            </div>
-            <div class="col">
-                <a class="btn btn-outline-secondary" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </a>
-            </div>
 
-            <div class="col text-end">
-                <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal" data-bs-target="#orderModal">
-                    <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Thêm
-                </a>
-            </div>
+    <div class="row my-3">
 
-            <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-
-
-
-                <form asp-action="OrderOffline" asp-controller="Admin"  method="post" enctype="multipart/form-data">
-                    <div class="modal-dialog modal-xl">
-
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới đơn hàng </h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body ">
-
-                                <div class="row">
-                                    <div class="col-5">
-
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <input name="Phone" class="form-control" required
-                                                    placeholder="Số điện thoại* ">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <input name="Name" class="form-control" required placeholder="Tên* ">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <input name="Date" type="date" class="form-control" required
-                                                    placeholder="Ngày đặt hàng* ">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <input name="Note" type="text" class="form-control"
-                                                    placeholder="Ghi chú ">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-7">
-
-                                        <fieldset class="">
-                                            <legend>Choose order product</legend>
-
-                                            <div class="row mb-3">
-                                                <select name="countries" id="countries" multiple>
-
-                                                    @foreach (var laptopOption in Model)
-                                                    {
-                                                        <option value='@(laptopOption.Name + " + " + laptopOption.Price)'>
-                                                            @laptopOption.Name</option>
-                                                    }
-                                                </select>
-                                            </div>
-
-                                            <table class="table table-striped table-bordered">
-                                                <thead class="thead-dark">
-                                                    <tr>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Giá</th>
-                                                        <th>Số lượng</th>
-
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="selectedLaptopsBody">
-                                                </tbody>
-
-                                            </table>
-                                        </fieldset>
-
-
-
-                                    </div>
-                                </div>
-
-
-                                <div id="required-message" class="alert alert-danger"> * Bắt buộc nhập </div>
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </form>
-
-
-
-            </div>
+        <div class="col-8">
+            <input class="form-control" type="search" id="SearchLabel" placeholder="Tìm kiếm">
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-secondary" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
 
-    </form>
+
+        <div class="col text-end">
+            <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal" data-bs-target="#orderModal">
+                <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Thêm
+            </a>
+        </div>
+
+        <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+            <form asp-action="OrderOffline" asp-controller="Admin" method="post" enctype="multipart/form-data">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới đơn hàng </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body ">
+
+                            <div class="row">
+                                <div class="col-5">
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input type="number" name="Phone" class="form-control" required
+                                                placeholder="Số điện thoại* ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input name="Name" class="form-control" required placeholder="Tên* ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input name="OrderDate" type="date" class="form-control" required
+                                                placeholder="Ngày đặt hàng* ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input name="Note" type="text" class="form-control" placeholder="Ghi chú ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+
+                                    <fieldset class="">
+                                        <legend>Choose order product</legend>
+
+                                        <div class="row mb-3">
+                                            <select name="Products" id="Products" multiple>
+
+                                                @foreach (var laptopOption in Model)
+                                                {
+                                                    <option value='@(laptopOption.Name + " + " + laptopOption.Price)'>
+                                                        @laptopOption.Name</option>
+                                                }
+
+                                            </select>
+                                        </div>
+
+                                        <table class="table table-striped table-bordered">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá</th>
+                                                    <th>Số lượng</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="selectedLaptopsBody">
+                                            </tbody>
+
+                                        </table>
+                                    </fieldset>
+
+
+
+                                </div>
+                            </div>
+
+
+                            <div id="required-message" class="alert alert-danger"> * Bắt buộc nhập </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+
+
+        </div>
+    </div>
+
+
 
 
 
@@ -242,7 +241,7 @@ console.log(values)
 </script> *@
 
 <script>
-    new MultiSelectTag('countries', {
+    new MultiSelectTag('Products', {
         rounded: true,
         shadow: true,
         placeholder: 'Search',
@@ -252,29 +251,27 @@ console.log(values)
             bgColor: '#eaffe6',
         },
         onChange: function (values) {
-
-
-
             var selectedLaptopsBody = document.getElementById('selectedLaptopsBody');
 
             selectedLaptopsBody.innerHTML = ''; // Xóa các dòng dữ liệu cũ trong bảng
-            values.forEach(function (laptop, price, sum) {
-                var price = laptop.value.split('+').pop().trim();
+            values.forEach(function (laptop) {
+    @* var price = laptop.value.split('+').pop().trim(); *@
+
+                var priceString = laptop.value.split('+').pop().trim();
+                var price = parseFloat(priceString);
+                console.log(price); // Output: 1800
 
                 var row = '<tr>';
                 row += '<td>' + laptop.label + '</td>'; // Tên sản phẩm
                 // Thêm các cột khác tương ứng với thông tin sản phẩm, ví dụ: giá, số lượng, tổng, thao tác
-                row += '<td>' + price + '</td>'; // Giá
-                row += '<td><input type="number" class="quantity-input" value="1" min="1"></td>'; // Số lượng
+                row += '<td>' + '<input   name="Price[]" readonly  value="' + price + '">' + '</td>'; // Giá
+                row += '<td><input type="number" name="Quantity[]" class="quantity-input" value="1" min="1" autocomplete="off"></td>'; // Số lượng
                 row += '</tr>';
                 selectedLaptopsBody.innerHTML += row;
             });
-
-
-
         }
     });
-    
+
 </script>
 
 

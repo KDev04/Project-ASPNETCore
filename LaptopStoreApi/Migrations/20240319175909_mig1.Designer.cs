@@ -12,7 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
+<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319175909_mig1.Designer.cs
     [Migration("20240319175909_mig1")]
+=======
+<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319204922_mig1.Designer.cs
+    [Migration("20240319204922_mig1")]
+========
+    [Migration("20240319075224_mig1")]
+>>>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741:LaptopStoreApi/Migrations/20240319075224_mig1.Designer.cs
+>>>>>>> aadb2454077e217d5ec0de4b558b99adc1b3232c:LaptopStoreApi/Migrations/20240319075224_mig1.Designer.cs
     partial class mig1
     {
         /// <inheritdoc />
@@ -353,25 +361,50 @@ namespace LaptopStoreApi.Migrations
 
             modelBuilder.Entity("LaptopStoreApi.Database.OrderOffline", b =>
                 {
-                    b.Property<int>("IdOrder")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrder"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319204922_mig1.Designer.cs
+                    b.Property<int>("IdOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+========
                     b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
                     b.Property<int?>("LaptopName")
                         .HasColumnType("int");
+>>>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741:LaptopStoreApi/Migrations/20240319075224_mig1.Designer.cs
 
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
+<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319204922_mig1.Designer.cs
+                    b.Property<int?>("Phone")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Products")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+========
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("Quantity")
+>>>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741:LaptopStoreApi/Migrations/20240319075224_mig1.Designer.cs
                         .HasColumnType("int");
 
                     b.Property<int?>("StatusOrder")
@@ -380,7 +413,7 @@ namespace LaptopStoreApi.Migrations
                     b.Property<decimal?>("Total")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("IdOrder");
+                    b.HasKey("Id");
 
                     b.ToTable("OrderOfflines");
                 });

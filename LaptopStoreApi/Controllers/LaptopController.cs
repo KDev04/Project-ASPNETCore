@@ -32,7 +32,7 @@ namespace LaptopStoreApi.Controllers
 
             var consolidatedLaptops = laptops.Select(c => new ConsolidatedLaptop
             {
-               Laptop = c,
+                Laptop = c,
                 Categories = GetCategoriesByLaptopId(c.LaptopId)
             }).ToList();
 
@@ -172,7 +172,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [HttpGet]
-        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from = 0, decimal to= int.MaxValue)
+        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from , decimal to)
         {
             try
             {
@@ -192,7 +192,7 @@ namespace LaptopStoreApi.Controllers
                 throw new Exception("Có lỗi xảy ra khi tìm kiếm laptop.", ex);
             }
         }
-/*        [Authorize(Roles = RoleNames.Moderator)]*/
+        /*        [Authorize(Roles = RoleNames.Moderator)]*/
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
@@ -218,7 +218,7 @@ namespace LaptopStoreApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLaptop(int id, [FromForm] LapModel2 Loadlaptop)
         {
-            
+
             var laptop = await _dbContext.Laptops.FindAsync(id);
             if (laptop == null)
             {
@@ -483,17 +483,60 @@ namespace LaptopStoreApi.Controllers
         }
 
 
-        //  [HttpPost]
-        // public async Task<IActionResult> PostOrderOffline()
-        // {
-        //     try
-        //     {
-                
-        //     }
-        //     catch
-        //     {
-        //         return StatusCode(StatusCodes.Status500InternalServerError);
-        //     }
-        // }
+        [HttpPost]
+        public async Task<IActionResult> PostOrderOffline([FromBody] List<OrderOffline> AddOrderOfflines)
+        {
+            try
+            {
+
+                if (AddOrderOfflines == null || AddOrderOfflines.Count == 0)
+                {
+                    return BadRequest("No orders to process");
+                }
+                else
+                {
+                    foreach (var order in AddOrderOfflines)
+                    {
+                        _dbContext.OrderOfflines.Add(order);
+                    }
+                }
+                // Save changes to database
+                await _dbContext.SaveChangesAsync();
+
+                return Ok("Orders added successfully!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetIdOrder()
+        {
+            try
+            {
+                // Lấy ra IdOrder lớn nhất trong bảng OrderOffline
+                int maxIdOrder = await _dbContext.OrderOfflines
+                    .Select(o => o.IdOrder)
+                    .DefaultIfEmpty()
+                    .MaxAsync();
+
+                // Tăng giá trị maxIdOrder lên 1 để có IdOrder mới
+                int newIdOrder = maxIdOrder + 1;
+
+                return Ok(newIdOrder);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
     }
 }
+
+
+

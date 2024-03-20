@@ -5,17 +5,24 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net;
+using System.Text;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace LaptopStore.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IWebHostEnvironment _env;
+
         private readonly HttpClient _httpClient;
         private readonly ILogger<AdminController> _logger;
-        public AdminController(HttpClient httpClient, ILogger<AdminController> logger)
+        public AdminController(HttpClient httpClient, ILogger<AdminController> logger, IWebHostEnvironment env)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _env = env;
         }
         public IActionResult Index()
         {
@@ -333,13 +340,65 @@ namespace LaptopStore.Controllers
         }
 
 
-        public async Task<IActionResult> OrderOffline()
+
+
+        public async Task<IActionResult> OrderOffline(int IdOrder, int Id, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
         {
+            try
+            {
+                List<OrderOffline> AddOrderOfflines = new List<OrderOffline>();
+
+                HttpResponseMessage responseIdOrder = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetIdOrder");
+
+               int maxIdOrder = await responseIdOrder.Content.ReadFromJsonAsync<int>();
+
+                 
+                for (int i = 0; i < Products.Length; i++)
+                {
+                    OrderOffline AddOrderOffline = new OrderOffline();
+
+                    // Gán ID đơn hàng
+                    AddOrderOffline.IdOrder = maxIdOrder;
+                    AddOrderOffline.Phone = Phone; // Giải mã URL để lấy số điện thoại
+                    AddOrderOffline.Name = Name; // Tên người đặt hàng
+                    AddOrderOffline.Note = Note; // Ghi chú
+                    AddOrderOffline.Products = Products[i]; // Giải mã URL để lấy tên sản phẩm
+                    AddOrderOffline.Quantity = Quantity[i];// Số lượng sản phẩm
+                    AddOrderOffline.Price = Price[i];
+                    AddOrderOffline.Total = Price[i] * Quantity[i];
+                    AddOrderOffline.OrderDate = OrderDate;
+                    AddOrderOffline.StatusOrder = 0; // Ngày đặt hàng
+
+                    AddOrderOfflines.Add(AddOrderOffline);
+                }
+
+                var jsonContent = JsonConvert.SerializeObject(AddOrderOfflines);
+
+                var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/PostOrderOffline", stringContent);
+
+                // Xử lý phản hồi từ API
+                if (response.IsSuccessStatusCode)
+                {
+                    // Phản hồi thành công
+                    return View();
+                }
+                else
+                {
+                    // Xử lý phản hồi không thành công
+                    return BadRequest("Failed to process order");
+                }
 
 
+                // Xử lý danh sách AddOrderOfflines tại đây (ví dụ: lưu vào cơ sở dữ liệu)
 
-            return View("OrderConfirmation");
-
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                return BadRequest("Error processing order: " + ex.Message);
+            }
         }
     }
 }
