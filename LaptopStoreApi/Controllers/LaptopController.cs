@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -29,6 +30,25 @@ namespace LaptopStoreApi.Controllers
         public async Task<ActionResult<List<ConsolidatedLaptop>>> GetLaptopWithAllCategory()
         {
             var laptops = await _dbContext.Laptops.Include(l => l.LaptopCategories).ToListAsync();
+
+            var consolidatedLaptops = laptops.Select(c => new ConsolidatedLaptop
+            {
+                Laptop = c,
+                Categories = GetCategoriesByLaptopId(c.LaptopId)
+            }).ToList();
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                MaxDepth = 32 // Nếu cần thiết, bạn có thể tăng giới hạn độ sâu của đối tượng lên
+            };
+
+            return new JsonResult(consolidatedLaptops, options);
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<ConsolidatedLaptop>>> SearchLaptopWithAllCategory(string key)
+        {
+            var laptops = await _dbContext.Laptops.Where(l=> l.Name.Contains(key)).Include(l => l.LaptopCategories).ToListAsync();
 
             var consolidatedLaptops = laptops.Select(c => new ConsolidatedLaptop
             {
@@ -104,7 +124,6 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-        [Authorize(Roles = RoleNames.Moderator)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -7,21 +7,19 @@
 @model PageLaptopModel
 
 
-<section id="main" style="position: absolute;  margin-top:60">
+<section id="main" style="position: absolute;  margin-top:60px;">
     <p id="errorMessage" class="text-center text-success bg-black">@ViewBag.ErrorMessage</p>
 
-    <form class="my-3">
+    <form class="my-3" asp-action="SearchLaptop" asp-controller="Admin">
         <div class="row">
             <div class="col-7">
-                <input class="form-control" type="search" id="SearchLabel" placeholder="Tìm kiếm">
+                <input class="form-control" type="search" name="SearchKey" placeholder="Tìm kiếm">
             </div>
             <div class="col-1">
                 <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-
-
         </div>
 
     </form>
@@ -439,7 +437,6 @@
                                                     <div class="col">
                                                         <input name="Cpu" class="form-control" placeholder="@laptop.Laptop.Cpu">
                                                     </div>
-
                                                 </div>
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
@@ -539,7 +536,7 @@
 
                             <!-- Modal delete -->
                             <form method="post" asp-action="DeleteLaptop" asp-controller="Admin"
-                                  asp-route-LaptopId="@laptop.Laptop.LaptopId" onsubmit="return confirmDelete();">
+                                asp-route-LaptopId="@laptop.Laptop.LaptopId" onsubmit="return confirmDelete();">
                                 <button class="btn " type="submit" title="Xóa sản phẩm"><i class="fa-solid fa-trash-can" style="color: #ec1818;"></i></button>
                             </form>
                             <script>

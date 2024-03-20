@@ -356,7 +356,6 @@ namespace LaptopStoreApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-<<<<<<< HEAD
                     b.Property<int>("IdOrder")
                         .HasColumnType("int");
 
@@ -365,18 +364,10 @@ namespace LaptopStoreApi.Migrations
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
-=======
-                    b.Property<int?>("LaptopId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LaptopName")
-                        .HasColumnType("int");
->>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741
 
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
                     b.Property<int?>("Phone")
                         .HasColumnType("int");
 
@@ -388,18 +379,12 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
-=======
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("Quantity")
->>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741
                         .HasColumnType("int");
 
                     b.Property<int?>("StatusOrder")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("Total")
+                    b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
