@@ -154,13 +154,13 @@ namespace LaptopStoreApi.Controllers
 
             return Ok(laptops);
         }
-        [HttpGet]
-        public async Task<List<Laptop>> SearchByLaptopName(string name)
+        [HttpGet("{keyword}")]
+        public async Task<List<Laptop>> SearchByLaptopName(string keyword)
         {
             try
             {
                 var laptops = await _dbContext.Laptops
-                    .Where(l => l.Name.Contains(name))
+                    .Where(l => l.Name.Contains(keyword))
                     .ToListAsync();
 
                 return laptops;
@@ -172,11 +172,11 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [HttpGet]
-        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from, decimal to)
+        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from , decimal to)
         {
             try
             {
-                if (to >= from)
+                if (to >= from || from >=0 )
                 {
                     var laptops = await _dbContext.Laptops
                     .Where(l => l.Price >= from && l.Price <= to)
@@ -262,13 +262,6 @@ namespace LaptopStoreApi.Controllers
             if (!string.IsNullOrEmpty(Loadlaptop.Color))
             {
                 laptop.Color = Loadlaptop.Color;
-                laptop.LastModifiedDate = DateTime.Now;
-                _dbContext.Laptops.Update(laptop);
-                await _dbContext.SaveChangesAsync();
-            }
-            if (!string.IsNullOrEmpty(Loadlaptop.Type))
-            {
-                laptop.Type = Loadlaptop.Type;
                 laptop.LastModifiedDate = DateTime.Now;
                 _dbContext.Laptops.Update(laptop);
                 await _dbContext.SaveChangesAsync();
@@ -401,7 +394,6 @@ namespace LaptopStoreApi.Controllers
         {
             try
             {
-                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
                 var allLaptops = await _repository.GetAll();
                 var linhkien = allLaptops.Where(laptop => laptop.Type == "LK").ToList();
 
@@ -429,13 +421,13 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+       
 
         [HttpGet]
         public async Task<IActionResult> GetPK()
         {
             try
             {
-                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
                 var allLaptops = await _repository.GetAll();
                 var linhkien = allLaptops.Where(laptop => laptop.Type == "PK").ToList();
 
@@ -452,7 +444,6 @@ namespace LaptopStoreApi.Controllers
         {
             try
             {
-                // Lấy tất cả sản phẩm từ bảng Laptop có Type là "LK"
                 var allLaptops = await _repository.GetAll();
                 var linhkien = allLaptops.Where(laptop => laptop.Type == "Card").ToList();
 

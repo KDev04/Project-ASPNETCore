@@ -14,6 +14,28 @@ namespace LaptopStoreApi.Database
             {
                 context.Database.Migrate();
             }
+            if (!context.Categories.Any())
+            {
+                context.Categories.AddRange(
+                    new Category
+                    {
+                        CategoryName = "Laptop"
+                    },
+                    new Category
+                    {
+                        CategoryName = "Linh kiện"
+                    },
+                    new Category
+                    {
+                        CategoryName = "Phụ kiện"
+                    },
+                    new Category
+                    {
+                        CategoryName = "Card"
+                    }
+                    );
+                context.SaveChanges();
+            }
             if (!context.Laptops.Any())
             {
                 context.Laptops.AddRange(
@@ -1052,6 +1074,89 @@ namespace LaptopStoreApi.Database
                     }
                 );
                 context.SaveChanges();
+            }
+            if (!context.LaptopCategories.Any())
+            {
+                List<Laptop> laptops = await context.Laptops.Where(l => l.Type == "Laptop").ToListAsync();
+                Category cate = context.Categories.Where(c => c.CategoryName == "Laptop").FirstOrDefault();
+                foreach (var laptop in laptops)
+                {
+                    LaptopCategory lap_cate = new LaptopCategory
+                    {
+                        CategoryId = cate.CategoryId,
+                        Category = cate,
+                        LaptopId = laptop.LaptopId,
+                        Laptop = laptop
+                    };
+
+                    context.LaptopCategories.Add(lap_cate);
+                    cate.LaptopCategories.Add(lap_cate);
+                    context.Categories.Update(cate);
+                    laptop.LaptopCategories.Add(lap_cate);
+                    context.Laptops.Update(laptop);
+
+                    await context.SaveChangesAsync();
+                }
+                List<Laptop> linhkiens = await context.Laptops.Where(l => l.Type == "LK").ToListAsync();
+                Category catelk = context.Categories.Where(c => c.CategoryName == "Linh kiện").FirstOrDefault();
+                foreach (var laptop in linhkiens)
+                {
+                    LaptopCategory lap_cate = new LaptopCategory
+                    {
+                        CategoryId = catelk.CategoryId,
+                        Category = catelk,
+                        LaptopId = laptop.LaptopId,
+                        Laptop = laptop
+                    };
+
+                    context.LaptopCategories.Add(lap_cate);
+                    catelk.LaptopCategories.Add(lap_cate);
+                    context.Categories.Update(catelk);
+                    laptop.LaptopCategories.Add(lap_cate);
+                    context.Laptops.Update(laptop);
+
+                    await context.SaveChangesAsync();
+                }
+                List<Laptop> phukiens = await context.Laptops.Where(l => l.Type == "PK").ToListAsync();
+                Category catepk = context.Categories.Where(c => c.CategoryName == "Phụ kiện").FirstOrDefault();
+                foreach (var laptop in phukiens)
+                {
+                    LaptopCategory lap_cate = new LaptopCategory
+                    {
+                        CategoryId = catepk.CategoryId,
+                        Category = catepk,
+                        LaptopId = laptop.LaptopId,
+                        Laptop = laptop
+                    };
+
+                    context.LaptopCategories.Add(lap_cate);
+                    catepk.LaptopCategories.Add(lap_cate);
+                    context.Categories.Update(catepk);
+                    laptop.LaptopCategories.Add(lap_cate);
+                    context.Laptops.Update(laptop);
+
+                    await context.SaveChangesAsync();
+                }
+                List<Laptop> cards = await context.Laptops.Where(l => l.Type == "Card").ToListAsync();
+                Category catecard = context.Categories.Where(c => c.CategoryName == "Card").FirstOrDefault();
+                foreach (var laptop in cards)
+                {
+                    LaptopCategory lap_cate = new LaptopCategory
+                    {
+                        CategoryId = catecard.CategoryId,
+                        Category = catecard,
+                        LaptopId = laptop.LaptopId,
+                        Laptop = laptop
+                    };
+
+                    context.LaptopCategories.Add(lap_cate);
+                    catecard.LaptopCategories.Add(lap_cate);
+                    context.Categories.Update(catecard);
+                    laptop.LaptopCategories.Add(lap_cate);
+                    context.Laptops.Update(laptop);
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
     }
