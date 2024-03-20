@@ -56,29 +56,74 @@
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="StoreDropdown">
                           <li>
-                              <a class="dropdown-item" asp-action="Index" asp-controller="Laptop">
+                              <a class="dropdown-item" asp-action="LaptopCategoryPage" asp-controller="Laptop">
                                  <i class="fa-solid fa-list-check me-2"></i>Sản phẩm
                               </a>
                           </li>
                            <li>
-                              <a class="dropdown-item" href="/Laptop/AllLaptop">
-                                <i class="fa-solid fa-laptop-code me-2 "></i>Laptop
-                              </a>
+                            <form id="myForm" asp-action="GetLaptopsByCategoryId" asp-controller="Laptop" method="post">
+                                <input name="CategoryId" value="1" class="d-none" />
+                                <a id="myLink" class="dropdown-item">
+                                    <i class="fa-solid fa-laptop-code me-2"></i>Laptop
+                                </a>
+                            </form>
+
+                            <script>
+                                document.getElementById('myLink').addEventListener('click', function () {
+                                    document.getElementById('myForm').submit();
+                                });
+                            </script>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="/Laptop/Linhkien">
+                            <form id="myForm2" asp-action="GetLaptopsByCategoryId" asp-controller="Laptop" method="post">
+                                <input name="CategoryId" value="2" class="d-none" />
+                                <a id="myLink2" class="dropdown-item">
+                                    <i class="fa-solid fa-tv me-2"></i>Màn hình
+                                </a>
+                            </form>
+
+                            <script>
+                                document.getElementById('myLink2').addEventListener('click', function () {
+                                    document.getElementById('myForm2').submit();
+                                });
+                            </script>
+@*                               <a class="dropdown-item" href="/Laptop/Linhkien">
                                 <i class="fa-solid fa-tv me-2"></i>Màn hình
-                              </a>
+                              </a> *@
                           </li>
                            <li>
-                              <a class="dropdown-item" href="/Laptop/Phukien">
+                            <form id="myForm3" asp-action="GetLaptopsByCategoryId" asp-controller="Laptop" method="post">
+                                <input name="CategoryId" value="3" class="d-none" />
+                                <a id="myLink3" class="dropdown-item">
+                                    <i class="fa-solid fa-headphones me-2"></i>Phụ kiện
+                                </a>
+                            </form>
+
+                            <script>
+                                document.getElementById('myLink3').addEventListener('click', function () {
+                                    document.getElementById('myForm3').submit();
+                                });
+                            </script>
+                              @* <a class="dropdown-item" href="/Laptop/Phukien">
                                   <i class="fa-solid fa-headphones me-2"></i>Phụ kiện
-                              </a>
+                              </a> *@
                           </li>
                           <li>
-                              <a class="dropdown-item" href="/Laptop/Card">
+                            <form id="myForm4" asp-action="GetLaptopsByCategoryId" asp-controller="Laptop" method="post">
+                                <input name="CategoryId" value="4" class="d-none" />
+                                <a id="myLink4" class="dropdown-item">
+                                    <i class="fa-solid fa-wrench me-2 "></i> Card màn hình
+                                </a>
+                            </form>
+
+                            <script>
+                                document.getElementById('myLink4').addEventListener('click', function () {
+                                    document.getElementById('myForm4').submit();
+                                });
+                            </script>
+                              @* <a class="dropdown-item" href="/Laptop/Card">
                                   <i class="fa-solid fa-wrench me-2 "></i> Card màn hình
-                              </a>
+                              </a> *@
                           </li>
                       </ul>
                   </li>

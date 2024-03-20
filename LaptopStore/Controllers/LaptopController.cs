@@ -271,7 +271,43 @@ namespace LaptopStore.Controllers
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
-                HttpResponseMessage responselap = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/Search/{keyword}");
+                HttpResponseMessage responselap = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/SearchByLaptopName/{keyword}");
+                if (responselap == null)
+                {
+                    return NotFound("Danh sach laptop rong ");
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var laps = await responselap.Content.ReadAsStringAsync();
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                    if (res == null) { res = new List<ConsolidatedCategory>(); }
+                    var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                    if (reslaps == null) { reslaps = new List<Laptop>(); }
+                    PageCategoryModel model = new PageCategoryModel()
+                    {
+                        Categories = res,
+                        Laptops = reslaps
+                    };
+                    return View("LaptopCategoryPage", model);
+                }
+                else
+                {
+                    return RedirectToAction("LaptopCategoryPage");
+                }
+            }
+            catch
+            {
+                return BadRequest("khong hoat dong");
+            }
+        }
+        public async Task<IActionResult> SearchLaptopByPrice(decimal from, decimal to)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+                HttpResponseMessage responselap = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/SearchByLaptopPrice?from={from}&to={to}");
                 if (responselap == null)
                 {
                     return NotFound("Danh sach laptop rong ");
@@ -308,7 +344,7 @@ namespace LaptopStore.Controllers
             int page = 1,
             int from = 0,
             int to = int.MaxValue
-        )
+            )
         {
             using (var httpClient = new HttpClient())
             {
@@ -406,12 +442,12 @@ namespace LaptopStore.Controllers
             return responseData;
         }
 
-        public async Task<IActionResult> Linhkien()
+/*        public async Task<IActionResult> Linhkien()
         {
             using (var httpClient = new HttpClient())
             {
-                /*var token = HttpContext.Session.GetString("Token");
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
+                *//*var token = HttpContext.Session.GetString("Token");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*//*
                 HttpResponseMessage response = await httpClient.GetAsync(
                     "http://localhost:4000/api/Laptop/GetLinhkien"
                 );
@@ -497,6 +533,6 @@ namespace LaptopStore.Controllers
                     return StatusCode((int)response.StatusCode);
                 }
             }
-        }
+        }*/
     }
 }
