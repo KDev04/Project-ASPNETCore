@@ -884,6 +884,7 @@ D:\D\LaptopStore\bin\Debug\net7.0\System.Diagnostics.DiagnosticSource.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Drawing.Common.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+D:\D\LaptopStore\bin\Debug\net7.0\System.Net.Http.Json.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Reflection.MetadataLoadContext.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Security.Permissions.dll
@@ -1058,4 +1059,3 @@ D:\D\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 D:\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
-D:\D\LaptopStore\bin\Debug\net7.0\System.Net.Http.Json.dll

@@ -124,7 +124,6 @@ namespace LaptopStoreApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319204922_mig1.cs
                     IdOrder = table.Column<int>(type: "int", nullable: false),
                     Phone = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -133,13 +132,6 @@ namespace LaptopStoreApi.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-========
-                    LaptopId = table.Column<int>(type: "int", nullable: true),
-                    LaptopName = table.Column<int>(type: "int", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: true),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
->>>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741:LaptopStoreApi/Migrations/20240319075224_mig1.cs
                     StatusOrder = table.Column<int>(type: "int", nullable: true),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
