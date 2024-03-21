@@ -7,16 +7,11 @@
 @model CustomModel
 
 
-@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @ViewBag.SuccessMessage
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
+
 
 
 <section id="main" style="position: absolute; ">
+
 
     <div class="row my-3">
 
@@ -41,6 +36,8 @@
                 <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Sửa
             </a>
         </div>
+
+
 
         <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <form asp-action="OrderOffline" asp-controller="Admin" method="post" enctype="multipart/form-data">
@@ -132,6 +129,15 @@
 
 
         </div>
+
+
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+        {
+            <div class="alert alert-success alert-dismissible fade show m-3 " role="alert">
+                @ViewBag.SuccessMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
     </div>
 
 
@@ -140,6 +146,8 @@
         var groupedOrders = Model.OrderOfflines
         .GroupBy(o => o.IdOrder)
         .OrderByDescending(g => g.Key);
+
+
 
         foreach (var orderGroup in groupedOrders)
         {
@@ -227,18 +235,37 @@
 
 
                     </tr>
-                    <tr style="background-color:rgb(206, 238, 245)">
-                        <td colspan="6" class="col-6"> <!-- Sử dụng colspan để nút chiếm hết hàng -->
-                            <button class="btn btn-primary">Đặt hàng</button>
-                            <button class="btn btn-success">Thanh toán</button>
-                            <button class="btn btn-warning text-white">In hóa đơn</button>
 
-                            <form asp-action="DeleteOrderOfflines" asp-controller="Admin" method="post"
+                    <tr style="background-color:rgb(206, 238, 245)">
+                        <td class="text-center"> <!-- Sử dụng colspan để nút chiếm hết hàng -->
+                            <form asp-action="YourAction" asp-controller="YourController" method="post"
                                 enctype="multipart/form-data">
-                                 <input type="hidden" name="IdOrder" value="@orderGroup.Key" />
-                                <button class="btn btn-danger" type=submit >Hủy phiếu</button>
+                                <!-- Your form content for the second button here -->
+                                <button class="btn btn-primary">Đặt hàng</button>
                             </form>
 
+                        </td>
+                        <td class="text-center">
+                            <form asp-action="YourAction" asp-controller="YourController" method="post"
+                                enctype="multipart/form-data">
+                                <!-- Your form content for the third button here -->
+                                <button class="btn btn-success">Thanh toán</button>
+                            </form>
+
+                        </td>
+                        <td class="text-center">
+                            <form asp-action="YourAction" asp-controller="YourController" method="post"
+                                enctype="multipart/form-data">
+                                <!-- Your form content for the fourth button here -->
+                                <button class="btn btn-warning text-white">In hóa đơn</button>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            <form asp-action="DeleteOrderOfflines" asp-controller="Admin" method="post"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="IdOrder" value="@orderGroup.Key" />
+                                <button class="btn btn-danger" type="submit">Hủy phiếu</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
