@@ -23,22 +23,28 @@
         </div>
 
     </form>
+    <div class="row">
+    <div class="col-3">
+    <select class="form-select" onchange="location = this.value;">
+        <option value="" disabled selected>Tùy chọn sắp xếp</option>
+        <option value="@Url.Action("OrderByName", "Admin")">Tên tăng dần </option>
+        <option value="@Url.Action("OrderByName2", "Admin")">Tên giảm dần </option>
+        <option value="@Url.Action("OrderByPrice", "Admin")">Giá tăng dần</option>
+        <option value="@Url.Action("OrderByPrice2", "Admin")">Giá giảm  dần</option>
+    </select>
+</div>
+
+</div>
+
+
+    </div>
     <div class="row my-3">
-        <div class="col-1">
+        <div class="col">
             <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal" data-bs-target="#modal1">
                 <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Thêm
             </a>
         </div>
-        <div class="col-2">
-            <a class="btn btn-outline-secondary text-uppercase" asp-action="OrderByName" asp-controller="Admin">
-                <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Sắp xếp theo tên
-            </a>
-        </div>
-        <div class="col-2">
-            <a class="btn btn-outline-secondary text-uppercase" asp-action="OrderByPrice" asp-controller="Admin">
-                <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Sắp xếp theo giá 
-            </a>
-        </div>
+        
         <div class="col d-flex justify-content-end">
             <form asp-action="LaptopPage" asp-controller="Admin" method="post">
                 <div class="row" >
