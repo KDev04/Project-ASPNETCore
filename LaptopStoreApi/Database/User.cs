@@ -12,4 +12,5 @@ namespace LaptopStoreApi.Database
         public int? Age { get; set; }
         public ICollection<LikeProduct> LikeProducts { get; set; }
     }
+     
 }

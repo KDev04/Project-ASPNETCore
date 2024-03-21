@@ -212,7 +212,7 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
-                    formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");
+/*                    formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");*/
                     formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
                     formData.Add(new StringContent(model.Color.ToString() ?? ""), "Color");
                     formData.Add(new StringContent(model.Brand.ToString() ?? ""), "Brand");

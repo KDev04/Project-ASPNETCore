@@ -28,7 +28,7 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> LaptopPage()
+        public async Task<IActionResult> LaptopPage(int page = 1, int take = 5)
         {
             // Danh sách Category 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
@@ -48,11 +48,36 @@ namespace LaptopStore.Controllers
                 var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
                 if (res == null) { res = new List<ConsolidatedCategory>(); }
                 var reslaps = JsonConvert.DeserializeObject<List<ConsolidatedLaptop>>(laps);
+               
+
+
+               
                 if (reslaps == null) { reslaps = new List<ConsolidatedLaptop>(); }
+                int totalPages = 1;
+                if (reslaps != null)
+                {
+                    int totalLaptops = reslaps.Count;
+                    totalPages = (int)Math.Ceiling((double)totalLaptops / take);
+                }
+/*                if (totalPages <page)
+                {
+                    PageLaptopModel all = new PageLaptopModel()
+                    {
+                        page = page,
+                        pageSize = take,
+                        totalPage = totalPages,
+                        Categories = res,
+                        Laptops = reslaps.Skip(page - 1).Take(page * take).ToList()
+                    };
+                    return View(all);
+                }*/
                 PageLaptopModel model = new PageLaptopModel()
                 {
+                    page = page,
+                    pageSize = take,
+                    totalPage = totalPages,
                     Categories = res,
-                    Laptops = reslaps
+                    Laptops = reslaps.Skip(page * take -1).Take(take).ToList()
                 };
                 return View(model); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
@@ -110,7 +135,7 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
                     formData.Add(new StringContent(model.Description?.ToString() ?? ""), "Description");
-                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");
+/*                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");*/
                     formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
                     formData.Add(new StringContent(model.Color?.ToString() ?? ""), "Color");
                     formData.Add(new StringContent(model.Brand?.ToString() ?? ""), "Brand");
@@ -179,7 +204,7 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
                     formData.Add(new StringContent(model.Description?.ToString() ?? ""), "Description");
-                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");
+/*                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");*/
                     formData.Add(new StringContent(model.BigPrice?.ToString() ?? ""), "BigPrice");
                     formData.Add(new StringContent(model.Color?.ToString() ?? ""), "Color");
                     formData.Add(new StringContent(model.Brand?.ToString() ?? ""), "Brand");
