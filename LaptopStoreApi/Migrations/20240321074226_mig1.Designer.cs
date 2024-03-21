@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240321064356_mig1")]
+    [Migration("20240321074226_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
