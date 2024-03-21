@@ -4,6 +4,8 @@ namespace LaptopStore.Models
 {
     public class CustomModel
     {
-         public Laptop Laptop { get; set; }
+        public List<Laptop> Laptops { get; set; }
+        public List<OrderOffline> OrderOfflines { get; set; }
+
     }
 }

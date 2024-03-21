@@ -359,6 +359,9 @@ namespace LaptopStoreApi.Migrations
                     b.Property<int>("IdOrder")
                         .HasColumnType("int");
 
+                    b.Property<int?>("LaptopId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
