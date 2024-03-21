@@ -8,6 +8,7 @@ namespace LaptopStore.Models
     {
         [Key]
         public int Id { get; set; }
+        public int? LaptopId { get; set; }
         public int? IdOrder { get; set; }
         public int? Phone { get; set; }
         public string? Name { get; set; }

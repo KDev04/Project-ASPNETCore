@@ -172,11 +172,11 @@ namespace LaptopStoreApi.Controllers
             }
         }
         [HttpGet]
-        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from , decimal to)
+        public async Task<List<Laptop>> SearchByLaptopPrice(decimal from, decimal to)
         {
             try
             {
-                if (to >= from || from >=0 )
+                if (to >= from || from >= 0)
                 {
                     var laptops = await _dbContext.Laptops
                     .Where(l => l.Price >= from && l.Price <= to)
@@ -231,7 +231,7 @@ namespace LaptopStoreApi.Controllers
                 _dbContext.Laptops.Update(laptop);
                 await _dbContext.SaveChangesAsync();
             }
-            if (Loadlaptop.Price!=0 && Loadlaptop.Price != null && Loadlaptop.Price > 0)
+            if (Loadlaptop.Price != 0 && Loadlaptop.Price != null && Loadlaptop.Price > 0)
             {
                 laptop.Price = Loadlaptop.Price;
                 laptop.LastModifiedDate = DateTime.Now;
@@ -421,7 +421,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-       
+
 
         [HttpGet]
         public async Task<IActionResult> GetPK()
@@ -533,6 +533,93 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderOffline()
+        {
+            try
+            {
+                // Truy vấn tất cả các sản phẩm từ bảng tương ứng
+                var orderOfflineList = await _dbContext.OrderOfflines.ToListAsync();
+
+                // Trả về danh sách sản phẩm trong phản hồi HTTP
+                return Ok(orderOfflineList);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý nếu có lỗi xảy ra
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetDetailOrderOfflines([FromForm] int IdOrder)
+        {
+            try
+            {
+                var orders = _dbContext.OrderOfflines.Where(o => o.IdOrder == IdOrder).ToList();
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeOrderOffline([FromBody] List<OrderOffline> AddOrderOfflines)
+        {
+            try
+            {
+                if (AddOrderOfflines == null || AddOrderOfflines.Count == 0)
+                {
+                    return BadRequest("No orders to process");
+                }
+
+                // Lấy ra các IdOrder từ danh sách được truyền vào
+                var idOrders = AddOrderOfflines.Select(o => o.IdOrder).ToList();
+
+                // Xóa các đối tượng cũ trong cơ sở dữ liệu có IdOrder giống với các IdOrder trong danh sách
+                var oldOrders = await _dbContext.OrderOfflines.Where(o => idOrders.Contains(o.IdOrder)).ToListAsync();
+                _dbContext.OrderOfflines.RemoveRange(oldOrders);
+
+                // Lưu danh sách mới vào cơ sở dữ liệu
+                _dbContext.OrderOfflines.AddRange(AddOrderOfflines);
+                await _dbContext.SaveChangesAsync();
+
+                return Ok("Orders added and old orders removed successfully!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteOrderOfflines([FromForm]int IdOrder)
+        {
+            try
+            {
+                // Lấy tất cả các đơn hàng có IdOrder tương ứng
+                var orders = _dbContext.OrderOfflines.Where(o => o.IdOrder == IdOrder).ToList();
+
+                // Xóa các đơn hàng khỏi DbContext
+                _dbContext.OrderOfflines.RemoveRange(orders);
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await _dbContext.SaveChangesAsync();
+
+                return Ok("Đã xóa các sản phẩm thành công!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+            }
+        }
+
+
 
 
     }

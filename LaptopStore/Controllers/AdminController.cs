@@ -165,7 +165,7 @@ namespace LaptopStore.Controllers
                     {
                         var streamContent = new StreamContent(model.Image.OpenReadStream());
                         formData.Add(streamContent, "Image", model.Image.FileName);
-                       
+
                     }
                     Console.WriteLine("day hinh anh thanh congddd");
                     var response = await _httpClient.PutAsync($"http://localhost:4000/api/Laptop/UpdateLaptop/{LaptopId}", formData);
@@ -191,7 +191,7 @@ namespace LaptopStore.Controllers
                 return Redirect("/Home/Error");
             }
         }
-/*                        return Redirect("/Home/Error");*/
+        /*                        return Redirect("/Home/Error");*/
         /*        public async Task<IActionResult> SaveUpdate(Laptop model)
                 {
                     try
@@ -319,30 +319,50 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> OrderPage()
         {
-
-            HttpResponseMessage response1 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
-
-            if (response1.IsSuccessStatusCode)
+            ViewBag.SuccessMessage = TempData["SuccessMessage"] as string;
+            try
             {
-                var response1Data = await response1.Content.ReadAsStringAsync();
+                HttpResponseMessage response1 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
 
-                // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                var laptopOption = JsonConvert.DeserializeObject<List<Laptop>>(response1Data);
+                HttpResponseMessage response2 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetOrderOffline");
 
-                return View(laptopOption); // Trả về view mà bạn muốn hiển thị dữ liệu
+                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+
+                {
+                    var response1Data = await response1.Content.ReadAsStringAsync();
+                    var response2Data = await response2.Content.ReadAsStringAsync();
+
+                    // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                    var laptopOption = JsonConvert.DeserializeObject<List<Laptop>>(response1Data);
+                    var orderOfflines = JsonConvert.DeserializeObject<List<OrderOffline>>(response2Data);
+
+                    // Tạo một đối tượng CustomModel chứa cả hai danh sách này
+                    var customModel = new CustomModel
+                    {
+                        Laptops = laptopOption,
+                        OrderOfflines = orderOfflines
+                    };
+
+                    return View(customModel); // Trả về view với custom model chứa cả danh sách laptop và orderoffline
+
+                }
+                else
+                {
+
+                    // Xử lý phản hồi không thành công
+                    return BadRequest("Failed to process api");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                List<Laptop> laptopOption = new List<Laptop>();
-                return View(laptopOption);
+                return BadRequest("Error processing api: " + ex.Message);
             }
+
+
         }
 
-
-
-
-        public async Task<IActionResult> OrderOffline(int IdOrder, int Id, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
+        public async Task<IActionResult> OrderOffline(int IdOrder, int Id, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
         {
             try
             {
@@ -350,15 +370,16 @@ namespace LaptopStore.Controllers
 
                 HttpResponseMessage responseIdOrder = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetIdOrder");
 
-               int maxIdOrder = await responseIdOrder.Content.ReadFromJsonAsync<int>();
+                int maxIdOrder = await responseIdOrder.Content.ReadFromJsonAsync<int>();
 
-                 
+
                 for (int i = 0; i < Products.Length; i++)
                 {
                     OrderOffline AddOrderOffline = new OrderOffline();
 
                     // Gán ID đơn hàng
                     AddOrderOffline.IdOrder = maxIdOrder;
+                    AddOrderOffline.LaptopId = LaptopId[i];
                     AddOrderOffline.Phone = Phone; // Giải mã URL để lấy số điện thoại
                     AddOrderOffline.Name = Name; // Tên người đặt hàng
                     AddOrderOffline.Note = Note; // Ghi chú
@@ -380,8 +401,8 @@ namespace LaptopStore.Controllers
                 // Xử lý phản hồi từ API
                 if (response.IsSuccessStatusCode)
                 {
-                    // Phản hồi thành công
-                    return View();
+                    TempData["SuccessMessage"] = "Đã thực hiện thành công!";
+                    return RedirectToAction("OrderPage", "Admin");
                 }
                 else
                 {
@@ -390,9 +411,8 @@ namespace LaptopStore.Controllers
                 }
 
 
-                // Xử lý danh sách AddOrderOfflines tại đây (ví dụ: lưu vào cơ sở dữ liệu)
 
-                return View();
+
             }
             catch (Exception ex)
             {
@@ -400,5 +420,89 @@ namespace LaptopStore.Controllers
                 return BadRequest("Error processing order: " + ex.Message);
             }
         }
+
+        public async Task<IActionResult> ChangeOrderOffline(int IdOrder, int Id, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
+        {
+            try
+            {
+                List<OrderOffline> AddOrderOfflines = new List<OrderOffline>();
+
+                for (int i = 0; i < Products.Length; i++)
+                {
+                    OrderOffline AddOrderOffline = new OrderOffline();
+
+                    // Gán ID đơn hàng
+                    AddOrderOffline.IdOrder = IdOrder;
+                    AddOrderOffline.LaptopId = LaptopId[i];
+                    AddOrderOffline.Phone = Phone; // Giải mã URL để lấy số điện thoại
+                    AddOrderOffline.Name = Name; // Tên người đặt hàng
+                    AddOrderOffline.Note = Note; // Ghi chú
+                    AddOrderOffline.Products = Products[i]; // Giải mã URL để lấy tên sản phẩm
+                    AddOrderOffline.Quantity = Quantity[i];// Số lượng sản phẩm
+                    AddOrderOffline.Price = Price[i];
+                    AddOrderOffline.Total = Price[i] * Quantity[i];
+                    AddOrderOffline.OrderDate = OrderDate;
+                    AddOrderOffline.StatusOrder = 0; // Ngày đặt hàng
+
+                    AddOrderOfflines.Add(AddOrderOffline);
+                }
+
+                var jsonContent = JsonConvert.SerializeObject(AddOrderOfflines);
+
+                var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/ChangeOrderOffline", stringContent);
+
+                // Xử lý phản hồi từ API
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["SuccessMessage"] = "Đã thực hiện thành công!";
+                    return RedirectToAction("OrderPage", "Admin");
+                }
+                else
+                {
+                    // Xử lý phản hồi không thành công
+                    return BadRequest("Failed to process order");
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                return BadRequest("Error processing order: " + ex.Message);
+            }
+        }
+
+
+        public async Task<IActionResult> DeleteOrderOfflines(int IdOrder)
+        {
+            try
+            {
+                // Gửi yêu cầu DELETE tới API với IdOrder được truyền vào
+                HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:4000/api/Laptop/DeleteOrderOfflines",IdOrder    );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Xử lý thành công
+                    return RedirectToAction("OrderPage", "Admin");
+                }
+                else
+                {
+                    // Xử lý lỗi từ API
+                    return BadRequest("Failed to delete order");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+      
+
+
     }
 }

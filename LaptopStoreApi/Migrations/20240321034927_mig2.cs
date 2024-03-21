@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LaptopStoreApi.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mig2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -124,6 +124,7 @@ namespace LaptopStoreApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    LaptopId = table.Column<int>(type: "int", nullable: true),
                     IdOrder = table.Column<int>(type: "int", nullable: false),
                     Phone = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),

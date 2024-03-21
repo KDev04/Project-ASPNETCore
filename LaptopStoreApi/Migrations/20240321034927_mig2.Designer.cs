@@ -12,20 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319211943_mig1.Designer.cs
-    [Migration("20240319211943_mig1")]
-========
-<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319175909_mig1.Designer.cs
-    [Migration("20240319175909_mig1")]
-=======
-<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240319204922_mig1.Designer.cs
-    [Migration("20240319204922_mig1")]
-========
-    [Migration("20240319075224_mig1")]
->>>>>>>> e556263c9fcbaa6a38727f2df0784ee831e9b741:LaptopStoreApi/Migrations/20240319075224_mig1.Designer.cs
->>>>>>> aadb2454077e217d5ec0de4b558b99adc1b3232c:LaptopStoreApi/Migrations/20240319075224_mig1.Designer.cs
->>>>>>>> 22636af76fcaaabbdb8e35b2d295b7221d32b9b8:LaptopStoreApi/Migrations/20240319175909_mig1.Designer.cs
-    partial class mig1
+    [Migration("20240321034927_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -372,6 +360,9 @@ namespace LaptopStoreApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
