@@ -95,6 +95,8 @@
 
                         <td>
                             <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modalupdate-@res.CategoryId">Cập nhật</button>
+
+                             <button class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modalupdate2-@res.CategoryId">Xem sản phẩm liên quan</button>
                             <!-- Modal update -->
                             <div class="modal modalupdate fade" id="modalupdate-@res.CategoryId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
@@ -120,9 +122,111 @@
                                                     <div class="col-1">
                                                         <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></button>
                                                     </div>
+                                                    
                                                 </div>
 
                                             </form>
+                                                @* Xóa laptop khỏi danh mục *@
+                                                @* <div class="row row-cols-2 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex ">
+                                                        <label for="Name" class="mr-2">Laptop hiện có</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        @if (res.Laptops.Count > 0)
+                                                        {
+                                                            @foreach (var lap in res.Laptops)
+                                                            {
+                                                            <form asp-action="DeleteLaptopInCategory" asp-controller="Settings" method="post" enctype="multipart/form-data" class="form-inline">
+                                                                    <div class="row mt-2">
+                                                                        <div class="col-6">
+                                                                            @lap.Name
+                                                                            <input type="text" class="form-control d-none" name="CategoryId" value=@res.CategoryId />
+                                                                            <input type="text" class="form-control d-none" name="LaptopId" value=@lap.LaptopId />
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <button type="submit" class="btn" title="Xóa khỏi danh mục"><i class="fa-solid fa-trash-can" style="color: #ec1818;"></i></button>
+                                                                        </div>
+
+                                                                    </div>
+                                                            </form>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-black-50 italic">
+                                                                Hiện chưa có Laptop nào thuộc danh mục này
+                                                            </p>
+                                                        }
+                                                    </div>
+                                                </div> *@
+
+                                                <div class="row row-cols-3 mb-3">
+                                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label for="Status" class="mr-2">Thêm Laptop</label>
+                                                    </div>
+                                                        @* Thêm laptop vào danh mục *@
+                                                <form asp-action="AddLaptopIntoCategory" name="AddLaptopForm" asp-controller="Settings" method="post" enctype="multipart/form-data" name="AddLaptopForm" class="form-inline">
+                                                    <div class="col">
+                                                        <div class="row mt-2">
+                                                            <div class="col-6">
+                                                                <select name="LaptopId" class="form-control" required>
+                                                                    <option value="" disabled selected>Chọn Laptop</option>
+                                                                    @foreach (var lap2s in Model.Laptops)
+                                                                    {
+                                                                        <option value="@lap2s.LaptopId">@lap2s.Name</option>
+                                                                    }
+                                                                </select>
+
+                                                                <input type="text" name="CategoryId" value=@res.CategoryId class="d-none" />
+
+                                                            </div>
+                                                            <div class="col-1">
+
+                                                                <button type="submit" class="btn"><i class="fa-solid fa-plus" style="color: #4bfb6e;"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    </form>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="modal modalupdate fade" id="modalupdate2-@res.CategoryId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                Sản phẩm thuộc danh mục: @res.CategoryName
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body ">
+                                            @* <form asp-action="UpdateCategoryName" asp-controller="Settings" method="post" enctype="multipart/form-data" class="form-inline">
+                                                <div class="row row-cols-2 mb-3">
+                                                    <div class="col-auto col-sm-2 offset-md-2 d-flex align-items-center">
+                                                        <label class="mr-2">
+                                                            Sửa tên danh mục:
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <input type="text" class="form-control" type="search" name="CategoryName" placeholder="@res.CategoryName">
+                                                        <input type="text" class="form-control d-none" name="CategoryId" value=@res.CategoryId />
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></button>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                            </form> *@
                                                 @* Xóa laptop khỏi danh mục *@
                                                 <div class="row row-cols-2 mb-3">
                                                     <div class="col-6 col-sm-2 offset-md-2 d-flex ">
@@ -193,7 +297,16 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+
+
+
                             <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal-@res.CategoryId">Xóa</button>
+ 
+
                             @* Modal xóa  *@
                             <form asp-action="DeleteCategory" asp-controller="Settings" method="post">
                                 <div class="modal fade" id="modal-@res.CategoryId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
