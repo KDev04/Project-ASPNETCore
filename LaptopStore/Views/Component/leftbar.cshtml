@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="~/assets/css/leftbar.css" asp-append-version="true" />
+﻿<link rel="stylesheet" href="~/assets/css/leftbar.css" asp-append-version="true" />
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -13,10 +13,23 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" asp-action="LaptopPage" asp-controller="Admin">
-        <i class="fa-solid fa-layer-group"></i>
-        <span>Product Manager</span>
-      </a>
+            <form id="myForm" asp-action="LaptopPage" asp-controller="Admin" method="post">
+                <input name="page" value="1" class="d-none" />
+                <input name="take" value="5" class="d-none" />
+                <a id="myLink" class="nav-link collapsed">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Product Manager</span>
+                </a>
+            </form>
+
+            <script>
+                document.getElementById("myLink").addEventListener("click", function (event) {
+                    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+
+                    // Gửi form
+                    document.getElementById("myForm").submit();
+                });
+            </script>
     </li>
     @* <li class="nav-item">
       <a class="nav-link collapsed" asp-action="Promotion" asp-controller="Settings">

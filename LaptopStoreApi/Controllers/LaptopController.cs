@@ -48,7 +48,7 @@ namespace LaptopStoreApi.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ConsolidatedLaptop>>> SearchLaptopWithAllCategory(string key)
         {
-            var laptops = await _dbContext.Laptops.Where(l=> l.Name.Contains(key)).Include(l => l.LaptopCategories).ToListAsync();
+            var laptops = await _dbContext.Laptops.Where(l => l.Name.Contains(key)).Include(l => l.LaptopCategories).ToListAsync();
 
             var consolidatedLaptops = laptops.Select(c => new ConsolidatedLaptop
             {
@@ -616,8 +616,8 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteOrderOfflines([FromForm]int IdOrder)
+        [HttpDelete("{IdOrder}")]
+        public async Task<IActionResult> DeleteOrderOfflines(int IdOrder)
         {
             try
             {

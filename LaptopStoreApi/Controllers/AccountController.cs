@@ -37,7 +37,51 @@ namespace LaptopStoreApi.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [HttpPost]
+        public async Task<ActionResult> CreateUser([FromForm] UserModel model)
+        {
+            try
+            {
+                var user = new User();
 
+                if (model.Image != null || model.Image.Length > 0)
+                {
+                    string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model?.Image?.FileName);
+                    string imgFolderPath = Path.Combine("wwwroot/Avatars"); // Thư mục "wwwroot/Image"
+                    string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+                    if (!Directory.Exists(imgFolderPath))
+                    {
+                        Directory.CreateDirectory(imgFolderPath);
+                    }
+                    var stream = new FileStream(imgFilePath, FileMode.Create);
+                    await model.Image.CopyToAsync(stream);
+                    user.AvatarUrl = "Avatars/" + imgFileName;
+                }
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Address = model.Address;
+                user.BirthDay = model.BirthDay;
+                DateTime now = DateTime.Now;
+                TimeSpan ageTimeSpan = now.Subtract(model.BirthDay);
+                user.Age = (int)(ageTimeSpan.Days / 365.25);
+                if (model.Password != null)
+                {
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new Exception("Vui lòng nhập password");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<ActionResult> Register([FromForm] RegisterModel input)
@@ -221,6 +265,7 @@ namespace LaptopStoreApi.Controllers
                 });
             }
         }
+        
         /*[Authorize(Roles =RoleNames.Moderator)]
         [HttpGet]
         public async Task<IActionResult> GetAllUser()

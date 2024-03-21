@@ -55,38 +55,38 @@
                             <form action="SaveProduct" method="post" enctype="multipart/form-data" class="form-inline">
                                 <div class="row row-cols-2 mb-3">
                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Phân quyền *:</label>
+                                        <label for="UserName" class="mr-2">Tên đăng nhập *:</label>
                                     </div>
                                     <div class="col">
-                                        <input name="Name" class="form-control" required>
+                                        <input name="UserName" class="form-control" required>
                                     </div>
                                 </div>
 
 
                                 <div class="row row-cols-2 mb-3">
                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Tên tài khoản *:</label>
+                                        <label for="FirstName" class="mr-2">Họ *:</label>
                                     </div>
                                     <div class="col">
-                                        <input name="Name" class="form-control" required>
+                                        <input name="FirstName" class="form-control" required>
                                     </div>
                                 </div>
 
                                 <div class="row row-cols-2 mb-3">
                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Quantity" class="mr-2">Mật khẩu *:</label>
+                                        <label for="LastName" class="mr-2">Mật khẩu *:</label>
                                     </div>
                                     <div class="col">
-                                        <input name="Quantity" type="number" class="form-control">
+                                        <input name="LastName" type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row row-cols-2 mb-3">
                                     <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Số điện thoại *:</label>
+                                        <label for="PhoneNumber" class="mr-2">Số điện thoại *:</label>
                                     </div>
                                     <div class="col">
-                                        <input name="Name" class="form-control" required>
+                                        <input name="PhoneNumber" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -294,7 +294,7 @@
                     <td>Admin</td>
                     <td>@user.UserName</td>
                     <td>@user.PhoneNumber</td>
-                    <td>@user.LastName</td>
+                    <td>@user.LastName @user.FirstName</td>
                     <td>@user.Email</td>
                     @* <td>@user.FirstName</td> *@
 
