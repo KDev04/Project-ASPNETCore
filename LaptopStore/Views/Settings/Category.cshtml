@@ -63,8 +63,9 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
+                    <th>ID</th>
                     <th>Tên danh mục  </th>
-                    <th>Danh sách sản phẩm có thuộc danh mục</th>
+                    @* <th>Danh sách sản phẩm có thuộc danh mục</th> *@
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -72,8 +73,9 @@
                 @foreach (var res in Model.Categories)
                 {
                     <tr>
+                        <td>@res.CategoryId</td>
                         <td>@res.CategoryName</td>
-                        <td>
+                        @* <td>
                             @if (res.Laptops.Count >0)
                             {
                                 @foreach (var lap in res.Laptops)
@@ -89,7 +91,7 @@
                                     Hiện chưa có Laptop nào thuộc danh mục này 
                                 </p>
                             }
-                        </td>
+                        </td> *@
 
                         <td>
                             <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modalupdate-@res.CategoryId">Cập nhật</button>

@@ -261,7 +261,7 @@
                             </form>
                         </td>
                         <td class="text-center">
-                            <form asp-action="DeleteOrderOfflines" asp-controller="Admin" method="post"
+                            <form id="deleteForm" asp-action="DeleteOrderOfflines" asp-controller="Admin" method="post"
                                 enctype="multipart/form-data">
                                 <input type="hidden" name="IdOrder" value="@orderGroup.Key" />
                                 <button class="btn btn-danger" type="submit">Hủy phiếu</button>
@@ -419,6 +419,13 @@
             var idOrder = $(this).data('id-order');
             $('#orderId').val(idOrder);
         });
+    });
+
+    document.getElementById("deleteForm").addEventListener("submit", function(event) {
+        var confirmation = confirm("Bạn có chắc chắn muốn xóa?");
+        if (!confirmation) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của form (xóa)
+        }
     });
 
 </script>
