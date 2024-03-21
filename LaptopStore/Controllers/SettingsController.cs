@@ -82,6 +82,134 @@ namespace LaptopStore.Controllers
                 return View(model);
             }
         }
+        public async Task<IActionResult> OrderCategoryByName()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                res = res.OrderBy(c=> c.CategoryName).ToList();
+                var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                if (reslaps == null) { reslaps = new List<Laptop>(); }
+                PageCategoryModel model = new PageCategoryModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View("Category", model);
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return View("Category", model);
+            }
+        }
+        public async Task<IActionResult> OrderCategoryByNameDes()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                res = res.OrderByDescending(c => c.CategoryName).ToList();
+                var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                if (reslaps == null) { reslaps = new List<Laptop>(); }
+                PageCategoryModel model = new PageCategoryModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View("Category", model);
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return View("Category", model);
+            }
+        }
+        public async Task<IActionResult> OrderCategoryById()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                res = res.OrderBy(c => c.CategoryId).ToList();
+                var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                if (reslaps == null) { reslaps = new List<Laptop>(); }
+                PageCategoryModel model = new PageCategoryModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View("Category", model);
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return View("Category", model);
+            }
+        }
+        public async Task<IActionResult> OrderCategoryByIdDes()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                res = res.OrderByDescending(c => c.CategoryId).ToList();
+                var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
+                if (reslaps == null) { reslaps = new List<Laptop>(); }
+                PageCategoryModel model = new PageCategoryModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View("Category", model);
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return View("Category", model);
+            }
+        }
         public async Task<IActionResult> SearchCategory(string SearchKey)
         {
             HttpResponseMessage laps = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");

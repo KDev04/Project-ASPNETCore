@@ -530,6 +530,7 @@ D:\BE-Kết thúc môn - Nhóm 10\D\LaptopStore\obj\Debug\net7.0\LaptopStore.gen
 D:\BE-Kết thúc môn - Nhóm 10\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
 >>>>>>> 35f7beaec6f03081485f0e23b021489278784c3b
 >>>>>>> 62546f8f9ecad578027bbf154500b304ad0ed872
+<<<<<<< HEAD
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\appsettings.Development.json
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\appsettings.json
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\global.json
@@ -796,6 +797,8 @@ E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\ne
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
+=======
+>>>>>>> b628e584645b1d3ff93f4e130509ea03f4ebcc5a
 D:\D\LaptopStore\bin\Debug\net7.0\appsettings.Development.json
 D:\D\LaptopStore\bin\Debug\net7.0\appsettings.json
 D:\D\LaptopStore\bin\Debug\net7.0\global.json
