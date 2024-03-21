@@ -30,7 +30,10 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> LaptopPage()
         {
+            // Danh sách Category 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+
+            // Danh sách laptop 
             HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptopWithAllCategory");
             if (responselap == null)
             {
@@ -41,6 +44,7 @@ namespace LaptopStore.Controllers
                 var responseData = await response.Content.ReadAsStringAsync();
                 var laps = await responselap.Content.ReadAsStringAsync();
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
+
                 var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
                 if (res == null) { res = new List<ConsolidatedCategory>(); }
                 var reslaps = JsonConvert.DeserializeObject<List<ConsolidatedLaptop>>(laps);
@@ -59,8 +63,39 @@ namespace LaptopStore.Controllers
                 return View(model);
             }
         }
+        // Phương thức tìm kiếm laptop trong trang LaptopPage 
+        public async Task<IActionResult> SearchLaptop(string SearchKey)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+            HttpResponseMessage responselap = await _httpClient.GetAsync($"http://localhost:4000/api/Laptop/SearchLaptopWithAllCategory?key={SearchKey}");
+            if (responselap == null)
+            {
+                return NotFound("Danh sach laptop rong ");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                var laps = await responselap.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
 
-
+                var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
+                if (res == null) { res = new List<ConsolidatedCategory>(); }
+                var reslaps = JsonConvert.DeserializeObject<List<ConsolidatedLaptop>>(laps);
+                if (reslaps == null) { reslaps = new List<ConsolidatedLaptop>(); }
+                PageLaptopModel model = new PageLaptopModel()
+                {
+                    Categories = res,
+                    Laptops = reslaps
+                };
+                return View("LaptopPage", model); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                PageCategoryModel model = new PageCategoryModel();
+                return View("LaptopPage", model);
+            }
+        }
         public IActionResult Create()
         {
             return View();
@@ -191,71 +226,6 @@ namespace LaptopStore.Controllers
                 return Redirect("/Home/Error");
             }
         }
-        /*                        return Redirect("/Home/Error");*/
-        /*        public async Task<IActionResult> SaveUpdate(Laptop model)
-                {
-                    try
-                    {
-                        using (var formData = new MultipartFormDataContent())
-                        {
-                            formData.Add(new StringContent(model.Name?.ToString() ?? ""), "Name");
-                            formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
-                            formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
-                            formData.Add(new StringContent(model.Description.ToString() ?? ""), "Description");
-                            formData.Add(new StringContent(model.Type.ToString() ?? ""), "Type");
-                            formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
-                            formData.Add(new StringContent(model.Color.ToString() ?? ""), "Color");
-                            formData.Add(new StringContent(model.Brand.ToString() ?? ""), "Brand");
-                            formData.Add(new StringContent(model.SeriesLaptop.ToString() ?? ""), "SeriesLaptop");
-                            formData.Add(new StringContent(model.Cpu.ToString() ?? ""), "Cpu");
-                            formData.Add(new StringContent(model.Chip.ToString() ?? ""), "Chip");
-                            formData.Add(new StringContent(model.RAM.ToString() ?? ""), "RAM");
-                            formData.Add(new StringContent(model.Memory.ToString() ?? ""), "Memory");
-                            formData.Add(new StringContent(model.BlueTooth.ToString() ?? ""), "BlueTooth");
-                            formData.Add(new StringContent(model.Keyboard.ToString() ?? ""), "Keyboard");
-                            formData.Add(new StringContent(model.OperatingSystem.ToString() ?? ""), "OperatingSystem");
-                            formData.Add(new StringContent(model.Pin.ToString() ?? ""), "Pin");
-                            formData.Add(new StringContent(model.weight.ToString() ?? ""), "weight");
-                            formData.Add(new StringContent(model.Accessory.ToString() ?? ""), "Accessory");
-                            formData.Add(new StringContent(model.Screen.ToString() ?? ""), "Screen");
-
-                            if (model.Image != null && model.Image.Length > 0)
-                            {
-                                using (var streamContent = new StreamContent(model.Image.OpenReadStream()))
-                                {
-                                    formData.Add(streamContent, "Image", model.Image.FileName);
-                                    Console.WriteLine(model.LaptopId);
-
-                                    var response = await _httpClient.PutAsync($"http://localhost:4000/api/Laptop/UpdateLaptop/{model.LaptopId}", formData);
-                                    Console.WriteLine("goi qua api roi");
-
-                                    Console.WriteLine(response.StatusCode);
-
-                                    if (response.IsSuccessStatusCode)
-                                    {
-
-                                        Console.WriteLine("Cap nhat thanh cong");
-                                        return Redirect("/Admin/LaptopPage");
-                                    }
-                                    else
-                                    {
-
-                                        Console.WriteLine("Cap nhat that bai");
-                                        return Redirect("/Admin/Index");
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                return Redirect("/Admin/LaptopPage");
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        return Redirect("/Home/Error");
-                    }
-                }*/
         public async Task<IActionResult> UserPage()
         {
             var token = HttpContext.Session.GetString("Token");
