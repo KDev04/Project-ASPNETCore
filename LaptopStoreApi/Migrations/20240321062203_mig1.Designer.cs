@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-<<<<<<<< HEAD:LaptopStoreApi/Migrations/20240321034927_mig2.Designer.cs
-    [Migration("20240321034927_mig2")]
-    partial class mig2
-========
-    [Migration("20240320092728_mig1")]
+    [Migration("20240321062203_mig1")]
     partial class mig1
->>>>>>>> 35f7beaec6f03081485f0e23b021489278784c3b:LaptopStoreApi/Migrations/20240320092728_mig1.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

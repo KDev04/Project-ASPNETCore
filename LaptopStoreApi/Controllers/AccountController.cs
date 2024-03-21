@@ -37,6 +37,7 @@ namespace LaptopStoreApi.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [HttpPost]
         public async Task<ActionResult> CreateUser([FromForm] UserModel model)
         {
             try

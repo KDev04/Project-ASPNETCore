@@ -476,7 +476,7 @@ namespace LaptopStore.Controllers
             try
             {
                 // Gửi yêu cầu DELETE tới API với IdOrder được truyền vào
-                HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:4000/api/Laptop/DeleteOrderOfflines",IdOrder    );
+                HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:4000/api/Laptop/DeleteOrderOfflines/{IdOrder}");
 
                 if (response.IsSuccessStatusCode)
                 {
