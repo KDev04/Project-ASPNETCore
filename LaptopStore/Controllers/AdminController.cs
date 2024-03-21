@@ -28,6 +28,40 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> CreateUser(User model)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+            using (var formData = new MultipartFormDataContent())
+            {
+                formData.Add(new StringContent(model.UserName?.ToString() ?? ""), "UserName");
+                formData.Add(new StringContent(model.FirstName?.ToString() ?? ""), "FirstName");
+                formData.Add(new StringContent(model.LastName?.ToString() ?? ""), "LastName");
+                formData.Add(new StringContent(model.BirthDay.ToString() ?? ""), "BirthDay");
+                formData.Add(new StringContent(model.Address?.ToString() ?? ""), "Address");
+                formData.Add(new StringContent(model.Email?.ToString() ?? ""), "Email");
+                formData.Add(new StringContent(model.PhoneNumber?.ToString() ?? ""), "PhoneNumber");
+                formData.Add(new StringContent(model.Password?.ToString() ?? ""), "Password");
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    var streamContent = new StreamContent(model.Image.OpenReadStream());
+                    formData.Add(streamContent, "Image", model.Image.FileName);
+                }
+                var response = await _httpClient.PostAsync("http://localhost:4000/api/Account/CreateUser", formData);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Xử lý khi tạo laptop thành công
+                    return RedirectToAction("UserPage");
+                }
+                else
+                {
+                    // Xử lý khi có lỗi từ API
+                    return Redirect("Home/Error");
+                }
+            }
+        }
         public async Task<IActionResult> LaptopPage(int page = 1, int take = 5)
         {
             // Danh sách Category 
@@ -48,10 +82,6 @@ namespace LaptopStore.Controllers
                 var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
                 if (res == null) { res = new List<ConsolidatedCategory>(); }
                 var reslaps = JsonConvert.DeserializeObject<List<ConsolidatedLaptop>>(laps);
-               
-
-
-               
                 if (reslaps == null) { reslaps = new List<ConsolidatedLaptop>(); }
                 int totalPages = 1;
                 if (reslaps != null)
@@ -253,8 +283,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> UserPage()
         {
-            var token = HttpContext.Session.GetString("Token");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+/*            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetAllUser");
             if (response.IsSuccessStatusCode)
             {
