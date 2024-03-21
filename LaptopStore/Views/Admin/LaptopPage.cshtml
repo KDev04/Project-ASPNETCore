@@ -32,7 +32,7 @@
         <div class="col d-flex justify-content-end">
             <form asp-action="LaptopPage" asp-controller="Admin" method="post">
                 <div class="row" >
-                    <input type="number" name="page" class="col-2 " min="1" value="@Model.page"/>
+                    <input type="number" name="page" class="col-2 " min="1" value="@Model.page" max="@Model.totalPage"/>
                     <label class="col-2">
                         / @Model.totalPage
                     </label>
