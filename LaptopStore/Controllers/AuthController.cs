@@ -525,11 +525,8 @@ namespace LaptopStore.Controllers
                 using (var formData = new MultipartFormDataContent())
                 {
                     formData.Add(new StringContent(model.UserName ?? ""), "UserName");
-                    formData.Add(new StringContent(model.FirstName ?? ""), "FirstName");
-                    formData.Add(new StringContent(model.LastName ?? ""), "LastName");
-                    formData.Add(new StringContent(model.BirthDay.ToString("yyyy-MM-dd") ?? ""), "BirthDay");
+                    formData.Add(new StringContent(model.FullName ?? ""), "FullName");
                     formData.Add(new StringContent(model.Address ?? ""), "Address");
-                    formData.Add(new StringContent(model.Age?.ToString() ?? ""), "Age");
                     formData.Add(new StringContent(model.Email ?? ""), "Email");
                     formData.Add(new StringContent(model.PhoneNumber ?? ""), "PhoneNumber");
 

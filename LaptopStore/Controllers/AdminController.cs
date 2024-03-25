@@ -38,9 +38,7 @@ namespace LaptopStore.Controllers
             using (var formData = new MultipartFormDataContent())
             {
                 formData.Add(new StringContent(model.UserName?.ToString() ?? ""), "UserName");
-                formData.Add(new StringContent(model.FirstName?.ToString() ?? ""), "FirstName");
-                formData.Add(new StringContent(model.LastName?.ToString() ?? ""), "LastName");
-                formData.Add(new StringContent(model.BirthDay.ToString() ?? ""), "BirthDay");
+                formData.Add(new StringContent(model.FullName?.ToString() ?? ""), "FullName");
                 formData.Add(new StringContent(model.Address?.ToString() ?? ""), "Address");
                 formData.Add(new StringContent(model.Email?.ToString() ?? ""), "Email");
                 formData.Add(new StringContent(model.PhoneNumber?.ToString() ?? ""), "PhoneNumber");
@@ -63,7 +61,63 @@ namespace LaptopStore.Controllers
                 }
             }
         }
-        public async Task<IActionResult> LaptopPage(int page = 1, int take = 5)
+        public async Task<IActionResult> UpdateUser(User model)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+            using (var formData = new MultipartFormDataContent())
+            {
+                formData.Add(new StringContent(model.UserName?.ToString() ?? ""), "UserName");
+                formData.Add(new StringContent(model.FullName?.ToString() ?? ""), "FullName");
+                formData.Add(new StringContent(model.Address?.ToString() ?? ""), "Address");
+                formData.Add(new StringContent(model.Email?.ToString() ?? ""), "Email");
+                formData.Add(new StringContent(model.PhoneNumber?.ToString() ?? ""), "PhoneNumber");
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    var streamContent = new StreamContent(model.Image.OpenReadStream());
+                    formData.Add(streamContent, "Image", model.Image.FileName);
+                }
+                var response = await _httpClient.PutAsync($"http://localhost:4000/api/Account/UpdateUser/{model.Id}", formData);
+                Console.WriteLine("chay toi day roi");
+                if (response.IsSuccessStatusCode)
+                {
+                    // Xử lý khi tạo laptop thành công
+                    return RedirectToAction("UserPage");
+                }
+                else
+                {
+                    // Xử lý khi có lỗi từ API
+                    return Redirect("Home/Error");
+                }
+            }
+        }
+        public async Task<IActionResult> DeleteUser(string Id)
+        {
+            Console.WriteLine(Id);
+            var apiUrl = $"http://localhost:4000/api/Account/DeleteUser/{Id}";
+
+            var response = await _httpClient.DeleteAsync(apiUrl);
+            Console.WriteLine("Toi day roi ne");
+            if (response.IsSuccessStatusCode)
+            {
+                // Xử lý kết quả thành công
+                Console.WriteLine("da vo day roi");
+                return RedirectToAction("UserPage");
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                // Xử lý khi không tìm thấy danh mục
+                return Redirect("/Home/Error");
+            }
+            else
+            {
+                // Xử lý lỗi
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+        public async Task<IActionResult> LaptopPage(int page = 1, int take = 4)
         {
             // Danh sách Category 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");

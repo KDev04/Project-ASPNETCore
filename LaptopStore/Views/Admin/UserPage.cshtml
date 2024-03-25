@@ -85,21 +85,13 @@
                         </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="FirstName" class="mr-2">Họ *:</label>
+                                <label for="FullName" class="mr-2">Họ tên *:</label>
                             </div>
                             <div class="col">
-                                <input name="FirstName" class="form-control" required>
+                                <input name="FullName" class="form-control" required>
                             </div>
                         </div>
 
-                        <div class="row row-cols-2 mb-3">
-                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="LastName" class="mr-2"> Tên *:</label>
-                            </div>
-                            <div class="col">
-                                <input name="LastName" type="text" class="form-control">
-                            </div>
-                        </div>
 
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
@@ -110,14 +102,6 @@
                             </div>
                         </div>
 
-                        <div class="row row-cols-2 mb-3">
-                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                <label for="BirthDay" class="mr-2">Sinh nhật:</label>
-                            </div>
-                            <div class="col">
-                                <input name="BirthDay" class="form-control" type="datetime" />
-                            </div>
-                        </div>
                         <div class="row row-cols-2 mb-3">
                             <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
                                 <label for="Email" class="mr-2">Email :</label>
@@ -144,9 +128,6 @@
                             </div>
                         </div>
 
-
-
-
                     <div id="required-message" class="alert alert-danger"> * Bắt buộc nhập </div>
                 </div>
                 <div class="modal-footer">
@@ -171,7 +152,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+@*             <tr>
                 <td>Admin</td>
                 <td>Admin</td>
                 <td>0921728312</td>
@@ -185,7 +166,7 @@
                     </button>
                     <button class="btn btn-primary  deleteButton">Xóa</button>
                 </td>
-            </tr>
+            </tr> *@
 
 
             @if (TempData["SuccessMessage"] != null)
@@ -198,174 +179,123 @@
                     <td>Admin</td>
                     <td>@user.UserName</td>
                     <td>@user.PhoneNumber</td>
-                    <td>@user.LastName @user.FirstName</td>
+                    <td>@user.FullName </td>
                     <td>@user.Email</td>
-                    @* <td>@user.FirstName</td> *@
-
-                    @* <td>@user.BirthDay.ToString("dd/MM/yy")</td> *@
                     <td>@user.Address</td>
-                    @* <td>@user.Age</td> *@
-
 
                     <td>
-                        <form method="post" asp-action="AddRole" asp-controller="Admin" asp-route-USerId=@user.Id>
+@*                         <form method="post" asp-action="AddRole" asp-controller="Admin" asp-route-USerId=@user.Id>
                             <button class="btn btn-primary btn-sm" type="submit">Cấp quyền</button>
-                        </form>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeUser">
+                        </form> *@
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#changeUser-@user.Id">
                             chỉnh sửa
                         </button>
-                        <button class="btn btn-primary btn-sm deleteButton" value=@user.Id>Xóa</button>
+                        <button class="btn btn-primary btn-sm deleteButton" data-bs-toggle="modal" data-bs-target="#modal-@user.Id">Xóa</button>
                     </td>
 
                 </tr>
+                <div class="modal fade" id="changeUser-@user.Id" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Cập nhật người dùng
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </h1>
+                            </div>
+                            <form asp-action="UpdateUser" asp-controller="Admin" method="post" enctype="multipart/form-data" class="form-inline">
 
-            }
+                            <div class="modal-body ">
 
-            <div class="modal fade" id="changeUser" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                Cập nhật người dùng
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </h1>
-                        </div>
-                        <div class="modal-body ">
-                            <form action="SaveProduct" method="post" enctype="multipart/form-data" class="form-inline">
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Phân quyền *:</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Name" class="form-control" required>
-                                    </div>
-                                </div>
+                                    <input name="Id" class="d-none" value="@user.Id">
 
 
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Tên tài khoản *:</label>
+                                    <div class="row row-cols-2 mb-3">
+                                        <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                            <label for="UserName" class="mr-2">Tên tài khoản *:</label>
+                                        </div>
+                                        <div class="col">
+                                            <input name="UserName" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input name="Name" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Status" class="mr-2">Chọn loại phiếu:</label>
-                                    </div>
-                                    <div class="col">
-                                        <select name="Status" class="form-control" required>
-                                            <option value="" disabled selected>Chọn giới tính</option>
-                                            <option value="Đang chuẩn bị hàng">Nam</option>
-                                            <option value="Đã xuất">Nữ</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Quantity" class="mr-2">Mật khẩu hiện tại*:</label>
+                                    <div class="row row-cols-2 mb-3">
+                                        <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                            <label for="FullName" class="mr-2">Họ tên :</label>
+                                        </div>
+                                        <div class="col">
+                                            <input name="FullName" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input name="Quantity" type="number" class="form-control">
+                                    <div class="row row-cols-2 mb-2">
+                                        <div class="col-4 col-sm-2 offset-md-2">
+                                            <label for="PhoneNumber" class="mr-2">Số điện thoại</label>
+                                        </div>
+                                        <div class="col">
+                                            <input name="PhoneNumber" type="tel" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row row-cols-2 mb-2">
-                                    <div class="col-4 col-sm-2 offset-md-2">
-                                        <label for="Age" class="mr-2">Số điện thoại</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Age" type="number" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="row row-cols-2 mb-2">
-                                    <div class="col-4 col-sm-2 offset-md-2">
-                                        <label for="Age" class="mr-2">Địa chỉ</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Age" class="form-control" required>
-                                    </div>
-                                </div>
 
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Quantity" class="mr-2">Mật khẩu mới *:</label>
+                                    <div class="row row-cols-2 mb-3">
+                                        <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
+                                            <label for="Image" class="mr-2">Ảnh:</label>
+                                        </div>
+                                        <div class="col">
+                                            <input name="Image" type="file" class="form-control-file">
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input name="Quantity" type="number" class="form-control">
+                                    <div class="row row-cols-2 mb-2">
+                                        <div class="col-4 col-sm-2 offset-md-2">
+                                            <label for="Address" class="mr-2">Địa chỉ</label>
+                                        </div>
+                                        <div class="col">
+                                            <input name="Address" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
 
 
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Số điện thoại *:</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Name" class="form-control" required>
-                                    </div>
-                                </div>
 
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Name" class="mr-2">Họ tên :</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Name" class="form-control" required>
-                                    </div>
-                                </div>
-                                @*                                 <div class="row text-center">
-                                <div class="col">
-                                <button type="submit" class="btn btn-secondary">Hủy</button>
-                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                <div id="required-message" class="alert alert-danger"> * Bắt buộc nhập </div>
 
-                                </div>
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Price" class="mr-2">Email :</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Price" type="number" class="form-control" required>
-                                    </div>
-                                </div>
 
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Image" class="mr-2">Ảnh:</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Image" type="file" class="form-control-file" required>
-                                    </div>
-                                </div>
-                                <div class="row row-cols-2 mb-3">
-                                    <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Description" class="mr-2">Địa chỉ:</label>
-                                    </div>
-                                    <div class="col">
-                                        <input name="Description" class="form-control" required>
-                                    </div>
-                                </div>
-                                @* <div class="row text-center">
-                                <div class="col">
-                                <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
-                                </div>
-                                </div> *@
-
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
 
                             </form>
-                            <div id="required-message" class="alert alert-danger"> * Bắt buộc nhập </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
-            </div>
+                <form asp-action="DeleteUser" asp-controller="Admin" method="post">
+                    <div class="modal fade" id="modal-@user.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        Xóa nguời dùng @user.UserName
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body ">
+                                    Bạn chắc chắn muốn xóa nguời dùng @user.UserName
+                                    <input type="text" class="form-control d-none" name="Id" value=@user.Id />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-danger ">Xóa</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+
+            
         </tbody>
     </table>
 </section>

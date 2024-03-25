@@ -57,16 +57,15 @@ namespace LaptopStoreApi.Controllers
                     await model.Image.CopyToAsync(stream);
                     user.AvatarUrl = "Avatars/" + imgFileName;
                 }
+                else
+                {
+                    user.AvatarUrl = "Avatars/user1.jpg";
+                }
                 user.UserName = model.UserName;
                 user.Email = model.Email;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
+                user.FullName  = model.FullName;
                 user.PhoneNumber = model.PhoneNumber;
                 user.Address = model.Address;
-                user.BirthDay = model.BirthDay;
-                DateTime now = DateTime.Now;
-                TimeSpan ageTimeSpan = now.Subtract(model.BirthDay);
-                user.Age = (int)(ageTimeSpan.Days / 365.25);
                 if (model.Password != null)
                 {
                     var result = await _userManager.CreateAsync(user, model.Password);
@@ -213,12 +212,9 @@ namespace LaptopStoreApi.Controllers
                 UserName = user.UserName,
                 Email = user.Email,
                 AvatarUrl = user.AvatarUrl,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
+                FullName = user.FullName,
                 PhoneNumber= user.PhoneNumber,
                 Address = user.Address,
-                Age = user.Age,
-                BirthDay = user.BirthDay,
             };
             return Ok(UserInfo);
         }
@@ -330,7 +326,7 @@ namespace LaptopStoreApi.Controllers
                 return NoContent(); // Hoặc trả về giá trị tùy chỉnh khác thể hiện rằng người dùng không có vai trò nào
             }
         }
-        [Authorize]
+/*        [Authorize]*/
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromForm] UserModel updatedUser)
         {
@@ -340,47 +336,145 @@ namespace LaptopStoreApi.Controllers
             {
                 return NotFound(); // Trả về lỗi 404 nếu không tìm thấy người dùng với Id tương ứng
             }
+            if (!string.IsNullOrEmpty(updatedUser.UserName))
+            {
+                user.UserName = updatedUser.UserName;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
+            }
+            if (!string.IsNullOrEmpty(updatedUser.FullName))
+            {
+                user.FullName = updatedUser.FullName;
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
+            }
+            if (!string.IsNullOrEmpty(updatedUser.Email))
+            {
+                user.Email = updatedUser.Email;
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
+            }
+            if (!string.IsNullOrEmpty(updatedUser.Address))
+            {
+                user.Address = updatedUser.Address;
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
+            }
+            if (updatedUser.PhoneNumber != null)
+            {
+                user.PhoneNumber = updatedUser.PhoneNumber.Trim();
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
+            }
             if (updatedUser.Image == null || updatedUser.Image.Length == 0)
             {
-                // Xử lý khi không có tệp hình ảnh được gửi lên
-                // Ví dụ: trả về lỗi hoặc thông báo không có tệp hình ảnh
-                throw new Exception("Không có tệp hình ảnh được gửi lên.");
-            }
+                user.AvatarUrl = user.AvatarUrl;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
 
-            string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(updatedUser?.Image?.FileName);
-            string imgFolderPath = Path.Combine("wwwroot/Avatars"); // Thư mục "wwwroot/Image"
-            string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+                var result = await _userManager.UpdateAsync(user);
 
-            if (!Directory.Exists(imgFolderPath))
-            {
-                Directory.CreateDirectory(imgFolderPath);
-            }
-
-            using (var stream = new FileStream(imgFilePath, FileMode.Create))
-            {
-                await updatedUser.Image.CopyToAsync(stream);
-            }
-            // Cập nhật thông tin người dùng
-            user.UserName = updatedUser.UserName;
-            user.Email = updatedUser.Email;
-            user.FirstName = updatedUser.FirstName;
-            user.LastName = updatedUser.LastName;
-            user.PhoneNumber = updatedUser.PhoneNumber;
-            user.Address = updatedUser.Address;
-            user.Age = updatedUser.Age;
-            user.AvatarUrl = "Avatars/"+imgFileName ;
-            // Cập nhật các thuộc tính khác tùy ý
-
-            var result = await _userManager.UpdateAsync(user);
-
-            if (result.Succeeded)
-            {
-                return Ok(); // Trả về thành công nếu cập nhật thành công
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
             }
             else
             {
-                return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(updatedUser?.Image?.FileName);
+                string imgFolderPath = Path.Combine("wwwroot/Avatars"); // Thư mục "wwwroot/Image"
+                string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
+
+                if (!Directory.Exists(imgFolderPath))
+                {
+                    Directory.CreateDirectory(imgFolderPath);
+                }
+
+                using (var stream = new FileStream(imgFilePath, FileMode.Create))
+                {
+                    await updatedUser.Image.CopyToAsync(stream);
+                }
+
+                user.AvatarUrl = "Avatars/" + imgFileName;
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // Trả về thành công nếu cập nhật thành công
+                }
+                else
+                {
+                    return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
+                }
             }
+            
+
         }
 
         [HttpPost]
@@ -453,6 +547,24 @@ namespace LaptopStoreApi.Controllers
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(errors);
             }
+        }
+
+
+        [HttpDelete("{Id}")]
+
+        public async Task<IActionResult> DeleteUser(string Id)
+        {
+            var user = await _userManager.FindByIdAsync(Id);
+            if (user == null)
+            {
+                // Người dùng không tồn tại
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            await _context.SaveChangesAsync();
+            return Ok(result);
         }
     }
 }

@@ -107,12 +107,9 @@ namespace LaptopStoreApi.Controllers
                 var Admin = new User();
                 Admin.UserName = "Admin";
                 Admin.Email = "Admin@gmail.com";
-                Admin.FirstName = "Nguyễn Phúc";
-                Admin.LastName = "Thịnh";
+                Admin.FullName = "Nguyễn Phúc Thịnh";
                 Admin.AvatarUrl = "Avatars/user1.jpg";
-                Admin.BirthDay = DateTime.Now;
                 Admin.Address = "Cao Đẳng Sài Gòn";
-                Admin.Age = 22;
                 string AdminPassword = "Admin123";
                 var resultAdmin = await _userManager.CreateAsync(Admin, AdminPassword);
             }
@@ -130,12 +127,9 @@ namespace LaptopStoreApi.Controllers
                 var Moderator = new User();
                 Moderator.UserName = "Moderator";
                 Moderator.Email = "Moderator@gmail.com";
-                Moderator.FirstName = "Huỳnh Duy";
-                Moderator.LastName = "Khánh";
+                Moderator.FullName = "Huỳnh Duy Khánh";
                 Moderator.AvatarUrl = "Avatars/user2.jpg";
-                Moderator.BirthDay = DateTime.Now;
                 Moderator.Address = "Cao Đẳng Sài Gòn";
-                Moderator.Age = 22;
                 string ModPassword = "Mod123";
                 var resultMod = await _userManager.CreateAsync(Moderator, ModPassword);
             }
@@ -153,12 +147,9 @@ namespace LaptopStoreApi.Controllers
                 var Client = new User();
                 Client.UserName = "Client";
                 Client.Email = "Client@gmail.com";
-                Client.FirstName = "Mr .";
-                Client.LastName = "Gpt";
+                Client.FullName = "GPT";
                 Client.AvatarUrl = "Avatars/user3.jpg";
-                Client.BirthDay = DateTime.Now;
                 Client.Address = "Cao Đẳng Sài Gòn";
-                Client.Age = 22;
                 string ClientPassword = "Client123";
                 var resultClient = await _userManager.CreateAsync(Client, ClientPassword);
             }
@@ -173,12 +164,9 @@ namespace LaptopStoreApi.Controllers
                 var Base = new User();
                 Base.UserName = "Base";
                 Base.Email = "Base@gmail.com";
-                Base.FirstName = "Mr .";
-                Base.LastName = "Gpt";
+                Base.FullName = "Base";
                 Base.AvatarUrl = "Avatars/user3.jpg";
-                Base.BirthDay = DateTime.Now;
                 Base.Address = "Cao Đẳng Sài Gòn";
-                Base.Age = 22;
                 string BasePassword = "Base123";
                 var resultClient = await _userManager.CreateAsync(Base, BasePassword);
             }
