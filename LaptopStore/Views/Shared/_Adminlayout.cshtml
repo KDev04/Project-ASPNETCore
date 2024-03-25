@@ -11,12 +11,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
     <!-- Multi select library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
-   <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
-     
-   
-                            
-                                
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
 
 </head>
 
@@ -24,13 +21,20 @@
     <partial name="~/Views/Component/adminnavbar.cshtml" />
     <partial name="~/Views/Component/leftbar.cshtml" />
     @RenderBody()
-@*     <partial name="~/Views/Component/footer.cshtml" /> *@
-  
+    @*
+    <partial name="~/Views/Component/footer.cshtml" /> *@
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    
+
 </body>
+
+<style>
+    .container {
+        overflow: hidden;
+    }
+</style>
 
 </html>

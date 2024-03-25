@@ -63,7 +63,7 @@ namespace LaptopStore.Controllers
                 }
             }
         }
-        public async Task<IActionResult> LaptopPage(int page = 1, int take = 5)
+        public async Task<IActionResult> LaptopPage(int page = 1, int take = 4)
         {
             // Danh sách Category 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
