@@ -93,7 +93,6 @@ namespace LaptopStoreApi.Database
                 .Property(o => o.Id)
                 .ValueGeneratedOnAdd();
         }
-
         public DbSet<Laptop> Laptops => Set<Laptop>();
         public DbSet<LaptopStatus> LaptopStatuses => Set<LaptopStatus>();
         public DbSet<Image> Images => Set<Image>();

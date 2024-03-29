@@ -1,15 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using LaptopStoreApi.Constants;
 using LaptopStoreApi.Database;
 using LaptopStoreApi.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using LaptopStoreApi.Constants;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -22,13 +20,21 @@ namespace LaptopStoreApi.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
+        private List<Claim> claimsToAdd = new List<Claim>
+        {
+            new Claim("ClaimType1", "ClaimValue1"),
+            new Claim("ClaimType2", "ClaimValue2"),
+            // ... Thêm các claim khác vào danh sách ...
+        };
         public AccountController(
             ApiDbContext context,
             ILogger<AccountController> logger,
             IConfiguration configuration,
             UserManager<User> userManager,
-            SignInManager<User> signInManager
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager
         )
         {
             _context = context;
@@ -36,6 +42,7 @@ namespace LaptopStoreApi.Controllers
             _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         [HttpPost]
         public async Task<ActionResult> CreateUser([FromForm] UserModel model)
@@ -44,7 +51,7 @@ namespace LaptopStoreApi.Controllers
             {
                 var user = new User();
 
-                if (model.Image != null || model.Image.Length > 0)
+                if (model.Image != null || model?.Image?.Length > 0)
                 {
                     string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(model?.Image?.FileName);
                     string imgFolderPath = Path.Combine("wwwroot/Avatars"); // Thư mục "wwwroot/Image"
@@ -54,22 +61,41 @@ namespace LaptopStoreApi.Controllers
                         Directory.CreateDirectory(imgFolderPath);
                     }
                     var stream = new FileStream(imgFilePath, FileMode.Create);
-                    await model.Image.CopyToAsync(stream);
+                    await model!.Image.CopyToAsync(stream);
                     user.AvatarUrl = "Avatars/" + imgFileName;
                 }
                 else
                 {
                     user.AvatarUrl = "Avatars/user1.jpg";
                 }
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-                user.FullName  = model.FullName;
-                user.PhoneNumber = model.PhoneNumber;
-                user.Address = model.Address;
-                if (model.Password != null)
+                user.UserName = model?.UserName;
+                user.Email = model?.Email;
+                user.FullName  = model?.FullName;
+                user.PhoneNumber = model?.PhoneNumber;
+                user.Address = model?.Address;
+                if (model?.Password != null)
                 {
                     var result = await _userManager.CreateAsync(user, model.Password);
-                    return Ok(result);
+                    if (result.Succeeded)
+                    {
+                        // Thêm các claim cho người dùng
+                        var claimResult = await _userManager.AddClaimsAsync(user, claimsToAdd);
+
+                        if (claimResult.Succeeded)
+                        {
+                            return Ok(result);
+                        }
+                        else
+                        {
+                            // Xảy ra lỗi khi thêm claim
+                            return BadRequest(claimResult.Errors);
+                        }
+                    }
+                    else
+                    {
+                        // Xảy ra lỗi khi tạo người dùng
+                        return BadRequest(result.Errors);
+                    }
                 }
                 else
                 {
@@ -92,16 +118,29 @@ namespace LaptopStoreApi.Controllers
                     var newUser = new User();
                     newUser.UserName = input.UserName;
                     newUser.Email = input.Email;
-                    var result = await _userManager.CreateAsync(newUser, input.Password);
+                    var result = await _userManager.CreateAsync(newUser, input.Password!);
 
                     if (result.Succeeded)
                     {
-                        _logger.LogInformation(
-                            "User {userName} ({email}) has been created.",
-                            newUser.UserName,
-                            newUser.Email
-                        );
-                        return StatusCode(201, $"User '{newUser.UserName}' has been created.");
+                        // Thêm các claim cho người dùng
+                        var claimResult = await _userManager.AddClaimsAsync(newUser, claimsToAdd);
+
+                        if (claimResult.Succeeded)
+                        {
+                            _logger.LogInformation(
+                                "User {userName} ({email}) has been created.",
+                                newUser.UserName,
+                                newUser.Email
+                            );
+                            return StatusCode(201, $"User '{newUser.UserName}' has been created.");
+
+                        }
+                        else
+                        {
+                            // Xảy ra lỗi khi thêm claim
+                            return BadRequest(claimResult.Errors);
+                        }
+
                     }
                     else
                         throw new Exception(
@@ -137,30 +176,43 @@ namespace LaptopStoreApi.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await _userManager.FindByNameAsync(input.UserName);
+                    var user = await _userManager.FindByNameAsync(input.UserName!);
                     if (
                         user == null
-                        || !await _userManager.CheckPasswordAsync(user, input.Password)
+                        || !await _userManager.CheckPasswordAsync(user, input.Password!)
                     )
                         throw new Exception("Invalid login attempt.");
                     else
                     {
                         var signingCredentials = new SigningCredentials(
                             new SymmetricSecurityKey(
-                                System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"])
+                                System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]!)
                             ),
                             SecurityAlgorithms.HmacSha256
                         );
-
                         var claims = new List<Claim>();
-                        claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-                        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                         claims.AddRange(
                             (await _userManager.GetRolesAsync(user)).Select(
                                 r => new Claim(ClaimTypes.Role, r)
                             )
                         );
+/*                        claims.AddRange(
+                                (await _userManager.GetClaimsAsync(user)).Select(c=> new Claim(c.Type, c.Value))
+                            );*/
+                        var roles = await _userManager.GetRolesAsync(user);
 
+                        foreach (var role in roles)
+                        {
+                            // Xử lý vai trò tại đây
+                            // Tìm kiếm các claim của vai trò
+                            claims.AddRange(
+                                    (await _roleManager.GetClaimsAsync(new IdentityRole(role))).Select(c => new Claim(c.Type, c.Value))
+                                );
+                            Console.WriteLine("Co quyen");
+                        }
+                        claims.Add(new Claim(ClaimTypes.Name, user.UserName!));
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                        Console.WriteLine(claims);
                         var jwtObject = new JwtSecurityToken(
                             issuer: _configuration["JWT:Issuer"],
                             audience: _configuration["JWT:Audience"],
@@ -201,7 +253,7 @@ namespace LaptopStoreApi.Controllers
             var userId = User.Claims.FirstOrDefault(
                 c => c.Type == ClaimTypes.NameIdentifier
             )?.Value;
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId!);
             if (user == null)
             {
                 return NotFound();
@@ -226,13 +278,13 @@ namespace LaptopStoreApi.Controllers
             var userId = User.Claims.FirstOrDefault(
                 c => c.Type == ClaimTypes.NameIdentifier
             )?.Value;
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId!);
             if (user == null)
             {
                 var testbase = await _userManager.FindByNameAsync("Base");
                 user = testbase;
             }
-            string Id = user.Id;
+            string Id = user!.Id;
             return Id;
         }
 
@@ -315,7 +367,7 @@ namespace LaptopStoreApi.Controllers
         public IActionResult GetUserRoles()
         {
             var currentUser = _userManager.GetUserAsync(User).Result;
-            var userRoles = _userManager.GetRolesAsync(currentUser).Result;
+            var userRoles = _userManager.GetRolesAsync(currentUser!).Result;
 
             if (userRoles != null && userRoles.Any())
             {
@@ -443,7 +495,7 @@ namespace LaptopStoreApi.Controllers
             }
             else
             {
-                string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(updatedUser?.Image?.FileName);
+                string imgFileName = Guid.NewGuid().ToString() + Path.GetExtension(updatedUser.Image.FileName);
                 string imgFolderPath = Path.Combine("wwwroot/Avatars"); // Thư mục "wwwroot/Image"
                 string imgFilePath = Path.Combine(imgFolderPath, imgFileName);
 
