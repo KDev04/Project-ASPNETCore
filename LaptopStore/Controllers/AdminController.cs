@@ -6,7 +6,6 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
-using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using QuestPDF.Fluent;
@@ -153,7 +152,7 @@ namespace LaptopStore.Controllers
                     pageSize = take,
                     totalPage = totalPages,
                     Categories = res,
-                    Laptops = reslaps.Skip(page * take - 1).Take(take).ToList()
+                    Laptops = reslaps!.Skip(page * take -1).Take(take).ToList()
                 };
                 return View(model); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
@@ -523,7 +522,7 @@ namespace LaptopStore.Controllers
                 var resultString = await response.Content.ReadAsStringAsync();
                 var resultObject = JsonConvert.DeserializeAnonymousType(resultString, new { Result = "" });
 
-                Console.WriteLine(resultObject.Result);
+                Console.WriteLine(resultObject!.Result);
                 ViewBag.SuccessMessage = resultObject.Result;
                 TempData["SuccessMessage"] = "Đã thêm quyền.";
                 return Redirect("/Admin/UserPage");
@@ -559,8 +558,8 @@ namespace LaptopStore.Controllers
                     // Tạo một đối tượng CustomModel chứa cả hai danh sách này
                     var customModel = new CustomModel
                     {
-                        Laptops = laptopOption,
-                        OrderOfflines = orderOfflines
+                        Laptops = laptopOption!,
+                        OrderOfflines = orderOfflines!
                     };
 
                     return View(customModel); // Trả về view với custom model chứa cả danh sách laptop và orderoffline

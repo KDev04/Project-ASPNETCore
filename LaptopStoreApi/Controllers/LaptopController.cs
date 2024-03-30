@@ -72,9 +72,8 @@ namespace LaptopStoreApi.Controllers
                 .Select(lc => lc.Category)
                 .ToList();
 
-            return Categories;
+            return Categories!;
         }
-        /*        [Authorize]*/
         [HttpGet]
         public async Task<IActionResult> GetLaptops()
         {
@@ -211,7 +210,8 @@ namespace LaptopStoreApi.Controllers
                 throw new Exception("Có lỗi xảy ra khi tìm kiếm laptop.", ex);
             }
         }
-        /*        [Authorize(Roles = RoleNames.Moderator)]*/
+
+
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)

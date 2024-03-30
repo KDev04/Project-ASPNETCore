@@ -122,7 +122,7 @@ namespace LaptopStore.Controllers
             {
                 // Chuyển hướng đến trang "/Auth/Login"
                 HttpContext.Response.Redirect("/Auth/Login");
-                return null;
+                return string.Empty;
             }
             else
             {

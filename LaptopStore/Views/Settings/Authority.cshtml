@@ -1,3 +1,4 @@
+@model List<UserAuthority>
 @{
     Layout = "~/Views/Shared/_Adminlayout.cshtml";
     ViewData["Title"] = "Admin - Settings - Authority";
@@ -11,164 +12,409 @@
             <div class="col ">
                 <div class="form-group">
                     <label for="employeeSelect">Chọn nhân viên:</label>
-                    <select class="form-control" id="employeeSelect">
-                        <option value="1">Nhân viên A</option>
-                        <option value="2">Nhân viên B</option>
-                        <option value="3">Nhân viên C</option>
+                    <select class="form-control" id="userSelect">
+                        @foreach (var m in Model)
+                        {
+
+
+                            <option value=@m.UserId>
+                                @m.FullName
+
+                            </option>
+                        }
                         <!-- Thêm các lựa chọn khác tương ứng với các nhân viên khác -->
                     </select>
                 </div>
             </div>
-
+            <div class="row row-cols-1" id="userInfoDiv">
+            </div>
             <div class="form-group mt-4">
                 <label for="roleSelect">Chọn phân quyền nhanh:</label>
-                <select class="form-control" id="roleSelect">
-                    <option value="employee">Nhân viên đóng hàng</option>
-                    <option value="manager">Nhân viên quản lí</option>
-                    <option value="storekeeper">Nhân viên kho</option>
-                    <option value="financial">Nhân viên tài chính</option>
+                <select class="form-control" id="roleSelect" >
+                    <option value="order">Quản lý đơn hàng</option>
+                    <option value="product">Quản lý sản phẩm</option>
+                    <option value="user">Quản lý người dùng</option>
+                    <option value="category">Quản lý danh mục</option>
                     <option value="admin">Admin</option>
+
                     <!-- Thêm các lựa chọn khác tương ứng với các vai trò khác -->
                 </select>
             </div>
+            <div class="row justify-content-center">
+                <a class="btn btn-primary col-auto mt-2 " data-bs-toggle="modal" data-bs-target="#test">
+                    Tùy chỉnh 
+                </a>
+            </div>
+            <div class="modal fade" id="test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                Thêm nhóm quyền 
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
-        </div>
+                        <div class="modal-body">
+                            <div class="row row-cols-2 mb-3 justify-content-center">
+                                <label class="col-4" for="RoleName">
+                                    Tên nhóm quyền*:
+                                </label>
+                                <div class="col">
+                                    <input name="RoleName" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="row row-cols-2 mb-3 justify-content-center">
+                                <label class="col-4" for="RoleName">
+                                    Danh sách quyền:
+                                </label>
+                                <div class="col">
+                                    <select class="form-control" id="SelectClaim">
+                                        <option value="cl1">Quyền 1</option>
+                                        <option value="cl2">Quyền 2</option>
+                                        <option value="cl3">Quyền 3</option>
+                                        <option value="cl4">Quyền 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row row-cols-1">
+                                <div class="col offset-5">
+                                    <div id="ClaimSlected" class="row row-cols-1"></div>
 
-        <div class="col-8">
-            <div class="row">
-                <div class="col-6">
-                    <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
-                        <span>Quyền quản lí sản phẩm</span>
-                    </a>
-                    <hr>
-                    <div class="row">
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox1">
-                            <label class="form-check-label" for="EditorCheckbox1">Xem</label>
-                        </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox2" checked>
-                            <label class="form-check-label" for="EditorCheckbox2">Thêm</label>
-                        </div>
-                      
+                                </div>
+                            </div>
 
-                    </div>
-                    <div class="row">
-                         <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox3">
-                            <label class="form-check-label" for="EditorCheckbox3">Sửa </label>
                         </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox4">
-                            <label class="form-check-label" for="EditorCheckbox4">Xóa</label>
-                        </div>
-                    </div>
-                </div>
-               
 
+                        <script>
+                            // Lưu trữ các quyền đã chọn
+                            var selectedClaims = [];
 
-                <div class="col-6">
-                    <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
-                        <span>Quyền quản lí đơn hàng</span>
-                    </a>
-                    <hr>
-                    <div class="row">
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox1">
-                            <label class="form-check-label" for="EditorCheckbox1">Xem</label>
-                        </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox2" checked>
-                            <label class="form-check-label" for="EditorCheckbox2">Thêm</label>
-                        </div>
-                      
+                            // Lắng nghe sự kiện change của select
+                            document.getElementById("SelectClaim").addEventListener("change", function () {
+                                var selectedValue = this.value; // Lấy giá trị đã chọn từ select
 
-                    </div>
-                    <div class="row">
-                         <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox3">
-                            <label class="form-check-label" for="EditorCheckbox3">Sửa </label>
+                                var existingClaim = getExistingClaim(selectedValue); // Kiểm tra xem đã có object có Type=selectedValue chưa
+
+                                if (existingClaim) {
+                                    alert("Quyền đã được chọn trước đó.");
+                                } else {
+                                    var newClaim = {
+                                        Type: selectedValue,
+                                        Value: true
+                                    };
+                                    selectedClaims.push(newClaim); // Thêm quyền mới vào danh sách quyền đã chọn
+                                    displaySelectedClaims(); // Hiển thị danh sách quyền đã chọn
+                                }
+                            });
+
+                            // Hàm kiểm tra xem đã có object có Type=selectedValue chưa
+                            function getExistingClaim(selectedValue) {
+                                for (var i = 0; i < selectedClaims.length; i++) {
+                                    if (selectedClaims[i].Type === selectedValue) {
+                                        return selectedClaims[i];
+                                    }
+                                }
+                                return null;
+                            }
+
+                            // Hiển thị danh sách quyền đã chọn
+                            function displaySelectedClaims() {
+                                var claimSelectedDiv = document.getElementById("ClaimSlected");
+                                claimSelectedDiv.innerHTML = ""; // Xóa nội dung hiện tại
+
+                                for (var i = 0; i < selectedClaims.length; i++) {
+                                    var claim = selectedClaims[i];
+                                    var row = document.createElement("div");
+                                    row.className = "col mb-3";
+
+                                    var claimData = document.createElement("span");
+                                    claimData.innerHTML = "Quyền: " + claim.Type;
+
+                                    var removeButton = document.createElement("button");
+                                    removeButton.innerHTML = '<i class="fas fa-trash-can" style="color: #ff0000;"></i>';
+                                    removeButton.className = "btn";
+
+                                    removeButton.addEventListener("click", createRemoveButtonClickHandler(i));
+
+                                    row.appendChild(claimData);
+                                    row.appendChild(removeButton);
+                                    claimSelectedDiv.appendChild(row);
+                                }
+                            }
+
+                            // Tạo hàm xử lý sự kiện khi nhấn nút xóa
+                            function createRemoveButtonClickHandler(index) {
+                                return function () {
+                                    selectedClaims.splice(index, 1); // Xóa đối tượng khỏi mảng selectedClaims
+                                    displaySelectedClaims(); // Hiển thị danh sách quyền đã chọn sau khi xóa
+                                };
+                            }
+                        </script>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary ">Lưu</button>
                         </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox4">
-                            <label class="form-check-label" for="EditorCheckbox4">Xóa</label>
-                        </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row mt-3">
-                 <div class="col-6">
-                    <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
-                        <span>Quyền quản lí tài khoản người dùng </span>
-                    </a>
-                    <hr>
-                    <div class="row">
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox1">
-                            <label class="form-check-label" for="EditorCheckbox1">Xem</label>
+        <form class="col-8">
+            <div class="container">
+                <div class="row row-cols-2 mt-2" id="adminClaims">
+                    <div class="col-6">
+                        <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
+                            <span>Quyền quản lí sản phẩm</span>
+                        </a>
+                        <div class="row row-cols-2 mt-2" id="productClaims">
                         </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox2" checked>
-                            <label class="form-check-label" for="EditorCheckbox2">Thêm</label>
-                        </div>
-                      
+                        <hr>
 
                     </div>
-                    <div class="row">
-                         <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox3">
-                            <label class="form-check-label" for="EditorCheckbox3">Sửa </label>
+                    <div class="col-6">
+                        <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
+                            <span>Quyền quản lí danh mục</span>
+                        </a>
+                        <div class="row row-cols-2 mt-2" id="categoryClaims">
                         </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox4">
-                            <label class="form-check-label" for="EditorCheckbox4">Xóa</label>
+                        <hr>
+
+                    </div>
+                    <div class="col-6">
+                        <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
+                            <span>Quyền quản lí đơn hàng</span>
+                        </a>
+                        <div class="row row-cols-2 mt-2" id="orderClaims">
                         </div>
+                        <hr>
+
+                    </div>
+                    <div class="col-6">
+                        <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
+                            <span>Quyền quản lí người dùng </span>
+                        </a>
+
+                        <div class="row row-cols-2 mt-2" id="userClaims">
+                        </div>
+                        <hr>
                     </div>
                 </div>
 
-                 <div class="col-6">
-                    <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
-                        <span>Quyền quản lí doanh thu </span>
-                    </a>
-                    <hr>
-                    <div class="row">
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox1">
-                            <label class="form-check-label" for="EditorCheckbox1">Xem</label>
-                        </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox2" checked>
-                            <label class="form-check-label" for="EditorCheckbox2">Thêm</label>
-                        </div>
-                      
+                <script>
+                    $(document).ready(function () {
+                        $('#roleSelect').change(function () {
+                            var selectedRole = $(this).val(); // Lấy giá trị vai trò đã chọn
 
-                    </div>
-                    <div class="row">
-                         <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox3">
-                            <label class="form-check-label" for="EditorCheckbox3">Sửa </label>
-                        </div>
-                        <div class="form-check form-switch fs-6 col">
-                            <input class="form-check-input" type="checkbox" id="EditorCheckbox4">
-                            <label class="form-check-label" for="EditorCheckbox4">Xóa</label>
-                        </div>
+                            // Thay đổi giá trị của checkbox trong productClaims dựa trên vai trò đã chọn
+                            $('#productClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole === 'product') {
+                                    checkbox.prop('checked', true);
+                                }
+
+
+                            });
+
+                            $('#orderClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole === 'order') {
+                                    checkbox.prop('checked', true);
+                                }
+
+
+                            });
+
+                            $('#userClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole === 'user') {
+                                    checkbox.prop('checked', true);
+                                }
+
+
+                            });
+
+                            $('#categoryClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole === 'category') {
+                                    checkbox.prop('checked', true);
+                                }
+
+                            });
+
+                            $('#adminClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole === 'admin') {
+                                    checkbox.prop('checked', true);
+                                }
+
+                            });
+                  
+                        });
+
+
+
+                        
+                        $('#userSelect').change(function () {
+                            var selectedUserId = $(this).val(); // Lấy giá trị userId từ select
+
+                            // Gọi hàm Ajax để lấy danh sách claim tương ứng với userId
+                            $.ajax({
+                                type: 'GET',
+                                url: '/settings/GetClaimsByUser',
+                                data: { userId: selectedUserId },
+                                success: function (data) {
+                                    // Xóa danh sách claim hiện tại
+                                    $('#productClaims').empty();
+                                    $('#categoryClaims').empty();
+                                    $('#orderClaims').empty();
+                                    $('#userClaims').empty();
+                                    $('#userInfoDiv').empty(); // Xóa thông tin khác
+
+                                    // Chèn thông tin khác vào userInfoDiv
+                                    var userNameHtml = '<span class="col">Tên đăng nhập: ' + data.userName + '</span>';
+                                    var userInfoHtml = '<span class="col">Họ tên: ' + data.fullName + '</span>';
+                                    var userAddressHtml = '<span class="col">Địa chỉ: ' + data.address + '</span>';
+                                    var userPhoneHtml = '<span class="col">Số điện thoại: ' + data.phoneNumber + '</span>';
+                                    var imageHtml = '<div class="col"><img src="http://localhost:4000/' + data.avatarUrl + '" alt="Avatar" style="width: 100px; height: 100px; border-radius: 4px;"></div>';
+                                    $('#userInfoDiv').append(userNameHtml).append(userInfoHtml).append(userAddressHtml).append(userPhoneHtml).append(imageHtml);
+
+
+
+
+
+
+                                    // Lọc danh sách các item có type chứa từ khóa "product"
+                                    var products = data.claims.filter(function (item) {
+                                        return item.type.toLowerCase().includes("product");
+                                    });
+                                    // Tạo các label và checkbox cho từng item trong danh sách đã lọc
+                                    $.each(products, function (index, item) {
+                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                        var label = $('<label>').text(item.type).addClass('form-check-label');
+                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                        col.append(label).append(checkbox);
+                                        $('#productClaims').append(col);
+                                    });
+
+                                    //Categories
+                                    var categories = data.claims.filter(function (item) {
+                                        return item.type.toLowerCase().includes("category");
+                                    });
+
+                                    $.each(categories, function (index, item) {
+                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                        var label = $('<label>').text(item.type).addClass('form-check-label');
+                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                        col.append(label).append(checkbox);
+                                        $('#categoryClaims').append(col);
+                                    });
+
+
+                                    //Orders
+                                    var orders = data.claims.filter(function (item) {
+                                        return item.type.toLowerCase().includes("order");
+                                    });
+                                    $.each(orders, function (index, item) {
+                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                        var label = $('<label>').text(item.type).addClass('form-check-label');
+                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                        col.append(label).append(checkbox);
+                                        $('#orderClaims').append(col);
+                                    });
+
+                                    //Users
+                                    var users = data.claims.filter(function (item) {
+                                        return item.type.toLowerCase().includes("user");
+                                    });
+                                    $.each(users, function (index, item) {
+                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                        var label = $('<label>').text(item.type).addClass('form-check-label');
+                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                        col.append(label).append(checkbox);
+                                        $('#userClaims').append(col);
+                                    });
+                                },
+                                error: function () {
+                                    // Xử lý lỗi khi gọi Ajax
+                                }
+                            });
+                        });
+
+
+
+                        // Lắng nghe sự kiện nhấn nút Lưu
+                        $('.btn-primary').click(function () {
+
+                            // Gọi phương thức xử lý với các giá trị đã lấy được
+                            var userId = $('#userSelect').val();
+                            var userName = "";
+                            var fullName = "";
+                            var email = "";
+
+                            // Tạo mảng claims từ các input
+                            var claims = [];
+                            $('input[type="checkbox"]').each(function () {
+                                var input = $(this);
+                                var inputValue = {
+                                    Type: input.siblings('label').text(),
+                                    Value: input.prop('checked').toString()
+                                };
+
+                                claims.push(inputValue);
+                            });
+
+                            // Tạo đối tượng UserInfo từ các giá trị đã lấy được
+                            var userAuthority = {
+                                UserId: userId,
+                                UserName: userName,
+                                FullName: fullName,
+                                Email: email,
+                                Claims: claims
+                            };
+
+                            // Gửi yêu cầu POST đến API
+                            $.ajax({
+                                url: 'http://localhost:4000/Seed/AddOrUpdateClaimModels',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(userAuthority),
+                                async: true, // Chế độ không đồng bộ
+                                success: function (response) {
+                                    // Xử lý phản hồi thành công từ API
+                                    console.log('Phản hồi từ API:', response);
+                                },
+                                error: function (error) {
+                                    // Xử lý lỗi từ API
+                                    console.log(error.responseText);
+                                }
+                            });
+                        });
+
+                    });
+                </script>
+
+                <div class="row mt-5">
+                    <div class="col text-center ">
+                        <!-- Đây là nơi để đặt nút lưu -->
+                        <button type="button" class="btn btn-primary">Lưu</button>
                     </div>
                 </div>
             </div>
-
-        </div>
-
-
-
-
+        </form>
+        
     </div>
-   <div class="row mt-5">
-    <div class="col text-center ">
-        <!-- Đây là nơi để đặt nút lưu -->
-        <button type="button" class="btn btn-primary">Lưu</button>
-    </div>
-</div>
+
 
 
 

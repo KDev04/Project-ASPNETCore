@@ -84,7 +84,7 @@ namespace LaptopStore.Controllers
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
                 var evaluations = JsonConvert.DeserializeObject<List<Evaluate>>(responseData);
 
-                return evaluations;
+                return evaluations!;
             }
             catch (HttpRequestException ex)
             {

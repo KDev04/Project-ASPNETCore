@@ -4,12 +4,17 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Net;
+using System.Security.Claims;
+using System.Text;
 
 namespace LaptopStore.Controllers
 {
     public class SettingsController : Controller
     {
         private readonly HttpClient _httpClient;
+
+        public object JsonRequestBehavior { get; private set; }
+
         public SettingsController(HttpClient httpClient) { _httpClient = httpClient; }
         public async Task<IActionResult> Dashboard()
         {
@@ -33,11 +38,66 @@ namespace LaptopStore.Controllers
         }
 
 
-        public IActionResult Authority()
+        public async Task<IActionResult> Authority()
         {
-            return View();
+            HttpResponseMessage req = await _httpClient.GetAsync("http://localhost:4000/Seed/GetAllUsersWithClaims");
+            if (req.IsSuccessStatusCode)
+            {
+                var responseData = await req.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<UserAuthority>>(responseData);
+                if (res == null) { res = new List<UserAuthority>(); }
+
+
+                return View(res); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                List<UserAuthority> res = new List<UserAuthority>();
+                return View(res);
+            }
+        }
+        public async Task<IActionResult> GetClaimsByUser(string userId)
+        {
+            // Lấy danh sách claim tương ứng với userId từ nguồn dữ liệu
+
+            // Ví dụ: Lấy danh sách claim từ danh sách claims và lọc theo userId
+            HttpResponseMessage req = await _httpClient.GetAsync($"http://localhost:4000/Seed/GetInfoWithUserId?userId={userId}");
+            if (req.IsSuccessStatusCode)
+            {
+                var resdata = await req.Content.ReadAsStringAsync();
+                var res = JsonConvert.DeserializeObject<UserAuthority>(resdata);
+                Console.WriteLine(res);
+                return Ok(res);
+            }
+            return NoContent();
         }
 
+
+        public async Task<IActionResult> AddOrUpdateClaimModels(UserAuthority req)
+        {
+            Console.WriteLine("chay vo day roi");
+            
+            Console.WriteLine(req.UserId);
+            var reqUrl = "http://localhost:4000/Seed/AddOrUpdateClaimModels";
+            var jsonPayload = JsonConvert.SerializeObject(req);
+            Console.WriteLine(jsonPayload);
+            Console.WriteLine("Bug sieu to");
+            // Tạo nội dung yêu cầu HTTP POST
+            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+            HttpResponseMessage res = await _httpClient.PostAsync(reqUrl, content);
+            if (res.IsSuccessStatusCode)
+            {
+                // Xử lý thành công
+                return Ok(res);
+            }
+            else
+            {
+                // Xử lý khi có lỗi
+                return BadRequest("Dữ liệu không hợp lệ");
+            }
+        }
         public IActionResult Setting()
         {
             return View();

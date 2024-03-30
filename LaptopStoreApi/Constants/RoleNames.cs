@@ -2,8 +2,9 @@
 {
     public static class RoleNames
     {
-        public const string PowerUser = "PowerUser";
-        public const string Moderator = "Moderator";
-        public const string Administrator = "Administrator";
+        public const string Demo = "Demo"; // Admin 
+        public const string Cashier = "Cashier"; // Thu ngân 
+        public const string Moderator = "Moderator"; // Quản lý
+        public const string Administrator = "Administrator"; // Admin 
     }
 }

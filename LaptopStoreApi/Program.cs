@@ -16,6 +16,8 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using LaptopStoreApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(cfg =>
     {
-        cfg.WithOrigins(builder.Configuration["AllowedOrigins"]);
+        cfg.WithOrigins(builder.Configuration["AllowedOrigins"]!);
         cfg.AllowAnyHeader();
         cfg.AllowAnyMethod();
     });
@@ -96,6 +98,31 @@ builder.Services.AddIdentity<User, IdentityRole>(option =>
     option.Password.RequireUppercase = false;
     option.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<ApiDbContext>().AddDefaultTokenProviders();
+builder.Services.AddAuthorization(options =>
+{
+    //Product
+    options.AddPolicy("CreateProductPolicy", policy => policy.RequireClaim("CreateProduct", "true"));
+    options.AddPolicy("UpdateProductPolicy", policy => policy.RequireClaim("UpdateProduct", "true"));
+    options.AddPolicy("DeleteProductPolicy", policy => policy.RequireClaim("DeleteProduct", "true"));
+
+    //Category
+    options.AddPolicy("CreateCategoryPolicy", policy => policy.RequireClaim("CreateCategory", "true"));
+    options.AddPolicy("UpdateCategoryPolicy", policy => policy.RequireClaim("UpdateCategory", "true"));
+    options.AddPolicy("DeleteCategoryPolicy", policy => policy.RequireClaim("DeleteCategory", "true"));
+
+    //User
+    options.AddPolicy("ReadUserPolicy", policy => policy.RequireClaim("ReadUser", "true"));
+    options.AddPolicy("CreateUserPolicy", policy => policy.RequireClaim("CreateUser", "true"));
+    options.AddPolicy("UpdateUserPolicy", policy => policy.RequireClaim("UpdateUser", "true"));
+    options.AddPolicy("DeleteUserPolicy", policy => policy.RequireClaim("DeleteUser", "true"));
+
+    //Order
+    options.AddPolicy("ReadOrderPolicy", policy => policy.RequireClaim("ReadOrder", "true"));
+    options.AddPolicy("CreateOrderPolicy", policy => policy.RequireClaim("CreateOrder", "true"));
+    options.AddPolicy("UpdateOrderPolicy", policy => policy.RequireClaim("UpdateOrder", "true"));
+    options.AddPolicy("DeleteOrderPolicy", policy => policy.RequireClaim("DeleteOrder", "true"));
+
+});
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme =
@@ -117,7 +144,7 @@ builder.Services.AddAuthentication(options =>
         RequireExpirationTime = true,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]!))
     };
 });
 builder.Services.AddScoped<ILapRepo2, LapRepo2>();
@@ -129,7 +156,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+await SeedDatabase.CreateData(app);
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -138,28 +165,28 @@ app.MapControllers();
 app.UseStaticFiles();
 LocationEndpointsConfig.AddEndpoints(app);
 
-await SeedDatabase.CreateData(app);
+
 
 
 app.MapGet("/auth/test/1",
     [Authorize]
-    [EnableCors("AnyOrigin")]
-    [ResponseCache(NoStore = true)] () =>
+[EnableCors("AnyOrigin")]
+[ResponseCache(NoStore = true)] () =>
     {
         return Results.Ok("You are authorized!");
     });
 app.MapGet("/auth/test/2",
     [Authorize(Roles = RoleNames.Moderator)]
-    [EnableCors("AnyOrigin")]
-    [ResponseCache(NoStore = true)] () =>
+[EnableCors("AnyOrigin")]
+[ResponseCache(NoStore = true)] () =>
     {
         return Results.Ok("You are authorized!");
     });
 
 app.MapGet("/auth/test/3",
     [Authorize(Roles = RoleNames.Administrator)]
-    [EnableCors("AnyOrigin")]
-    [ResponseCache(NoStore = true)] () =>
+[EnableCors("AnyOrigin")]
+[ResponseCache(NoStore = true)] () =>
     {
         return Results.Ok("You are authorized!");
     });

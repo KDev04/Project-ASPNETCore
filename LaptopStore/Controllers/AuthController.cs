@@ -50,9 +50,9 @@ namespace LaptopStore.Controllers
                         var content = new FormUrlEncodedContent(
                             new[]
                             {
-                                new KeyValuePair<string, string>("UserName", model.UserName),
-                                new KeyValuePair<string, string>("Email", model.Email),
-                                new KeyValuePair<string, string>("Password", model.Password)
+                                new KeyValuePair<string, string>("UserName", model.UserName!),
+                                new KeyValuePair<string, string>("Email", model.Email!),
+                                new KeyValuePair<string, string>("Password", model.Password!)
                             }
                         );
 
@@ -134,8 +134,8 @@ namespace LaptopStore.Controllers
                     var content = new FormUrlEncodedContent(
                         new[]
                         {
-                            new KeyValuePair<string, string>("UserName", model.UserName),
-                            new KeyValuePair<string, string>("Password", model.Password)
+                            new KeyValuePair<string, string>("UserName", model.UserName!),
+                            new KeyValuePair<string, string>("Password", model.Password!)
                         }
                     );
 
@@ -154,7 +154,7 @@ namespace LaptopStore.Controllers
                         ViewBag.SuccessMessage = $"User '{model.UserName}' has been logged.";
                         Response.Cookies.Append("CheckLogin", "Inlogged");
                         Console.WriteLine(model.UserName);
-                        Response.Cookies.Append("Username", model.UserName);
+                        Response.Cookies.Append("Username", model.UserName!);
                         var role = await GetUserRoles();
 
                         if (role != null)
