@@ -638,6 +638,33 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatusOrder([FromForm] int IdOrder)
+        {
+            try
+            {
+                var newStatus = _dbContext.OrderOfflines.Where(o => o.IdOrder == IdOrder).ToList();
+
+                // Thay đổi cột StatusOrder thành giá trị 1
+                foreach (var order in newStatus)
+                {
+                    order.StatusOrder = StatusOrder.Shipping; // Thay đổi thành giá trị Shipping = 1
+                }
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await _dbContext.SaveChangesAsync();
+
+                return Ok("Cập nhật trạng thái đơn hàng thành công");
+
+
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, "Đã xảy ra lỗi trong quá trình cập nhật trạng thái đơn hàng: " + ex.Message);
+            }
+
+
+        }
+
 
 
 

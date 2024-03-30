@@ -362,6 +362,9 @@ namespace LaptopStoreApi.Migrations
                     b.Property<int?>("LaptopId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

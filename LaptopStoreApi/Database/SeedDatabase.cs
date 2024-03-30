@@ -68,7 +68,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "PREDATOR TRITON 17 X",
-                        Description ="GEFORCE RTX™ 4090\r\nIntel® Core™ i9-13900HX\r\nWINDOWS 11 HOME\r\n32GB DDR5 / 4TB",
+                        Description = "GEFORCE RTX™ 4090\r\nIntel® Core™ i9-13900HX\r\nWINDOWS 11 HOME\r\n32GB DDR5 / 4TB",
                         Type = "Laptop",
                         Price = 1599,
                         BigPrice = 2000,
@@ -94,7 +94,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "PREDATOR HELIOS NEO 16",
-                        Description ="GEFORCE RTX™ 4070\r\nIntel® Core™ i7-13700HX\r\nWINDOWS 11 HOME\r\n32GB DDR5 / 2TB",
+                        Description = "GEFORCE RTX™ 4070\r\nIntel® Core™ i7-13700HX\r\nWINDOWS 11 HOME\r\n32GB DDR5 / 2TB",
                         Type = "Laptop",
                         Price = 1599,
                         BigPrice = 2000,
@@ -120,7 +120,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "PREDATOR TRITON 14",
-                        Description ="NVIDIA® GEFORCE RTX™ 40 SERIES LAPTOPS\r\nIntel® Core™ i7 Processor1\r\nWINDOWS 11 HOME\r\n32GB LPDDR5",
+                        Description = "NVIDIA® GEFORCE RTX™ 40 SERIES LAPTOPS\r\nIntel® Core™ i7 Processor1\r\nWINDOWS 11 HOME\r\n32GB LPDDR5",
                         Type = "Laptop",
                         Price = 1599,
                         BigPrice = 2000,
@@ -146,7 +146,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "Swift 14",
-                        Description ="13th Gen Intel® Core™ H-Series\r\nTwinAir cooling\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
+                        Description = "13th Gen Intel® Core™ H-Series\r\nTwinAir cooling\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
                         Type = "Laptop",
                         Price = 1599,
                         Color = "Đen",
@@ -172,7 +172,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "Nitro 16 AMD",
-                        Description ="12th Gen Intel® Core™ processors\r\nTwinAir cooling\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
+                        Description = "12th Gen Intel® Core™ processors\r\nTwinAir cooling\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
                         Type = "Laptop",
                         Price = 6000,
                         BigPrice = 2000,
@@ -224,7 +224,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "Swift Edge 16",
-                        Description ="AMD Ryzen™ 7040 Series\r\n16-inch, 16:10, 3.2K OLED\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
+                        Description = "AMD Ryzen™ 7040 Series\r\n16-inch, 16:10, 3.2K OLED\r\nAntimicrobial Corning® Gorilla® Glass\r\nWINDOWS 11 HOME\r\n",
                         Type = "Laptop",
                         Price = 1599,
                         BigPrice = 2000,
@@ -250,7 +250,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "Swift X AMD",
-                        Description ="AMD Ryzen™ 5000 Series1\r\nGeForce RTX™ 3050 Ti1\r\n16GB RAM \r\nWINDOWS 11 HOME\r\n",
+                        Description = "AMD Ryzen™ 5000 Series1\r\nGeForce RTX™ 3050 Ti1\r\n16GB RAM \r\nWINDOWS 11 HOME\r\n",
                         Type = "Laptop",
                         Price = 1599,
                         BigPrice = 2000,
@@ -276,7 +276,7 @@ namespace LaptopStoreApi.Database
                     new Laptop
                     {
                         Name = "Nitro 5 Intel",
-                        Description ="Intel® Core™ i7 Processors1\r\nGeForce RTX™ 30 Series\r\n32GB, 3200MHZ\r\nWINDOWS 11 HOME\r\n",
+                        Description = "Intel® Core™ i7 Processors1\r\nGeForce RTX™ 30 Series\r\n32GB, 3200MHZ\r\nWINDOWS 11 HOME\r\n",
                         Type = "Laptop",
                         Price = 1599,
                         BigPrice = 2000,
@@ -757,12 +757,12 @@ namespace LaptopStoreApi.Database
                         Quantity = 72,
                         ImgPath = "/images/pk5.webp",
                         Brand = "ACER",
-                       
+
                         BlueTooth = "WiFi 802.11ax (Wifi 6) , Bluetooth 5.2",
                         Pin = "20 Wh",
                         weight = "0.4 kg",
                         Accessory = "Cáp + Sạc",
-                      
+
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
                     },
@@ -828,10 +828,10 @@ namespace LaptopStoreApi.Database
                         Brand = "ACER",
 
                         BlueTooth = "Wi-Fi 6(AX), 2.4GHz/5GHz 4x4, 256 Concurrent Capable",
-                        
+
                         weight = "0.5 kg",
                         Accessory = "Cáp + Sạc",
-                       
+
                         CreateDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
                     },
@@ -1072,6 +1072,181 @@ namespace LaptopStoreApi.Database
                     await context.SaveChangesAsync();
                 }
             }
+            if (!context.OrderOfflines.Any())
+            {
+                context.OrderOfflines.AddRange(
+                    new OrderOffline
+                    {
+                        LaptopId = 1,
+                        IdOrder = 1001,
+                        Phone = 123456789,
+                        Name = "John Doe",
+                        Note = "Delivery instructions",
+                        Products = "Laptop",
+                        Price = 999.99m,
+                        Quantity = 1,
+                        Total = 999.99m,
+                        StatusOrder = StatusOrder.New, // Trạng thái mới
+                        OrderDate = DateTime.Now
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 2,
+                        IdOrder = 1002,
+                        Phone = 987654321,
+                        Name = "Jane Smith",
+                        Note = "Urgent delivery",
+                        Products = "Smartphone",
+                        Price = 599.99m,
+                        Quantity = 2,
+                        Total = 1199.98m,
+                        StatusOrder = StatusOrder.Shipping, // Đang giao hàng
+                        OrderDate = DateTime.Now
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 3,
+                        IdOrder = 1003,
+                        Phone = 555555555,
+                        Name = "Alice Johnson",
+                        Note = "No rush",
+                        Products = "Tablet",
+                        Price = 399.99m,
+                        Quantity = 1,
+                        Total = 399.99m,
+                        StatusOrder = StatusOrder.Complete, // Hoàn thành
+                        OrderDate = DateTime.Now.AddDays(-2)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 4,
+                        IdOrder = 1004,
+                        Phone = 111111111,
+                        Name = "Bob Brown",
+                        Note = "Call before delivery",
+                        Products = "Desktop",
+                        Price = 1299.99m,
+                        Quantity = 1,
+                        Total = 1299.99m,
+                        StatusOrder = StatusOrder.Complete, // Hoàn thành
+                        OrderDate = DateTime.Now.AddDays(-5)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 5,
+                        IdOrder = 1005,
+                        Phone = 222222222,
+                        Name = "Emily Williams",
+                        Note = "Morning delivery preferred",
+                        Products = "Printer",
+                        Price = 299.99m,
+                        Quantity = 1,
+                        Total = 299.99m,
+                        StatusOrder = StatusOrder.Cancel, // Hủy
+                        OrderDate = DateTime.Now.AddDays(-7)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 6,
+                        IdOrder = 1006,
+                        Phone = 333333333,
+                        Name = "Michael Davis",
+                        Note = "Gift wrapping required",
+                        Products = "Headphones",
+                        Price = 99.99m,
+                        Quantity = 2,
+                        Total = 199.98m,
+                        StatusOrder = StatusOrder.Shipping, // Đang giao hàng
+                        OrderDate = DateTime.Now.AddDays(-10)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 7,
+                        IdOrder = 1007,
+                        Phone = 444444444,
+                        Name = "Jessica Taylor",
+                        Note = "Handle with care",
+                        Products = "Camera",
+                        Price = 799.99m,
+                        Quantity = 1,
+                        Total = 799.99m,
+                        StatusOrder = StatusOrder.New, // Trạng thái mới
+                        OrderDate = DateTime.Now.AddDays(-12)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 8,
+                        IdOrder = 1008,
+                        Phone = 666666666,
+                        Name = "Christopher Wilson",
+                        Note = "Include invoice",
+                        Products = "External Hard Drive",
+                        Price = 129.99m,
+                        Quantity = 3,
+                        Total = 389.97m,
+                        StatusOrder = StatusOrder.Shipping, // Đang giao hàng
+                        OrderDate = DateTime.Now.AddDays(-15)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 9,
+                        IdOrder = 1009,
+                        Phone = 777777777,
+                        Name = "Amanda Martinez",
+                        Note = "Gift message: Happy Birthday!",
+                        Products = "Monitor",
+                        Price = 399.99m,
+                        Quantity = 1,
+                        Total = 399.99m,
+                        StatusOrder = StatusOrder.New, // Trạng thái mới
+                        OrderDate = DateTime.Now.AddDays(-20)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 10,
+                        IdOrder = 1010,
+                        Phone = 888888888,
+                        Name = "David Anderson",
+                        Note = "Ship to work address",
+                        Products = "Keyboard",
+                        Price = 49.99m,
+                        Quantity = 2,
+                        Total = 99.98m,
+                        StatusOrder = StatusOrder.New, // Hủy
+                        OrderDate = DateTime.Now.AddDays(-25)
+                    },
+                    new OrderOffline
+                    {
+                        LaptopId = 11,
+                        IdOrder = 1010,
+                        Phone = 888888888,
+                        Name = "David Anderson",
+                        Note = "Ship to work address",
+                        Products = "Software",
+                        Price = 49.99m,
+                        Quantity = 2,
+                        Total = 99.98m,
+                        StatusOrder = StatusOrder.New, // Hủy
+                        OrderDate = DateTime.Now.AddDays(-25)
+                    },
+                     new OrderOffline
+                    {
+                        LaptopId = 12,
+                        IdOrder = 1010,
+                        Phone = 888888888,
+                        Name = "David Anderson",
+                        Note = "Ship to work address",
+                        Products = "Monitor",
+                        Price = 49.99m,
+                        Quantity = 2,
+                        Total = 99.98m,
+                        StatusOrder = StatusOrder.New, // Hủy
+                        OrderDate = DateTime.Now.AddDays(-25)
+                    }
+                );
+                context.SaveChanges(); // Lưu các thay đổi vào cơ sở dữ liệu
+            }
+
         }
     }
 }

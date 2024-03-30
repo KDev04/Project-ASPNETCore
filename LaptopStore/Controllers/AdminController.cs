@@ -9,6 +9,9 @@ using System.Text;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 
 
 namespace LaptopStore.Controllers
@@ -117,7 +120,7 @@ namespace LaptopStore.Controllers
                 return StatusCode((int)response.StatusCode);
             }
         }
-        public async Task<IActionResult> LaptopPage(int page = 1, int take = 4)
+        public async Task<IActionResult> LaptopPage(int page = 1, int take = 5)
         {
             // Danh sách Category 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
@@ -133,7 +136,6 @@ namespace LaptopStore.Controllers
                 var responseData = await response.Content.ReadAsStringAsync();
                 var laps = await responselap.Content.ReadAsStringAsync();
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
-
                 var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
                 if (res == null) { res = new List<ConsolidatedCategory>(); }
                 var reslaps = JsonConvert.DeserializeObject<List<ConsolidatedLaptop>>(laps);
@@ -144,25 +146,14 @@ namespace LaptopStore.Controllers
                     int totalLaptops = reslaps.Count;
                     totalPages = (int)Math.Ceiling((double)totalLaptops / take);
                 }
-/*                if (totalPages <page)
-                {
-                    PageLaptopModel all = new PageLaptopModel()
-                    {
-                        page = page,
-                        pageSize = take,
-                        totalPage = totalPages,
-                        Categories = res,
-                        Laptops = reslaps.Skip(page - 1).Take(page * take).ToList()
-                    };
-                    return View(all);
-                }*/
+
                 PageLaptopModel model = new PageLaptopModel()
                 {
                     page = page,
                     pageSize = take,
                     totalPage = totalPages,
                     Categories = res,
-                    Laptops = reslaps.Skip(page * take -1).Take(take).ToList()
+                    Laptops = reslaps.Skip(page * take - 1).Take(take).ToList()
                 };
                 return View(model); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
@@ -207,7 +198,7 @@ namespace LaptopStore.Controllers
             }
         }
 
-         public async Task<IActionResult> OrderByName2()
+        public async Task<IActionResult> OrderByName2()
         {
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
 
@@ -370,7 +361,7 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
                     formData.Add(new StringContent(model.Description?.ToString() ?? ""), "Description");
-/*                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");*/
+                    /*                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");*/
                     formData.Add(new StringContent(model.BigPrice.ToString() ?? ""), "BigPrice");
                     formData.Add(new StringContent(model.Color?.ToString() ?? ""), "Color");
                     formData.Add(new StringContent(model.Brand?.ToString() ?? ""), "Brand");
@@ -439,7 +430,6 @@ namespace LaptopStore.Controllers
                     formData.Add(new StringContent(model.Price.ToString() ?? ""), "Price");
                     formData.Add(new StringContent(model.Quantity.ToString() ?? ""), "Quantity");
                     formData.Add(new StringContent(model.Description?.ToString() ?? ""), "Description");
-/*                    formData.Add(new StringContent(model.Type?.ToString() ?? ""), "Type");*/
                     formData.Add(new StringContent(model.BigPrice?.ToString() ?? ""), "BigPrice");
                     formData.Add(new StringContent(model.Color?.ToString() ?? ""), "Color");
                     formData.Add(new StringContent(model.Brand?.ToString() ?? ""), "Brand");
@@ -488,8 +478,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> UserPage()
         {
-/*            var token = HttpContext.Session.GetString("Token");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
+            /*            var token = HttpContext.Session.GetString("Token");
+                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetAllUser");
             if (response.IsSuccessStatusCode)
             {
@@ -592,7 +582,7 @@ namespace LaptopStore.Controllers
 
         }
 
-        public async Task<IActionResult> OrderOffline(int IdOrder, int Id, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
+        public async Task<IActionResult> OrderOffline(int IdOrder, int Id, [FromForm] string Location, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
         {
             try
             {
@@ -609,6 +599,7 @@ namespace LaptopStore.Controllers
 
                     // Gán ID đơn hàng
                     AddOrderOffline.IdOrder = maxIdOrder;
+                    AddOrderOffline.Location = Location;
                     AddOrderOffline.LaptopId = LaptopId[i];
                     AddOrderOffline.Phone = Phone; // Giải mã URL để lấy số điện thoại
                     AddOrderOffline.Name = Name; // Tên người đặt hàng
@@ -631,7 +622,7 @@ namespace LaptopStore.Controllers
                 // Xử lý phản hồi từ API
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["SuccessMessage"] = "Đã thực hiện thành công!";
+                    TempData["SuccessMessage"] = "Đã thêm thành công!";
                     return RedirectToAction("OrderPage", "Admin");
                 }
                 else
@@ -651,24 +642,32 @@ namespace LaptopStore.Controllers
             }
         }
 
-        public async Task<IActionResult> ChangeOrderOffline(int IdOrder, int Id, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
+        public async Task<IActionResult> ChangeOrderOffline(int IdOrder, int Id, [FromForm] string Location, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
         {
             try
             {
+                // Kiểm tra xem có sản phẩm nào không
+                if (Products == null || Products.Length == 0)
+                {
+                    TempData["ErrorMessage"] = "Danh sách sản phẩm trống!";
+                    return RedirectToAction("OrderPage", "Admin");
+                }
+
                 List<OrderOffline> AddOrderOfflines = new List<OrderOffline>();
 
                 for (int i = 0; i < Products.Length; i++)
                 {
                     OrderOffline AddOrderOffline = new OrderOffline();
 
-                    // Gán ID đơn hàng
+                    // Gán thông tin cho đơn hàng offline từ sản phẩm
                     AddOrderOffline.IdOrder = IdOrder;
+                    AddOrderOffline.Location = Location;
                     AddOrderOffline.LaptopId = LaptopId[i];
                     AddOrderOffline.Phone = Phone; // Giải mã URL để lấy số điện thoại
                     AddOrderOffline.Name = Name; // Tên người đặt hàng
                     AddOrderOffline.Note = Note; // Ghi chú
                     AddOrderOffline.Products = Products[i]; // Giải mã URL để lấy tên sản phẩm
-                    AddOrderOffline.Quantity = Quantity[i];// Số lượng sản phẩm
+                    AddOrderOffline.Quantity = Quantity[i]; // Số lượng sản phẩm
                     AddOrderOffline.Price = Price[i];
                     AddOrderOffline.Total = Price[i] * Quantity[i];
                     AddOrderOffline.OrderDate = OrderDate;
@@ -678,7 +677,6 @@ namespace LaptopStore.Controllers
                 }
 
                 var jsonContent = JsonConvert.SerializeObject(AddOrderOfflines);
-
                 var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/ChangeOrderOffline", stringContent);
 
@@ -690,21 +688,18 @@ namespace LaptopStore.Controllers
                 }
                 else
                 {
-                    // Xử lý phản hồi không thành công
-                    return BadRequest("Failed to process order");
+                    TempData["ErrorMessage"] = "Sản phẩm không hợp lệ!";
+                    return RedirectToAction("OrderPage", "Admin");
                 }
-
-
-
-
             }
             catch (Exception ex)
             {
+                TempData["ErrorMessage"] = "Sản phẩm không hợp lệ!";
+                return RedirectToAction("OrderPage", "Admin");
                 // Xử lý ngoại lệ nếu có
-                return BadRequest("Error processing order: " + ex.Message);
+                // return BadRequest("Error processing order: " + ex.Message);
             }
         }
-
 
         public async Task<IActionResult> DeleteOrderOfflines(int IdOrder)
         {
@@ -715,13 +710,49 @@ namespace LaptopStore.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["SuccessMessage"] = "Đã xóa thành công!";
                     // Xử lý thành công
                     return RedirectToAction("OrderPage", "Admin");
                 }
                 else
                 {
+                    TempData["ErrorMessage"] = "Xóa thất bại !";
                     // Xử lý lỗi từ API
                     return BadRequest("Failed to delete order");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Lỗi mạng hoặc lỗi chưa xác định !";
+                // Xử lý ngoại lệ nếu có
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+        public async Task<IActionResult> ChangeStatusOrder([FromForm] int IdOrder)
+        {
+            try
+            {
+                // Tạo dữ liệu form
+                var formData = new MultipartFormDataContent();
+                formData.Add(new StringContent(IdOrder.ToString()), "IdOrder");
+
+                // Gửi yêu cầu POST đến API
+                HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/ChangeStatusOrder", formData);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["SuccessMessage"] = "Đã đặt hàng thành công!";
+                    // Xử lý thành công
+                    return RedirectToAction("OrderPage", "Admin");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Đặt hàng thất bại !";
+                    // Xử lý lỗi từ API
+                    return BadRequest("Failed to change status order");
                 }
             }
             catch (Exception ex)
@@ -731,7 +762,12 @@ namespace LaptopStore.Controllers
             }
         }
 
+
+
       
+
+
+
 
 
     }
