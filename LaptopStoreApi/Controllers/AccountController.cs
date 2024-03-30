@@ -22,10 +22,33 @@ namespace LaptopStoreApi.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        private List<Claim> claimsToAdd = new List<Claim>
+        public List<Claim> claimsToAdd = new List<Claim>
         {
-            new Claim("ClaimType1", "ClaimValue1"),
-            new Claim("ClaimType2", "ClaimValue2"),
+
+            // Prodcut Claim
+            new Claim("ReadProduct", "false"),
+            new Claim("CreateProduct", "false"),
+            new Claim("UpdateProduct", "false"),
+            new Claim("DeleteProduct", "false"),
+
+            // Category
+            new Claim("ReadCategory", "false"),
+            new Claim("CreateCategory", "false"),
+            new Claim("UpdateCategory", "false"),
+            new Claim("DeleteCategory", "false"),
+
+            // Order
+            new Claim("ReadOrder", "false"),
+            new Claim("CreateOrder", "false"),
+            new Claim("UpdateOrder", "false"),
+            new Claim("DeleteOrder", "false"),
+
+            // User 
+            new Claim("ReadUser", "false"),
+            new Claim("CreateUser", "false"),
+            new Claim("UpdateUser", "false"),
+            new Claim("DeleteUser", "false"),
+
             // ... Thêm các claim khác vào danh sách ...
         };
         public AccountController(
@@ -70,7 +93,7 @@ namespace LaptopStoreApi.Controllers
                 }
                 user.UserName = model?.UserName;
                 user.Email = model?.Email;
-                user.FullName  = model?.FullName;
+                user.FullName = model?.FullName;
                 user.PhoneNumber = model?.PhoneNumber;
                 user.Address = model?.Address;
                 if (model?.Password != null)
@@ -196,9 +219,9 @@ namespace LaptopStoreApi.Controllers
                                 r => new Claim(ClaimTypes.Role, r)
                             )
                         );
-/*                        claims.AddRange(
-                                (await _userManager.GetClaimsAsync(user)).Select(c=> new Claim(c.Type, c.Value))
-                            );*/
+                        /*                        claims.AddRange(
+                                                        (await _userManager.GetClaimsAsync(user)).Select(c=> new Claim(c.Type, c.Value))
+                                                    );*/
                         var roles = await _userManager.GetRolesAsync(user);
 
                         foreach (var role in roles)
@@ -265,7 +288,7 @@ namespace LaptopStoreApi.Controllers
                 Email = user.Email,
                 AvatarUrl = user.AvatarUrl,
                 FullName = user.FullName,
-                PhoneNumber= user.PhoneNumber,
+                PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
             };
             return Ok(UserInfo);
@@ -297,7 +320,7 @@ namespace LaptopStoreApi.Controllers
             {
                 return NotFound("không tìm thấy người dùng");
             }
-            else if (user!=null && !await _userManager.IsInRoleAsync(user, RoleNames.Moderator))
+            else if (user != null && !await _userManager.IsInRoleAsync(user, RoleNames.Moderator))
             {
                 await _userManager.AddToRoleAsync(user, RoleNames.Moderator);
                 return new JsonResult(new
@@ -313,7 +336,7 @@ namespace LaptopStoreApi.Controllers
                 });
             }
         }
-        
+
         /*[Authorize(Roles =RoleNames.Moderator)]
         [HttpGet]
         public async Task<IActionResult> GetAllUser()
@@ -322,41 +345,41 @@ namespace LaptopStoreApi.Controllers
             return Ok(users);
         }*/
         [HttpGet]
-/*        public async Task<IActionResult> GetAllUser()
-        {
-            var currentUser = await _userManager.GetUserAsync(User);
-
-            if (currentUser == null)
-            {
-                return Unauthorized(); // Người dùng chưa đăng nhập
-            }
-
-            if (await _userManager.IsInRoleAsync(currentUser, RoleNames.Administrator))
-            {
-                // Người dùng đăng nhập có vai trò Administrator, trả về tất cả danh sách người dùng
-                var users = await _context.Users.ToListAsync();
-                return Ok(users);
-            }
-            else if (await _userManager.IsInRoleAsync(currentUser, RoleNames.Moderator))
-            {
-                // Lấy danh sách tất cả người dùng
-                var users = await _userManager.Users.ToListAsync();
-
-                // Lọc danh sách người dùng không có vai trò Moderator và không có vai trò Administrator
-                var filteredUsers = users.Where(user =>
+        /*        public async Task<IActionResult> GetAllUser()
                 {
-                    var isInModeratorRole = _userManager.IsInRoleAsync(user, RoleNames.Moderator).GetAwaiter().GetResult();
-                    var isInAdministratorRole = _userManager.IsInRoleAsync(user, RoleNames.Administrator).GetAwaiter().GetResult();
-                    return !isInModeratorRole && !isInAdministratorRole;
-                }).ToList();
+                    var currentUser = await _userManager.GetUserAsync(User);
 
-                return Ok(filteredUsers);
-            }
-            else
-            {
-                return Forbid(); // Người dùng không có vai trò Administrator hoặc Moderator, trả về mã lỗi 403 (Forbidden)
-            }
-        }*/
+                    if (currentUser == null)
+                    {
+                        return Unauthorized(); // Người dùng chưa đăng nhập
+                    }
+
+                    if (await _userManager.IsInRoleAsync(currentUser, RoleNames.Administrator))
+                    {
+                        // Người dùng đăng nhập có vai trò Administrator, trả về tất cả danh sách người dùng
+                        var users = await _context.Users.ToListAsync();
+                        return Ok(users);
+                    }
+                    else if (await _userManager.IsInRoleAsync(currentUser, RoleNames.Moderator))
+                    {
+                        // Lấy danh sách tất cả người dùng
+                        var users = await _userManager.Users.ToListAsync();
+
+                        // Lọc danh sách người dùng không có vai trò Moderator và không có vai trò Administrator
+                        var filteredUsers = users.Where(user =>
+                        {
+                            var isInModeratorRole = _userManager.IsInRoleAsync(user, RoleNames.Moderator).GetAwaiter().GetResult();
+                            var isInAdministratorRole = _userManager.IsInRoleAsync(user, RoleNames.Administrator).GetAwaiter().GetResult();
+                            return !isInModeratorRole && !isInAdministratorRole;
+                        }).ToList();
+
+                        return Ok(filteredUsers);
+                    }
+                    else
+                    {
+                        return Forbid(); // Người dùng không có vai trò Administrator hoặc Moderator, trả về mã lỗi 403 (Forbidden)
+                    }
+                }*/
         [HttpGet]
         public async Task<IActionResult> GetAllUser()
         {
@@ -378,7 +401,7 @@ namespace LaptopStoreApi.Controllers
                 return NoContent(); // Hoặc trả về giá trị tùy chỉnh khác thể hiện rằng người dùng không có vai trò nào
             }
         }
-/*        [Authorize]*/
+        /*        [Authorize]*/
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromForm] UserModel updatedUser)
         {
@@ -525,7 +548,7 @@ namespace LaptopStoreApi.Controllers
                     return BadRequest(result.Errors); // Trả về lỗi 400 nếu có lỗi trong quá trình cập nhật
                 }
             }
-            
+
 
         }
 

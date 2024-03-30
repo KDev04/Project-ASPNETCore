@@ -24,7 +24,35 @@ namespace LaptopStoreApi.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
 
         private readonly UserManager<User> _userManager;
+        public List<Claim> claimsToAdd = new List<Claim>
+        {
 
+            // Prodcut Claim
+            new Claim("ReadProduct", "false"),
+            new Claim("CreateProduct", "false"),
+            new Claim("UpdateProduct", "false"),
+            new Claim("DeleteProduct", "false"),
+
+            // Category
+            new Claim("ReadCategory", "false"),
+            new Claim("CreateCategory", "false"),
+            new Claim("UpdateCategory", "false"),
+            new Claim("DeleteCategory", "false"),
+
+            // Order
+            new Claim("ReadOrder", "false"),
+            new Claim("CreateOrder", "false"),
+            new Claim("UpdateOrder", "false"),
+            new Claim("DeleteOrder", "false"),
+
+            // User 
+            new Claim("ReadUser", "false"),
+            new Claim("CreateUser", "false"),
+            new Claim("UpdateUser", "false"),
+            new Claim("DeleteUser", "false"),
+
+            // ... Thêm các claim khác vào danh sách ...
+        };
         public SeedController(
             ApiDbContext context,
             IWebHostEnvironment env,
@@ -57,7 +85,26 @@ namespace LaptopStoreApi.Controllers
             return res;
         }
 
-
+        [HttpGet]
+        public async Task<UserInfo> GetInfoWithUserId(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return new UserInfo(); // Thay đổi BadRequest() thành null để trả về kết quả không hợp lệ
+            }
+            UserInfo res = new UserInfo();
+            res.FullName = user.FullName;
+            res.UserName = user.UserName;
+            res.Email = user.Email;
+            res.Address = user.Address;
+            res.PhoneNumber = user.PhoneNumber;
+            res.UserId = userId;
+            res.AvatarUrl = user.AvatarUrl;
+            var reqCl = await _userManager.GetClaimsAsync(user);
+            res.Claims = reqCl.Select(c => new UserClaim { Type = c.Type, Value = c.Value }).ToList();
+            return res;
+        }
         // Lấy danh sách người dùng gồm cả Claim
         [HttpGet]
         public async Task<List<UserInfo>> GetAllUsersWithClaims()
@@ -351,7 +398,8 @@ namespace LaptopStoreApi.Controllers
                 Admin.AvatarUrl = "Avatars/user1.jpg";
                 Admin.Address = "Cao Đẳng Sài Gòn";
                 string AdminPassword = "Admin123";
-                var resultAdmin = await _userManager.CreateAsync(Admin, AdminPassword);
+                await _userManager.CreateAsync(Admin, AdminPassword);
+                await _userManager.AddClaimsAsync(Admin, claimsToAdd);
             }
 
 
@@ -371,7 +419,8 @@ namespace LaptopStoreApi.Controllers
                 Moderator.AvatarUrl = "Avatars/user2.jpg";
                 Moderator.Address = "Cao Đẳng Sài Gòn";
                 string ModPassword = "Mod123";
-                var resultMod = await _userManager.CreateAsync(Moderator, ModPassword);
+                await _userManager.CreateAsync(Moderator, ModPassword);
+                await _userManager.AddClaimsAsync(Moderator, claimsToAdd);
             }
 
 
@@ -391,7 +440,8 @@ namespace LaptopStoreApi.Controllers
                 Client.AvatarUrl = "Avatars/user3.jpg";
                 Client.Address = "Cao Đẳng Sài Gòn";
                 string ClientPassword = "Client123";
-                var resultClient = await _userManager.CreateAsync(Client, ClientPassword);
+                await _userManager.CreateAsync(Client, ClientPassword);
+                await _userManager.AddClaimsAsync(Client, claimsToAdd);
             }
 
             var testbase = await _userManager.FindByNameAsync("Base");
@@ -408,7 +458,8 @@ namespace LaptopStoreApi.Controllers
                 Base.AvatarUrl = "Avatars/user3.jpg";
                 Base.Address = "Cao Đẳng Sài Gòn";
                 string BasePassword = "Base123";
-                var resultClient = await _userManager.CreateAsync(Base, BasePassword);
+                await _userManager.CreateAsync(Base, BasePassword);
+                await _userManager.AddClaimsAsync(Base, claimsToAdd);
             }
 
             return new JsonResult(new

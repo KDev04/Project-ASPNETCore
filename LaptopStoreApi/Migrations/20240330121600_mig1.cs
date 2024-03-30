@@ -262,27 +262,6 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order2s",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PromotionCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order2s", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Order2s_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
                 {
@@ -437,32 +416,6 @@ namespace LaptopStoreApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "OrderDetails",
-                columns: table => new
-                {
-                    LaptopId = table.Column<int>(type: "int", nullable: false),
-                    Order2Id = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetails", x => new { x.LaptopId, x.Order2Id });
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Laptops_LaptopId",
-                        column: x => x.LaptopId,
-                        principalTable: "Laptops",
-                        principalColumn: "LaptopId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Order2s_Order2Id",
-                        column: x => x.Order2Id,
-                        principalTable: "Order2s",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -538,16 +491,6 @@ namespace LaptopStoreApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order2s_UserId",
-                table: "Order2s",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_Order2Id",
-                table: "OrderDetails",
-                column: "Order2Id");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_LaptopId",
                 table: "Orders",
                 column: "LaptopId");
@@ -592,9 +535,6 @@ namespace LaptopStoreApi.Migrations
                 name: "LikeProducts");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
-
-            migrationBuilder.DropTable(
                 name: "OrderOfflines");
 
             migrationBuilder.DropTable(
@@ -613,13 +553,10 @@ namespace LaptopStoreApi.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Order2s");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Laptops");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

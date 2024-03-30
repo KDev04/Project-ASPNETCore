@@ -302,52 +302,6 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("LaptopStoreApi.Database.Order2", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("PromotionCode")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Order2s");
-                });
-
-            modelBuilder.Entity("LaptopStoreApi.Database.OrderDetail", b =>
-                {
-                    b.Property<int?>("LaptopId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Order2Id")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("LaptopId", "Order2Id");
-
-                    b.HasIndex("Order2Id");
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("LaptopStoreApi.Database.OrderOffline", b =>
                 {
                     b.Property<int>("Id")
@@ -731,36 +685,6 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("LaptopStoreApi.Database.Order2", b =>
-                {
-                    b.HasOne("LaptopStoreApi.Database.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("LaptopStoreApi.Database.OrderDetail", b =>
-                {
-                    b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
-                        .WithMany()
-                        .HasForeignKey("LaptopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LaptopStoreApi.Database.Order2", "Order2")
-                        .WithMany("Items")
-                        .HasForeignKey("Order2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Laptop");
-
-                    b.Navigation("Order2");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -827,11 +751,6 @@ namespace LaptopStoreApi.Migrations
             modelBuilder.Entity("LaptopStoreApi.Database.LaptopStatus", b =>
                 {
                     b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("LaptopStoreApi.Database.Order2", b =>
-                {
-                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Database.User", b =>

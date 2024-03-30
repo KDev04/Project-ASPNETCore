@@ -63,11 +63,11 @@ namespace LaptopStore.Controllers
             // Lấy danh sách claim tương ứng với userId từ nguồn dữ liệu
 
             // Ví dụ: Lấy danh sách claim từ danh sách claims và lọc theo userId
-            HttpResponseMessage req = await _httpClient.GetAsync($"http://localhost:4000/Seed/GetClaimsWithUserId?userId={userId}");
+            HttpResponseMessage req = await _httpClient.GetAsync($"http://localhost:4000/Seed/GetInfoWithUserId?userId={userId}");
             if (req.IsSuccessStatusCode)
             {
                 var resdata = await req.Content.ReadAsStringAsync();
-                var res = JsonConvert.DeserializeObject<List<ClaimModel>>(resdata);
+                var res = JsonConvert.DeserializeObject<UserAuthority>(resdata);
                 Console.WriteLine(res);
                 return Ok(res);
             }
