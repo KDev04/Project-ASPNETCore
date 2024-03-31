@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
@@ -7,17 +8,117 @@ namespace LaptopStoreApi.Database
 {
     public class SeedDatabase
     {
+
+
         public static async Task CreateData(IApplicationBuilder app)
         {
-            
+
+            var userManager = app.ApplicationServices.CreateScope()
+                .ServiceProvider.GetRequiredService<UserManager<User>>();
+            var roleManager = app.ApplicationServices.CreateScope()
+            .ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             ApiDbContext context = app.ApplicationServices.CreateScope()
                 .ServiceProvider.GetRequiredService<ApiDbContext>();
 
+            // List claim thường 
+            List<Claim> claimsToAdd = new List<Claim>
+{
+
+                // Prodcut Claim
+                new Claim("ReadProduct", "true"),
+                new Claim("CreateProduct", "false"),
+                new Claim("UpdateProduct", "false"),
+                new Claim("DeleteProduct", "false"),
+
+                // Category
+                new Claim("ReadCategory", "true"),
+                new Claim("CreateCategory", "false"),
+                new Claim("UpdateCategory", "false"),
+                new Claim("DeleteCategory", "false"),
+
+                // Order
+                new Claim("ReadOrder", "true"),
+                new Claim("CreateOrder", "false"),
+                new Claim("UpdateOrder", "false"),
+                new Claim("DeleteOrder", "false"),
+
+                // User 
+                new Claim("ReadUser", "true"),
+                new Claim("CreateUser", "false"),
+                new Claim("UpdateUser", "false"),
+                new Claim("DeleteUser", "false"),
+
+                // ... Thêm các claim khác vào danh sách ...
+            };
+
+
+            // Claim Admin
+            List<Claim> claimsAdmin = new List<Claim>
+{
+
+                // Prodcut Claim
+                new Claim("ReadProduct", "true"),
+                new Claim("CreateProduct", "true"),
+                new Claim("UpdateProduct", "true"),
+                new Claim("DeleteProduct", "true"),
+
+                // Category
+                new Claim("ReadCategory", "true"),
+                new Claim("CreateCategory", "true"),
+                new Claim("UpdateCategory", "true"),
+                new Claim("DeleteCategory", "true"),
+
+                // Order
+                new Claim("ReadOrder", "true"),
+                new Claim("CreateOrder", "true"),
+                new Claim("UpdateOrder", "true"),
+                new Claim("DeleteOrder", "true"),
+
+                // User 
+                new Claim("ReadUser", "true"),
+                new Claim("CreateUser", "true"),
+                new Claim("UpdateUser", "true"),
+                new Claim("DeleteUser", "true"),
+
+                // ... Thêm các claim khác vào danh sách ...
+            };
             if (context.Database.GetPendingMigrations().Any())
             {
                 context.Database.Migrate();
             }
-            
+            if (!context.Roles.Any())
+            {
+
+                // role Laptop
+                await roleManager.CreateAsync(new IdentityRole("ReadProduct"));
+                await roleManager.CreateAsync(new IdentityRole("CreateProduct"));
+                await roleManager.CreateAsync(new IdentityRole("UpdateProduct"));
+                await roleManager.CreateAsync(new IdentityRole("DeleteProduct"));
+
+                // Role Category
+                await roleManager.CreateAsync(new IdentityRole("ReadCategory"));
+                await roleManager.CreateAsync(new IdentityRole("CreateCategory"));
+                await roleManager.CreateAsync(new IdentityRole("UpdateCategory"));
+                await roleManager.CreateAsync(new IdentityRole("DeleteCategory"));
+
+                // role Order 
+                await roleManager.CreateAsync(new IdentityRole("ReadOrder"));
+                await roleManager.CreateAsync(new IdentityRole("CreateOrder"));
+                await roleManager.CreateAsync(new IdentityRole("UpdateOrder"));
+                await roleManager.CreateAsync(new IdentityRole("DeleteOrder"));
+
+                // role User
+                await roleManager.CreateAsync(new IdentityRole("ReadUser"));
+                await roleManager.CreateAsync(new IdentityRole("CreateUser"));
+                await roleManager.CreateAsync(new IdentityRole("UpdateUser"));
+                await roleManager.CreateAsync(new IdentityRole("DeleteUser"));
+
+                // role Order Offline
+                await roleManager.CreateAsync(new IdentityRole("ReadOrderOffline"));
+                await roleManager.CreateAsync(new IdentityRole("CreateOrderOffline"));
+                await roleManager.CreateAsync(new IdentityRole("UpdateOrderOffline"));
+                await roleManager.CreateAsync(new IdentityRole("DeleteOrderOffline"));
+            }
             if (!context.Categories.Any())
             {
                 context.Categories.AddRange(
@@ -1234,24 +1335,134 @@ namespace LaptopStoreApi.Database
                         OrderDate = DateTime.Now.AddDays(-25)
                     },
                      new OrderOffline
-                    {
-                        LaptopId = 12,
-                        IdOrder = 1010,
-                        Phone = 888888888,
-                        Name = "David Anderson",
-                        Note = "Ship to work address",
-                        Products = "Monitor",
-                        Price = 49.99m,
-                        Quantity = 2,
-                        Total = 99.98m,
-                        StatusOrder = StatusOrder.New, // Hủy
-                        OrderDate = DateTime.Now.AddDays(-25)
-                    }
+                     {
+                         LaptopId = 12,
+                         IdOrder = 1010,
+                         Phone = 888888888,
+                         Name = "David Anderson",
+                         Note = "Ship to work address",
+                         Products = "Monitor",
+                         Price = 49.99m,
+                         Quantity = 2,
+                         Total = 99.98m,
+                         StatusOrder = StatusOrder.New, // Hủy
+                         OrderDate = DateTime.Now.AddDays(-25)
+                     }
                 );
                 context.SaveChanges(); // Lưu các thay đổi vào cơ sở dữ liệu
             }
 
+            if (!context.Users.Any())
+            {
+                var Admin = new User();
+                Admin.UserName = "Admin";
+                Admin.Email = "Admin@gmail.com";
+                Admin.FullName = "Nguyễn Phúc Thịnh";
+                Admin.AvatarUrl = "Avatars/user1.jpg";
+                Admin.PhoneNumber = "1234567890";
+                Admin.Address = "Cao Đẳng Sài Gòn";
+                string AdminPassword = "Admin123";
+                await userManager.CreateAsync(Admin, AdminPassword);
+                await userManager.AddClaimsAsync(Admin, claimsAdmin);
+
+                // mod
+                var Moderator = new User();
+                Moderator.UserName = "Moderator";
+                Moderator.Email = "Moderator@gmail.com";
+                Moderator.FullName = "Huỳnh Duy Khánh";
+                Moderator.AvatarUrl = "Avatars/user2.jpg";
+                Moderator.PhoneNumber = "1234567890";
+                Moderator.Address = "Cao Đẳng Sài Gòn";
+                string ModPassword = "Mod123";
+                await userManager.CreateAsync(Moderator, ModPassword);
+                await userManager.AddClaimsAsync(Moderator, claimsAdmin);
+
+                // client
+                var Client = new User();
+                Client.UserName = "Client";
+                Client.Email = "Client@gmail.com";
+                Client.FullName = "GPT";
+                Client.AvatarUrl = "Avatars/user3.jpg";
+                Client.PhoneNumber = "1234567890";
+                Client.Address = "Cao Đẳng Sài Gòn";
+                string ClientPassword = "Client123";
+                await userManager.CreateAsync(Client, ClientPassword);
+                await userManager.AddClaimsAsync(Client, claimsToAdd);
+
+
+                // base 
+
+
+                var Base = new User();
+                Base.UserName = "Base";
+                Base.Email = "Base@gmail.com";
+                Base.FullName = "Base";
+                Base.AvatarUrl = "Avatars/user3.jpg";
+                Base.PhoneNumber = "1234567890";
+                Base.Address = "Cao Đẳng Sài Gòn";
+                string BasePassword = "Base123";
+                await userManager.CreateAsync(Base, BasePassword);
+                await userManager.AddClaimsAsync(Base, claimsToAdd);
+            }
+            if (!context.GroupRoles.Any())
+            {
+                List<IdentityRole> AdminRoles = context.Roles.ToList();
+                List<IdentityRole> AdminRole = context.Roles.ToList();
+                List<IdentityRole> ProductRole = context.Roles.Where(x => x.Name.Contains("Product")).ToList();
+                List<IdentityRole> CategoryRole = context.Roles.Where(x => x.Name.Contains("Category")).ToList();
+                List<IdentityRole> UserRole = context.Roles.Where(x => x.Name.Contains("User")).ToList();
+                List<IdentityRole> OrderOfflineRoleAll = context.Roles.Where(x => x.Name.Contains("Order")).ToList();
+
+                List<IdentityRole> OrderOfflineRole = OrderOfflineRoleAll.Where(x => x.Name.Contains("Offline")).ToList();
+
+                List<IdentityRole> OrderRole = OrderOfflineRoleAll.Where(x => !x.Name.Contains("Offline")).ToList();
+
+                List<IdentityRole> a= OrderOfflineRoleAll.Where(x => !x.Name.Contains("")).ToList();
+
+                context.GroupRoles.AddRange(
+                    
+                    new GroupRole
+                    {
+                        Name = "Admin",
+                        Description = "Nhóm ",
+                        Roles = a
+                        
+                    },
+
+                    new GroupRole
+                    {
+                        Name = "Laptop",
+                        Description = "Nhóm quyền quản trị Laptop",
+                        Roles = ProductRole
+                    },
+                    new GroupRole
+                    {
+                        Name = "Order",
+                        Description = "Nhóm quyền quản trị đơn hàng",
+                        Roles = OrderRole
+                    },
+                    new GroupRole
+                    {
+                        Name = "User",
+                        Description = "Nhóm quyền quản trị người dùng",
+                        Roles = UserRole
+                    },
+                    new GroupRole
+                    {
+                        Name = "Category",
+                        Description = "Nhóm quyền quản trị danh mục",
+                        Roles = CategoryRole
+                    },
+                    new GroupRole
+                    {
+                        Name = "OrderOffline",
+                        Description = "Nhóm quyền quản trị mua tại chỗ",
+                        Roles = OrderOfflineRole
+                    }
+                    );
+                context.SaveChanges();
+            }
         }
     }
-    
+
 }

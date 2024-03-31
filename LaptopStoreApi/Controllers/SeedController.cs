@@ -289,40 +289,7 @@ namespace LaptopStoreApi.Controllers
         }
 
 
-        // Lấy danh sách Role
-        [HttpGet]
-
-        public async Task<IActionResult> GetAllRole()
-        {
-            var roles = await _roleManager.Roles.ToListAsync();
-            return Ok(roles);
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateRole(string roleName)
-        {
-            if (string.IsNullOrWhiteSpace(roleName))
-            {
-                return BadRequest("Tên role không hợp lệ");
-            }
-
-            var roleExists = await _roleManager.RoleExistsAsync(roleName);
-            if (roleExists)
-            {
-                return BadRequest("Role đã tồn tại");
-            }
-
-            var newRole = new IdentityRole(roleName);
-            var result = await _roleManager.CreateAsync(newRole);
-            if (result.Succeeded)
-            {
-                return Ok("Role đã được tạo thành công");
-            }
-            else
-            {
-                var errors = string.Join(", ", result.Errors.Select(error => error.Description));
-                return BadRequest($"Lỗi tạo role: {errors}");
-            }
-        }
+        
         [HttpPost]
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> AuthData()

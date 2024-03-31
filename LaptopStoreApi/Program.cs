@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using LaptopStoreApi.Models;
+using System.Security.Claims;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -156,6 +158,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
+
 await SeedDatabase.CreateData(app);
 app.UseHttpsRedirection();
 app.UseAuthentication();

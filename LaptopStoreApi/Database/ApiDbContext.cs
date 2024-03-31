@@ -91,6 +91,11 @@ namespace LaptopStoreApi.Database
             modelBuilder.Entity<OrderOffline>()
                 .Property(o => o.Id)
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<UserGroupRole>().HasKey(lc => new { lc.UserId, lc.GroupRoleId });
+            modelBuilder.Entity<UserGroupRole>().HasOne(lc => lc.User).WithMany(l => l.UserGroupRole).HasForeignKey(lc => lc.UserId);
+            modelBuilder.Entity<UserGroupRole>().HasOne(lc => lc.GroupRole).WithMany(c => c.UserGroups).HasForeignKey(lc => lc.GroupRoleId);
+
         }
         public DbSet<Laptop> Laptops => Set<Laptop>();
         public DbSet<LaptopStatus> LaptopStatuses => Set<LaptopStatus>();
@@ -103,5 +108,7 @@ namespace LaptopStoreApi.Database
         public DbSet<LikeProduct> LikeProducts { get; set; }
         public DbSet<Promotion> Promotions { get; set; } // Khuyến mãi
         public DbSet<OrderOffline> OrderOfflines { get; set; }
+        public DbSet<GroupRole> GroupRoles { get; set; }
+        public DbSet<UserGroupRole> UserGroups { get; set; }
     }
 }

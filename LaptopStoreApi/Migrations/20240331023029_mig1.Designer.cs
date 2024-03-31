@@ -4,6 +4,7 @@ using LaptopStoreApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240331023029_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,8 +109,6 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("Evaluates");
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("LaptopStoreApi.Database.GroupRole", b =>
                 {
                     b.Property<int>("Id")
@@ -127,7 +128,6 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("GroupRoles");
                 });
 
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
             modelBuilder.Entity("LaptopStoreApi.Database.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -477,8 +477,6 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("LaptopStoreApi.Database.UserGroupRole", b =>
                 {
                     b.Property<string>("UserId")
@@ -494,7 +492,6 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("UserGroups");
                 });
 
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -504,12 +501,9 @@ namespace LaptopStoreApi.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-=======
                     b.Property<int?>("GroupRoleId")
                         .HasColumnType("int");
 
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -520,11 +514,8 @@ namespace LaptopStoreApi.Migrations
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD
-=======
                     b.HasIndex("GroupRoleId");
 
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
@@ -739,8 +730,6 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("User");
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("LaptopStoreApi.Database.UserGroupRole", b =>
                 {
                     b.HasOne("LaptopStoreApi.Database.GroupRole", "GroupRole")
@@ -767,7 +756,6 @@ namespace LaptopStoreApi.Migrations
                         .HasForeignKey("GroupRoleId");
                 });
 
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -824,8 +812,6 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("LaptopCategories");
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("LaptopStoreApi.Database.GroupRole", b =>
                 {
                     b.Navigation("Roles");
@@ -833,7 +819,6 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("UserGroups");
                 });
 
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
             modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
                 {
                     b.Navigation("LaptopCategories");
@@ -849,11 +834,8 @@ namespace LaptopStoreApi.Migrations
             modelBuilder.Entity("LaptopStoreApi.Database.User", b =>
                 {
                     b.Navigation("LikeProducts");
-<<<<<<< HEAD
-=======
 
                     b.Navigation("UserGroupRole");
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
                 });
 #pragma warning restore 612, 618
         }

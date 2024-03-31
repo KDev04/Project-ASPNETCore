@@ -58,6 +58,27 @@ namespace LaptopStore.Controllers
                 return View(res);
             }
         }
+
+        public async Task<IActionResult> Authority2()
+        {
+            HttpResponseMessage req = await _httpClient.GetAsync("http://localhost:4000/Seed/GetAllUsersWithClaims");
+            if (req.IsSuccessStatusCode)
+            {
+                var responseData = await req.Content.ReadAsStringAsync();
+                // Xử lý dữ liệu responseData theo nhu cầu của bạn
+                var res = JsonConvert.DeserializeObject<List<UserAuthority>>(responseData);
+                if (res == null) { res = new List<UserAuthority>(); }
+
+
+                return View(res); // Trả về view mà bạn muốn hiển thị dữ liệu
+            }
+            else
+            {
+                // Xử lý lỗi khi không nhận được phản hồi thành công từ API
+                List<UserAuthority> res = new List<UserAuthority>();
+                return View(res);
+            }
+        }
         public async Task<IActionResult> GetClaimsByUser(string userId)
         {
             // Lấy danh sách claim tương ứng với userId từ nguồn dữ liệu

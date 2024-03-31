@@ -818,3 +818,4 @@ D:\D\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 D:\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
+>>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
