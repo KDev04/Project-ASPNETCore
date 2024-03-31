@@ -531,6 +531,7 @@ D:\BE-Kết thúc môn - Nhóm 10\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore
 >>>>>>> 35f7beaec6f03081485f0e23b021489278784c3b
 >>>>>>> 62546f8f9ecad578027bbf154500b304ad0ed872
 >>>>>>> b628e584645b1d3ff93f4e130509ea03f4ebcc5a
+>>>>>>> 09a0b477ed5b08a81b93fd2b5520f8fd95c3f021
 D:\D\LaptopStore\bin\Debug\net7.0\appsettings.Development.json
 D:\D\LaptopStore\bin\Debug\net7.0\appsettings.json
 D:\D\LaptopStore\bin\Debug\net7.0\global.json
@@ -545,6 +546,7 @@ D:\D\LaptopStore\bin\Debug\net7.0\LaptopStore.dll
 D:\D\LaptopStore\bin\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\bin\Debug\net7.0\AutoMapper.dll
 D:\D\LaptopStore\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\D\LaptopStore\bin\Debug\net7.0\HarfBuzzSharp.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Humanizer.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -602,6 +604,13 @@ D:\D\LaptopStore\bin\Debug\net7.0\NuGet.Packaging.dll
 D:\D\LaptopStore\bin\Debug\net7.0\NuGet.ProjectModel.dll
 D:\D\LaptopStore\bin\Debug\net7.0\NuGet.Protocol.dll
 D:\D\LaptopStore\bin\Debug\net7.0\NuGet.Versioning.dll
+D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Charting.dll
+D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Quality.dll
+D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Snippets.dll
+D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.System.dll
+D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.WPFonts.dll
+D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.dll
+D:\D\LaptopStore\bin\Debug\net7.0\QuestPDF.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Serilog.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Serilog.AspNetCore.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Serilog.Extensions.Hosting.dll
@@ -611,6 +620,8 @@ D:\D\LaptopStore\bin\Debug\net7.0\Serilog.Settings.Configuration.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Serilog.Sinks.Console.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Serilog.Sinks.Debug.dll
 D:\D\LaptopStore\bin\Debug\net7.0\Serilog.Sinks.File.dll
+D:\D\LaptopStore\bin\Debug\net7.0\SkiaSharp.dll
+D:\D\LaptopStore\bin\Debug\net7.0\SkiaSharp.HarfBuzz.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.CodeDom.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Composition.AttributedModel.dll
 D:\D\LaptopStore\bin\Debug\net7.0\System.Composition.Convention.dll
@@ -768,7 +779,17 @@ D:\D\LaptopStore\bin\Debug\net7.0\ru\Microsoft.CodeAnalysis.Workspaces.resources
 D:\D\LaptopStore\bin\Debug\net7.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\D\LaptopStore\bin\Debug\net7.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\D\LaptopStore\bin\Debug\net7.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\D\LaptopStore\bin\Debug\net7.0\de\PdfSharp.Charting.resources.dll
+D:\D\LaptopStore\bin\Debug\net7.0\de\PdfSharp.resources.dll
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
 D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\osx\native\libSkiaSharp.dylib
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-arm64\native\libSkiaSharp.dll
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x64\native\libSkiaSharp.dll
+D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x86\native\libSkiaSharp.dll
 D:\D\LaptopStore\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
@@ -797,26 +818,3 @@ D:\D\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 D:\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
-<<<<<<< HEAD
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Charting.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Quality.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Snippets.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.System.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.WPFonts.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\de\PdfSharp.Charting.resources.dll
-D:\D\LaptopStore\bin\Debug\net7.0\de\PdfSharp.resources.dll
-D:\D\LaptopStore\bin\Debug\net7.0\HarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\QuestPDF.dll
-D:\D\LaptopStore\bin\Debug\net7.0\SkiaSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\SkiaSharp.HarfBuzz.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\osx\native\libHarfBuzzSharp.dylib
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\osx\native\libSkiaSharp.dylib
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-arm64\native\libSkiaSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x64\native\libSkiaSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x86\native\libSkiaSharp.dll
-=======
->>>>>>> 09a0b477ed5b08a81b93fd2b5520f8fd95c3f021

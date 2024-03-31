@@ -6,6 +6,42 @@
 
 @model CustomModel
 
+// string jsonResponse = await response.Content.ReadAsStringAsync();
+// TempData["SuccessMessage"] = jsonResponse;
+// return RedirectToAction("OrderPage", "Admin");
+
+// Deserialize dữ liệu JSON thành danh sách các đối tượng OrderOffline
+// string jsonResponse = await response.Content.ReadAsStringAsync();
+// List<OrderOffline> orderOfflines = JsonConvert.DeserializeObject<List<OrderOffline>>(jsonResponse);
+
+// // Sử dụng QuestPDF để tạo tài liệu PDF
+// PdfDocument document = new PdfDocument();
+// document.AddSection(section =>
+// {
+//     // Tạo nội dung của tài liệu PDF từ danh sách các đối tượng OrderOffline
+//     foreach (var order in orderOfflines)
+//     {
+//         section.AddParagraph(order.Name);
+//         section.AddParagraph(order.Phone);
+//         // Thêm các thông tin khác tương ứng với đối tượng OrderOffline
+//     }
+// });
+
+// // Tạo MemoryStream để lưu trữ tài liệu PDF
+// MemoryStream stream = new MemoryStream();
+// document.GeneratePdf(stream);
+
+// // Đặt vị trí của stream về đầu để có thể đọc từ đầu
+// stream.Position = 0;
+
+
+
+
+// Trả về file PDF từ MemoryStream
+// return File(stream, "application/pdf", "order.pdf");
+
+
+
 
 
 

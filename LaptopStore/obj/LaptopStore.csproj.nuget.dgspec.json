@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj": {}
+    "D:\\D\\LaptopStore\\LaptopStore.csproj": {}
   },
   "projects": {
-    "E:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj": {
+    "D:\\D\\LaptopStore\\LaptopStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj",
+        "projectUniqueName": "D:\\D\\LaptopStore\\LaptopStore.csproj",
         "projectName": "LaptopStore",
-        "projectPath": "E:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\LaptopStore.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "E:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\",
+        "projectPath": "D:\\D\\LaptopStore\\LaptopStore.csproj",
+        "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
+        "outputPath": "D:\\D\\LaptopStore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -8,9 +8,15 @@ using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using QuestPDF;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using PdfSharp.Fonts;
+
 
 
 namespace LaptopStore.Controllers
@@ -152,7 +158,7 @@ namespace LaptopStore.Controllers
                     pageSize = take,
                     totalPage = totalPages,
                     Categories = res,
-                    Laptops = reslaps!.Skip(page * take -1).Take(take).ToList()
+                    Laptops = reslaps!.Skip(page * take - 1).Take(take).ToList()
                 };
                 return View(model); // Trả về view mà bạn muốn hiển thị dữ liệu
             }
@@ -694,9 +700,9 @@ namespace LaptopStore.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = "Sản phẩm không hợp lệ!";
-                return RedirectToAction("OrderPage", "Admin");
+                // return RedirectToAction("OrderPage", "Admin");
                 // Xử lý ngoại lệ nếu có
-                // return BadRequest("Error processing order: " + ex.Message);
+                return BadRequest("Error processing order: " + ex.Message);
             }
         }
 
@@ -763,11 +769,141 @@ namespace LaptopStore.Controllers
 
 
 
-      
+        public async Task<IActionResult> CreatePdf([FromForm] int IdOrder)
+        {
+
+            try
+            {
+                // Tạo dữ liệu form
+                var formData = new MultipartFormDataContent();
+                formData.Add(new StringContent(IdOrder.ToString()), "IdOrder");
+                // Gửi yêu cầu POST đến API
+                HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/GetDetailOrderOfflines", formData);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    // Deserialize dữ liệu JSON thành danh sách các đối tượng OrderOffline
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    List<OrderOffline> orderOfflines = JsonConvert.DeserializeObject<List<OrderOffline>>(jsonResponse);
+
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                    GlobalFontSettings.FontResolver = new FileFontResolver();
+
+                    // Tạo tệp PDF mới
+                    PdfDocument pdf = new PdfDocument();
+
+                    PdfPage page = pdf.AddPage();
+
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+
+                    XFont font = new XFont("Arial", 20);
+
+
+
+                    // Vị trí bắt đầu của text
+                    XPoint point = new XPoint(10, 10);
+
+                    // Thêm thông tin của từng OrderOffline vào tệp PDF
+                    foreach (var orderOffline in orderOfflines)
+                    {
+                        gfx.DrawString($"IdOrder: {orderOffline.IdOrder}", font, XBrushes.Black, point);
+                        // Thêm các thông tin khác tương tự vào tệp PDF
+
+                        // Di chuyển đến dòng tiếp theo
+                        point.Y += 20;
+                    }
+
+                    // Lưu tệp PDF vào bộ nhớ đệm
+                    MemoryStream memoryStream = new MemoryStream();
+                    pdf.Save(memoryStream, false);
+
+                    // Trả về tệp PDF dưới dạng một phản hồi HTTP
+                    return File(memoryStream.ToArray(), "application/pdf", "order_offlines.pdf");
+
+
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Đặt hàng thất bại !";
+                    // Xử lý lỗi từ API
+                    return BadRequest("Failed to change status order");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
 
 
 
 
+
+
+
+
+
+    }
+
+
+    public class FileFontResolver : IFontResolver // FontResolverBase
+    {
+        // public string DefaultFontName => throw new NotImplementedException();
+
+        // public byte[] GetFont(string faceName)
+        // {
+        //     using (var ms = new MemoryStream())
+        //     {
+        //         using (var fs = File.Open(faceName, FileMode.Open))
+        //         {
+        //             fs.CopyTo(ms);
+        //             ms.Position = 0;
+        //             return ms.ToArray();
+        //         }
+        //     }
+        // }
+
+         public string DefaultFontName => "Arial";  
+
+        public byte[] GetFont(string faceName)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var fs = File.OpenRead(faceName))
+                {
+                    fs.CopyTo(ms);
+                    ms.Position = 0;
+                    return ms.ToArray();
+                }
+            }
+        }
+
+        public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
+        {
+            if (familyName.Equals("Verdana", StringComparison.CurrentCultureIgnoreCase))
+            {
+                if (isBold && isItalic)
+                {
+                    return new FontResolverInfo("Fonts/Verdana-BoldItalic.ttf");
+                }
+                else if (isBold)
+                {
+                    return new FontResolverInfo("Fonts/Verdana-Bold.ttf");
+                }
+                else if (isItalic)
+                {
+                    return new FontResolverInfo("Fonts/Verdana-Italic.ttf");
+                }
+                else
+                {
+                    return new FontResolverInfo("Fonts/Verdana-Regular.ttf");
+                }
+            }
+            return null;
+        }
     }
 }

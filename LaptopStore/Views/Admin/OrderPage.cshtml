@@ -272,26 +272,22 @@
 
                             <div class="modal fade" id="billModal" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel3">Xác nhận in hóa đơn </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                     <form asp-action="CreatePdf" asp-controller="Admin" method="post" enctype="multipart/form-data">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel3">Xác nhận in hóa đơn </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" id="modalBodyContent">
+                                                <input name="IdOrder" value="@orderOffline.IdOrder" />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                            <button type="submit" class="btn btn-primary" id="printButton">In hóa đơn</button>
+                                            </div>
+                                            
                                         </div>
-                                        <div class="modal-body" id="modalBodyContent">
-                                            <!-- Nội dung của modal -->
-                                            <p>Mã phiếu: @orderOffline.IdOrder</p>
-                                            <p>Tên: @orderOffline.Name</p>
-                                            <p>Phone: @orderOffline.Phone</p>
-                                            <p>Ngày: @(orderOffline.OrderDate.HasValue ? orderOffline.OrderDate.Value.ToShortDateString() : "Không có ngày")</p>
-                                            <p>Địa chỉ: @(orderOffline.Location != null ? orderOffline.Location : "Không")</p>
-                                            <p>Tình trạng: @orderOffline.StatusOrder</p>
-                                            <p>Ghi chú: @(orderOffline.Note != null ? orderOffline.Note : "Không")</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" id="printButton">Save changes</button>
-                                        </div>
-                                    </div>
+                                     </form>
                                 </div>
                             </div>
 
