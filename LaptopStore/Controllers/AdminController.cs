@@ -91,6 +91,7 @@ namespace LaptopStore.Controllers
                 else
                 {
                     // Xử lý khi có lỗi từ API
+                    Console.WriteLine(response);
                     return Redirect("Home/Error");
                 }
             }

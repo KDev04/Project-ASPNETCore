@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Data;
 
 namespace LaptopStoreApi.Controllers
 {
@@ -40,17 +41,34 @@ namespace LaptopStoreApi.Controllers
                                         FullName = g.FirstOrDefault().User.FullName,
                                         Address = g.FirstOrDefault().User.Address,
                                         AvatarUrl = g.FirstOrDefault().User.AvatarUrl,
-                                        Email = g.FirstOrDefault().User.Address,
+                                        Email = g.FirstOrDefault().User.Email,
                                         PhoneNumber = g.FirstOrDefault().User.PhoneNumber,
                                         Roles = g.Select(ug => ug.GroupRole).ToList()
 
 
                                     })
                                     .ToListAsync();
-
-            return Ok(res);
+            UserRolePage userRolePage = new UserRolePage()
+            {
+                Users = await _context.Users.ToListAsync(),
+                Roles= res
+            };
+            return Ok(userRolePage);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetUserWithGroupRole()
+        {
 
+            var users = await _context.Users.ToListAsync();
+            var gr = await _context.GroupRoles.Include(g=>g.Roles).ToListAsync();
+            UserGroupRolePage userRolePage = new UserGroupRolePage()
+            {
+
+                Users = users,
+                GroupRoles = gr
+            };
+            return Ok(userRolePage);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetGroupByUserId(string userId)
@@ -82,7 +100,87 @@ namespace LaptopStoreApi.Controllers
 
             return Ok(JsonSerializer.Serialize(res, options));
         }
+        [HttpGet]
+        public async Task<IActionResult> GetRoleInUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
 
+            if (user == null)
+            {
+                return NotFound("Người dùng không tồn tại");
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var roles = new List<IdentityRole>();
+
+            foreach (var role in userRoles)
+            {
+                var identityRole = await _roleManager.FindByNameAsync(role);
+                if (identityRole != null)
+                {
+                    roles.Add(identityRole);
+                }
+            }
+
+            // Trả về danh sách các đối tượng IdentityRole
+            return Ok(roles);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRoleToUser(string userId, string roleId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            if (user == null || role == null)
+            {
+                return NotFound("Người dùng hoặc vai trò không tồn tại");
+            }
+
+            if (await _userManager.IsInRoleAsync(user, role.Name))
+            {
+                return BadRequest("Người dùng đã có sẵn quyền " + role.Name);
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, role.Name);
+
+            if (result.Succeeded)
+            {
+                return Ok("Đã thêm quyền vào người dùng");
+            }
+            else
+            {
+                return BadRequest("Lỗi khi thêm quyền vào người dùng");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveRoleToUser(string userId, string roleId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            if (user == null || role == null)
+            {
+                return NotFound("Người dùng hoặc vai trò không tồn tại");
+            }
+
+            if (!await _userManager.IsInRoleAsync(user, role.Name))
+            {
+                return BadRequest("Người dùng " + user.FullName+ " chưa có quyền " + role.Name);
+            }
+
+            var result = await _userManager.RemoveFromRoleAsync(user, role.Name);
+
+            if (result.Succeeded)
+            {
+                return Ok("Đã gỡ quyền "+ role.Name+ " ra khỏi người dùng " + user.FullName);
+            }
+            else
+            {
+                return BadRequest("Lỗi khi gỡ quyền khỏi người dùng");
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> CreateUserGroup(string userId, int groupId)
         {
@@ -93,7 +191,11 @@ namespace LaptopStoreApi.Controllers
             }
 
             var user = await _userManager.FindByIdAsync(userId);
-            var group = await _context.GroupRoles.FindAsync(groupId);
+
+            Console.WriteLine(user.FullName + user.PhoneNumber);
+            var group = await _context.GroupRoles.Include(g=>g.Roles).Where(g => g.Id == groupId).FirstOrDefaultAsync();
+
+            Console.WriteLine("Tim thay nhom ");
 
             // Kiểm tra xem user và group có tồn tại không
             if (user == null || group == null)
@@ -101,25 +203,33 @@ namespace LaptopStoreApi.Controllers
                 return NotFound("Người dùng hoặc nhóm không tồn tại");
             }
 
+            
+
+
             // Kiểm tra xem user đã thuộc nhóm này chưa
             var userGroupExists = await _context.UserGroups.AnyAsync(ug => ug.UserId == userId && ug.GroupRoleId == groupId);
             if (userGroupExists)
             {
                 return BadRequest("Người dùng đã thuộc nhóm này");
             }
+            Console.WriteLine("check    null?????????");
 
-            foreach (var role in group.Roles)
+            if (user != null && group.Roles!=null)
             {
-                if (user != null && role != null)
+                Console.WriteLine("Chui  vao if ?????????");
+
+                foreach (var role in group.Roles)
                 {
                     if (!await _userManager.IsInRoleAsync(user, role.Name))
                     {
                         await _userManager.AddToRoleAsync(user, role.Name);
+                        Console.WriteLine($"Da them {role.Name}");
                     }
+                    Console.WriteLine("Dang trong vong lap");
                 }
+
             }
-
-
+            Console.WriteLine("null?????????");
             // Tạo mới UserGroupRole và lưu vào cơ sở dữ liệu
             var newUserGroup = new UserGroupRole
             {

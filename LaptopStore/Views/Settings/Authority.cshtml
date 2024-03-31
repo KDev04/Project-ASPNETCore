@@ -13,6 +13,9 @@
                 <div class="form-group">
                     <label for="employeeSelect">Chọn nhân viên:</label>
                     <select class="form-control" id="userSelect">
+                        <option value="none">
+                            Chọn người dùng
+                        </option>
                         @foreach (var m in Model)
                         {
 
@@ -26,21 +29,43 @@
                     </select>
                 </div>
             </div>
-            <div class="row row-cols-1" id="userInfoDiv">
+            <div class="row row-cols-1 d-none" id="userInfoDiv">
             </div>
             <div class="form-group mt-4">
                 <label for="roleSelect">Chọn phân quyền nhanh:</label>
-                <select class="form-control" id="roleSelect" >
-                    <option value="order">Quản lý đơn hàng</option>
-                    <option value="product">Quản lý sản phẩm</option>
-                    <option value="user">Quản lý người dùng</option>
-                    <option value="category">Quản lý danh mục</option>
-                    <option value="admin">Admin</option>
 
-                    <!-- Thêm các lựa chọn khác tương ứng với các vai trò khác -->
-                </select>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="orderCheck">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Quản lý đơn hàng
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="productCheck">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Quản lý sản phẩm
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="categoryCheck">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Quản lý Danh mục
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="userCheck">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Quản lý Người dùng
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="allCheck">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Admin
+                    </label>
+                </div>
             </div>
-            <div class="row justify-content-center">
+            @* <div class="row justify-content-center">
                 <a class="btn btn-primary col-auto mt-2 " data-bs-toggle="modal" data-bs-target="#test">
                     Tùy chỉnh 
                 </a>
@@ -158,12 +183,12 @@
 
                     </div>
                 </div>
-            </div>
+            </div> *@
         </div>
 
         <form class="col-8">
-            <div class="container">
-                <div class="row row-cols-2 mt-2" id="adminClaims">
+            <div class="container" id="adminClaims">
+                <div class="row row-cols-2 mt-2">
                     <div class="col-6">
                         <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
                             <span>Quyền quản lí sản phẩm</span>
@@ -182,6 +207,9 @@
                         <hr>
 
                     </div>
+
+                </div>
+                <div class="row row-cols-2 mt-2">
                     <div class="col-6">
                         <a class="text-decoration-none text-black d-flex justify-content-between fs-5 fw-bold">
                             <span>Quyền quản lí đơn hàng</span>
@@ -204,157 +232,248 @@
 
                 <script>
                     $(document).ready(function () {
-                        $('#roleSelect').change(function () {
-                            var selectedRole = $(this).val(); // Lấy giá trị vai trò đã chọn
+                        $('#productCheck').on('change', function () {
+                            var checkbox = $(this);
+                            var selectedRole = checkbox.prop('checked');
 
-                            // Thay đổi giá trị của checkbox trong productClaims dựa trên vai trò đã chọn
                             $('#productClaims input[type="checkbox"]').each(function () {
                                 var checkbox = $(this);
                                 // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
-                                if (selectedRole === 'product') {
+                                if (selectedRole) {
                                     checkbox.prop('checked', true);
+                                } else {
+                                    checkbox.prop('checked', false);
                                 }
-
-
                             });
-
-                            $('#orderClaims input[type="checkbox"]').each(function () {
-                                var checkbox = $(this);
-                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
-                                if (selectedRole === 'order') {
-                                    checkbox.prop('checked', true);
-                                }
-
-
-                            });
-
-                            $('#userClaims input[type="checkbox"]').each(function () {
-                                var checkbox = $(this);
-                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
-                                if (selectedRole === 'user') {
-                                    checkbox.prop('checked', true);
-                                }
-
-
-                            });
+                        });
+                        $('#categoryCheck').on('change', function () {
+                            var checkbox = $(this);
+                            var selectedRole = checkbox.prop('checked');
 
                             $('#categoryClaims input[type="checkbox"]').each(function () {
                                 var checkbox = $(this);
                                 // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
-                                if (selectedRole === 'category') {
+                                if (selectedRole) {
                                     checkbox.prop('checked', true);
+                                } else {
+                                    checkbox.prop('checked', false);
                                 }
-
                             });
+                        });
+                        $('#orderCheck').on('change', function () {
+                            var checkbox = $(this);
+                            var selectedRole = checkbox.prop('checked');
 
+                            $('#orderClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole) {
+                                    checkbox.prop('checked', true);
+                                } else {
+                                    checkbox.prop('checked', false);
+                                }
+                            });
+                        });
+                        $('#userCheck').on('change', function () {
+                            var checkbox = $(this);
+                            var selectedRole = checkbox.prop('checked');
+
+                            $('#userClaims input[type="checkbox"]').each(function () {
+                                var checkbox = $(this);
+                                // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
+                                if (selectedRole) {
+                                    checkbox.prop('checked', true);
+                                } else {
+                                    checkbox.prop('checked', false);
+                                }
+                            });
+                        });
+                        $('#allCheck').on('change', function () {
+                            var checkbox = $(this);
+                            var isChecked = checkbox.prop('checked');
+
+                            $('#productCheck').prop('checked', isChecked);
+                            $('#orderCheck').prop('checked', isChecked);
+                            $('#userCheck').prop('checked', isChecked);
+                            $('#categoryCheck').prop('checked', isChecked);
                             $('#adminClaims input[type="checkbox"]').each(function () {
                                 var checkbox = $(this);
                                 // Kiểm tra giá trị checkbox hiện tại và thay đổi giá trị tương ứng
-                                if (selectedRole === 'admin') {
+                                if (isChecked) {
                                     checkbox.prop('checked', true);
+                                } else {
+                                    checkbox.prop('checked', false);
                                 }
-
                             });
-                  
-                        });
+                        }); 
 
 
 
                         
                         $('#userSelect').change(function () {
                             var selectedUserId = $(this).val(); // Lấy giá trị userId từ select
+                            if (selectedUserId == "none") {
+                                $('#userInfoDiv').addClass("d-none");
+                                $('#productClaims').empty();
+                                $('#categoryClaims').empty();
+                                $('#orderClaims').empty();
+                                $('#userClaims').empty();
+                            }
 
-                            // Gọi hàm Ajax để lấy danh sách claim tương ứng với userId
-                            $.ajax({
-                                type: 'GET',
-                                url: '/settings/GetClaimsByUser',
-                                data: { userId: selectedUserId },
-                                success: function (data) {
-                                    // Xóa danh sách claim hiện tại
-                                    $('#productClaims').empty();
-                                    $('#categoryClaims').empty();
-                                    $('#orderClaims').empty();
-                                    $('#userClaims').empty();
-                                    $('#userInfoDiv').empty(); // Xóa thông tin khác
+                            else {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/settings/GetClaimsByUser',
+                                    data: { userId: selectedUserId },
+                                    success: function (data) {
+                                        // Xóa danh sách claim hiện tại
+                                        $('#productClaims').empty();
+                                        $('#categoryClaims').empty();
+                                        $('#orderClaims').empty();
+                                        $('#userClaims').empty();
+                                        $('#userInfoDiv').removeClass("d-none");
+                                        $('#userInfoDiv').empty(); // Xóa thông tin khác
 
-                                    // Chèn thông tin khác vào userInfoDiv
-                                    var userNameHtml = '<span class="col">Tên đăng nhập: ' + data.userName + '</span>';
-                                    var userInfoHtml = '<span class="col">Họ tên: ' + data.fullName + '</span>';
-                                    var userAddressHtml = '<span class="col">Địa chỉ: ' + data.address + '</span>';
-                                    var userPhoneHtml = '<span class="col">Số điện thoại: ' + data.phoneNumber + '</span>';
-                                    var imageHtml = '<div class="col"><img src="http://localhost:4000/' + data.avatarUrl + '" alt="Avatar" style="width: 100px; height: 100px; border-radius: 4px;"></div>';
-                                    $('#userInfoDiv').append(userNameHtml).append(userInfoHtml).append(userAddressHtml).append(userPhoneHtml).append(imageHtml);
-
-
-
-
-
-
-                                    // Lọc danh sách các item có type chứa từ khóa "product"
-                                    var products = data.claims.filter(function (item) {
-                                        return item.type.toLowerCase().includes("product");
-                                    });
-                                    // Tạo các label và checkbox cho từng item trong danh sách đã lọc
-                                    $.each(products, function (index, item) {
-                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
-                                        var label = $('<label>').text(item.type).addClass('form-check-label');
-                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
-
-                                        col.append(label).append(checkbox);
-                                        $('#productClaims').append(col);
-                                    });
-
-                                    //Categories
-                                    var categories = data.claims.filter(function (item) {
-                                        return item.type.toLowerCase().includes("category");
-                                    });
-
-                                    $.each(categories, function (index, item) {
-                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
-                                        var label = $('<label>').text(item.type).addClass('form-check-label');
-                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
-
-                                        col.append(label).append(checkbox);
-                                        $('#categoryClaims').append(col);
-                                    });
+                                        // Chèn thông tin khác vào userInfoDiv
+                                        var userNameHtml = '<span class="col">Tên đăng nhập: ' + data.userName + '</span>';
+                                        var userInfoHtml = '<span class="col">Họ tên: ' + data.fullName + '</span>';
+                                        var userAddressHtml = '<span class="col">Địa chỉ: ' + data.address + '</span>';
+                                        var userPhoneHtml = '<span class="col">Số điện thoại: ' + data.phoneNumber + '</span>';
+                                        var imageHtml = '<div class="col"><img src="http://localhost:4000/' + data.avatarUrl + '" alt="Avatar" style="width: 100px; height: 100px; border-radius: 4px;"></div>';
+                                        $('#userInfoDiv').append(userNameHtml).append(userInfoHtml).append(userAddressHtml).append(userPhoneHtml).append(imageHtml);
 
 
-                                    //Orders
-                                    var orders = data.claims.filter(function (item) {
-                                        return item.type.toLowerCase().includes("order");
-                                    });
-                                    $.each(orders, function (index, item) {
-                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
-                                        var label = $('<label>').text(item.type).addClass('form-check-label');
-                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
 
-                                        col.append(label).append(checkbox);
-                                        $('#orderClaims').append(col);
-                                    });
 
-                                    //Users
-                                    var users = data.claims.filter(function (item) {
-                                        return item.type.toLowerCase().includes("user");
-                                    });
-                                    $.each(users, function (index, item) {
-                                        var col = $('<div>').addClass('form-check form-switch fs-6 col');
-                                        var label = $('<label>').text(item.type).addClass('form-check-label');
-                                        var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
 
-                                        col.append(label).append(checkbox);
-                                        $('#userClaims').append(col);
-                                    });
-                                },
-                                error: function () {
-                                    // Xử lý lỗi khi gọi Ajax
-                                }
-                            });
+
+                                        // Lọc danh sách các item có type chứa từ khóa "product"
+                                        var products = data.claims.filter(function (item) {
+                                            return item.type.toLowerCase().includes("product");
+                                        });
+                                        // Tạo các label và checkbox cho từng item trong danh sách đã lọc
+                                        $.each(products, function (index, item) {
+                                            var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                            var label = $('<label>').addClass('form-check-label');
+                                            var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                            if (item.type.toLowerCase().includes("read")) {
+                                                label.text("Xem");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("create")) {
+                                                label.text("Thêm");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("delete")) {
+                                                label.text("Xóa");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("update")) {
+                                                label.text("Chỉnh sửa");
+                                                label.attr('data-value', item.type);
+                                            } else {
+                                                label.text(item.type);
+                                            }
+
+                                            col.append(label).append(checkbox);
+                                            $('#productClaims').append(col);
+                                        });
+                                        //Categories
+                                        var categories = data.claims.filter(function (item) {
+                                            return item.type.toLowerCase().includes("category");
+                                        });
+
+                                        $.each(categories, function (index, item) {
+                                            var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                            var label = $('<label>').addClass('form-check-label');
+                                            var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                            if (item.type.toLowerCase().includes("read")) {
+                                                label.text("Xem");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("create")) {
+                                                label.text("Thêm");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("delete")) {
+                                                label.text("Xóa");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("update")) {
+                                                label.text("Chỉnh sửa");
+                                                label.attr('data-value', item.type);
+                                            } else {
+                                                label.text(item.type);
+                                            }
+
+                                            col.append(label).append(checkbox);
+                                            $('#categoryClaims').append(col);
+                                        });
+
+
+                                        //Orders
+                                        var orders = data.claims.filter(function (item) {
+                                            return item.type.toLowerCase().includes("order");
+                                        });
+                                        $.each(orders, function (index, item) {
+                                            var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                            var label = $('<label>').addClass('form-check-label');
+                                            var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                            if (item.type.toLowerCase().includes("read")) {
+                                                label.text("Xem");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("create")) {
+                                                label.text("Thêm");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("delete")) {
+                                                label.text("Xóa");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("update")) {
+                                                label.text("Chỉnh sửa");
+                                                label.attr('data-value', item.type);
+                                            } else {
+                                                label.text(item.type);
+                                            }
+
+                                            col.append(label).append(checkbox);
+                                            $('#orderClaims').append(col);
+                                        });
+
+                                        //Users
+                                        var users = data.claims.filter(function (item) {
+                                            return item.type.toLowerCase().includes("user");
+                                        });
+                                        $.each(users, function (index, item) {
+                                            var col = $('<div>').addClass('form-check form-switch fs-6 col');
+                                            var label = $('<label>').addClass('form-check-label');
+                                            var checkbox = $('<input>').attr('type', 'checkbox').prop('checked', item.value === "true").addClass('form-check-input');
+
+                                            if (item.type.toLowerCase().includes("read")) {
+                                                label.text("Xem");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("create")) {
+                                                label.text("Thêm");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("delete")) {
+                                                label.text("Xóa");
+                                                label.attr('data-value', item.type);
+                                            } else if (item.type.toLowerCase().includes("update")) {
+                                                label.text("Chỉnh sửa");
+                                                label.attr('data-value', item.type);
+                                            } else {
+                                                label.text(item.type);
+                                            }
+
+                                            col.append(label).append(checkbox);
+                                            $('#userClaims').append(col);
+                                        });
+                                    },
+                                    error: function () {
+                                        // Xử lý lỗi khi gọi Ajax
+                                    }
+                                });
+                            }
                         });
 
-
-
                         // Lắng nghe sự kiện nhấn nút Lưu
-                        $('.btn-primary').click(function () {
+                        $('#saveBtn').click(function () {
 
                             // Gọi phương thức xử lý với các giá trị đã lấy được
                             var userId = $('#userSelect').val();
@@ -364,12 +483,15 @@
 
                             // Tạo mảng claims từ các input
                             var claims = [];
-                            $('input[type="checkbox"]').each(function () {
+                            $('#adminClaims').find('input[type="checkbox"]').each(function () {
                                 var input = $(this);
+                                console.log(input.siblings('label').attr('data-value'));
+                                var label = input.siblings('label');
                                 var inputValue = {
-                                    Type: input.siblings('label').text(),
+                                    Type: label.attr('data-value'), // Lấy giá trị của thuộc tính dữ liệu "data-value"
                                     Value: input.prop('checked').toString()
                                 };
+
 
                                 claims.push(inputValue);
                             });
@@ -393,9 +515,11 @@
                                 success: function (response) {
                                     // Xử lý phản hồi thành công từ API
                                     console.log('Phản hồi từ API:', response);
+                                    alert("Da luu");
                                 },
                                 error: function (error) {
                                     // Xử lý lỗi từ API
+                                    alert("Vui lòng chọn một người dùng");
                                     console.log(error.responseText);
                                 }
                             });
@@ -407,7 +531,36 @@
                 <div class="row mt-5">
                     <div class="col text-center ">
                         <!-- Đây là nơi để đặt nút lưu -->
-                        <button type="button" class="btn btn-primary">Lưu</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveClaim">Lưu</button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="saveClaim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Lưu thay đổi
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="row mb-3 justify-content-center">
+                                    <div class="col">
+                                        <span>
+                                            Bạn chắn chắn muốn lưu
+                                        </span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button class="btn btn-success " id="saveBtn">Lưu</button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

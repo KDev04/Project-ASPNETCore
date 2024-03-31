@@ -1408,6 +1408,7 @@ namespace LaptopStoreApi.Database
             {
                 List<IdentityRole> AdminRoles = context.Roles.ToList();
                 List<IdentityRole> AdminRole = context.Roles.ToList();
+                List<IdentityRole> a = context.Roles.Where(x => x.Name.Contains("e")).ToList();
                 List<IdentityRole> ProductRole = context.Roles.Where(x => x.Name.Contains("Product")).ToList();
                 List<IdentityRole> CategoryRole = context.Roles.Where(x => x.Name.Contains("Category")).ToList();
                 List<IdentityRole> UserRole = context.Roles.Where(x => x.Name.Contains("User")).ToList();
@@ -1417,18 +1418,8 @@ namespace LaptopStoreApi.Database
 
                 List<IdentityRole> OrderRole = OrderOfflineRoleAll.Where(x => !x.Name.Contains("Offline")).ToList();
 
-                List<IdentityRole> a= OrderOfflineRoleAll.Where(x => !x.Name.Contains("")).ToList();
 
                 context.GroupRoles.AddRange(
-                    
-                    new GroupRole
-                    {
-                        Name = "Admin",
-                        Description = "Nhóm ",
-                        Roles = a
-                        
-                    },
-
                     new GroupRole
                     {
                         Name = "Laptop",

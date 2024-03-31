@@ -61,13 +61,14 @@ namespace LaptopStore.Controllers
 
         public async Task<IActionResult> Authority2()
         {
-            HttpResponseMessage req = await _httpClient.GetAsync("http://localhost:4000/Seed/GetAllUsersWithClaims");
+            HttpResponseMessage req = await _httpClient.GetAsync("http://localhost:4000/api/UserGroup/GetUserWithGroupRole");
+
             if (req.IsSuccessStatusCode)
             {
                 var responseData = await req.Content.ReadAsStringAsync();
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                var res = JsonConvert.DeserializeObject<List<UserAuthority>>(responseData);
-                if (res == null) { res = new List<UserAuthority>(); }
+                var res = JsonConvert.DeserializeObject<UserGroupRolePage>(responseData);
+                if (res == null) { res = new UserGroupRolePage(); };
 
 
                 return View(res); // Trả về view mà bạn muốn hiển thị dữ liệu
@@ -75,7 +76,7 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                List<UserAuthority> res = new List<UserAuthority>();
+                UserGroupRolePage res = new UserGroupRolePage();
                 return View(res);
             }
         }

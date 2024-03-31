@@ -91,7 +91,33 @@ namespace LaptopStoreApi.Controllers
                 {
                     user.AvatarUrl = "Avatars/user1.jpg";
                 }
+                if (string.IsNullOrEmpty(model.UserName))
+                {
+                    return BadRequest(ModelState);
+                }
+
+
+                var existingUser = await _userManager.FindByNameAsync(model.UserName);
+                if (existingUser != null)
+                {
+                    // Tên đăng nhập đã tồn tại
+                    // Thực hiện xử lý tương ứng, ví dụ: trả về BadRequest
+                    return BadRequest("Tên đăng nhập này đã tồn tại");
+                }
+
+
                 user.UserName = model?.UserName;
+                if (string.IsNullOrEmpty(model.Email))
+                {
+                    return BadRequest("Vui lòng nhập Eamil");
+                }
+
+
+                var existingEmail = await _userManager.FindByEmailAsync(model.Email);
+                if (existingEmail != null)
+                {
+                    return BadRequest("Email "+ model.Email + " đã được sử dụng");
+                }
                 user.Email = model?.Email;
                 user.FullName = model?.FullName;
                 user.PhoneNumber = model?.PhoneNumber;
@@ -269,6 +295,18 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
+
+        [HttpGet] 
+        public async Task<IActionResult> GetUserById (string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUserInfo()
@@ -413,6 +451,11 @@ namespace LaptopStoreApi.Controllers
             }
             if (!string.IsNullOrEmpty(updatedUser.UserName))
             {
+                var existingNewUserName = await _userManager.FindByNameAsync(updatedUser.UserName);
+                if (existingNewUserName != null)
+                {
+                    return BadRequest("Tên đăng nhập " + updatedUser.UserName + " Đã được sử dụng");
+                }
                 user.UserName = updatedUser.UserName;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
@@ -448,6 +491,11 @@ namespace LaptopStoreApi.Controllers
             }
             if (!string.IsNullOrEmpty(updatedUser.Email))
             {
+                var existingEmail = await _userManager.FindByEmailAsync(updatedUser.Email);
+                if (existingEmail != null)
+                {
+                    return BadRequest("Email " + updatedUser.Email + " đã được sử dụng bời tài khoản khác.");
+                }
                 user.Email = updatedUser.Email;
 
                 _context.Users.Update(user);
