@@ -67,7 +67,6 @@ namespace LaptopStoreApi.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        [Authorize(Roles = "Thêm người dùng")]
         [HttpPost]
         public async Task<ActionResult> CreateUser([FromForm] UserModel model)
         {

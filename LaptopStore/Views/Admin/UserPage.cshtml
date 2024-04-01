@@ -160,9 +160,14 @@
                                     location.reload();
                                 },
                                 error: function (xhr, status, error) {
-                                    // Xử lý khi có lỗi xảy ra
-                                    var errorMessage = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : error;
-                                    alert('Lỗi: ' + xhr.responseText);
+                                    if (xhr.status === 403) {
+                                        alert("Bạn không có quyền tạo.");
+                                    } else if (xhr.status === 401) {
+                                        alert("Bạn chưa đăng nhập.");
+                                    } else {
+                                        var errorMessage = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : error;
+                                        alert('Lỗi: '+ xhr.status + ' ' + xhr.responseText);
+                                    }
                                 }
                             });
                         });
