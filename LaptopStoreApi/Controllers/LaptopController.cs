@@ -122,7 +122,7 @@ namespace LaptopStoreApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
+        [Authorize(Roles ="Xoá sản phẩm")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -211,7 +211,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-
+        [Authorize(Roles ="Thêm sản phẩm")]
         [HttpPost]
         [ResponseCache(CacheProfileName = "NoCache")]
         public async Task<IActionResult> Add([FromForm] LapModel2 model)
@@ -233,7 +233,7 @@ namespace LaptopStoreApi.Controllers
                 return BadRequest();
             }
         }
-
+        [Authorize(Roles ="Cập nhật sản phẩm")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLaptop(int id, [FromForm] LapModel2 Loadlaptop)
         {
@@ -501,7 +501,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-
+        [Authorize(Roles ="Thêm đơn bán")]
         [HttpPost]
         public async Task<IActionResult> PostOrderOffline([FromBody] List<OrderOffline> AddOrderOfflines)
         {
@@ -586,7 +586,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-
+        [Authorize(Roles ="Cập nhật đơn bán")]
         [HttpPost]
         public async Task<IActionResult> ChangeOrderOffline([FromBody] List<OrderOffline> AddOrderOfflines)
         {
@@ -616,6 +616,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
+        [Authorize(Roles ="Xóa đơn bán")]
         [HttpDelete("{IdOrder}")]
         public async Task<IActionResult> DeleteOrderOfflines(int IdOrder)
         {

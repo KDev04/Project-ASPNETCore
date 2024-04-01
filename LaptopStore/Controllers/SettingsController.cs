@@ -64,13 +64,14 @@ namespace LaptopStore.Controllers
 
         public async Task<IActionResult> Authority2()
         {
-            HttpResponseMessage req = await _httpClient.GetAsync("http://localhost:4000/Seed/GetAllUsersWithClaims");
+            HttpResponseMessage req = await _httpClient.GetAsync("http://localhost:4000/api/UserGroup/GetUserWithGroupRole");
+
             if (req.IsSuccessStatusCode)
             {
                 var responseData = await req.Content.ReadAsStringAsync();
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
-                var res = JsonConvert.DeserializeObject<List<UserAuthority>>(responseData);
-                if (res == null) { res = new List<UserAuthority>(); }
+                var res = JsonConvert.DeserializeObject<UserGroupRolePage>(responseData);
+                if (res == null) { res = new UserGroupRolePage(); };
 
 
                 return View(res); // Trả về view mà bạn muốn hiển thị dữ liệu
@@ -78,7 +79,7 @@ namespace LaptopStore.Controllers
             else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
-                List<UserAuthority> res = new List<UserAuthority>();
+                UserGroupRolePage res = new UserGroupRolePage();
                 return View(res);
             }
         }
@@ -137,7 +138,10 @@ namespace LaptopStore.Controllers
         //Category
         public async Task<IActionResult> Category()
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+
             HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
             if (responselap == null)
             {
@@ -332,6 +336,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<ActionResult> CreateCategory(string CategoryName)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // Xử lý dữ liệu responseData theo nhu cầu của bạn
             var req = new FormUrlEncodedContent(
                     new[]
@@ -364,7 +370,8 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> DeleteCategory(int CategoryId)
         {
             var apiUrl = $"http://localhost:4000/api/Category/DeleteCategory/{CategoryId}";
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.DeleteAsync(apiUrl);
             Console.WriteLine("Toi day roi ne");
             if (response.IsSuccessStatusCode)
@@ -395,7 +402,8 @@ namespace LaptopStore.Controllers
 
                     }
                 );
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage res = await _httpClient.PostAsync(
                 "http://localhost:4000/api/LaptopCategory/CreateLaptopCategory", req
             );
@@ -414,7 +422,8 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> DeleteLaptopInCategory(int LaptopId, int CategoryId)
         {
             var apiUrl = $"http://localhost:4000/api/LaptopCategory/DeleteLaptopCategory/{LaptopId}/{CategoryId}";
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.DeleteAsync(apiUrl);
             Console.WriteLine("Toi day roi ne");
             if (response.IsSuccessStatusCode)
@@ -437,7 +446,8 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> UpdateCategoryName(int CategoryId, string CategoryName)
         {
             var apiUrl = $"http://localhost:4000/api/Category/UpdateCategoryName/{CategoryId}/{CategoryName}";
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.PutAsync(apiUrl, null);
             Console.WriteLine("Toi day roi ne");
             if (response.IsSuccessStatusCode)

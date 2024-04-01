@@ -39,6 +39,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> CreateUser(User model)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             if (model == null)
             {
                 throw new ArgumentNullException("user");
@@ -71,6 +73,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> UpdateUser(User model)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             if (model == null)
             {
                 throw new ArgumentNullException("user");
@@ -97,12 +101,15 @@ namespace LaptopStore.Controllers
                 else
                 {
                     // Xử lý khi có lỗi từ API
+                    Console.WriteLine(response);
                     return Redirect("Home/Error");
                 }
             }
         }
         public async Task<IActionResult> DeleteUser(string Id)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             Console.WriteLine(Id);
             var apiUrl = $"http://localhost:4000/api/Account/DeleteUser/{Id}";
 
@@ -127,6 +134,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> LaptopPage(int page = 1, int take = 5)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // Danh sách Category 
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
 
@@ -358,6 +367,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> SaveProduct(Laptop model)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             try
             {
                 using (var formData = new MultipartFormDataContent())
@@ -411,6 +422,7 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> DeleteLaptop(int LaptopId)
         {
+
             var token = HttpContext.Session.GetString("Token");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:4000/api/Laptop/Delete/{LaptopId}");
@@ -483,6 +495,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> UserPage()
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             /*            var token = HttpContext.Session.GetString("Token");
                         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);*/
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Account/GetAllUser");
@@ -544,9 +558,12 @@ namespace LaptopStore.Controllers
         }
         public async Task<IActionResult> OrderPage(int page = 1, int pageSize = 2)
         {
+
             ViewBag.SuccessMessage = TempData["SuccessMessage"] as string;
             try
             {
+                var token = HttpContext.Session.GetString("Token");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 HttpResponseMessage response1 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
 
                 HttpResponseMessage response2 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetOrderOffline");
@@ -729,6 +746,8 @@ namespace LaptopStore.Controllers
 
                 var jsonContent = JsonConvert.SerializeObject(AddOrderOfflines);
                 var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var token = HttpContext.Session.GetString("Token");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/ChangeOrderOffline", stringContent);
 
                 // Xử lý phản hồi từ API
@@ -756,6 +775,8 @@ namespace LaptopStore.Controllers
         {
             try
             {
+                var token = HttpContext.Session.GetString("Token");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 // Gửi yêu cầu DELETE tới API với IdOrder được truyền vào
                 HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:4000/api/Laptop/DeleteOrderOfflines/{IdOrder}");
 
@@ -791,6 +812,8 @@ namespace LaptopStore.Controllers
                 formData.Add(new StringContent(IdOrder.ToString()), "IdOrder");
 
                 // Gửi yêu cầu POST đến API
+                var token = HttpContext.Session.GetString("Token");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/ChangeStatusOrder", formData);
 
                 if (response.IsSuccessStatusCode)

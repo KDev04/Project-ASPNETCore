@@ -1,16 +1,22 @@
-﻿using LaptopStoreApi.Models;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-namespace LaptopStoreApi.Database
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace LaptopStore.Models
 {
     public class GroupRole
     {
-        [Key]
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         public List<IdentityRole>? Roles { get; set; }
         public List<UserGroupRole>? UserGroups { get; set; }
+    }
+    public class UserGroupRole
+    {
+        public int? GroupRoleId { get; set; }
+        public GroupRole? GroupRole { get; set; }
+
+        public string? UserId { get; set; }
+        public User? User { get; set; }
     }
     public class GroupRoleModel
     {
@@ -36,9 +42,9 @@ namespace LaptopStoreApi.Database
         public List<User>? Users { get; set; }
         public List<UserRoles>? Roles { get; set; }
     }
-    public class UserGroupRolePage 
-    { 
-        public List<User>? Users{get; set;}
-        public List<GroupRole>?GroupRoles { get; set; }
+    public class UserGroupRolePage
+    {
+        public List<User>? Users { get; set; }
+        public List<GroupRole>? GroupRoles { get; set; }
     }
 }

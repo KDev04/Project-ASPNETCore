@@ -91,7 +91,33 @@ namespace LaptopStoreApi.Controllers
                 {
                     user.AvatarUrl = "Avatars/user1.jpg";
                 }
+                if (string.IsNullOrEmpty(model.UserName))
+                {
+                    return BadRequest(ModelState);
+                }
+
+
+                var existingUser = await _userManager.FindByNameAsync(model.UserName);
+                if (existingUser != null)
+                {
+                    // Tên đăng nhập đã tồn tại
+                    // Thực hiện xử lý tương ứng, ví dụ: trả về BadRequest
+                    return BadRequest("Tên đăng nhập này đã tồn tại");
+                }
+
+
                 user.UserName = model?.UserName;
+                if (string.IsNullOrEmpty(model.Email))
+                {
+                    return BadRequest("Vui lòng nhập Eamil");
+                }
+
+
+                var existingEmail = await _userManager.FindByEmailAsync(model.Email);
+                if (existingEmail != null)
+                {
+                    return BadRequest("Email "+ model.Email + " đã được sử dụng");
+                }
                 user.Email = model?.Email;
                 user.FullName = model?.FullName;
                 user.PhoneNumber = model?.PhoneNumber;
@@ -235,6 +261,7 @@ namespace LaptopStoreApi.Controllers
                         }
                         claims.Add(new Claim(ClaimTypes.Name, user.UserName!));
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                        claims.Add(new Claim("AvatarUrl", user.AvatarUrl!));
                         Console.WriteLine(claims);
                         var jwtObject = new JwtSecurityToken(
                             issuer: _configuration["JWT:Issuer"],
@@ -267,6 +294,18 @@ namespace LaptopStoreApi.Controllers
                 exceptionDetails.Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1";
                 return StatusCode(StatusCodes.Status401Unauthorized, exceptionDetails);
             }
+        }
+
+
+        [HttpGet] 
+        public async Task<IActionResult> GetUserById (string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
         [Authorize]
@@ -401,7 +440,7 @@ namespace LaptopStoreApi.Controllers
                 return NoContent(); // Hoặc trả về giá trị tùy chỉnh khác thể hiện rằng người dùng không có vai trò nào
             }
         }
-        /*        [Authorize]*/
+        [Authorize(Roles = "Cập nhật người dùng")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromForm] UserModel updatedUser)
         {
@@ -413,6 +452,11 @@ namespace LaptopStoreApi.Controllers
             }
             if (!string.IsNullOrEmpty(updatedUser.UserName))
             {
+                var existingNewUserName = await _userManager.FindByNameAsync(updatedUser.UserName);
+                if (existingNewUserName != null)
+                {
+                    return BadRequest("Tên đăng nhập " + updatedUser.UserName + " Đã được sử dụng");
+                }
                 user.UserName = updatedUser.UserName;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
@@ -448,6 +492,11 @@ namespace LaptopStoreApi.Controllers
             }
             if (!string.IsNullOrEmpty(updatedUser.Email))
             {
+                var existingEmail = await _userManager.FindByEmailAsync(updatedUser.Email);
+                if (existingEmail != null)
+                {
+                    return BadRequest("Email " + updatedUser.Email + " đã được sử dụng bời tài khoản khác.");
+                }
                 user.Email = updatedUser.Email;
 
                 _context.Users.Update(user);
@@ -551,7 +600,7 @@ namespace LaptopStoreApi.Controllers
 
 
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(string userId, string currentPassword, string newPassword, string confirmPassword)
         {
@@ -624,7 +673,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Xóa người dùng")]
         [HttpDelete("{Id}")]
 
         public async Task<IActionResult> DeleteUser(string Id)
