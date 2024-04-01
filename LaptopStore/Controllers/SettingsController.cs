@@ -367,7 +367,8 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> DeleteCategory(int CategoryId)
         {
             var apiUrl = $"http://localhost:4000/api/Category/DeleteCategory/{CategoryId}";
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.DeleteAsync(apiUrl);
             Console.WriteLine("Toi day roi ne");
             if (response.IsSuccessStatusCode)
@@ -398,7 +399,8 @@ namespace LaptopStore.Controllers
 
                     }
                 );
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage res = await _httpClient.PostAsync(
                 "http://localhost:4000/api/LaptopCategory/CreateLaptopCategory", req
             );
@@ -417,7 +419,8 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> DeleteLaptopInCategory(int LaptopId, int CategoryId)
         {
             var apiUrl = $"http://localhost:4000/api/LaptopCategory/DeleteLaptopCategory/{LaptopId}/{CategoryId}";
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.DeleteAsync(apiUrl);
             Console.WriteLine("Toi day roi ne");
             if (response.IsSuccessStatusCode)
@@ -440,7 +443,8 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> UpdateCategoryName(int CategoryId, string CategoryName)
         {
             var apiUrl = $"http://localhost:4000/api/Category/UpdateCategoryName/{CategoryId}/{CategoryName}";
-
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.PutAsync(apiUrl, null);
             Console.WriteLine("Toi day roi ne");
             if (response.IsSuccessStatusCode)
