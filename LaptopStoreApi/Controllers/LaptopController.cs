@@ -658,13 +658,360 @@ namespace LaptopStoreApi.Controllers
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, "Đã xảy ra lỗi trong quá trình cập nhật trạng thái đơn hàng: " + ex.Message);
             }
 
 
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllInventoryTicket()
+        {
+            try
+            {
+                // Truy vấn cơ sở dữ liệu để lấy tất cả các InventoryTicket
+                var inventoryTickets = await _dbContext.InventoryTickets.ToListAsync();
+
+                // Trả về danh sách các InventoryTicket
+                return Ok(inventoryTickets);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu có
+                return StatusCode(500, $"An error occurred while fetching InventoryTickets: {ex.Message}");
+            }
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> PostInventoryTicket([FromBody] List<InventoryTicket> inventoryTickets)
+        {
+            if (inventoryTickets == null || inventoryTickets.Count == 0)
+            {
+                return BadRequest("Inventory ticket list is empty");
+            }
+            try
+            {
+                foreach (var inventoryTicket in inventoryTickets)
+                {
+                    // Kiểm tra xem có tồn tại LaptopId trong bảng Laptop không
+                    Laptop existingLaptop = await _dbContext.Laptops.FindAsync(inventoryTicket.LaptopId);
+
+                    if (existingLaptop == null)
+                    {
+                        return BadRequest($"Laptop with Id {inventoryTicket.LaptopId} does not exist");
+                    }
+                    else
+                    {
+                        inventoryTicket.Products = existingLaptop.Name;
+                        inventoryTicket.Price = existingLaptop.Price;
+                        inventoryTicket.Total = existingLaptop.Price * inventoryTicket.Quantity;
+                    }
+
+                    // Thêm InventoryTicket vào DbContext
+                    _dbContext.InventoryTickets.Add(inventoryTicket);
+                }
+
+                // Lưu các thay đổi vào cơ sở dữ liệu
+                await _dbContext.SaveChangesAsync();
+
+                return Ok("Inventory tickets added successfully");
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, $"An error occurred while adding inventory tickets: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetIdTicket()
+        {
+            try
+            {
+                // Truy vấn cơ sở dữ liệu để lấy tất cả các IdTicket hiện có
+                var existingIdTickets = await _dbContext.InventoryTickets.Select(ticket => ticket.IdTicket).ToListAsync();
+
+                // Nếu danh sách rỗng, trả về IdTicket = 1
+                if (existingIdTickets.Count == 0)
+                {
+                    return Ok(0);
+                }
+
+                // Xác định IdTicket lớn nhất
+                int maxIdTicket = existingIdTickets.Max();
+
+                // Tạo một IdTicket mới
+                int newIdTicket = maxIdTicket + 1;
+
+                // Trả về IdTicket mới
+                return Ok(newIdTicket);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu có
+                return StatusCode(500, $"An error occurred while fetching IdTicket: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{IdTicket}")]
+        public async Task<IActionResult> DeleteInventoryTicket(int IdTicket)
+        {
+            try
+            {
+                var tickets = _dbContext.InventoryTickets.Where(o => o.IdTicket == IdTicket).ToList();
+                _dbContext.InventoryTickets.RemoveRange(tickets);
+                await _dbContext.SaveChangesAsync();
+                return Ok("Đã xóa phiếu nhập/xuất thành công!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostLaptopQuantity([FromForm] int IdTicket, [FromForm] StatusOrder status)
+        {
+            try
+            {
+                if (status == StatusOrder.Complete)
+                {
+                    // Tìm các dòng từ bảng InventoryTickets có idTicket là tham số được truyền vào
+                    var inventoryItems = await _dbContext.InventoryTickets
+                        .Where(item => item.IdTicket == IdTicket)
+                        .ToListAsync();
+
+                    var bill = new Bill
+                    {
+                        IdTicketForeign = IdTicket
+
+                    };
+                    _dbContext.Bills.Add(bill);
+
+
+
+
+                    // Duyệt qua từng dòng của bảng InventoryTickets
+                    foreach (var item in inventoryItems)
+                    {
+                        // Lấy laptopId và quantity từ mỗi dòng
+                        var laptopId = item.LaptopId;
+                        var quantity = item.Quantity;
+                        item.StatusOrder = status;
+
+                        // Tìm laptop trong bảng Laptop có laptopId tương ứng
+                        var laptop = await _dbContext.Laptops.FindAsync(laptopId);
+
+                        // Nếu laptop tồn tại, cập nhật số lượng
+                        if (laptop != null)
+                        {
+                            laptop.Quantity += quantity;
+                        }
+
+
+                    }
+
+
+
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    await _dbContext.SaveChangesAsync();
+
+                    // Trả về kết quả thành công
+                    return Ok("Cập nhật số lượng laptop thành công");
+                }
+                else
+                {
+                    // Tìm các dòng từ bảng InventoryTickets có idTicket là tham số được truyền vào
+                    var inventoryItems = await _dbContext.InventoryTickets
+                        .Where(item => item.IdTicket == IdTicket)
+                        .ToListAsync();
+
+                    foreach (var item in inventoryItems)
+                    {
+                        item.StatusOrder = status;
+                    }
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    await _dbContext.SaveChangesAsync();
+
+                    // Trả về kết quả thành công
+                    return Ok("Cập nhật trạng thái thành công");
+
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+            }
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatusOrderComplete([FromForm] int IdOrder)
+        {
+            try
+            {
+                var newStatus = _dbContext.OrderOfflines.Where(o => o.IdOrder == IdOrder).ToList();
+
+                var bill = new Bill
+                {
+                    IdOrderForeign = IdOrder
+
+                };
+
+                _dbContext.Bills.Add(bill);
+
+                // Thay đổi cột StatusOrder thành giá trị 1
+                foreach (var order in newStatus)
+                {
+                    order.StatusOrder = StatusOrder.Complete; // Thay đổi thành giá trị Shipping = 1
+                }
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await _dbContext.SaveChangesAsync();
+
+                return Ok("Cập nhật trạng thái đơn hàng thành công");
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Đã xảy ra lỗi trong quá trình cập nhật trạng thái đơn hàng: " + ex.Message);
+            }
+
+
+        }
+
+        // [HttpGet]
+        // public async Task<IActionResult> GetBill()
+        // {
+        //     try
+        //     {
+
+        //         var inventoryTicketsList = new List<InventoryTicket>();
+
+        //         var orderOfflineList = new List<OrderOffline>();
+
+        //         // Lấy tất cả các giá trị trong cột IdTicketForeign của bảng Bill
+        //         var billIdTicketForeign = await _dbContext.Bills
+        //             .Select(b => b.IdTicketForeign)
+        //             .ToListAsync();
+        //         // Lấy tất cả các giá trị trong cột IdOrderForeign của bảng Bill
+        //         var billIdOrderForeign = await _dbContext.Bills
+        //             .Select(b => b.IdOrderForeign)
+        //             .ToListAsync();
+
+        //         foreach (var billId in billIdTicketForeign)
+        //         {
+        //             if (billId != null)
+        //             {
+        //                 // Lấy thông tin từ bảng InventoryTicket với IdTicket tương ứng
+        //                 var inventoryTickets = await _dbContext.InventoryTickets
+        //                     .Where(t => t.IdTicket == billId)
+        //                     .ToListAsync();
+
+        //                 inventoryTicketsList.AddRange(inventoryTickets); // Thêm các InventoryTicket vào danh sách
+
+        //             }
+        //         }
+        //         foreach (var billIdOrder in billIdOrderForeign)
+        //         {
+
+        //              if (billIdOrder != null)
+        //             {
+        //                 // Lấy thông tin từ bảng InventoryTicket với IdTicket tương ứng
+        //                 var orderOffline = await _dbContext.OrderOfflines
+        //                     .Where(t => t.IdOrder == billIdOrder)
+        //                     .ToListAsync();
+
+        //                 orderOfflineList.AddRange(orderOffline); // Thêm các InventoryTicket vào danh sách
+
+        //             }
+
+        //         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetInventoryTickets()
+        {
+            try
+            {
+                var billIdTicketForeign = await _dbContext.Bills
+                    .Select(b => b.IdTicketForeign)
+                    .ToListAsync();
+
+                var inventoryTickets = new List<InventoryTicket>();
+
+                foreach (var billId in billIdTicketForeign)
+                {
+                    if (billId != null)
+                    {
+                        var tickets = await _dbContext.InventoryTickets
+                            .Where(t => t.IdTicket == billId)
+                            .ToListAsync();
+
+                        inventoryTickets.AddRange(tickets);
+                    }
+                }
+
+                return Ok(inventoryTickets);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Đã xảy ra lỗi trong quá trình lấy thông tin InventoryTickets: " + ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderOfflines()
+        {
+            try
+            {
+                var billIdOrderForeign = await _dbContext.Bills
+                    .Select(b => b.IdOrderForeign)
+                    .ToListAsync();
+
+                var orderOfflines = new List<OrderOffline>();
+
+                foreach (var billIdOrder in billIdOrderForeign)
+                {
+                    if (billIdOrder != null)
+                    {
+                        var orders = await _dbContext.OrderOfflines
+                            .Where(t => t.IdOrder == billIdOrder)
+                            .ToListAsync();
+
+                        orderOfflines.AddRange(orders);
+                    }
+                }
+
+                // Chỉ lấy một bản ghi duy nhất nếu có trùng lặp
+                orderOfflines = orderOfflines.DistinctBy(o => o.Id).ToList();
+
+                return Ok(orderOfflines);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Đã xảy ra lỗi trong quá trình lấy thông tin OrderOfflines: " + ex.Message);
+            }
+        }
+
+
+
+
+
+
+
+
 
 
 

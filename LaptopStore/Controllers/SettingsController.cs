@@ -6,6 +6,9 @@ using System.Net.Http;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LaptopStore.Controllers
 {
@@ -100,7 +103,7 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> AddOrUpdateClaimModels(UserAuthority req)
         {
             Console.WriteLine("chay vo day roi");
-            
+
             Console.WriteLine(req.UserId);
             var reqUrl = "http://localhost:4000/Seed/AddOrUpdateClaimModels";
             var jsonPayload = JsonConvert.SerializeObject(req);
@@ -124,10 +127,10 @@ namespace LaptopStore.Controllers
         {
             return View();
         }
-        public IActionResult Inventory()
-        {
-            return View();
-        }
+
+
+
+
         public IActionResult Promotion()
         {
             return View();
@@ -182,7 +185,7 @@ namespace LaptopStore.Controllers
                 // Xử lý dữ liệu responseData theo nhu cầu của bạn
                 var res = JsonConvert.DeserializeObject<List<ConsolidatedCategory>>(responseData);
                 if (res == null) { res = new List<ConsolidatedCategory>(); }
-                res = res.OrderBy(c=> c.CategoryName).ToList();
+                res = res.OrderBy(c => c.CategoryName).ToList();
                 var reslaps = JsonConvert.DeserializeObject<List<Laptop>>(laps);
                 if (reslaps == null) { reslaps = new List<Laptop>(); }
                 PageCategoryModel model = new PageCategoryModel()
@@ -298,7 +301,7 @@ namespace LaptopStore.Controllers
         public async Task<IActionResult> SearchCategory(string SearchKey)
         {
             HttpResponseMessage laps = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
-            if (laps== null)
+            if (laps == null)
             {
                 return NotFound("Danh sach laptop rong ");
             }
@@ -357,7 +360,7 @@ namespace LaptopStore.Controllers
                 TempData["ErrorMessage"] = "Tên danh mục đã tồn tại.";
                 return RedirectToAction("Category");
             }
-            else 
+            else
             {
                 // Xử lý lỗi khi không nhận được phản hồi thành công từ API
                 return RedirectToAction("Category");
@@ -475,7 +478,220 @@ namespace LaptopStore.Controllers
         }
 
 
-   
+        public async Task<IActionResult> Inventory(int page = 1, int pageSize = 5, int pageTicket = 1, int pageSizeTicket = 5)
+        {
+            try
+            {
+
+                HttpResponseMessage response1 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
+                HttpResponseMessage response2 = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetAllInventoryTicket");
+
+                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+                {
+                    var response1Data = await response1.Content.ReadAsStringAsync();
+                    var laptopOption = JsonConvert.DeserializeObject<List<Laptop>>(response1Data);
+
+                    var response2Data = await response2.Content.ReadAsStringAsync();
+                    var inventoryTicketList = JsonConvert.DeserializeObject<List<InventoryTicket>>(response2Data);
+
+                    // Tính toán số lượng laptops và trang
+                    var totalLaptops = laptopOption.Count;
+                    var totalPages = (int)Math.Ceiling((double)totalLaptops / pageSize);
+
+                    var totalinventoryTicket = inventoryTicketList.Count;
+                    var totalTicketPages = (int)Math.Ceiling((double)totalinventoryTicket / pageSizeTicket);
+
+
+                    // Chia dữ liệu thành các trang
+                    var laptopsForPage = laptopOption.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+                    var ticketsForPage = inventoryTicketList.Skip((pageTicket - 1) * pageSizeTicket).Take(pageSizeTicket).ToList();
+
+
+                    var iventoryCustom1 = new IventoryCustom
+                    {
+                        Laptops = laptopsForPage,
+                        Page = page,
+                        PageSize = pageSize,
+                        TotalPages = totalPages,
+
+                        Laptop2s = laptopOption,
+
+                        InventoryTickets = inventoryTicketList,
+
+                        TotalTicketPages = totalTicketPages,
+                        PageTicket = pageTicket,
+                        PageSizeTicket = pageSizeTicket,
+                    };
+
+                    return View(iventoryCustom1); // Trả về view với custom model chứa cả danh sách laptop và orderoffline
+                }
+                else
+                {
+                    return NotFound(); // hoặc return View("Error");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
+
+        }
+
+
+        public async Task<IActionResult> PostInventoryTicket(int IdTicket, decimal Total, [FromForm] string Type, [FromForm] string Name, [FromForm] int Phone, [FromForm] DateTime Date, [FromForm] int[] LaptopId, [FromForm] int[] Quantity)
+        {
+            try
+            {
+                List<InventoryTicket> InventoryTicketList = new List<InventoryTicket>();
+
+                HttpResponseMessage responseIdTicket = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetIdTicket");
+
+                int maxIdTicket = await responseIdTicket.Content.ReadFromJsonAsync<int>();
+
+
+                for (int i = 0; i < LaptopId.Length; i++)
+                {
+                    InventoryTicket InventoryTicketObjects = new InventoryTicket();
+
+                    // Gán ID đơn hàng
+                    InventoryTicketObjects.IdTicket = maxIdTicket;
+                    InventoryTicketObjects.Type = Type;
+                    InventoryTicketObjects.LaptopId = LaptopId[i];
+                    InventoryTicketObjects.Phone = Phone; // Giải mã URL để lấy số điện thoại
+                    InventoryTicketObjects.Name = Name; // Tên người đặt hàng
+                    InventoryTicketObjects.Quantity = Quantity[i];// Số lượng sản phẩm                            
+                    InventoryTicketObjects.Date = Date;
+                    InventoryTicketObjects.StatusOrder = 0; // Ngày đặt hàng
+
+                    InventoryTicketList.Add(InventoryTicketObjects);
+                }
+
+                var jsonContent = JsonConvert.SerializeObject(InventoryTicketList);
+
+                var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/PostInventoryTicket", stringContent);
+
+                // Xử lý phản hồi từ API
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["SuccessMessage"] = "Đã thêm thành công!";
+                    return RedirectToAction("Inventory", "Settings");
+                }
+                else
+                {
+                    // Xử lý phản hồi không thành công
+                    return BadRequest("Failed to process order");
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                return BadRequest("Error processing order: " + ex.Message);
+            }
+
+
+
+
+        }
+
+
+        // public async Task<IActionResult> DeleteInventoryTicket([FromForm] int IdTicket)
+        // {
+        //     try
+        //     {
+        //         HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/DeleteInventoryTicket/" + {IdTicket} );
+        //         if (response.IsSuccessStatusCode)
+        //         {
+        //             TempData["SuccessMessage"] = "Đã xóa phiếu thành công!";
+        //             return RedirectToAction("Inventory", "Settings");
+        //         }
+        //         else
+        //         {
+        //             // Xử lý phản hồi không thành công
+        //             return BadRequest("Failed to handle delete request !");
+        //         }
+
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+        //     }
+
+        // }
+
+        // public async Task<IActionResult> PostLaptopQuantity([FromForm] int IdTicket, [FromForm] StatusOrder StatusOrder)
+        // {
+        //     try
+        //     {
+        //         HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/PostLaptopQuantity" );
+
+        //         if (response.IsSuccessStatusCode)
+        //         {
+        //             TempData["SuccessMessage"] = "Đã cập nhật phiếu thành công!";
+        //             return RedirectToAction("Inventory", "Settings");
+        //         }
+        //         else
+        //         {
+        //             // Xử lý phản hồi không thành công
+        //             return BadRequest("Failed to handle delete request !");
+        //         }
+
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+        //     }
+        // }
+
+        // [HttpPost]
+        // public async Task<IActionResult> PostLaptopQuantity([FromForm] int IdTicket, [FromForm] StatusOrder status)
+        // {
+        //     try
+        //     {
+        //         // Tạo một đối tượng chứa IdTicket và status
+        //         var payload = new { IdTicket, status };
+
+        //         // Chuyển đối tượng này thành chuỗi JSON
+        //         var jsonPayload = JsonConvert.SerializeObject(payload);
+
+        //         // Tạo nội dung HTTP từ chuỗi JSON
+        //         var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+        //         // Gửi yêu cầu POST tới API
+        //         HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:4000/api/Laptop/PostLaptopQuantity", content);
+
+        //         // Kiểm tra phản hồi từ API
+        //         if (response.IsSuccessStatusCode)
+        //         {
+        //             TempData["SuccessMessage"] = "Đã cập nhật phiếu thành công!";
+        //             // return RedirectToAction("Inventory", "Settings");
+        //             return Ok();
+        //         }
+        //         else
+        //         {
+        //             // Xử lý phản hồi không thành công
+        //             return BadRequest("Failed to handle delete request !");
+        //         }
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+        //     }
+        // }
+
+
+
+
+
+
 
     }
 }

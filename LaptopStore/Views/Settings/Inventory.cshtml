@@ -3,367 +3,672 @@
     ViewData["Title"] = "Admin - Orders";
 
 }
+@model IventoryCustom
+
 <section id="main" style="position: absolute; ">
 
-    <section>
 
 
-        <!-- Modal button -->
-        <div class="row my-3">
-            <div class="col ">
-                <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal" data-bs-target="#modal1">
-                    <i class="fa-solid fa-circle-plus" style="color: #74C0FC;"></i> Tạo phiếu 
-                </a>
-                
+    <div class="row my-2">
+        <form method="get" class="col-8">
+            <div class="input-group">
+                <input class="form-control" type="search" id="SearchLabel" name="searchString" placeholder="Tìm kiếm">
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+
+
+    <div class="row my-3">
+        <div class="col d-flex">
+            <div class="">
                 <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal" data-bs-target="#modal4">
                     <i class="fa-regular fa-file-excel" style="color: #63E6BE;"></i> Xuất báo cáo
                 </a>
             </div>
-        </div>
-        <form class="my-3">
-            <div class="row">
-                <div class="col-7">
-                    <input class="form-control" type="search" id="SearchLabel" placeholder="Tìm kiếm">
-                </div>
-                <div class="col-1">
-                    <a class="btn btn-outline-secondary" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </a>
-                </div>
 
-
+            <div class="ms-2">
+                <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal" data-bs-target="#modalnhap">
+                    <i class="fa-regular fa-file-excel" style="color: #63E6BE;"></i> Phiếu nhập/xuất
+                </a>
             </div>
 
-        </form>
-
-        <div class="container my-2">
-            <form>
-                <div class="row mb-3">
-                    <label for="startDate" class="col-sm-2 col-form-label">Ngày bắt đầu:</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="startDate" name="startDate" required>
-                    </div>
-                    <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc:</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="endDate" name="endDate" required>
-                    </div>
-                </div>
-            </form>
+           
         </div>
-        <!-- Modal nhập  -->
-        <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+
+    <div class="container">
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+        {
+            <div class="alert alert-success alert-dismissible fade show m-3 " role="alert">
+                @ViewBag.SuccessMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                @ViewBag.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+    </div>
+
+
+
+
+    @* <div class="container my-2">
+    <form>
+    <div class="row mb-3">
+    <label for="startDate" class="col-sm-2 col-form-label">Ngày bắt đầu:</label>
+    <div class="col-sm-4">
+    <input type="date" class="form-control" id="startDate" name="startDate" required>
+    </div>
+    <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc:</label>
+    <div class="col-sm-4">
+    <input type="date" class="form-control" id="endDate" name="endDate" required>
+    </div>
+    </div>
+    </form>
+    </div> *@
+
+
+
+    <!-- Modal xuất báo cáo -->
+    <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xuất báo cáo </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+
+                    <form id="exportForm ">
+                        <div class="form-group">
+                            <label for="fileFormat">Định dạng:</label>
+                            <select class="form-control my-2" id="fileFormat" name="fileFormat">
+                                <option value="pdf">PDF</option>
+                                <option value="excel">Excel</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalnhap" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <form asp-action="PostInventoryTicket" asp-controller="Settings" method="post" enctype="multipart/form-data">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Tạo phiếu </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body ">
+                    <div class="modal-body modal-body-custom">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    <form action="SaveProduct" method="post" enctype="multipart/form-data" class="form-inline">
-                                        <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                <label for="Status" class="mr-2">Chọn loại phiếu:</label>
-                                            </div>
-                                            <div class="col">
-                                                <select name="Status" class="form-control" required>
-                                                    <option value="" disabled selected>Chọn loại phiếu</option>
-                                                    <option value="Đang chuẩn bị hàng">Phiếu nhập</option>
-                                                    <option value="Đã xuất">Phiếu xuất</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                <label for="Name" class="mr-2">Khách hàng</label>
-                                            </div>
-                                            <div class="col">
-                                                <input name="Name" class="form-control" required>
-                                            </div>
-                                        </div>
+                            <div class="row" style="margin-bottom: 150px;">
+                                <div class="col-5">
 
-                                        <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                <label for="Name" class="mr-2">Địa chỉ </label>
-                                            </div>
-                                            <div class="col">
-                                                <input name="Name" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                <label for="Quantity" class="mr-2">Tổng giá:</label>
-                                            </div>
-                                            <div class="col">
-                                                <input  name="Quantity" type="number" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                <label for="Quantity" class="mr-2">Ghi chú</label>
-                                            </div>
-                                            <div class="col">
-                                                <input  name="Quantity" type="number" class="form-control">
-                                            </div>
-                                        </div>
-                                        @* <div class="row row-cols-2 mb-3">
-                                        <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                        <label for="Image" class="mr-2">Ảnh:</label>
-                                        </div>
+                                    <div class="row my-3">
                                         <div class="col">
-                                        <input name="Image" type="file" class="form-control-file" required>
+                                            <select name="Type" class="form-control" required>
+                                                <option value="Nhập">Nhập</option>
+                                                <option value="Xuất">Xuất</option>
+                                            </select>
                                         </div>
-                                        </div> *@
-
-                                        <div class="row row-cols-2 mb-3">
-                                            <div class="col-6 col-sm-2 offset-md-2 d-flex align-items-center">
-                                                <label for="Date" class="mr-2">Ngày tháng:</label>
-                                            </div>
-                                            <div class="col">
-                                                <input type="date" name="Date" class="form-control" required>
-                                            </div>
-                                        </div>
-
-
-
-                                        @* <div class="row text-center">
-                                        <div class="col">
-                                        <button type="submit" class="btn btn-primary">Tạo mới Laptop</button>
-                                        </div>
-                                        </div> *@
-                                    </form>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <input class="form-control" type="search" id="SearchLabel" placeholder="Tìm kiếm sản phẩm">
-                                        </div>
-                                        <div class="col-1">
-                                            <a class="btn btn-outline-secondary" type="submit">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </a>
-                                        </div>
-
-
                                     </div>
-                                    <div class="row mt-2 text-center">
+
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input name="Name" class="form-control" required
+                                                placeholder="Nguồn nhập hàng* ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input name="Phone" class="form-control" required
+                                                placeholder="Số điện thoại* ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input name="Date" type="date" class="form-control" required
+                                                placeholder="Ngày đặt hàng* ">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-7">
+                                    <fieldset class="">
+                                        <legend>Choose order product</legend>
+
+                                        <div class="row mb-3">
+                                            <select id="ChangeProduct" multiple>
+                                                @foreach (var laptopOption in Model.Laptop2s)
+                                                {
+                                                    var laptopId = @laptopOption.LaptopId.ToString();
+                                                    <option id="@laptopId"
+                                                        value='@(laptopOption.Name + " + " + laptopOption.Price + " + " +   laptopOption.LaptopId)'>
+                                                        @laptopOption.Name
+                                                    </option>
+                                                }
+                                            </select>
+                                        </div>
+
                                         <table class="table table-striped table-bordered">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th>Tên sản phẩm</th>
                                                     <th>Giá</th>
                                                     <th>Số lượng</th>
-                                                    <th>Tổng</th>
-                                                    <th>Thao tác</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Laptop Acer</td>
-                                                    <td>12000000</td>
-                                                    <td>200</td>
-                                                    <td>2400000000</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laptop Acer</td>
-                                                    <td>12000000</td>
-                                                    <td>200</td>
-                                                    <td>2400000000</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laptop Acer</td>
-                                                    <td>12000000</td>
-                                                    <td>200</td>
-                                                    <td>2400000000</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laptop Acer</td>
-                                                    <td>12000000</td>
-                                                    <td>200</td>
-                                                    <td>2400000000</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laptop Acer</td>
-                                                    <td>12000000</td>
-                                                    <td>200</td>
-                                                    <td>2400000000</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>Tổng cộng</td>
-                                                    <td>....</td>
-                                                    <td></td>
-
-                                                </tr>
+                                            <tbody id="selectedLaptopsBody2">
                                             </tbody>
+
                                         </table>
-                                    </div>
-                                   
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-primary">Tạo</button>
+                        <button type="submit" class="btn btn-primary">Tạo</button>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Modal xuất báo cáo -->
-        <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xuất báo cáo </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body ">
+        </form>
+    </div>
 
-                        <form id="exportForm ">
-                            <div class="form-group">
-                                <label for="fileFormat">Định dạng:</label>
-                                <select class="form-control my-2" id="fileFormat" name="fileFormat">
-                                    <option value="pdf">PDF</option>
-                                    <option value="excel">Excel</option>
-                                    <option value="csv">CSV</option>
-                                </select>
-                            </div>
-                        </form>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Sản phẩm trong kho </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Các loại phiếu</button>
+        </li>
+
+    </ul>
+
+    @* <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+    role="tab" aria-controls="home" aria-selected="true">Sản phẩm trong kho </button>
+    </li>
+    <li class="nav-item" role="presentation">
+    <a class="nav-link" id="profile-tab" href="/Settings/InventoryProfile" role="tab" aria-controls="profile"
+    aria-selected="false">Các loại phiếu</a>
+    </li>
+    </ul> *@
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <table class="table table-striped table-bordered ">
+                <thead class="thead-dark" style="background-color: #bbe6d3">
+                    <tr>
+                        <th class="col-4">Tên sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng tồn kho</th>
+                        <th>Ảnh minh họa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var laptopList in Model.Laptops)
+                    {
+                        <tr>
+                            <td>@Html.Raw(laptopList.Name) </td>
+                            <td>@laptopList.Price</td>
+                            <td>@laptopList.Quantity</td>
+                            <td style="word-break: break-all;"></td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+
+            <div class="row">
+                <form asp-action="Inventory" asp-controller="Settings" method="get">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.Page > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-page="@(Model.Page - 1)"
+                                        asp-route-pageSize="@Model.PageSize" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                            }
+
+                            @for (var i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == Model.Page ? "active" : "")">
+                                    <a class="page-link" asp-route-page="@i" asp-route-pageSize="@Model.PageSize">@i</a>
+                                </li>
+                            }
+
+                            @if (Model.Page < Model.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-page="@(Model.Page + 1)"
+                                        asp-route-pageSize="@Model.PageSize" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </form>
             </div>
+
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+            @{
+                var groupedTicket = Model.InventoryTickets
+                .GroupBy(o => o.IdTicket)
+                .OrderByDescending(g => g.Key);
+
+
+                @foreach (var listInventoryTicket in groupedTicket)
+                {
+                    var totalQuantity = listInventoryTicket.Sum(o => o.Quantity);
+                    var totalAmount = listInventoryTicket.Sum(o => o.Total ?? 0);
+                    var totalProductsCount = listInventoryTicket.Sum(InventoryTicket => InventoryTicket.Quantity) +
+                    totalQuantity + 2;
+                    var totalProducts = listInventoryTicket.Sum(InventoryTicket => InventoryTicket.Quantity);
+
+                    <table class="table table-striped table-bordered ">
+                        <thead class="thead-dark" style="background-color: #bbe6d3">
+                            <tr>
+
+                                <th class="col-3">Thông tin</th>
+                                <th class="col-3">Tên sản phẩm</th>
+                                <th>Giá mỗi cái</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var list in listInventoryTicket)
+                            {
+                                <tr>
+                                    @if (list == listInventoryTicket.First())
+                                    {
+                                        var phoneconvert = "+84 " + @list.Phone;
+                                        <td rowspan="@totalProductsCount" style="vertical-align: middle;">
+                                            Loại phiếu: @list.Type
+                                            <br>
+                                            Nguồn gốc: @list.Name
+                                            <br>
+                                            Phone: @phoneconvert
+                                            <br>
+                                            Ngày: @(list.Date.HasValue ? list.Date.Value.ToShortDateString() : "Không có ngày")
+                                            <br>
+                                            Tình trạng: @list.StatusOrder
+                                        </td>
+                                    }
+                                </tr>
+                                <td>@list.Products</td>
+
+                                <td>@list.Price</td>
+                                <td class="text-center">@list.Quantity</td>
+                                <td class="text-center">@list.Total</td>
+
+
+
+
+                            }
+
+                            @foreach (var list in listInventoryTicket)
+                            {
+                                @if (list == listInventoryTicket.First())
+                                {
+                                    <tr style="background-color:rgb(206, 238, 245)">
+
+                                        <td></td>
+                                        <td>Tổng SL: @totalQuantity</td>
+                                        <td></td>
+                                        <td>Thành tiền: @totalAmount</td>
+                                    </tr>
+                                }
+
+
+                                @if (list == listInventoryTicket.First())
+                                {
+                                    <tr style="background-color:rgb(206, 238, 245)">
+
+                                        <td></td>
+
+                                        <td class="text-center">
+
+
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-secondary text-uppercase" data-bs-toggle="modal"
+                                                data-bs-target="#modal-@list.IdTicket">
+                                                Cập nhật trạng thái
+                                            </a>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <form id="deleteForm" method="get" enctype="multipart/form-data">
+                                                <input type="hidden" name="IdTicket" value="@list.IdTicket" />
+                                                <button class="btn btn-danger" type="button" onclick="submitForm('@list.IdTicket')">
+                                                    Hủy phiếu
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+
+                                    <!-- Modal update -->
+                                    <div class="modal fade" id="modal-@list.IdTicket" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-md">
+
+                                            <form asp-action="PostLaptopQuantity" asp-controller="Settings" id="updateform"
+                                                enctype="multipart/form-data" method="post">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật trạng thái cho mã
+                                                            phiếu
+                                                            - @list.IdTicket</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="fileFormat2">Trạng thái:</label>
+
+                                                            <select class="form-control my-2" id="statusinput" name="StatusOrder">
+                                                                <option value="New">New</option>
+                                                                <option value="Shipping">Shipping</option>
+                                                                <option value="Complete">Complete</option>
+                                                                <option value="Cancel">Cancel</option>
+                                                            </select>
+
+                                                            <input type="hidden" value="@list.IdTicket" name="IdTicket"
+                                                                id="updateinput">
+
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                }
+
+            }
+
+
+
+            @* <div class="row">
+            <form id="profile-pagination-form" method="get">
+            <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            @if (Model.PageTicket > 1)
+            {
+            <li class="page-item">
+            <a class="page-link" href="#" data-page="@(Model.PageTicket - 1)"
+            data-page-size="@Model.PageSizeTicket" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+            </a>
+            </li>
+            }
+
+            @for (var i = 1; i <= Model.TotalTicketPages; i++)
+            {
+            <li class="page-item @(i == Model.PageTicket ? "active" : "")">
+            <a class="page-link" href="#" data-page="@i"
+            data-page-size="@Model.PageSizeTicket">@i</a>
+            </li>
+            }
+
+            @if (Model.PageTicket < Model.TotalTicketPages)
+            {
+            <li class="page-item">
+            <a class="page-link" href="#" data-page="@(Model.PageTicket + 1)"
+            data-page-size="@Model.PageSizeTicket" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+            </a>
+            </li>
+            }
+            </ul>
+            </nav>
+            </form>
+            </div> *@
+
+
+
+
         </div>
 
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Mã phiếu</th>
-                    <th>Người làm phiếu</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá mỗi cái</th>
-                    <th>Số lượng</th>
-                    <th>Tổng giá</th>
-                    <th>Loại phiếu</th>
-                    <th>Ngày tạo phiếu</th>
-                    <th>Tình trạng</th>
-                    <th>Thao tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>N0001</td>
-                    <td>Công ty ABC</td>
-                    <td>Laptop Acer</td>
-                    <td>12000000</td>
-                    <td>200</td>
-                    <td>2400000000</td>
-                    <td>Xuất</td>
-                    <td>08:24 11/3/2024</td>
-                    <td>Đang đóng gói</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>N0001</td>
-                    <td>Công ty ABC</td>
-                    <td>Sản phẩm 2 </td>
-                    <td>12000000</td>
-                    <td>200</td>
-                    <td>2400000000</td>
-                    <td>Nhập</td>
-                    <td>08:24 11/3/2024</td>
-                    <td>Đang về kho</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>N0001</td>
-                    <td>Công ty ABC</td>
-                    <td>Sản phẩm 3</td>
-                    <td>12000000</td>
-                    <td>200</td>
-                    <td>2400000000</td>
-                    <td>Nhập</td>
-                    <td>08:24 11/3/2024</td>
-                    <td>Đang về kho</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>X0001</td>
-                    <td>Công ty ABC</td>
-                    <td>Sản phẩm 4</td>
-                    <td>12000000</td>
-                    <td>200</td>
-                    <td>2400000000</td>
-                    <td>Xuất</td>
-                    <td>08:24 11/3/2024</td>
-                    <td>Hoàn tất</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>X0001</td>
-                    <td>Công ty ABC</td>
-                    <td>Sản phẩm 5</td>
-                    <td>12000000</td>
-                    <td>200</td>
-                    <td>2400000000</td>
-                    <td>Xuất</td>
-                    <td>08:24 11/3/2024</td>
-                    <td>Đã xuất kho</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm deleteButton">Cập nhật</button>
-                        <button class="btn btn-primary btn-sm deleteButton">Hủy</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Tổng cộng</td>
-                    <td>....</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    </div>
+
+
+
+
 
 </section>
+
+@* <script>
+document.addEventListener('DOMContentLoaded', function () {
+// Lấy ra form bằng ID của nó
+var form = document.getElementById('updateform');
+
+// Thêm sự kiện submit cho form
+form.addEventListener('submit', function (event) {
+// Ngăn chặn hành động mặc định của form (tránh việc refresh trang)
+event.preventDefault();
+
+// Lấy ra giá trị của trường StatusOrder
+var statusOrder = document.getElementById('statusinput').value;
+
+// Lấy ra giá trị của trường IdTicket
+var idTicket = document.getElementById('updateinput').value;
+
+// Log ra console
+console.log('StatusOrder:', statusOrder);
+console.log('IdTicket:', idTicket);
+});
+});
+
+</script> *@
+@*
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+// Lấy ra form bằng ID của nó
+var form = document.getElementById('updateform');
+
+// Thêm sự kiện submit cho form
+form.addEventListener('submit', function (event) {
+// Ngăn chặn hành động mặc định của form (tránh việc refresh trang)
+event.preventDefault();
+
+// Lấy ra giá trị của trường StatusOrder
+var statusOrder = document.getElementById('statusinput').value;
+
+// Lấy ra giá trị của trường IdTicket
+var idTicket = document.getElementById('updateinput').value;
+
+// Tạo một đối tượng FormData để chứa dữ liệu form
+var formData = new FormData();
+formData.append('IdTicket', idTicket);
+formData.append('status', statusOrder);
+
+// Gửi yêu cầu POST tới API
+fetch('http://localhost:4000/api/Laptop/PostLaptopQuantity', {
+method: 'POST',
+body: formData
+})
+.then(response => {
+if (response.ok) {
+console.log('Request successful');
+// Thực hiện các hành động khác ở đây (nếu cần)
+} else {
+console.error('Request failed');
+}
+})
+.catch(error => console.error('Error:', error));
+});
+});
+</script> *@
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lấy ra form bằng ID của nó
+        var form = document.getElementById('updateform');
+
+        // Thêm sự kiện submit cho form
+        form.addEventListener('submit', function (event) {
+            // Ngăn chặn hành động mặc định của form (tránh việc refresh trang)
+            event.preventDefault();
+
+            // Lấy ra giá trị của trường StatusOrder
+            var statusOrder = document.getElementById('statusinput').value;
+
+            // Lấy ra giá trị của trường IdTicket
+            var idTicket = document.getElementById('updateinput').value;
+
+            // Xác nhận trước khi gửi yêu cầu
+            var confirmation = confirm('Bạn có chắc chắn muốn cập nhật trạng thái cho mã phiếu?');
+            if (confirmation) {
+                // Tạo một đối tượng FormData để chứa dữ liệu form
+                var formData = new FormData();
+                formData.append('IdTicket', idTicket);
+                formData.append('status', statusOrder);
+
+                // Gửi yêu cầu POST tới API
+                fetch('http://localhost:4000/api/Laptop/PostLaptopQuantity', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Request successful');
+                            // Refresh trang sau khi thành công
+                            location.reload();
+                        } else {
+                            console.error('Request failed');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+    });
+</script>
+
+
+<script>
+    function submitForm(IdTicket) {
+        // Hiển thị hộp thoại xác nhận trước khi xóa
+        var isConfirmed = confirm("Bạn có chắc chắn muốn xóa phiếu này?");
+        if (isConfirmed) {
+            // Nếu người dùng xác nhận, thực hiện xóa
+            deleteTicket(IdTicket);
+        }
+    }
+
+    function deleteTicket(IdTicket) {
+        // Xây dựng URL cho API xóa
+        var apiUrl = 'http://localhost:4000/api/Laptop/DeleteInventoryTicket/' + IdTicket;
+
+        // Tạo yêu cầu fetch với phương thức DELETE
+        fetch(apiUrl, {
+            method: 'DELETE',
+            headers: {
+                'Accept': '*/*'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Lỗi khi xóa');
+                }
+                console.log('Xóa thành công');
+                // Hiển thị thông báo xóa thành công
+                showSuccessMessage();
+                // Tải lại trang sau khi xóa thành công
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Lỗi khi xóa: ', error.message);
+            });
+    }
+
+    function showSuccessMessage() {
+        // Hiển thị thông báo xóa thành công
+        alert('Xóa thành công!');
+        // Hoặc có thể sử dụng các thư viện thông báo như Bootstrap Toast để hiển thị thông báo trên giao diện người dùng
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
     #main {
@@ -387,45 +692,53 @@
 
 <!-- Multi select library -->
 <script>
-    new MultiSelectTag('countries', {
-        rounded: true,    // default true
-        shadow: true,      // default false
-        placeholder: 'Search',  // default Search...
+    new MultiSelectTag('ChangeProduct', {
+        rounded: true,
+        shadow: true,
+        placeholder: 'Search',
         tagColor: {
             textColor: '#327b2c',
             borderColor: '#92e681',
             bgColor: '#eaffe6',
         },
         onChange: function (values) {
-            console.log(values)
-        }
-    })
+            console.log(values);
 
-    new MultiSelectTag('sp2', {
-        rounded: true,    // default true
-        shadow: true,      // default false
-        placeholder: 'Search',  // default Search...
-        tagColor: {
-            textColor: '#327b2c',
-            borderColor: '#92e681',
-            bgColor: '#eaffe6',
-        },
-        onChange: function (values) {
-            console.log(values)
-        }
-    })
+            var selectedLaptopsBody2 = document.getElementById('selectedLaptopsBody2');
 
-     new MultiSelectTag('changeinven', {
+            selectedLaptopsBody2.innerHTML = ''; // Xóa các dòng dữ liệu cũ trong bảng
+            values.forEach(function (laptop) {
+
+                var parts = laptop.value.split('+');
+                var name = parts[0].trim();
+                var price = parseFloat(parts[1].trim());
+                var laptopId = parseInt(parts[2].trim());
+                console.log("Name:", name, "Price:", price, "LaptopId:", laptopId);
+
+                var row = '<tr>';
+                row += '<td>' + '<input   readonly  value="' + name + '">' + '</td>';  // Tên sản phẩm
+                // Thêm các cột khác tương ứng với thông tin sản phẩm, ví dụ: giá, số lượng, tổng, thao tác
+                row += '<td>' + '<input    readonly  value="' + price + '">' + '</td>'; // Giá
+                row += '<td><input type="number" name="Quantity[]" class="quantity-input" value="1" min="1" autocomplete="off"></td>'; // Số lượng
+                row += '<td style="display:none;" >' + '<input   name="LaptopId[]" style="display:none;" readonly  value="' + laptopId + '">' + '</td>'; // Id
+                row += '</tr>';
+                selectedLaptopsBody2.innerHTML += row;
+            });
+        }
+    });
+
+    @* new MultiSelectTag('countries', {
         rounded: true,    // default true
         shadow: true,      // default false
         placeholder: 'Search',  // default Search...
         tagColor: {
-            textColor: '#327b2c',
-            borderColor: '#92e681',
-            bgColor: '#eaffe6',
+        textColor: '#327b2c',
+        borderColor: '#92e681',
+        bgColor: '#eaffe6',
         },
         onChange: function (values) {
-            console.log(values)
+        console.log(values)
         }
-    })
+        }); *@
+
 </script>

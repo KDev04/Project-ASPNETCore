@@ -2,8 +2,14 @@ using LaptopStore.Controllers;
 using LaptopStore.PublicHost;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using QuestPDF;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
