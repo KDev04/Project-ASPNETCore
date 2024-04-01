@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_Adminlayout.cshtml";
     ViewData["Title"] = "Admin - Orders";
 }
@@ -246,13 +246,13 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <form id="paymentForm" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" id="IdOrderInput" name="IdOrderInput" value="@orderOffline.IdOrder" />
-                                    <button class="btn btn-success" type="submit" onclick="confirmPayment('@orderOffline.IdOrder')">Thanh toán</button>
-                                </form>
+                                    <form asp-action="YourAction" asp-controller="YourController" method="post"
+                                        enctype="multipart/form-data">
+
+                                        <button class="btn btn-success">Thanh toán</button>
+                                    </form>
 
                                 </td>
-
                                 <td class="text-center">
                                         <button data-bs-toggle="modal" data-bs-target="#billModal" class="btn btn-warning text-white ">In hóa đơn</button>
                                 </td>
@@ -482,105 +482,8 @@
     }
 </style>
 
-@* <script>
-    function confirmPayment(idOrder)
-    {
-       
-        event.preventDefault();
-        console.log(idOrder);
-        // Thực hiện các công việc khác với idOrder ở đây
-    
-
-    }
-</script> *@
-<script>
-    function confirmPayment(idOrder) {
-        event.preventDefault();
-        
-        // Hiển thị hộp thoại xác nhận
-        var confirmation = confirm('Bạn có chắc chắn muốn thanh toán?');
-        if (!confirmation) {
-            return; // Không làm gì nếu người dùng không xác nhận
-        }
-        
-        // Tạo một đối tượng FormData để chứa dữ liệu form
-        var formData = new FormData();
-        formData.append('IdOrder', idOrder);
-
-        // Gửi yêu cầu POST tới API
-        fetch('http://localhost:4000/api/Laptop/ChangeStatusOrderComplete', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Yêu cầu thành công');
-                // Hiển thị thông báo thành công
-                alert('Thanh toán thành công!');
-                // Làm mới trang
-                location.reload();
-            } else {
-                console.error('Yêu cầu không thành công');
-                // Hiển thị thông báo lỗi nếu cần
-                alert('Yêu cầu không thành công. Vui lòng thử lại sau.');
-            }
-        })
-        .catch(error => {
-            console.error('Đã xảy ra lỗi:', error);
-            // Hiển thị thông báo lỗi nếu cần
-            alert('Đã xảy ra lỗi. Vui lòng thử lại sau.');
-        });
-    }
-</script>
-
-@* <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Lấy ra form bằng ID của nó
-        var form = document.getElementById('paymentForm');
-
-        // Thêm sự kiện submit cho form
-        form.addEventListener('submit', function (event) {
-            // Ngăn chặn hành động mặc định của form (tránh việc refresh trang)
-            event.preventDefault();
-
-            // Lấy ra giá trị của trường IdOrder
-            var idOrder = document.getElementById('IdOrderInput').value;
-
-            // Xác nhận trước khi gửi yêu cầu
-            var confirmation = confirm('Bạn có chắc chắn muốn thanh toán?');
-            if (confirmation) {
-                // Tạo một đối tượng FormData để chứa dữ liệu form
-                var formData = new FormData();
-                formData.append('IdOrder', idOrder);
-                console.log(formData);
-
-                // Gửi yêu cầu POST tới API
-                fetch('http://localhost:4000/api/Laptop/ChangeStatusOrderComplete', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            console.log('Request successful');
-                            // Refresh trang sau khi thành công
-                            location.reload();
-                        } else {
-                            console.error('Request failed');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        });
-    });
-</script> *@
-
-
 <script>
     function ChangeStatusOrder() {
-        var confirmation = confirm('Bạn có chắc chắn muốn đặt hàng?');
-        if (!confirmation) {
-            return; // Không làm gì nếu người dùng không xác nhận
-        }
         var idOrderInput = document.querySelector("#changeStatusForm [name='IdOrder']");
         var idOrderValue = idOrderInput.value;
         console.log(idOrderValue);

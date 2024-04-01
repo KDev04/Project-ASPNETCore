@@ -40,6 +40,20 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Bills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdTicketForeign = table.Column<int>(type: "int", nullable: true),
+                    IdOrderForeign = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bills", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -318,6 +332,35 @@ namespace LaptopStoreApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InventoryTickets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdTicket = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    StatusOrder = table.Column<int>(type: "int", nullable: true),
+                    LaptopId = table.Column<int>(type: "int", nullable: false),
+                    Products = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InventoryTickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InventoryTickets_Laptops_LaptopId",
+                        column: x => x.LaptopId,
+                        principalTable: "Laptops",
+                        principalColumn: "LaptopId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LaptopCategories",
                 columns: table => new
                 {
@@ -531,6 +574,11 @@ namespace LaptopStoreApi.Migrations
                 column: "LaptopStatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InventoryTickets_LaptopId",
+                table: "InventoryTickets",
+                column: "LaptopId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LaptopCategories_CategoryId",
                 table: "LaptopCategories",
                 column: "CategoryId");
@@ -575,6 +623,9 @@ namespace LaptopStoreApi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bills");
+
+            migrationBuilder.DropTable(
                 name: "Carts");
 
             migrationBuilder.DropTable(
@@ -582,6 +633,9 @@ namespace LaptopStoreApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "InventoryTickets");
 
             migrationBuilder.DropTable(
                 name: "LaptopCategories");

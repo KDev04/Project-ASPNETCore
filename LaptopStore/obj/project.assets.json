@@ -12332,7 +12332,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file E:\\cdsg\\HK5\\BACKEND\\ApiProjectFinaly\\Project-ASPNETCore\\LaptopStore\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problem reading the cache file D:\\D\\LaptopStore\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     },
     {
       "code": "NU1902",

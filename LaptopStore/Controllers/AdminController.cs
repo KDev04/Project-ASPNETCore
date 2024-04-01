@@ -542,7 +542,7 @@ namespace LaptopStore.Controllers
 
             }
         }
-        public async Task<IActionResult> OrderPage()
+        public async Task<IActionResult> OrderPage(int page = 1, int pageSize = 2)
         {
             ViewBag.SuccessMessage = TempData["SuccessMessage"] as string;
             try
@@ -561,11 +561,21 @@ namespace LaptopStore.Controllers
                     var laptopOption = JsonConvert.DeserializeObject<List<Laptop>>(response1Data);
                     var orderOfflines = JsonConvert.DeserializeObject<List<OrderOffline>>(response2Data);
 
+                    // Tính toán số lượng laptops và trang
+                    var totalLaptops = orderOfflines.Count;
+                    var totalPages = (int)Math.Ceiling((double)totalLaptops / pageSize);
+
+                    // Chia dữ liệu thành các trang
+                    var laptopsForPage = orderOfflines.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
                     // Tạo một đối tượng CustomModel chứa cả hai danh sách này
                     var customModel = new CustomModel
                     {
                         Laptops = laptopOption!,
-                        OrderOfflines = orderOfflines!
+                        OrderOfflines = laptopsForPage!,
+                        Page = page,
+                        PageSize = pageSize,
+                        TotalPages = totalPages
                     };
 
                     return View(customModel); // Trả về view với custom model chứa cả danh sách laptop và orderoffline
@@ -586,6 +596,42 @@ namespace LaptopStore.Controllers
 
 
         }
+
+
+        public async Task<IActionResult> Search(string searchvalue)
+        {
+            try
+            {
+                // Gửi yêu cầu GET để lấy danh sách order offline từ API
+                HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetOrderOffline");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var orderOfflines = JsonConvert.DeserializeObject<List<OrderOffline>>(responseData);
+
+                    // Tìm kiếm theo giá trị được nhập vào
+                    var searchResults = orderOfflines.Where(o => o.Name.ToLower().Contains(searchvalue.ToLower())).ToList();
+
+                    return View("OrderPage", searchResults); // Trả về view hiển thị kết quả tìm kiếm
+                }
+                else
+                {
+                    // Xử lý phản hồi không thành công từ API
+                    return BadRequest("Failed to fetch data from API");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                return BadRequest("Error processing search: " + ex.Message);
+            }
+        }
+
+         
+
+
+
 
         public async Task<IActionResult> OrderOffline(int IdOrder, int Id, [FromForm] string Location, [FromForm] int[] LaptopId, [FromForm] int Phone, [FromForm] string Name, [FromForm] DateTime OrderDate, [FromForm] string Note, [FromForm] string[] Products, [FromForm] int[] Quantity, [FromForm] int[] Price)
         {
@@ -867,7 +913,7 @@ namespace LaptopStore.Controllers
         //     }
         // }
 
-         public string DefaultFontName => "Arial";  
+        public string DefaultFontName => "Arial";
 
         public byte[] GetFont(string faceName)
         {
@@ -905,5 +951,8 @@ namespace LaptopStore.Controllers
             }
             return null;
         }
+
+
+
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopStoreApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240330130921_mig1")]
+    [Migration("20240401043105_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -24,6 +24,25 @@ namespace LaptopStoreApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("LaptopStoreApi.Database.Bill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("IdOrderForeign")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdTicketForeign")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bills");
+                });
 
             modelBuilder.Entity("LaptopStoreApi.Database.Cart", b =>
                 {
@@ -109,6 +128,25 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("Evaluates");
                 });
 
+            modelBuilder.Entity("LaptopStoreApi.Database.GroupRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupRoles");
+                });
+
             modelBuilder.Entity("LaptopStoreApi.Database.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -129,6 +167,54 @@ namespace LaptopStoreApi.Migrations
                     b.HasIndex("LaptopStatusId");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("LaptopStoreApi.Database.InventoryTicket", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdTicket")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LaptopId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Phone")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Products")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusOrder")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LaptopId");
+
+                    b.ToTable("InventoryTickets");
                 });
 
             modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
@@ -458,6 +544,21 @@ namespace LaptopStoreApi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("LaptopStoreApi.Database.UserGroupRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("GroupRoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "GroupRoleId");
+
+                    b.HasIndex("GroupRoleId");
+
+                    b.ToTable("UserGroups");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -466,6 +567,9 @@ namespace LaptopStoreApi.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GroupRoleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -476,6 +580,8 @@ namespace LaptopStoreApi.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupRoleId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -636,6 +742,17 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("LaptopStatus");
                 });
 
+            modelBuilder.Entity("LaptopStoreApi.Database.InventoryTicket", b =>
+                {
+                    b.HasOne("LaptopStoreApi.Database.Laptop", "Laptop")
+                        .WithMany()
+                        .HasForeignKey("LaptopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Laptop");
+                });
+
             modelBuilder.Entity("LaptopStoreApi.Database.LaptopCategory", b =>
                 {
                     b.HasOne("LaptopStoreApi.Database.Category", "Category")
@@ -689,6 +806,32 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("Laptop");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LaptopStoreApi.Database.UserGroupRole", b =>
+                {
+                    b.HasOne("LaptopStoreApi.Database.GroupRole", "GroupRole")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("GroupRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LaptopStoreApi.Database.User", "User")
+                        .WithMany("UserGroupRole")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GroupRole");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.HasOne("LaptopStoreApi.Database.GroupRole", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("GroupRoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -747,6 +890,13 @@ namespace LaptopStoreApi.Migrations
                     b.Navigation("LaptopCategories");
                 });
 
+            modelBuilder.Entity("LaptopStoreApi.Database.GroupRole", b =>
+                {
+                    b.Navigation("Roles");
+
+                    b.Navigation("UserGroups");
+                });
+
             modelBuilder.Entity("LaptopStoreApi.Database.Laptop", b =>
                 {
                     b.Navigation("LaptopCategories");
@@ -762,6 +912,8 @@ namespace LaptopStoreApi.Migrations
             modelBuilder.Entity("LaptopStoreApi.Database.User", b =>
                 {
                     b.Navigation("LikeProducts");
+
+                    b.Navigation("UserGroupRole");
                 });
 #pragma warning restore 612, 618
         }

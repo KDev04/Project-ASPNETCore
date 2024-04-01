@@ -532,6 +532,7 @@ D:\BE-Kết thúc môn - Nhóm 10\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore
 >>>>>>> 62546f8f9ecad578027bbf154500b304ad0ed872
 >>>>>>> b628e584645b1d3ff93f4e130509ea03f4ebcc5a
 >>>>>>> 09a0b477ed5b08a81b93fd2b5520f8fd95c3f021
+>>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
 D:\D\LaptopStore\bin\Debug\net7.0\appsettings.Development.json
 D:\D\LaptopStore\bin\Debug\net7.0\appsettings.json
 D:\D\LaptopStore\bin\Debug\net7.0\global.json
@@ -818,4 +819,3 @@ D:\D\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 D:\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
->>>>>>> 8e12609d76ad1e85dd1c5bfca58af79d0ad62e7e
