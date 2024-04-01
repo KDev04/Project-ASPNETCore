@@ -37,7 +37,21 @@
         <i class="fa-solid fa-sliders"></i>
         <span>Promotion Manager</span>
       </a>
-    </li> *@
+    </li> 
+    *@
+    @{
+            var roleCookie = Context.Request.Cookies["Role"];
+            if (roleCookie != null)
+            {
+                var role = roleCookie.ToString(); // Role của người dùng
+                @if (role == "Xem sản phẩm")
+                {
+                    <li class="nav-item">Xem sản phẩm</li>
+                }       // Thực hiện xử lý tương ứng với role ở đây
+            }
+    }
+
+
     <li class="nav-item">
       <a class="nav-link collapsed" asp-action="Category" asp-controller="Settings">
        <i class="fa-solid fa-tag"></i>

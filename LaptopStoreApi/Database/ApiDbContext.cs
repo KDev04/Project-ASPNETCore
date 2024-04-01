@@ -67,10 +67,6 @@ namespace LaptopStoreApi.Database
                 .WithMany()
                 .HasForeignKey(e => e.UserId);
 
-
-
-
-
             modelBuilder.Entity<Evaluate>().HasOne(e => e.Laptop).WithMany().HasForeignKey(e => e.LaptopId);
             modelBuilder.Entity<Cart>().Property(c => c.Price).HasColumnType("decimal(18, 2)");
 

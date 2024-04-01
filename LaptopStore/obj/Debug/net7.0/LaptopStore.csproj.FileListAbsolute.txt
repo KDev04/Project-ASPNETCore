@@ -819,29 +819,6 @@ D:\D\LaptopStore\obj\Debug\net7.0\refint\LaptopStore.dll
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.pdb
 D:\D\LaptopStore\obj\Debug\net7.0\LaptopStore.genruntimeconfig.cache
 D:\D\LaptopStore\obj\Debug\net7.0\ref\LaptopStore.dll
-<<<<<<< HEAD
-=======
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Charting.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Quality.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.Snippets.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.System.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.WPFonts.dll
-D:\D\LaptopStore\bin\Debug\net7.0\PdfSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\de\PdfSharp.Charting.resources.dll
-D:\D\LaptopStore\bin\Debug\net7.0\de\PdfSharp.resources.dll
-D:\D\LaptopStore\bin\Debug\net7.0\HarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\QuestPDF.dll
-D:\D\LaptopStore\bin\Debug\net7.0\SkiaSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\SkiaSharp.HarfBuzz.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\osx\native\libHarfBuzzSharp.dylib
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\osx\native\libSkiaSharp.dylib
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-arm64\native\libSkiaSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x64\native\libSkiaSharp.dll
-D:\D\LaptopStore\bin\Debug\net7.0\runtimes\win-x86\native\libSkiaSharp.dll
->>>>>>> 09a0b477ed5b08a81b93fd2b5520f8fd95c3f021
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\appsettings.Development.json
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\appsettings.json
 E:\cdsg\HK5\BACKEND\ApiProjectFinaly\Project-ASPNETCore\LaptopStore\bin\Debug\net7.0\global.json
