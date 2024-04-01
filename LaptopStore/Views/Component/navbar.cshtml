@@ -172,13 +172,24 @@
                   <li class="nav-item dropdown">
                       <a class="nav-link active dropdown-toggle" href="#" id="UserDropdown" role="button"
                           data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="~/img/user.jpg" alt="Profile" class="rounded-circle "
-                            style="width: 35px; height: auto;">
+
                         @{
+
                             string Username = Context.Request.Cookies["Username"]!;
+                            string avtUrl = Context.Request.Cookies["AvatarUrl"]!;
+                            if (avtUrl != null)
+                            {
+                                <img src="http://localhost:4000/@avtUrl" alt="Profile" class="rounded-circle "
+                                style="width: 35px; height: auto;">
+                            }
+                            else
+                            {
+                                <img src="~/img/user.jpg" alt="Profile" class="rounded-circle "
+                                     style="width: 35px; height: auto;">
+                            }
                             if (Username != null)
                             {
-                                <span class="text-uppercase active">@Username</span>
+                                <span class="text-uppercase active ms-2">@Username</span>
                             }
                         }
                       </a>

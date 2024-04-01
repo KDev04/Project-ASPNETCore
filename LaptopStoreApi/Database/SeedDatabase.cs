@@ -90,34 +90,34 @@ namespace LaptopStoreApi.Database
             {
 
                 // role Laptop
-                await roleManager.CreateAsync(new IdentityRole("ReadProduct"));
-                await roleManager.CreateAsync(new IdentityRole("CreateProduct"));
-                await roleManager.CreateAsync(new IdentityRole("UpdateProduct"));
-                await roleManager.CreateAsync(new IdentityRole("DeleteProduct"));
+                await roleManager.CreateAsync(new IdentityRole("Xem sản phẩm"));
+                await roleManager.CreateAsync(new IdentityRole("Thêm sản phẩm"));
+                await roleManager.CreateAsync(new IdentityRole("Cập nhật sản phẩm"));
+                await roleManager.CreateAsync(new IdentityRole("Xóa sản phẩm"));
 
                 // Role Category
-                await roleManager.CreateAsync(new IdentityRole("ReadCategory"));
-                await roleManager.CreateAsync(new IdentityRole("CreateCategory"));
-                await roleManager.CreateAsync(new IdentityRole("UpdateCategory"));
-                await roleManager.CreateAsync(new IdentityRole("DeleteCategory"));
+                await roleManager.CreateAsync(new IdentityRole("Xem danh mục"));
+                await roleManager.CreateAsync(new IdentityRole("Thêm danh mục"));
+                await roleManager.CreateAsync(new IdentityRole("Cập nhật danh mục"));
+                await roleManager.CreateAsync(new IdentityRole("Xóa danh mục"));
 
                 // role Order 
-                await roleManager.CreateAsync(new IdentityRole("ReadOrder"));
-                await roleManager.CreateAsync(new IdentityRole("CreateOrder"));
-                await roleManager.CreateAsync(new IdentityRole("UpdateOrder"));
-                await roleManager.CreateAsync(new IdentityRole("DeleteOrder"));
+                await roleManager.CreateAsync(new IdentityRole("Xem đơn hàng"));
+                await roleManager.CreateAsync(new IdentityRole("Thêm đơn hàng"));
+                await roleManager.CreateAsync(new IdentityRole("Cập nhật đơn hàng"));
+                await roleManager.CreateAsync(new IdentityRole("Xóa đơn hàng"));
 
                 // role User
-                await roleManager.CreateAsync(new IdentityRole("ReadUser"));
-                await roleManager.CreateAsync(new IdentityRole("CreateUser"));
-                await roleManager.CreateAsync(new IdentityRole("UpdateUser"));
-                await roleManager.CreateAsync(new IdentityRole("DeleteUser"));
+                await roleManager.CreateAsync(new IdentityRole("Xem người dùng"));
+                await roleManager.CreateAsync(new IdentityRole("Thêm người dùng"));
+                await roleManager.CreateAsync(new IdentityRole("Cập nhật người dùng"));
+                await roleManager.CreateAsync(new IdentityRole("Xóa người dùng"));
 
                 // role Order Offline
-                await roleManager.CreateAsync(new IdentityRole("ReadOrderOffline"));
-                await roleManager.CreateAsync(new IdentityRole("CreateOrderOffline"));
-                await roleManager.CreateAsync(new IdentityRole("UpdateOrderOffline"));
-                await roleManager.CreateAsync(new IdentityRole("DeleteOrderOffline"));
+                await roleManager.CreateAsync(new IdentityRole("Xem đơn bán"));
+                await roleManager.CreateAsync(new IdentityRole("Thêm đơn bán"));
+                await roleManager.CreateAsync(new IdentityRole("Cập nhật đơn bán"));
+                await roleManager.CreateAsync(new IdentityRole("Xóa đơn bán"));
             }
             if (!context.Categories.Any())
             {
@@ -1354,6 +1354,8 @@ namespace LaptopStoreApi.Database
 
             if (!context.Users.Any())
             {
+                var roles = roleManager.Roles.ToList();
+
                 var Admin = new User();
                 Admin.UserName = "Admin";
                 Admin.Email = "Admin@gmail.com";
@@ -1364,8 +1366,10 @@ namespace LaptopStoreApi.Database
                 string AdminPassword = "Admin123";
                 await userManager.CreateAsync(Admin, AdminPassword);
                 await userManager.AddClaimsAsync(Admin, claimsAdmin);
+                await userManager.AddToRolesAsync(Admin, roles.Select(r => r.Name));
 
                 // mod
+                var roleMod= roleManager.Roles.Where(r=>!r.Name.Contains("người dùng")).ToList();
                 var Moderator = new User();
                 Moderator.UserName = "Moderator";
                 Moderator.Email = "Moderator@gmail.com";
@@ -1376,7 +1380,7 @@ namespace LaptopStoreApi.Database
                 string ModPassword = "Mod123";
                 await userManager.CreateAsync(Moderator, ModPassword);
                 await userManager.AddClaimsAsync(Moderator, claimsAdmin);
-
+                await userManager.AddToRolesAsync(Moderator, roleMod.Select(r => r.Name));
                 // client
                 var Client = new User();
                 Client.UserName = "Client";
@@ -1409,14 +1413,14 @@ namespace LaptopStoreApi.Database
                 List<IdentityRole> AdminRoles = context.Roles.ToList();
                 List<IdentityRole> AdminRole = context.Roles.ToList();
                 List<IdentityRole> a = context.Roles.Where(x => x.Name.Contains("e")).ToList();
-                List<IdentityRole> ProductRole = context.Roles.Where(x => x.Name.Contains("Product")).ToList();
-                List<IdentityRole> CategoryRole = context.Roles.Where(x => x.Name.Contains("Category")).ToList();
-                List<IdentityRole> UserRole = context.Roles.Where(x => x.Name.Contains("User")).ToList();
-                List<IdentityRole> OrderOfflineRoleAll = context.Roles.Where(x => x.Name.Contains("Order")).ToList();
+                List<IdentityRole> ProductRole = context.Roles.Where(x => x.Name.Contains("sản phẩm")).ToList();
+                List<IdentityRole> CategoryRole = context.Roles.Where(x => x.Name.Contains("danh mục")).ToList();
+                List<IdentityRole> UserRole = context.Roles.Where(x => x.Name.Contains("người dùng")).ToList();
+                List<IdentityRole> OrderOfflineRoleAll = context.Roles.Where(x => x.Name.Contains("đơn")).ToList();
 
-                List<IdentityRole> OrderOfflineRole = OrderOfflineRoleAll.Where(x => x.Name.Contains("Offline")).ToList();
+                List<IdentityRole> OrderOfflineRole = OrderOfflineRoleAll.Where(x => x.Name.Contains("bán")).ToList();
 
-                List<IdentityRole> OrderRole = OrderOfflineRoleAll.Where(x => !x.Name.Contains("Offline")).ToList();
+                List<IdentityRole> OrderRole = OrderOfflineRoleAll.Where(x => !x.Name.Contains("bán")).ToList();
 
 
                 context.GroupRoles.AddRange(

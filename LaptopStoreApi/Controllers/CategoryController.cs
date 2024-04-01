@@ -1,5 +1,6 @@
 ﻿using LaptopStoreApi.Database;
 using LaptopStoreApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -152,6 +153,7 @@ namespace LaptopStoreApi.Controllers
 
             return Ok(categories);
         }
+        [Authorize(Roles = "Thêm danh mục")]
         [HttpPost]
         public async Task<ActionResult> CreateCategory([FromForm] string CategoryName)
         {
@@ -159,7 +161,7 @@ namespace LaptopStoreApi.Controllers
             var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.CategoryName == CategoryName);
             if (existingCategory != null)
             {
-                return BadRequest(existingCategory.CategoryName);
+                return BadRequest("Trùng tên danh mục");
             }
 
             // Tạo danh mục mới
@@ -170,6 +172,7 @@ namespace LaptopStoreApi.Controllers
             return Ok("Thêm danh mục thành công");
         }
 
+        [Authorize(Roles ="Cập nhật danh mục")]
         [HttpPut("{CategoryId}/{CategoryName}")]
         public async Task<IActionResult> UpdateCategoryName(int CategoryId, string CategoryName)
         {
@@ -192,6 +195,8 @@ namespace LaptopStoreApi.Controllers
             return NotFound();
         }
 
+
+        [Authorize("Xóa danh mục")]
         [HttpDelete("{CategoryId}")]
         public async Task<IActionResult> DeleteCategory(int CategoryId)
         {

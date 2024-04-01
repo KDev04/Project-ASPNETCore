@@ -124,6 +124,12 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("UpdateOrderPolicy", policy => policy.RequireClaim("UpdateOrder", "true"));
     options.AddPolicy("DeleteOrderPolicy", policy => policy.RequireClaim("DeleteOrder", "true"));
 
+    //Order Offfline 
+    options.AddPolicy("ReadOrderPolicy", policy => policy.RequireClaim("ReadOrder", "true"));
+    options.AddPolicy("CreateOrderPolicy", policy => policy.RequireClaim("CreateOrder", "true"));
+    options.AddPolicy("UpdateOrderPolicy", policy => policy.RequireClaim("UpdateOrder", "true"));
+    options.AddPolicy("DeleteOrderPolicy", policy => policy.RequireClaim("DeleteOrder", "true"));
+
 });
 builder.Services.AddAuthentication(options =>
 {

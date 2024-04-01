@@ -1,14 +1,15 @@
 ﻿<link rel="stylesheet" href="~/assets/css/leftbar.css" asp-append-version="true" />
 <!-- ======= Sidebar ======= -->
+<meta charset="utf-8" />
 <aside id="sidebar" class="sidebar">
 
   <ul class="sidebar-nav" id="sidebar-nav">
-    <li class="nav-heading">Manager</li>
+    <li class="nav-heading">Quản lý</li>
 
     <li class="nav-item">
       <a class="nav-link " href="/Settings/Setting">
         <i class="fa-solid fa-grip"></i>
-        <span>Analyze </span>
+        <span>Tổng quan</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
@@ -18,7 +19,7 @@
                 <input name="take" value="5" class="d-none" />
                 <a id="myLink" class="nav-link collapsed">
                     <i class="fa-solid fa-layer-group"></i>
-                    <span>Product Manager</span>
+                    <span>Quản lý sản phẩm</span>
                 </a>
             </form>
 
@@ -40,25 +41,25 @@
     <li class="nav-item">
       <a class="nav-link collapsed" asp-action="Category" asp-controller="Settings">
        <i class="fa-solid fa-tag"></i>
-        <span>Category Manager</span>
+        <span>Quản lý danh mục</span>
       </a>
     </li>
     <li class="nav-item"> 
       <a class="nav-link collapsed" asp-action="OrderPage" asp-controller="Admin">
        <i class="fa-regular fa-rectangle-list"></i>
-        <span>Order Manager</span>
+        <span>Quản lý đơn hàng</span>
       </a>
     </li>
-    <li class="nav-item"> 
+@*     <li class="nav-item"> 
       <a class="nav-link collapsed" asp-action="Inventory" asp-controller="Settings">
         <i class="fa-solid fa-cube"></i>
         <span>Inventory Manager</span>
       </a>
-    </li>
+    </li> *@
     <li class="nav-item">
       <a class="nav-link collapsed" asp-action="UserPage" asp-controller="Admin">
         <i class="fa-regular fa-user"></i>
-        <span>User Manager</span>
+        <span>Quản lý người dùng</span>
       </a>
     </li>
 
@@ -69,26 +70,26 @@
       </a>
     </li> *@
 
-    <li class="nav-item">
+   @*  <li class="nav-item">
       <a class="nav-link collapsed" asp-action="Authority" asp-controller="Settings">
         <i class="fa-solid fa-sliders"></i>
-        <span>Authorrize Manager</span>
+        <span>Quản trị</span>
       </a>
-    </li>
+    </li> *@
         <li class="nav-item">
             <a class="nav-link collapsed" asp-action="Authority2" asp-controller="Settings">
                 <i class="fa-solid fa-sliders"></i>
-                <span>Authorrize Manager</span>
+                <span>Quản trị</span>
             </a>
         </li>
 
 
-    <li class="nav-heading">Pages</li>
+    <li class="nav-heading">Trang</li>
 
     <li class="nav-item">
       <a class="nav-link collapsed" asp-action="Profilepage" asp-controller="Html">
         <i class="bi bi-person"></i>  
-        <span>Profile</span>
+        <span>Thông tin</span>
       </a>
     </li><!-- End Profile Page Nav -->
 

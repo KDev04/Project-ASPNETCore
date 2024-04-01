@@ -67,6 +67,7 @@ namespace LaptopStoreApi.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+        [Authorize(Roles = "Thêm người dùng")]
         [HttpPost]
         public async Task<ActionResult> CreateUser([FromForm] UserModel model)
         {
@@ -261,6 +262,7 @@ namespace LaptopStoreApi.Controllers
                         }
                         claims.Add(new Claim(ClaimTypes.Name, user.UserName!));
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                        claims.Add(new Claim("AvatarUrl", user.AvatarUrl!));
                         Console.WriteLine(claims);
                         var jwtObject = new JwtSecurityToken(
                             issuer: _configuration["JWT:Issuer"],
@@ -439,7 +441,7 @@ namespace LaptopStoreApi.Controllers
                 return NoContent(); // Hoặc trả về giá trị tùy chỉnh khác thể hiện rằng người dùng không có vai trò nào
             }
         }
-        /*        [Authorize]*/
+        [Authorize(Roles = "Cập nhật người dùng")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromForm] UserModel updatedUser)
         {
@@ -599,7 +601,7 @@ namespace LaptopStoreApi.Controllers
 
 
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(string userId, string currentPassword, string newPassword, string confirmPassword)
         {
@@ -672,7 +674,7 @@ namespace LaptopStoreApi.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Xóa người dùng")]
         [HttpDelete("{Id}")]
 
         public async Task<IActionResult> DeleteUser(string Id)

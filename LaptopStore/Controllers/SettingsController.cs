@@ -135,7 +135,10 @@ namespace LaptopStore.Controllers
         //Category
         public async Task<IActionResult> Category()
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:4000/api/Category/GetAllCategoriesWithLaptopCategories");
+
             HttpResponseMessage responselap = await _httpClient.GetAsync("http://localhost:4000/api/Laptop/GetLaptops");
             if (responselap == null)
             {
@@ -330,6 +333,8 @@ namespace LaptopStore.Controllers
         }
         public async Task<ActionResult> CreateCategory(string CategoryName)
         {
+            var token = HttpContext.Session.GetString("Token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // Xử lý dữ liệu responseData theo nhu cầu của bạn
             var req = new FormUrlEncodedContent(
                     new[]

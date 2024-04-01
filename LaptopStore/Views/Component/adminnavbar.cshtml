@@ -112,13 +112,30 @@
                 </li> *@
                 <li class="nav-item dropdown pe-3">
 
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="~/img/profile-img.jpg" alt="Profile" class="rounded-circle  "
-                            style="width: 35px; height: auto; object-fit: cover; padding :0 ;">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <a class="nav-link active dropdown-toggle" href="#" id="UserDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        @{
+
+                            string Username = Context.Request.Cookies["Username"]!;
+                            string avtUrl = Context.Request.Cookies["AvatarUrl"]!;
+                            if (avtUrl != null)
+                            {
+                                <img src="http://localhost:4000/@avtUrl" alt="Profile" class="rounded-circle "
+                                     style="width: 35px; height: auto;">
+                            }
+                            else
+                            {
+                                <img src="~/img/user.jpg" alt="Profile" class="rounded-circle "
+                                     style="width: 35px; height: auto;">
+                            }
+                            if (Username != null)
+                            {
+                                <span class="text-uppercase active ms-2">@Username</span>
+                            }
+                        }
                     </a><!-- End Profile Iamge Icon -->
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <ul class="dropdown-menu" aria-labelledby="UserDropdown">
                         <li class="dropdown-header">
                             <h6>Kevin Anderson</h6>
                             <span>Web Designer</span>
@@ -166,6 +183,17 @@
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li>
+                @{
+
+                    if(Username != null)
+                    {
+                        <li class="nav-item text-white" >
+                            <a class="dropdown-item text-white" asp-action="Logout" asp-controller="Auth">
+                                <i class="fa-solid fa-right-from-bracket me-2 text-white"></i>Đăng xuất
+                            </a>
+                        </li>
+                    }
+                }
 
                 <li class="nav-item d-flex align-items-center   ">
                     <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>

@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 using LaptopStore.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -118,59 +119,178 @@ namespace LaptopStore.Controllers
             }
         }
 
+        /*  public async Task<IActionResult> SignIn([FromForm] LoginModel model)
+          {
+              try
+              {
+                  if (ModelState.IsValid)
+                  {
+                      // Địa chỉ API đăng ký tài khoản
+                      var apiUrl = "http://localhost:4000/api/Account/Login";
+
+                      // Chuyển đối tượng RegisterModel thành chuỗi JSON
+                      var jsonModel = JsonConvert.SerializeObject(model);
+
+                      // Tạo nội dung yêu cầu từ chuỗi JSON
+                      var content = new FormUrlEncodedContent(
+                          new[]
+                          {
+                              new KeyValuePair<string, string>("UserName", model.UserName!),
+                              new KeyValuePair<string, string>("Password", model.Password!)
+                          }
+                      );
+
+                      var response = await _httpClient.PostAsync(apiUrl, content);
+
+                      // Kiểm tra xem cuộc gọi API có thành công hay không
+                      if (response.IsSuccessStatusCode)
+                      {
+                          // Xử lý khi thành công
+                          Console.WriteLine("Success");
+                          var token = await response.Content.ReadAsStringAsync();
+                          Console.WriteLine(token);
+                          // Lưu token trong session hoặc cookie
+                          HttpContext.Session.SetString("Token", token);
+                          Response.Cookies.Append("Token", token);
+                          ViewBag.SuccessMessage = $"User '{model.UserName}' has been logged.";
+                          Response.Cookies.Append("CheckLogin", "Inlogged");
+                          Console.WriteLine(model.UserName);
+                          Response.Cookies.Append("Username", model.UserName!);
+                          Response.Cookies.Append("AvartarUrl", "");
+                          var role = await GetUserRoles();
+
+                          if (role != null)
+                          {
+                              Response.Cookies.Append("Role", role.ToString());
+                              if (role == "Moderator" || role == "Administrator")
+                              {
+                                  return Redirect("/Admin/Index");
+                              }
+
+                          }
+                          Console.WriteLine(role);
+                          return RedirectToAction("Index", "Laptop"); // Đổi thành action hoặc view mong muốn
+                      }
+                      else
+                      {
+                          // Xử lý khi cuộc gọi API không thành công
+                          Console.WriteLine(
+                              $"API request failed with status code: {response.StatusCode}"
+                          );
+                          var responseContent = await response.Content.ReadAsStringAsync();
+                          Console.WriteLine($"API response content: {responseContent}");
+
+                          // Log lỗi từ ModelState
+                          foreach (var entry in ModelState)
+                          {
+                              foreach (var error in entry.Value.Errors)
+                              {
+                                  Console.WriteLine($"ModelState error: {error.ErrorMessage}");
+                              }
+                          }
+
+                          Console.WriteLine("Fail");
+                          // Log dữ liệu đầu vào
+                          Console.WriteLine($"JSON data being sent: {jsonModel}");
+
+                          Console.WriteLine($"Received data: {model}");
+                          ViewBag.SuccessMessage = $"User '{model.UserName}' has been created.";
+                          return View("Register"); // Đổi thành action hoặc view mong muốn
+                      }
+                  }
+                  else
+                  {
+                      // Log lỗi từ ModelState
+                      foreach (var entry in ModelState)
+                      {
+                          foreach (var error in entry.Value.Errors)
+                          {
+                              Console.WriteLine($"ModelState error: {error.ErrorMessage}");
+                          }
+                      }
+
+                      Console.WriteLine("Validation failed");
+
+                      return View("Register"); // Đổi thành action hoặc view mong muốn
+                  }
+              }
+              catch (Exception ex)
+              {
+                  // Xử lý ngoại lệ nếu có lỗi
+                  Console.WriteLine($"An error occurred: {ex.Message}");
+                  return View("Register");
+              }
+          }*/
         public async Task<IActionResult> SignIn([FromForm] LoginModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    // Địa chỉ API đăng ký tài khoản
+                    // Địa chỉ API đăng nhập
                     var apiUrl = "http://localhost:4000/api/Account/Login";
 
-                    // Chuyển đối tượng RegisterModel thành chuỗi JSON
-                    var jsonModel = JsonConvert.SerializeObject(model);
-
-                    // Tạo nội dung yêu cầu từ chuỗi JSON
+                    // Tạo nội dung yêu cầu từ model
                     var content = new FormUrlEncodedContent(
                         new[]
                         {
-                            new KeyValuePair<string, string>("UserName", model.UserName!),
-                            new KeyValuePair<string, string>("Password", model.Password!)
+                    new KeyValuePair<string, string>("UserName", model.UserName!),
+                    new KeyValuePair<string, string>("Password", model.Password!)
                         }
                     );
 
                     var response = await _httpClient.PostAsync(apiUrl, content);
-
+                    Console.WriteLine("Moi dang nhap");
                     // Kiểm tra xem cuộc gọi API có thành công hay không
                     if (response.IsSuccessStatusCode)
                     {
                         // Xử lý khi thành công
-                        Console.WriteLine("Success");
                         var token = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(token);
-                        // Lưu token trong session hoặc cookie
                         HttpContext.Session.SetString("Token", token);
                         Response.Cookies.Append("Token", token);
+
+                        var jwtHandler = new JwtSecurityTokenHandler();
+                        var jwtToken = jwtHandler.ReadJwtToken(token);
+
+                        // Lấy danh sách các claim từ chuỗi JWT
+                        var claimsResponse = jwtToken.Claims.ToList();
+
+                        // Thêm các claim vào cookies
+                        foreach (var claim in claimsResponse)
+                        {
+                            // Chuyển đổi tên claim thành tên cookie hợp lệ
+                            var cookieName = claim.Type.Replace("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/", "");
+                            cookieName = cookieName.Replace(":", "_");
+                            cookieName = cookieName.Replace("/", "_");
+
+                            var options = new CookieOptions
+                            {
+                                // Cấu hình các thuộc tính cho cookie, ví dụ: hết hạn, tên miền, v.v.
+                            };
+
+                            Response.Cookies.Append(cookieName, claim.Value, options);
+                        }
+
                         ViewBag.SuccessMessage = $"User '{model.UserName}' has been logged.";
                         Response.Cookies.Append("CheckLogin", "Inlogged");
-                        Console.WriteLine(model.UserName);
                         Response.Cookies.Append("Username", model.UserName!);
                         var role = await GetUserRoles();
 
                         if (role != null)
                         {
                             Response.Cookies.Append("Role", role.ToString());
-                            if(role == "Moderator" || role == "Administrator")
+                            if (role == "Moderator" || role == "Administrator")
                             {
                                 return Redirect("/Admin/Index");
                             }
-                           
                         }
+
                         Console.WriteLine(role);
                         return RedirectToAction("Index", "Laptop"); // Đổi thành action hoặc view mong muốn
                     }
                     else
                     {
+                        Console.WriteLine("bug");
                         // Xử lý khi cuộc gọi API không thành công
                         Console.WriteLine(
                             $"API request failed with status code: {response.StatusCode}"
@@ -189,10 +309,8 @@ namespace LaptopStore.Controllers
 
                         Console.WriteLine("Fail");
                         // Log dữ liệu đầu vào
-                        Console.WriteLine($"JSON data being sent: {jsonModel}");
-
                         Console.WriteLine($"Received data: {model}");
-                        /*                            ViewBag.SuccessMessage = $"User '{model.UserName}' has been created.";*/
+
                         return View("Register"); // Đổi thành action hoặc view mong muốn
                     }
                 }
@@ -219,6 +337,7 @@ namespace LaptopStore.Controllers
                 return View("Register");
             }
         }
+
         public async Task<IActionResult> AddToLikeList(int LaptopId)
         {
             var token = Request.Cookies["Token"];
@@ -434,6 +553,7 @@ namespace LaptopStore.Controllers
             Response.Cookies.Delete("CheckLogin");
             Response.Cookies.Delete("Role");
             Response.Cookies.Delete("Username");
+            Response.Cookies.Delete("AvatarUrl");
             ViewBag.IsLoggedIn = false;
             Console.WriteLine(ViewBag.IsLoggedIn);
             Console.WriteLine("No Login");

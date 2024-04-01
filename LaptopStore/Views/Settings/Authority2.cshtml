@@ -87,8 +87,122 @@
                         </label>
                     </div>
                 }
+                
+            </div>
+            <div class="row mt-5">
+                <div class="col text-center ">
+                <!-- Đây là nơi để đặt nút lưu -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveGroup">Thêm một nhóm quyền</button>
+                </div>
             </div>
 
+            <div class="modal fade" id="saveGroup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Tạo nhóm quyền
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="createGroupForm">
+                            <div class="modal-body" id="createGroupModal">
+                                <div class="row row-cols-2 mb-3 justify-content-center">
+                                    <div class="col-5">
+                                        <div class="row row-cols-2 mb-3">
+                                            <div class="col-4">
+                                                <label for="Name" class="mr-2">Tên nhóm *:</label>
+                                            </div>
+                                            <div class="col">
+                                                <input id="Name" name="Name" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row row-cols-2 mb-3">
+                                            <div class="col-4">
+                                                <label for="Description" class="mr-2">Mô tả :</label>
+                                            </div>
+                                            <div class="col">
+                                                <input id="Description" name="Description" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row mb-3">
+                                            @foreach (var group in Model.GroupRoles)
+                                            {
+                                                <div class="">
+                                                    @if (group.Roles.Count != 0)
+                                                    {
+                                                        <div class="row mt-2">
+
+                                                            @foreach (var role in group.Roles)
+                                                            {
+                                                                <div class="form-check form-switch col-6">
+                                                                    <input class="form-check-input" type="checkbox" role="switch" id="@role.Id" value="@role.Name">
+                                                                    <label class="form-check-label" for="@role.Id">@role.Name</label>
+                                                                </div>
+                                                            }
+                                                            
+
+
+                                                        </div>
+                                                        <hr>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-success" id="saveGroupBtn">Lưu</button>
+                            </div>
+                        </form>
+
+                        <div id="errorContainer" class="alert alert-danger" style="display: none;"></div>
+                        
+                        <script>
+                            $(function () {
+                                // Xử lý sự kiện gửi form
+                                $("#createGroupForm").on("submit", function (e) {
+                                    e.preventDefault();
+
+                                    // Lấy giá trị từ các input trong form
+                                    var name = $("#Name").val();
+                                    var description = $("#Description").val();
+                                    var roles = [];
+
+                                    // Lặp qua các checkbox và lấy giá trị của những checkbox được chọn
+                                    $("input[type='checkbox']:checked").each(function () {
+                                        roles.push($(this).val());
+                                    });
+                                    // Gửi Ajax request
+                                    $.ajax({
+                                        url: "http://localhost:4000/api/GroupRole/CreateGroupRole", // Thay thế ControllerName bằng tên thực tế của controller
+                                        type: "POST",
+                                        data: JSON.stringify({ Name: name, Description: description, Roles: roles }),
+                                        contentType: "application/json",
+                                        success: function (response) {
+                                            // Xử lý thành công
+                                            alert("Đã tạo nhóm");
+                                            // Thực hiện các hành động khác nếu cần
+                                            $('#createGroupModal').modal('hide');
+                                            location.reload();
+                                        },
+                                        error: function (xhr, status, error) {
+                                            // Xử lý lỗi
+                                            var errorMessage = xhr.responseJSON ? xhr.responseJSON : error;
+                                            $("#errorContainer").text(errorMessage).show();
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
             <script>
                 $(document).ready(function () {
                     $('#SelectGroupRole .form-check-input').change(function () {
@@ -151,14 +265,22 @@
                                     @group.Name : @group.Description
                                 </span>
                             </a>
-                            <div class="row row-cols-2 mt-2">
-                                @foreach (var role in group.Roles)
+                            <div class="row mt-2">
+                                @if (group.Roles.Count == 0)
                                 {
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="@role.Id" value="@role.Id">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">@role.Name</label>
-                                    </div>
+                                    <span>Nhóm này chưa có quyền</span>
                                 }
+                                else
+                                {
+                                    @foreach (var role in group.Roles)
+                                    {
+                                        <div class="form-check form-switch col-6">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="@role.Id" value="@role.Id">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">@role.Name</label>
+                                        </div>
+                                    }
+                                }
+                                
                             </div>
                             <hr>
 
@@ -259,41 +381,7 @@
                 </script>
 
 
-                @* <div class="row mt-5">
-                    <div class="col text-center ">
-                        <!-- Đây là nơi để đặt nút lưu -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveClaim">Lưu</button>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="saveClaim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Lưu thay đổi
-                                </h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-
-                            <div class="modal-body">
-                                <div class="row mb-3 justify-content-center">
-                                    <div class="col">
-                                        <span>
-                                            Bạn chắn chắn muốn lưu
-                                        </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button class="btn btn-success " id="saveBtn">Lưu</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div> *@
+                
 
                 <div class="modal fade" id="ChoiseUserPlease" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
